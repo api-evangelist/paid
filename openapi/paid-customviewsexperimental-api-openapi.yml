@@ -1,0 +1,946 @@
+openapi: 3.1.0
+info:
+  title: API Reference agents customViewsExperimental API
+  version: 1.0.0
+servers:
+- url: https://api.agentpaid.io/api/v1
+  description: Production
+tags:
+- name: customViewsExperimental
+paths:
+  /experimental/views/:
+    get:
+      operationId: list-custom-views
+      summary: List custom views (experimental)
+      description: '⚠️ **Experimental** — this endpoint may change or be removed without notice and is not subject to v2 backwards-compatibility guarantees. Do not build production-critical integrations against it yet.
+
+
+        Lists the organization''s custom views (newest first) with lightweight summary info — name, status, query count, default date range, created date. Does not return the SQL or render bundle; fetch a single view via getCustomView for those.'
+      tags:
+      - customViewsExperimental
+      parameters:
+      - name: Authorization
+        in: header
+        description: API Key authentication using Bearer token
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomViewListResponse'
+        '403':
+          description: '403'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: '500'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    post:
+      operationId: create-custom-view
+      summary: Create a custom view (experimental)
+      description: '⚠️ **Experimental** — this endpoint may change or be removed without notice and is not subject to v2 backwards-compatibility guarantees. Do not build production-critical integrations against it yet.
+
+
+        ⚠️ Only call this when the user has EXPLICITLY asked to save or create the view. After generating or previewing a dashboard, do NOT automatically save a draft — show it to the user and wait for them to ask you to save it. Creating saves a DRAFT only; it is NOT permission to publish — never chain a publish onto a create. After saving, hand the user the previewUrl and wait for their feedback before doing anything else. Saves named analytics queries + a self-contained HTML render bundle as a DRAFT custom view. **Call getCustomViewAuthoringGuide (GET /experimental/views/authoring-guide) first** — it returns the full guide and a copy-paste interactive template. Key rules: (1) Do NOT add a customer filter to the SQL — the database scopes every query to the viewing customer at embed time. (2) Each query''s SQL must be SELECT-only; return clearly-named columns. Compute metric VALUES in SQL (e.g. (count()*2)/5 AS custom_metric) — derive a number in the render bundle only when it depends on user interaction (toggle/filter/hover) or is pure formatting of a value a query already returns. (3) The render bundle must be SELF-CONTAINED — inline all CSS/JS/charting, NO external loads or fetch (the sandbox has connect-src ''none''); it must listen for the `paid:data` message (data keyed by query id) and re-render on each one. (4) Make it INTERACTIVE — mousemove hover tooltips and at least one addEventListener-wired control that re-renders (a static chart feels broken). (5) The render bundle is the single source of truth — BEFORE saving, preview the EXACT bundle in the user''s current client (call getCustomViewPreviewHarness with your bundle + sample data and render the HTML it returns) and show it to the user; that preview in the current client is how the user first sees the dashboard. Do NOT save a draft just to preview it in Paid — creating writes to the user''s real account and is never a preview step. Do NOT build a separate chart, and only show numbers that come from a declared query. (6) A view is a FULL dashboard — include as many charts/KPIs as the analysis has. Keep every element derived from the single viewing customer (KPIs, trends, type mix); drop only cross-customer comparisons (rankings, share-of-total, ''N customers''). Don''t simplify to one chart. (7) To make the date range adjustable (e.g. the user says ''last month''), write the date boundary as `{period_start:DateTime}` / `{period_end:DateTime}` placeholders in the SQL and pass a default `period` (relative like {kind:''relative'',unit:''month'',amount:1}, or absolute start/end). The org user can then change it in Paid without re-authoring. A query using the placeholders REQUIRES a period. Do NOT add your own date-range picker to the render bundle — Paid owns the timeframe and the bundle receives already-filtered data; a second in-bundle picker cannot re-run the SQL. (8) Check your draft with validateCustomView (POST /experimental/views/validate) BEFORE asking the user to save — it runs these same gates without persisting and reports every problem at once. The response returns a `previewUrl` — give it to the user so they can open the new view in Paid.'
+      tags:
+      - customViewsExperimental
+      parameters:
+      - name: Authorization
+        in: header
+        description: API Key authentication using Bearer token
+        required: true
+        schema:
+          type: string
+      responses:
+        '201':
+          description: '201'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomView'
+        '400':
+          description: '400'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: '403'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: '500'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        description: Body
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateCustomViewRequest'
+  /experimental/views/{displayId}/publish:
+    post:
+      operationId: publish-custom-view
+      summary: Publish a custom view (experimental)
+      description: '⚠️ **Experimental** — this endpoint may change or be removed without notice and is not subject to v2 backwards-compatibility guarantees. Do not build production-critical integrations against it yet.
+
+
+        ⚠️ Never publish as an automatic follow-up to creating or generating a view. Only call this after you have shown the user the built/previewed view and they have EXPLICITLY approved publishing — building and publishing are separate user decisions, and answering an earlier question (e.g. the view''s scope) is NOT publish approval. Flips the view from DRAFT to PUBLISHED. Only PUBLISHED views are served on the embed data path — this is the gate that stops an unreviewed view reaching end-customers. Idempotent: publishing an already-published view is a no-op success. The response returns a `previewUrl` — give it to the user so they can open the view in Paid.'
+      tags:
+      - customViewsExperimental
+      parameters:
+      - name: displayId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: API Key authentication using Bearer token
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomView'
+        '403':
+          description: '403'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: '404'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: '500'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        description: Body
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+  /experimental/views/{displayId}/period:
+    patch:
+      operationId: update-custom-view-period
+      summary: Change a custom view's date range (experimental)
+      description: '⚠️ **Experimental** — this endpoint may change or be removed without notice and is not subject to v2 backwards-compatibility guarantees. Do not build production-critical integrations against it yet.
+
+
+        Updates the view''s default date range (the period applied to queries that use the `{period_start:DateTime}` / `{period_end:DateTime}` placeholders). Accepts a relative rolling window (e.g. last 30 days) or a fixed start/end range. Lets the period be changed after deployment without re-authoring the SQL. Applies to DRAFT or PUBLISHED views.'
+      tags:
+      - customViewsExperimental
+      parameters:
+      - name: displayId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: API Key authentication using Bearer token
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomView'
+        '400':
+          description: '400'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: '403'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: '404'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: '500'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        description: Body
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateCustomViewPeriodRequest'
+  /experimental/views/{displayId}:
+    get:
+      operationId: get-custom-view
+      summary: Get a custom view's metadata + render bundle (experimental)
+      description: '⚠️ **Experimental** — this endpoint may change or be removed without notice and is not subject to v2 backwards-compatibility guarantees. Do not build production-critical integrations against it yet.
+
+
+        Returns the view''s name, status, query ids, and the author render bundle for the owning organization (DRAFT or PUBLISHED). Used by the trusted preview/embed frame to render the sandbox; the per-customer data is fetched separately via /:displayId/data.'
+      tags:
+      - customViewsExperimental
+      parameters:
+      - name: displayId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: API Key authentication using Bearer token
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomViewDetail'
+        '403':
+          description: '403'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: '404'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: '500'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    patch:
+      operationId: update-custom-view
+      summary: Update a custom view (experimental)
+      description: '⚠️ **Experimental** — this endpoint may change or be removed without notice and is not subject to v2 backwards-compatibility guarantees. Do not build production-critical integrations against it yet.
+
+
+        Partially updates a view. Omitted fields are left unchanged. For REVISIONS, prefer the incremental fields — `bundleEdits` (exact search-and-replace on the stored render bundle) and `queryUpserts`/`queryRemovals` (per-query changes) — so you transmit only what changed instead of re-sending the whole payload. The full-replacement fields remain for rewrites: `renderBundle`, and `queries` (a FULL replacement of the query list — never drop queries the user didn''t ask to remove). Replacement and incremental forms of the same aspect cannot be combined. The resulting SQL and bundle pass the same validation as createCustomView (SELECT-only, size cap, self-contained, paid:data listener). Works on DRAFT or PUBLISHED views — published embeds pick the change up on their next load.'
+      tags:
+      - customViewsExperimental
+      parameters:
+      - name: displayId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: API Key authentication using Bearer token
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomView'
+        '400':
+          description: '400'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: '403'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: '404'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: '500'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        description: Body
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateCustomViewRequest'
+  /experimental/views/{displayId}/data:
+    get:
+      operationId: get-custom-view-data
+      summary: Fetch a custom view's data, scoped to a customer or the organization (experimental)
+      description: '⚠️ **Experimental** — this endpoint may change or be removed without notice and is not subject to v2 backwards-compatibility guarantees. Do not build production-critical integrations against it yet.
+
+
+        Runs every stored query of the view on the read-only analytics database and returns the result sets keyed by query id. For a customer-scoped view (the default), the query is scoped to the caller''s organization AND the given `customerId` (both enforced as ClickHouse row filters) — `customerId` is required. For an organization-scoped view, the data is org-wide (scoped only to the caller''s organization) and `customerId` is ignored. The scope is enforced by the database — it cannot be widened by the stored SQL.'
+      tags:
+      - customViewsExperimental
+      parameters:
+      - name: displayId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: customerId
+        in: query
+        description: Customer to scope the data to (dev/preview only; the embed derives this from the verified token). Required for customer-scoped views; ignored for organization-scoped views (their data is org-wide).
+        required: false
+        schema:
+          type: string
+      - name: periodKind
+        in: query
+        description: Override the view's default date range for this request only. 'relative' = rolling window (set periodUnit + periodAmount); 'absolute' = fixed range (set periodStart + periodEnd).
+        required: false
+        schema:
+          $ref: '#/components/schemas/ExperimentalViewsDisplayIdDataGetParametersPeriodKind'
+      - name: periodUnit
+        in: query
+        description: 'relative override only: unit of the rolling window.'
+        required: false
+        schema:
+          $ref: '#/components/schemas/ExperimentalViewsDisplayIdDataGetParametersPeriodUnit'
+      - name: periodAmount
+        in: query
+        description: 'relative override only: how many units back from today.'
+        required: false
+        schema:
+          type: integer
+      - name: periodStart
+        in: query
+        description: 'absolute override only: inclusive start date (YYYY-MM-DD).'
+        required: false
+        schema:
+          type: string
+      - name: periodEnd
+        in: query
+        description: 'absolute override only: inclusive end date (YYYY-MM-DD).'
+        required: false
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: API Key authentication using Bearer token
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ViewDataResponse'
+        '400':
+          description: '400'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: '403'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: '404'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '408':
+          description: '408'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '429':
+          description: '429'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: '500'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /experimental/views/{displayId}/embed-token:
+    get:
+      operationId: get-custom-view-embed-token
+      summary: Get an embed token for a custom view
+      description: '⚠️ **Experimental** — this endpoint may change or be removed without notice and is not subject to v2 backwards-compatibility guarantees. Do not build production-critical integrations against it yet.
+
+
+        Mints a short-lived, customer-scoped token for embedding a published custom view. Call this from your server with your API key, then pass the returned token to the embed SDK. Organization-scoped views cannot be embedded per-customer — this returns a 400 (`ORG_SCOPED_VIEW_NOT_EMBEDDABLE`) for one.'
+      tags:
+      - customViewsExperimental
+      parameters:
+      - name: displayId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: customerId
+        in: query
+        description: 'The customer to scope the view to: external id, Paid display id (cus_…), or internal id.'
+        required: true
+        schema:
+          type: string
+      - name: ttlSeconds
+        in: query
+        description: Token lifetime in seconds (capped at 3600).
+        required: false
+        schema:
+          type: integer
+      - name: Authorization
+        in: header
+        description: API Key authentication using Bearer token
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomViewEmbedTokenResponse'
+        '400':
+          description: '400'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: '403'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: '404'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: '500'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+components:
+  schemas:
+    CustomViewSummaryPeriodUnit:
+      type: string
+      enum:
+      - day
+      - month
+      - year
+      description: 'relative only: the unit of the rolling window.'
+      title: CustomViewSummaryPeriodUnit
+    UpdateCustomViewRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          description: New human-readable view name.
+        description:
+          type:
+          - string
+          - 'null'
+          description: New description; pass null to clear it.
+        queries:
+          type: array
+          items:
+            $ref: '#/components/schemas/CustomViewQuery'
+          description: Full replacement of the view's query list. Each SQL is re-validated (SELECT-only) exactly like createCustomView. For changing one or two queries, prefer `queryUpserts`/`queryRemovals` instead. Cannot be combined with them.
+        renderBundle:
+          type: string
+          description: Replacement render bundle. Re-validated (size cap, self-contained, paid:data listener) exactly like createCustomView. For small changes, prefer `bundleEdits` instead. Cannot be combined with `bundleEdits`.
+        bundleEdits:
+          type: array
+          items:
+            $ref: '#/components/schemas/RenderBundleEdit'
+          description: 'PREFERRED for revisions: exact search-and-replace edits applied in order to the stored render bundle, so you send only the changed text instead of re-transmitting the whole bundle. The edited result passes the same validation as a full replacement. Cannot be combined with `renderBundle`.'
+        queryUpserts:
+          type: array
+          items:
+            $ref: '#/components/schemas/CustomViewQuery'
+          description: 'PREFERRED for revisions: per-query changes — each entry replaces the stored query with the same id, or is appended as a new query. Queries not mentioned are left unchanged. Cannot be combined with `queries`.'
+        queryRemovals:
+          type: array
+          items:
+            type: string
+          description: Ids of stored queries to remove (applied before `queryUpserts`). Rejected if an id does not exist. Cannot be combined with `queries`.
+      title: UpdateCustomViewRequest
+    CreateCustomViewRequestPeriodUnit:
+      type: string
+      enum:
+      - day
+      - month
+      - year
+      description: 'relative only: the unit of the rolling window.'
+      title: CreateCustomViewRequestPeriodUnit
+    CustomViewStatus:
+      type: string
+      enum:
+      - DRAFT
+      - PUBLISHED
+      description: A view is DRAFT until explicitly published. For customer-scoped views, only PUBLISHED views are embeddable and served to end-customers; a DRAFT is not. For organization-scoped views, publishing is only a 'ready to use' marker — both DRAFT and PUBLISHED are visible to your organization's members in Paid (publishing does not change who in the org can see it), and neither is ever embeddable to an end-customer.
+      title: CustomViewStatus
+    RenderBundleEdit:
+      type: object
+      properties:
+        oldText:
+          type: string
+          description: Exact text to find in the CURRENT stored bundle (fetch it via getCustomViewAuthoring first — it may have been hand-edited). Must match exactly once unless `replaceAll` is true; include enough surrounding context to make it unique.
+        newText:
+          type: string
+          description: Replacement text. May be empty to delete the matched text.
+        replaceAll:
+          type: boolean
+          description: Replace every occurrence instead of requiring a unique match (e.g. renaming a variable or color). Default false.
+      required:
+      - oldText
+      - newText
+      title: RenderBundleEdit
+    CustomViewDetailPeriod:
+      type: object
+      properties:
+        kind:
+          $ref: '#/components/schemas/CustomViewDetailPeriodKind'
+          description: '''relative'' = a rolling window ending today (set `unit` + `amount`); ''absolute'' = a fixed calendar range (set `start` + `end`).'
+        unit:
+          $ref: '#/components/schemas/CustomViewDetailPeriodUnit'
+          description: 'relative only: the unit of the rolling window.'
+        amount:
+          type: integer
+          description: 'relative only: how many units back from today (e.g. unit ''day'', amount 30 = last 30 days).'
+        start:
+          type: string
+          description: 'absolute only: inclusive start date (YYYY-MM-DD).'
+        end:
+          type: string
+          description: 'absolute only: inclusive end date (YYYY-MM-DD).'
+      required:
+      - kind
+      description: The view's current default date range, or null if it uses no adjustable period.
+      title: CustomViewDetailPeriod
+    CustomViewDetail:
+      type: object
+      properties:
+        displayId:
+          type: string
+        name:
+          type: string
+        description:
+          type:
+          - string
+          - 'null'
+        status:
+          $ref: '#/components/schemas/CustomViewDetailStatus'
+        queryIds:
+          type: array
+          items:
+            type: string
+          description: Ids of the result sets the render bundle will receive.
+        renderBundle:
+          type: string
+          description: Self-contained HTML document rendered inside the isolated sandbox iframe.
+        period:
+          oneOf:
+          - $ref: '#/components/schemas/CustomViewDetailPeriod'
+          - type: 'null'
+          description: The view's current default date range, or null if it uses no adjustable period.
+        scope:
+          $ref: '#/components/schemas/CustomViewDetailScope'
+          description: '''customer'': data is scoped to one viewing customer and the view is embeddable per-customer. ''organization'': data is org-wide and the view is internal-only.'
+      required:
+      - displayId
+      - name
+      - description
+      - status
+      - queryIds
+      - renderBundle
+      - period
+      - scope
+      title: CustomViewDetail
+    CustomViewQuery:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Stable identifier for this query's result set; the render bundle reads `data[<id>]`.
+        sql:
+          type: string
+          description: A single ClickHouse SELECT (or WITH … SELECT). Do NOT add a customer filter — the database scopes every query to the viewing customer at run time. Return clearly-named columns; bake any date range into WHERE.
+      required:
+      - id
+      - sql
+      title: CustomViewQuery
+    CustomViewSummaryStatus:
+      type: string
+      enum:
+      - DRAFT
+      - PUBLISHED
+      title: CustomViewSummaryStatus
+    ExperimentalViewsDisplayIdDataGetParametersPeriodUnit:
+      type: string
+      enum:
+      - day
+      - month
+      - year
+      title: ExperimentalViewsDisplayIdDataGetParametersPeriodUnit
+    UpdateCustomViewPeriodRequestPeriod:
+      type: object
+      properties:
+        kind:
+          $ref: '#/components/schemas/UpdateCustomViewPeriodRequestPeriodKind'
+          description: '''relative'' = a rolling window ending today (set `unit` + `amount`); ''absolute'' = a fixed calendar range (set `start` + `end`).'
+        unit:
+          $ref: '#/components/schemas/UpdateCustomViewPeriodRequestPeriodUnit'
+          description: 'relative only: the unit of the rolling window.'
+        amount:
+          type: integer
+          description: 'relative only: how many units back from today (e.g. unit ''day'', amount 30 = last 30 days).'
+        start:
+          type: string
+          description: 'absolute only: inclusive start date (YYYY-MM-DD).'
+        end:
+          type: string
+          description: 'absolute only: inclusive end date (YYYY-MM-DD).'
+      required:
+      - kind
+      description: Default date range for the view's queries. Use `{period_start:DateTime}` / `{period_end:DateTime}` placeholders in your SQL to make the range adjustable. Either relative (unit+amount) or absolute (start+end).
+      title: UpdateCustomViewPeriodRequestPeriod
+    CustomViewDetailStatus:
+      type: string
+      enum:
+      - DRAFT
+      - PUBLISHED
+      title: CustomViewDetailStatus
+    ExperimentalViewsDisplayIdDataGetParametersPeriodKind:
+      type: string
+      enum:
+      - relative
+      - absolute
+      title: ExperimentalViewsDisplayIdDataGetParametersPeriodKind
+    CustomView:
+      type: object
+      properties:
+        displayId:
+          type: string
+          description: Stable public identifier used in preview/embed URLs.
+        name:
+          type: string
+        status:
+          $ref: '#/components/schemas/CustomViewStatus'
+          description: A view is DRAFT until explicitly published. For customer-scoped views, only PUBLISHED views are embeddable and served to end-customers; a DRAFT is not. For organization-scoped views, publishing is only a 'ready to use' marker — both DRAFT and PUBLISHED are visible to your organization's members in Paid (publishing does not change who in the org can see it), and neither is ever embeddable to an end-customer.
+        previewUrl:
+          type:
+          - string
+          - 'null'
+          format: uri
+          description: Absolute URL to open this view in the Paid app for preview. Surface it to the user after creating or publishing a view. Null when the app URL is not configured.
+        scope:
+          $ref: '#/components/schemas/CustomViewScope'
+          description: '''customer'': data is scoped to one viewing customer and the view is embeddable per-customer. ''organization'': data is org-wide and the view is internal-only.'
+      required:
+      - displayId
+      - name
+      - status
+      - previewUrl
+      - scope
+      title: CustomView
+    CustomViewSummary:
+      type: object
+      properties:
+        displayId:
+          type: string
+        name:
+          type: string
+        description:
+          type:
+          - string
+          - 'null'
+        status:
+          $ref: '#/components/schemas/CustomViewSummaryStatus'
+        queryCount:
+          type: integer
+          description: How many named queries the view holds.
+        period:
+          oneOf:
+          - $ref: '#/components/schemas/CustomViewSummaryPeriod'
+          - type: 'null'
+          description: The view's default date range, or null if it has none.
+        createdAt:
+          type: string
+          description: ISO 8601 creation timestamp.
+        scope:
+          $ref: '#/components/schemas/CustomViewSummaryScope'
+          description: '''customer'': data is scoped to one viewing customer and the view is embeddable per-customer. ''organization'': data is org-wide and the view is internal-only.'
+      required:
+      - displayId
+      - name
+      - description
+      - status
+      - queryCount
+      - period
+      - createdAt
+      - scope
+      title: CustomViewSummary
+    UpdateCustomViewPeriodRequestPeriodKind:
+      type: string
+      enum:
+      - relative
+      - absolute
+      description: '''relative'' = a rolling window ending today (set `unit` + `amount`); ''absolute'' = a fixed calendar range (set `start` + `end`).'
+      title: UpdateCustomViewPeriodRequestPeriodKind
+    CreateCustomViewRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Human-readable view name (shown in preview + audit log).
+        description:
+          type: string
+          description: Optional longer description of what the view shows.
+        queries:
+          type: array
+          items:
+            $ref: '#/components/schemas/CustomViewQuery'
+          description: One or more named queries. Each becomes a separately-keyed result set in the embed.
+        renderBundle:
+          type: string
+          description: Self-contained HTML document that renders the result sets. Inline ALL CSS/JS/charting libraries — the render sandbox has no network access. It receives the keyed result sets via a `message` event (`data[<queryId>]`) and must not fetch anything itself.
+        period:
+          $ref: '#/components/schemas/CreateCustomViewRequestPeriod'
+          description: Optional default date range. Required if any query uses the `{period_start:DateTime}` / `{period_end:DateTime}` placeholders. Can be changed later in Paid without re-authoring.
+        scope:
+          $ref: '#/components/schemas/CreateCustomViewRequestScope'
+          description: '''customer'' (default): data is scoped to one viewing customer and the view is embeddable per-customer. ''organization'': data is org-wide; the view is internal-only (visible to org members in Paid, never embeddable).'
+      required:
+      - name
+      - queries
+      - renderBundle
+      title: CreateCustomViewRequest
+    UpdateCustomViewPeriodRequest:
+      type: object
+      properties:
+        period:
+          $ref: '#/components/schemas/UpdateCustomViewPeriodRequestPeriod'
+          description: Default date range for the view's queries. Use `{period_start:DateTime}` / `{period_end:DateTime}` placeholders in your SQL to make the range adjustable. Either relative (unit+amount) or absolute (start+end).
+      required:
+      - period
+      title: UpdateCustomViewPeriodRequest
+    CustomViewScope:
+      type: string
+      enum:
+      - customer
+      - organization
+      description: '''customer'': data is scoped to one viewing customer and the view is embeddable per-customer. ''organization'': data is org-wide and the view is internal-only.'
+      title: CustomViewScope
+    CreateCustomViewRequestPeriod:
+      type: object
+      properties:
+        kind:
+          $ref: '#/components/schemas/CreateCustomViewRequestPeriodKind'
+          description: '''relative'' = a rolling window ending today (set `unit` + `amount`); ''absolute'' = a fixed calendar range (set `start` + `end`).'
+        unit:
+          $ref: '#/components/schemas/CreateCustomViewRequestPeriodUnit'
+          description: 'relative only: the unit of the rolling window.'
+        amount:
+          type: integer
+          description: 'relative only: how many units back from today (e.g. unit ''day'', amount 30 = last 30 days).'
+        start:
+          type: string
+          description: 'absolute only: inclusive start date (YYYY-MM-DD).'
+        end:
+          type: string
+          description: 'absolute only: inclusive end date (YYYY-MM-DD).'
+      required:
+      - kind
+      description: Optional default date range. Required if any query uses the `{period_start:DateTime}` / `{period_end:DateTime}` placeholders. Can be changed later in Paid without re-authoring.
+      title: CreateCustomViewRequestPeriod
+    CustomViewDetailPeriodUnit:
+      type: string
+      enum:
+      - day
+      - month
+      - year
+      description: 'relative only: the unit of the rolling window.'
+      title: CustomViewDetailPeriodUnit
+    CreateCustomViewRequestPeriodKind:
+      type: string
+      enum:
+      - relative
+      - absolute
+      description: '''relative'' = a rolling window ending today (set `unit` + `amount`); ''absolute'' = a fixed calendar range (set `start` + `end`).'
+      title: CreateCustomViewRequestPeriodKind
+    ViewDataResponse:
+      type: object
+      properties:
+        data:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: object
+              additionalProperties:
+                description: Any type
+          description: Result sets keyed by query id. Each value is an array of row objects (column name → value); 64-bit integers are returned as JSON strings to preserve precision.
+      required:
+      - data
+      title: ViewDataResponse
+    CustomViewListResponse:
+      type: object
+      properties:
+        views:
+          type: array
+          items:
+            $ref: '#/components/schemas/CustomViewSummary'
+      required:
+      - views
+      title: CustomViewListResponse
+    CreateCustomViewRequestScope:
+      type: string
+      enum:
+      - customer
+      - organization
+      description: '''customer'' (default): data is scoped to one viewing customer and the view is embeddable per-customer. ''organization'': data is org-wide; the view is internal-only (visible to org members in Paid, never embeddable).'
+      title: CreateCustomViewRequestScope
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+        code:
+          type: string
+        details:
+          type: string
+      required:
+      - error
+      title: ErrorResponse
+    CustomViewEmbedTokenResponse:
+      type: object
+      properties:
+        token:
+          type: string
+          description: Short-lived signed token to pass to the embed SDK.
+        expiresAt:
+          type: string
+          format: date-time
+          description: When the token expires (ISO 8601).
+      required:
+      - token
+      - expiresAt
+      title: CustomViewEmbedTokenResponse
+    CustomViewDetailScope:
+      type: string
+      enum:
+      - customer
+      - organization
+      description: '''customer'': data is scoped to one viewing customer and the view is embeddable per-customer. ''organization'': data is org-wide and the view is internal-only.'
+      title: CustomViewDetailScope
+    CustomViewSummaryPeriod:
+      type: object
+      properties:
+        kind:
+          $ref: '#/components/schemas/CustomViewSummaryPeriodKind'
+          description: '''relative'' = a rolling window ending today (set `unit` + `amount`); ''absolute'' = a fixed calendar range (set `start` + `end`).'
+        unit:
+          $ref: '#/components/schemas/CustomViewSummaryPeriodUnit'
+          description: 'relative only: the unit of the rolling window.'
+        amount:
+          type: integer
+          description: 'relative only: how many units back from today (e.g. unit ''day'', amount 30 = last 30 days).'
+        start:
+          type: string
+          description: 'absolute only: inclusive start date (YYYY-MM-DD).'
+        end:
+          type: string
+          description: 'absolute only: inclusive end date (YYYY-MM-DD).'
+      required:
+      - kind
+      description: The view's default date range, or null if it has none.
+      title: CustomViewSummaryPeriod
+    CustomViewSummaryPeriodKind:
+      type: string
+      enum:
+      - relative
+      - absolute
+      description: '''relative'' = a rolling window ending today (set `unit` + `amount`); ''absolute'' = a fixed calendar range (set `start` + `end`).'
+      title: CustomViewSummaryPeriodKind
+    CustomViewSummaryScope:
+      type: string
+      enum:
+      - customer
+      - organization
+      description: '''customer'': data is scoped to one viewing customer and the view is embeddable per-customer. ''organization'': data is org-wide and the view is internal-only.'
+      title: CustomViewSummaryScope
+    UpdateCustomViewPeriodRequestPeriodUnit:
+      type: string
+      enum:
+      - day
+      - month
+      - year
+      description: 'relative only: the unit of the rolling window.'
+      title: UpdateCustomViewPeriodRequestPeriodUnit
+    CustomViewDetailPeriodKind:
+      type: string
+      enum:
+      - relative
+      - absolute
+      description: '''relative'' = a rolling window ending today (set `unit` + `amount`); ''absolute'' = a fixed calendar range (set `start` + `end`).'
+      title: CustomViewDetailPeriodKind
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer

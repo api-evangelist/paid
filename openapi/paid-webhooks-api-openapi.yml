@@ -1,0 +1,391 @@
+openapi: 3.1.0
+info:
+  title: API Reference agents webhooks API
+  version: 1.0.0
+servers:
+- url: https://api.agentpaid.io/api/v1
+  description: Production
+tags:
+- name: webhooks
+paths:
+  /webhooks/:
+    get:
+      operationId: list-webhooks
+      summary: List webhooks
+      description: List customer-facing billing webhooks for the authenticated organization, along with whether the organization has generated a signing secret.
+      tags:
+      - webhooks
+      parameters:
+      - name: Authorization
+        in: header
+        description: API Key authentication using Bearer token
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WebhookListResponse'
+        '403':
+          description: '403'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: '500'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /webhooks/{webhookName}:
+    patch:
+      operationId: update-webhook
+      summary: Update a webhook
+      description: Enable or disable a webhook and configure the destination URL for the authenticated organization.
+      tags:
+      - webhooks
+      parameters:
+      - name: webhookName
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/WebhooksWebhookNamePatchParametersWebhookName'
+      - name: Authorization
+        in: header
+        description: API Key authentication using Bearer token
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WebhookUpdateResponse'
+        '400':
+          description: '400'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: '403'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: '404'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: '500'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        description: Body
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateWebhookRequest'
+  /webhooks/{webhookName}/test:
+    post:
+      operationId: test-webhook
+      summary: Send a test webhook
+      description: Send a synthetic webhook delivery to the configured destination for this webhook.
+      tags:
+      - webhooks
+      parameters:
+      - name: webhookName
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/WebhooksWebhookNameTestPostParametersWebhookName'
+      - name: Authorization
+        in: header
+        description: API Key authentication using Bearer token
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WebhookTestResponse'
+        '400':
+          description: '400'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: '403'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: '404'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: '500'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        description: Body
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+  /webhooks/rotate-secret:
+    post:
+      operationId: rotate-webhook-secret
+      summary: Rotate the organization's webhook signing secret
+      description: Generate a new HMAC signing secret used by every webhook in this organization and return it exactly once. The previous secret is invalidated immediately on next delivery.
+      tags:
+      - webhooks
+      parameters:
+      - name: Authorization
+        in: header
+        description: API Key authentication using Bearer token
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RotateWebhookSecretResponse'
+        '400':
+          description: '400'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: '403'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: '500'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        description: Body
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+components:
+  schemas:
+    WebhookTestResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+      required:
+      - success
+      title: WebhookTestResponse
+    WebhookUpdateResponseName:
+      type: string
+      enum:
+      - billing-invoice-created
+      - billing-invoice-paid
+      - billing-invoice-posted
+      - billing-checkout-created
+      - billing-checkout-completed
+      - billing-checkout-expired
+      - billing-payment-succeeded
+      - billing-payment-failed
+      - billing-credits-depleted
+      - billing-overage-incurred
+      title: WebhookUpdateResponseName
+    Webhook:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          $ref: '#/components/schemas/WebhookName'
+        description:
+          type: string
+        enabled:
+          type: boolean
+        url:
+          type:
+          - string
+          - 'null'
+        lastSentAt:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        lastStatus:
+          $ref: '#/components/schemas/WebhookDeliveryStatus'
+      required:
+      - id
+      - name
+      - description
+      - enabled
+      - url
+      - lastSentAt
+      - lastStatus
+      title: Webhook
+    WebhooksWebhookNamePatchParametersWebhookName:
+      type: string
+      enum:
+      - billing-invoice-created
+      - billing-invoice-paid
+      - billing-invoice-posted
+      - billing-checkout-created
+      - billing-checkout-completed
+      - billing-checkout-expired
+      - billing-payment-succeeded
+      - billing-payment-failed
+      - billing-credits-depleted
+      - billing-overage-incurred
+      title: WebhooksWebhookNamePatchParametersWebhookName
+    WebhooksWebhookNameTestPostParametersWebhookName:
+      type: string
+      enum:
+      - billing-invoice-created
+      - billing-invoice-paid
+      - billing-invoice-posted
+      - billing-checkout-created
+      - billing-checkout-completed
+      - billing-checkout-expired
+      - billing-payment-succeeded
+      - billing-payment-failed
+      - billing-credits-depleted
+      - billing-overage-incurred
+      title: WebhooksWebhookNameTestPostParametersWebhookName
+    WebhookUpdateResponse:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          $ref: '#/components/schemas/WebhookUpdateResponseName'
+        description:
+          type: string
+        enabled:
+          type: boolean
+        url:
+          type:
+          - string
+          - 'null'
+        lastSentAt:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        lastStatus:
+          $ref: '#/components/schemas/WebhookDeliveryStatus'
+        signingSecret:
+          type: string
+          description: Included on the response of the first save that produced a signing key for this organization (when no webhook had a key yet). Store it now — subsequent reads will not return it; rotate to mint a new one if you lose it.
+      required:
+      - id
+      - name
+      - description
+      - enabled
+      - url
+      - lastSentAt
+      - lastStatus
+      title: WebhookUpdateResponse
+    WebhookName:
+      type: string
+      enum:
+      - billing-invoice-created
+      - billing-invoice-paid
+      - billing-invoice-posted
+      - billing-checkout-created
+      - billing-checkout-completed
+      - billing-checkout-expired
+      - billing-payment-succeeded
+      - billing-payment-failed
+      - billing-credits-depleted
+      - billing-overage-incurred
+      title: WebhookName
+    WebhookDeliveryStatus:
+      type: string
+      enum:
+      - success
+      - failed
+      title: WebhookDeliveryStatus
+    UpdateWebhookRequest:
+      type: object
+      properties:
+        enabled:
+          type: boolean
+          description: Whether the webhook is enabled for delivery.
+        url:
+          type:
+          - string
+          - 'null'
+          format: uri
+          description: The HTTPS endpoint Paid should deliver this webhook to. Set to null to clear it while disabled.
+      title: UpdateWebhookRequest
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+        code:
+          type: string
+        details:
+          type: string
+      required:
+      - error
+      title: ErrorResponse
+    RotateWebhookSecretResponse:
+      type: object
+      properties:
+        signingSecret:
+          type: string
+          description: The newly minted org-scoped signing secret. Returned exactly once — store it now; subsequent reads will not return it.
+      required:
+      - signingSecret
+      title: RotateWebhookSecretResponse
+    WebhookListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Webhook'
+        signingSecretConfigured:
+          type: boolean
+          description: True when the organization has generated a webhook signing secret at least once.
+      required:
+      - data
+      - signingSecretConfigured
+      title: WebhookListResponse
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer

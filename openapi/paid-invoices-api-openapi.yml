@@ -1,0 +1,623 @@
+openapi: 3.1.0
+info:
+  title: API Reference agents invoices API
+  version: 1.0.0
+servers:
+- url: https://api.agentpaid.io/api/v1
+  description: Production
+tags:
+- name: invoices
+paths:
+  /invoices/:
+    get:
+      operationId: list-invoices
+      summary: List invoices
+      description: Get a list of invoices for the organization
+      tags:
+      - invoices
+      parameters:
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          default: 10
+      - name: offset
+        in: query
+        required: false
+        schema:
+          type: integer
+      - name: customerId
+        in: query
+        description: Filter by customer ID.
+        required: false
+        schema:
+          type: string
+      - name: externalCustomerId
+        in: query
+        description: Filter by customer external ID.
+        required: false
+        schema:
+          type: string
+      - name: orderId
+        in: query
+        description: Filter by the order this invoice was generated from.
+        required: false
+        schema:
+          type: string
+      - name: status
+        in: query
+        description: Filter by invoice status.
+        required: false
+        schema:
+          $ref: '#/components/schemas/InvoicesGetParametersStatus'
+      - name: paymentStatus
+        in: query
+        description: Filter by payment status.
+        required: false
+        schema:
+          $ref: '#/components/schemas/InvoicesGetParametersPaymentStatus'
+      - name: issueDateFrom
+        in: query
+        description: Only invoices whose issue date is on or after this date. Accepts an ISO 8601 date or date-time. Date-only values (e.g. 2026-06-30) are treated as UTC; date-times without an explicit timezone offset are ambiguous, so include one (e.g. 2026-06-30T00:00:00-05:00) when precision matters.
+        required: false
+        schema:
+          type: string
+      - name: issueDateTo
+        in: query
+        description: Only invoices whose issue date is on or before this date. Accepts an ISO 8601 date or date-time. Date-only values (e.g. 2026-06-30) are treated as UTC; date-times without an explicit timezone offset are ambiguous, so include one (e.g. 2026-06-30T00:00:00-05:00) when precision matters.
+        required: false
+        schema:
+          type: string
+      - name: dueDateFrom
+        in: query
+        description: Only invoices whose due date is on or after this date. Invoices without a due date are not matched. Accepts an ISO 8601 date or date-time. Date-only values (e.g. 2026-06-30) are treated as UTC; date-times without an explicit timezone offset are ambiguous, so include one (e.g. 2026-06-30T00:00:00-05:00) when precision matters.
+        required: false
+        schema:
+          type: string
+      - name: dueDateTo
+        in: query
+        description: Only invoices whose due date is on or before this date. Invoices without a due date are not matched. Accepts an ISO 8601 date or date-time. Date-only values (e.g. 2026-06-30) are treated as UTC; date-times without an explicit timezone offset are ambiguous, so include one (e.g. 2026-06-30T00:00:00-05:00) when precision matters.
+        required: false
+        schema:
+          type: string
+      - name: displayNumber
+        in: query
+        description: Filter by the invoice number shown on the invoice, whether draft or posted (exact match).
+        required: false
+        schema:
+          type: string
+      - name: purchaseOrderReference
+        in: query
+        description: Filter by purchase order reference (exact match, whitespace-sensitive).
+        required: false
+        schema:
+          type: string
+      - name: currency
+        in: query
+        description: Filter by invoice currency code (case-insensitive, e.g. USD).
+        required: false
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: API Key authentication using Bearer token
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvoiceListResponse'
+        '400':
+          description: '400'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: '403'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: '500'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /invoices/{id}:
+    get:
+      operationId: get-invoice-by-id
+      summary: Get invoice
+      description: Get an invoice by ID
+      tags:
+      - invoices
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: API Key authentication using Bearer token
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Invoice'
+        '403':
+          description: '403'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: '404'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: '500'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    put:
+      operationId: update-invoice-by-id
+      summary: Update invoice
+      description: Update an invoice by ID
+      tags:
+      - invoices
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: API Key authentication using Bearer token
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Invoice'
+        '400':
+          description: '400'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: '403'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: '404'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: '500'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        description: Body
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateInvoiceRequest'
+  /invoices/{id}/lines:
+    get:
+      operationId: get-invoice-lines
+      summary: Get invoice lines
+      description: Get the invoice lines for an invoice by ID
+      tags:
+      - invoices
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          default: 10
+      - name: offset
+        in: query
+        required: false
+        schema:
+          type: integer
+      - name: Authorization
+        in: header
+        description: API Key authentication using Bearer token
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvoiceLinesResponse'
+        '403':
+          description: '403'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: '404'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: '500'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+components:
+  schemas:
+    InvoiceLinesResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/InvoiceLine'
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+      required:
+      - data
+      - pagination
+      title: InvoiceLinesResponse
+    InvoicePaymentStatus:
+      type: string
+      enum:
+      - pending
+      - paid
+      - partiallyPaid
+      - overdue
+      - error
+      title: InvoicePaymentStatus
+    InvoicesGetParametersStatus:
+      type: string
+      enum:
+      - building
+      - draft
+      - pending
+      - posted
+      - voided
+      - canceled
+      - error
+      title: InvoicesGetParametersStatus
+    InvoiceTaxStatus:
+      type: string
+      enum:
+      - not_applicable
+      - calculated
+      - committed
+      - failed
+      - voided
+      title: InvoiceTaxStatus
+    InvoiceSource:
+      type: string
+      enum:
+      - order_based
+      - manual
+      title: InvoiceSource
+    UpdateInvoiceRequest:
+      type: object
+      properties:
+        metadata:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            description: Any type
+      title: UpdateInvoiceRequest
+    InvoiceLinePaymentStatus:
+      type: string
+      enum:
+      - pending
+      - paid
+      - partiallyPaid
+      - overdue
+      - error
+      title: InvoiceLinePaymentStatus
+    InvoiceLine:
+      type: object
+      properties:
+        id:
+          type: string
+        orderId:
+          type:
+          - string
+          - 'null'
+        orderLineId:
+          type:
+          - string
+          - 'null'
+        orderLineAttributeId:
+          type:
+          - string
+          - 'null'
+        startDate:
+          type: string
+          format: date-time
+        endDate:
+          type: string
+          format: date-time
+        paymentStatus:
+          $ref: '#/components/schemas/InvoiceLinePaymentStatus'
+        quantity:
+          type: integer
+        totalPriceBeforeTax:
+          type: number
+          format: double
+        tax:
+          type: number
+          format: double
+        taxRate:
+          type: number
+          format: double
+        totalPriceAfterTax:
+          type: number
+          format: double
+        currency:
+          type: string
+        description:
+          type: string
+        balanceAmount:
+          type: number
+          format: double
+        creditedAmount:
+          type: number
+          format: double
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+      required:
+      - id
+      - orderId
+      - orderLineId
+      - orderLineAttributeId
+      - startDate
+      - endDate
+      - paymentStatus
+      - quantity
+      - totalPriceBeforeTax
+      - tax
+      - taxRate
+      - totalPriceAfterTax
+      - currency
+      - description
+      - balanceAmount
+      - creditedAmount
+      - createdAt
+      - updatedAt
+      title: InvoiceLine
+    InvoiceStatus:
+      type: string
+      enum:
+      - building
+      - draft
+      - pending
+      - posted
+      - voided
+      - canceled
+      - error
+      title: InvoiceStatus
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+        code:
+          type: string
+        details:
+          type: string
+      required:
+      - error
+      title: ErrorResponse
+    InvoiceListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Invoice'
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+      required:
+      - data
+      - pagination
+      title: InvoiceListResponse
+    Pagination:
+      type: object
+      properties:
+        limit:
+          type: integer
+        offset:
+          type: integer
+        total:
+          type: integer
+        hasMore:
+          type: boolean
+      required:
+      - limit
+      - offset
+      - total
+      - hasMore
+      title: Pagination
+    Invoice:
+      type: object
+      properties:
+        id:
+          type: string
+        displayNumber:
+          type:
+          - string
+          - 'null'
+        orderId:
+          type:
+          - string
+          - 'null'
+        customerId:
+          type: string
+        status:
+          $ref: '#/components/schemas/InvoiceStatus'
+        paymentStatus:
+          $ref: '#/components/schemas/InvoicePaymentStatus'
+        source:
+          $ref: '#/components/schemas/InvoiceSource'
+        startDate:
+          type: string
+          format: date-time
+        endDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        issueDate:
+          type: string
+          format: date-time
+        postedDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        dueDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        currency:
+          type: string
+        taxAmount:
+          type: number
+          format: double
+        taxRate:
+          type: number
+          format: double
+        taxStatus:
+          $ref: '#/components/schemas/InvoiceTaxStatus'
+        invoiceTotalExcludingTax:
+          type: number
+          format: double
+        invoiceTotal:
+          type: number
+          format: double
+        amountDue:
+          type: number
+          format: double
+        amountPaid:
+          type: number
+          format: double
+        amountRemaining:
+          type: number
+          format: double
+        creditNotesTotal:
+          type: number
+          format: double
+        metadata:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            description: Any type
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+        paymentLink:
+          type:
+          - string
+          - 'null'
+        disputeLink:
+          type:
+          - string
+          - 'null'
+        publicUrlToken:
+          type:
+          - string
+          - 'null'
+        taxExempt:
+          type: boolean
+        billingContactId:
+          type:
+          - string
+          - 'null'
+        purchaseOrderReference:
+          type:
+          - string
+          - 'null'
+          description: Purchase order reference stamped on this invoice.
+      required:
+      - id
+      - customerId
+      - status
+      - paymentStatus
+      - source
+      - startDate
+      - issueDate
+      - currency
+      - taxAmount
+      - taxRate
+      - taxStatus
+      - invoiceTotalExcludingTax
+      - invoiceTotal
+      - amountDue
+      - amountPaid
+      - amountRemaining
+      - creditNotesTotal
+      - createdAt
+      - updatedAt
+      - taxExempt
+      title: Invoice
+    InvoicesGetParametersPaymentStatus:
+      type: string
+      enum:
+      - pending
+      - paid
+      - partiallyPaid
+      - overdue
+      - error
+      title: InvoicesGetParametersPaymentStatus
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer

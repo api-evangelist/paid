@@ -1,0 +1,722 @@
+openapi: 3.1.0
+info:
+  title: API Reference agents contacts API
+  version: 1.0.0
+servers:
+- url: https://api.agentpaid.io/api/v1
+  description: Production
+tags:
+- name: contacts
+paths:
+  /contacts:
+    get:
+      operationId: list
+      summary: Get contacts
+      tags:
+      - contacts
+      parameters:
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Contact'
+    post:
+      operationId: create
+      summary: Create contact
+      tags:
+      - contacts
+      parameters:
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      responses:
+        '201':
+          description: Success response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Contact'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ContactCreate'
+  /contacts/{contactId}:
+    get:
+      operationId: get
+      summary: Get contact by ID
+      tags:
+      - contacts
+      parameters:
+      - name: contactId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Contact'
+    delete:
+      operationId: delete
+      summary: Delete contact
+      tags:
+      - contacts
+      parameters:
+      - name: contactId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: Success response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/contacts_delete_Response_204'
+  /contacts/external/{externalId}:
+    get:
+      operationId: get-by-external-id
+      summary: Get contact by external ID
+      tags:
+      - contacts
+      parameters:
+      - name: externalId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Contact'
+    delete:
+      operationId: delete-by-external-id
+      summary: Delete contact by external ID
+      tags:
+      - contacts
+      parameters:
+      - name: externalId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: Success response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/contacts_deleteByExternalId_Response_204'
+    put:
+      operationId: update-contact-by-external-id
+      summary: Update contact by external ID
+      description: Update a contact by its external ID
+      tags:
+      - contacts
+      parameters:
+      - name: externalId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: API Key authentication using Bearer token
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Contact_2'
+        '400':
+          description: '400'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: '403'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: '404'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: '500'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        description: Body
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateContactRequest'
+  /contacts/:
+    get:
+      operationId: list-contacts
+      summary: List contacts
+      description: Get a list of contacts for the organization
+      tags:
+      - contacts
+      parameters:
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          default: 10
+      - name: offset
+        in: query
+        required: false
+        schema:
+          type: integer
+      - name: Authorization
+        in: header
+        description: API Key authentication using Bearer token
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ContactListResponse'
+        '400':
+          description: '400'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: '403'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: '500'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    post:
+      operationId: create-contact
+      summary: Create a new contact
+      description: Creates a new contact for the organization
+      tags:
+      - contacts
+      parameters:
+      - name: Authorization
+        in: header
+        description: API Key authentication using Bearer token
+        required: true
+        schema:
+          type: string
+      responses:
+        '201':
+          description: '201'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Contact_2'
+        '400':
+          description: '400'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: '403'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: '500'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        description: Body
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateContactRequest'
+  /contacts/{id}:
+    get:
+      operationId: get-contact-by-id
+      summary: Get contact
+      description: Get a contact by its ID
+      tags:
+      - contacts
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: API Key authentication using Bearer token
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Contact_2'
+        '403':
+          description: '403'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: '404'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: '500'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    put:
+      operationId: update-contact-by-id
+      summary: Update contact
+      description: Update a contact by its ID
+      tags:
+      - contacts
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: API Key authentication using Bearer token
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Contact_2'
+        '400':
+          description: '400'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: '403'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: '404'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: '500'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        description: Body
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateContactRequest'
+    delete:
+      operationId: delete-contact-by-id
+      summary: Delete contact
+      description: Delete a contact by its ID
+      tags:
+      - contacts
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: API Key authentication using Bearer token
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmptyResponse'
+        '403':
+          description: '403'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: '404'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: '500'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+components:
+  schemas:
+    ContactRolesItems:
+      type: string
+      enum:
+      - BILLING
+      - ACCOUNTS_PAYABLE
+      title: ContactRolesItems
+    Salutation:
+      type: string
+      enum:
+      - Mr.
+      - Mrs.
+      - Miss
+      - Ms.
+      - Dr.
+      - Prof.
+      title: Salutation
+    CreateContactRequest:
+      type: object
+      properties:
+        customerId:
+          type: string
+        firstName:
+          type: string
+          default: ''
+        lastName:
+          type: string
+          default: ''
+        email:
+          type: string
+          format: email
+        phone:
+          type:
+          - string
+          - 'null'
+        billingAddress:
+          $ref: '#/components/schemas/ContactBillingAddress'
+        externalId:
+          type:
+          - string
+          - 'null'
+        roles:
+          type: array
+          items:
+            $ref: '#/components/schemas/CreateContactRequestRolesItems'
+      required:
+      - customerId
+      - email
+      title: CreateContactRequest
+    Contact:
+      type: object
+      properties:
+        id:
+          type: string
+        externalId:
+          type: string
+        organizationId:
+          type: string
+        customerId:
+          type: string
+        customerExternalId:
+          type: string
+        salutation:
+          $ref: '#/components/schemas/Salutation'
+        firstName:
+          type: string
+        lastName:
+          type: string
+        email:
+          type: string
+        phone:
+          type: string
+        billingStreet:
+          type: string
+        billingCity:
+          type: string
+        billingStateProvince:
+          type: string
+        billingCountry:
+          type: string
+        billingPostalCode:
+          type: string
+      title: Contact
+    UpdateContactRequestRolesItems:
+      type: string
+      enum:
+      - BILLING
+      - ACCOUNTS_PAYABLE
+      title: UpdateContactRequestRolesItems
+    EmptyResponse:
+      type: object
+      properties: {}
+      title: EmptyResponse
+    ContactListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Contact_2'
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+      required:
+      - data
+      - pagination
+      title: ContactListResponse
+    contacts_deleteByExternalId_Response_204:
+      type: object
+      properties: {}
+      description: Empty response body
+      title: contacts_deleteByExternalId_Response_204
+    ContactCreate:
+      type: object
+      properties:
+        externalId:
+          type: string
+        customerId:
+          type: string
+        customerExternalId:
+          type: string
+        salutation:
+          $ref: '#/components/schemas/Salutation'
+        firstName:
+          type: string
+        lastName:
+          type: string
+        email:
+          type: string
+        phone:
+          type: string
+        billingStreet:
+          type: string
+        billingCity:
+          type: string
+        billingStateProvince:
+          type: string
+        billingCountry:
+          type: string
+        billingPostalCode:
+          type: string
+      required:
+      - salutation
+      - firstName
+      - lastName
+      - email
+      title: ContactCreate
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+        code:
+          type: string
+        details:
+          type: string
+      required:
+      - error
+      title: ErrorResponse
+    CreateContactRequestRolesItems:
+      type: string
+      enum:
+      - BILLING
+      - ACCOUNTS_PAYABLE
+      title: CreateContactRequestRolesItems
+    Pagination:
+      type: object
+      properties:
+        limit:
+          type: integer
+        offset:
+          type: integer
+        total:
+          type: integer
+        hasMore:
+          type: boolean
+      required:
+      - limit
+      - offset
+      - total
+      - hasMore
+      title: Pagination
+    UpdateContactRequest:
+      type: object
+      properties:
+        customerId:
+          type: string
+        firstName:
+          type: string
+        lastName:
+          type: string
+        email:
+          type: string
+          format: email
+        phone:
+          type:
+          - string
+          - 'null'
+        billingAddress:
+          $ref: '#/components/schemas/ContactBillingAddress'
+        externalId:
+          type:
+          - string
+          - 'null'
+        roles:
+          type: array
+          items:
+            $ref: '#/components/schemas/UpdateContactRequestRolesItems'
+      title: UpdateContactRequest
+    Contact_2:
+      type: object
+      properties:
+        id:
+          type: string
+        customerId:
+          type: string
+        firstName:
+          type: string
+        lastName:
+          type: string
+        email:
+          type: string
+        phone:
+          type:
+          - string
+          - 'null'
+        billingAddress:
+          $ref: '#/components/schemas/ContactBillingAddress'
+        externalId:
+          type:
+          - string
+          - 'null'
+        roles:
+          type: array
+          items:
+            $ref: '#/components/schemas/ContactRolesItems'
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+      required:
+      - id
+      - customerId
+      - firstName
+      - lastName
+      - email
+      - phone
+      - externalId
+      - roles
+      - createdAt
+      - updatedAt
+      title: Contact
+    ContactBillingAddress:
+      type: object
+      properties:
+        street:
+          type: string
+        city:
+          type: string
+        state:
+          type: string
+        country:
+          type: string
+        zipCode:
+          type: string
+      title: ContactBillingAddress
+    contacts_delete_Response_204:
+      type: object
+      properties: {}
+      description: Empty response body
+      title: contacts_delete_Response_204
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer

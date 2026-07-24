@@ -1,0 +1,598 @@
+openapi: 3.1.0
+info:
+  title: API Reference agents customer-groups API
+  version: 1.0.0
+servers:
+- url: https://api.agentpaid.io/api/v1
+  description: Production
+tags:
+- name: customer-groups
+paths:
+  /customer-groups/:
+    get:
+      operationId: list-customer-groups
+      summary: List customer groups
+      description: List all customer groups for the organization.
+      tags:
+      - customer-groups
+      parameters:
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          default: 10
+      - name: offset
+        in: query
+        required: false
+        schema:
+          type: integer
+      - name: Authorization
+        in: header
+        description: API Key authentication using Bearer token
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomerGroupListResponse'
+        '500':
+          description: '500'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    post:
+      operationId: create-customer-group
+      summary: Create customer group
+      description: Create a new customer group. Names must be unique per org.
+      tags:
+      - customer-groups
+      parameters:
+      - name: Authorization
+        in: header
+        description: API Key authentication using Bearer token
+        required: true
+        schema:
+          type: string
+      responses:
+        '201':
+          description: '201'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomerGroupDetail'
+        '400':
+          description: '400'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '409':
+          description: '409'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: '500'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        description: Body
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateCustomerGroupRequest'
+  /customer-groups/{id}:
+    get:
+      operationId: get-customer-group
+      summary: Get customer group
+      description: Returns group details including member list (capped at 500).
+      tags:
+      - customer-groups
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: Authorization
+        in: header
+        description: API Key authentication using Bearer token
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomerGroupDetail'
+        '404':
+          description: '404'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: '500'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    delete:
+      operationId: delete-customer-group
+      summary: Delete customer group
+      description: Deletes the group and unbinds all members. Unbound customers fall back to the base value model config.
+      tags:
+      - customer-groups
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: Authorization
+        in: header
+        description: API Key authentication using Bearer token
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomerGroupDeleteResponse'
+        '404':
+          description: '404'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: '500'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        description: Body
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+    patch:
+      operationId: update-customer-group
+      summary: Update customer group
+      description: Update a customer group's name or description.
+      tags:
+      - customer-groups
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: Authorization
+        in: header
+        description: API Key authentication using Bearer token
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomerGroupDetail'
+        '404':
+          description: '404'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '409':
+          description: '409'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: '500'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        description: Body
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateCustomerGroupRequest'
+  /customer-groups/{id}/members:
+    post:
+      operationId: create-customer-group-members
+      summary: Add members to group
+      description: Additive. Adds customers to the group without removing existing members.
+      tags:
+      - customer-groups
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: Authorization
+        in: header
+        description: API Key authentication using Bearer token
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AddMembersResponse'
+        '400':
+          description: '400'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: '404'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: '500'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        description: Body
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MemberRequest'
+    put:
+      operationId: update-customer-group-members
+      summary: Set group members
+      description: Reconcile membership. The provided list is the complete desired membership. Customers not in the list are removed. Customers in the list but not currently in the group are added.
+      tags:
+      - customer-groups
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: Authorization
+        in: header
+        description: API Key authentication using Bearer token
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SetMembersResponse'
+        '400':
+          description: '400'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: '404'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: '500'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        description: Body
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MemberRequest'
+    delete:
+      operationId: delete-customer-group-members
+      summary: Remove members from group
+      description: Removes specific customers from the group.
+      tags:
+      - customer-groups
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: Authorization
+        in: header
+        description: API Key authentication using Bearer token
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RemoveMembersResponse'
+        '400':
+          description: '400'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: '404'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: '500'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        description: Body
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MemberRequest'
+components:
+  schemas:
+    CustomerGroupListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/CustomerGroupSummary'
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+      required:
+      - data
+      - pagination
+      title: CustomerGroupListResponse
+    RemoveMembersResponse:
+      type: object
+      properties:
+        removed:
+          type: integer
+        skipped:
+          type: integer
+        skippedIds:
+          type: array
+          items:
+            type: string
+      required:
+      - removed
+      - skipped
+      - skippedIds
+      title: RemoveMembersResponse
+    CustomerGroupDeleteResponse:
+      type: object
+      properties:
+        deletedGroupId:
+          type: string
+          format: uuid
+        unboundCustomerCount:
+          type: integer
+      required:
+      - deletedGroupId
+      - unboundCustomerCount
+      title: CustomerGroupDeleteResponse
+    SetMembersResponse:
+      type: object
+      properties:
+        added:
+          type: integer
+        removed:
+          type: integer
+        skipped:
+          type: integer
+        skippedIds:
+          type: array
+          items:
+            type: string
+      required:
+      - added
+      - removed
+      - skipped
+      - skippedIds
+      title: SetMembersResponse
+    MemberRequest:
+      type: object
+      properties:
+        customerIds:
+          type: array
+          items:
+            type: string
+          description: External customer IDs.
+      required:
+      - customerIds
+      title: MemberRequest
+    CustomerGroupSummary:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        description:
+          type:
+          - string
+          - 'null'
+        customerCount:
+          type: integer
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+      required:
+      - id
+      - name
+      - description
+      - customerCount
+      - createdAt
+      - updatedAt
+      title: CustomerGroupSummary
+    CreateCustomerGroupRequest:
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type:
+          - string
+          - 'null'
+      required:
+      - name
+      title: CreateCustomerGroupRequest
+    AddMembersResponse:
+      type: object
+      properties:
+        added:
+          type: integer
+        skipped:
+          type: integer
+        skippedIds:
+          type: array
+          items:
+            type: string
+      required:
+      - added
+      - skipped
+      - skippedIds
+      title: AddMembersResponse
+    CustomerGroupDetail:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        description:
+          type:
+          - string
+          - 'null'
+        customerCount:
+          type: integer
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+        customers:
+          type: array
+          items:
+            $ref: '#/components/schemas/CustomerGroupMember'
+      required:
+      - id
+      - name
+      - description
+      - customerCount
+      - createdAt
+      - updatedAt
+      - customers
+      title: CustomerGroupDetail
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+        code:
+          type: string
+        details:
+          type: string
+      required:
+      - error
+      title: ErrorResponse
+    Pagination:
+      type: object
+      properties:
+        limit:
+          type: integer
+        offset:
+          type: integer
+        total:
+          type: integer
+        hasMore:
+          type: boolean
+      required:
+      - limit
+      - offset
+      - total
+      - hasMore
+      title: Pagination
+    CustomerGroupMember:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        externalId:
+          type:
+          - string
+          - 'null'
+      required:
+      - id
+      - name
+      - externalId
+      title: CustomerGroupMember
+    UpdateCustomerGroupRequest:
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type:
+          - string
+          - 'null'
+      title: UpdateCustomerGroupRequest
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer

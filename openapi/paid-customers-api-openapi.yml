@@ -1,0 +1,3092 @@
+openapi: 3.1.0
+info:
+  title: API Reference agents customers API
+  version: 1.0.0
+servers:
+- url: https://api.agentpaid.io/api/v1
+  description: Production
+tags:
+- name: customers
+paths:
+  /customers:
+    get:
+      operationId: list
+      summary: List customers
+      tags:
+      - customers
+      parameters:
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Customer'
+    post:
+      operationId: create
+      summary: Create a new customer
+      tags:
+      - customers
+      parameters:
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success response - customer already exists with this externalId
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Customer'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CustomerCreate'
+  /customers/{customerId}:
+    get:
+      operationId: get
+      summary: Get customer by ID
+      tags:
+      - customers
+      parameters:
+      - name: customerId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Customer'
+    put:
+      operationId: update
+      summary: Update customer
+      tags:
+      - customers
+      parameters:
+      - name: customerId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Customer updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Customer'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CustomerUpdate'
+    delete:
+      operationId: delete
+      summary: Delete customer
+      tags:
+      - customers
+      parameters:
+      - name: customerId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: Success response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/customers_delete_Response_204'
+  /customers/{customerId}/entitlement:
+    get:
+      operationId: check-entitlement
+      summary: Check customer entitlement for an event
+      tags:
+      - customers
+      parameters:
+      - name: customerId
+        in: path
+        description: The customer ID
+        required: true
+        schema:
+          type: string
+      - name: event_name
+        in: query
+        description: The name of the usage event to check entitlement for
+        required: true
+        schema:
+          type: string
+      - name: view
+        in: query
+        description: Filter view - 'all' returns all entitlements regardless of status, 'active_only' returns only currently active entitlements with available credits
+        required: false
+        schema:
+          $ref: '#/components/schemas/CustomersCustomerIdEntitlementGetParametersView'
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/customers_checkEntitlement_Response_200'
+        '400':
+          description: Bad request (missing event_name parameter)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Customer not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /customers/{customerId}/credit-bundles:
+    get:
+      operationId: get-entitlements
+      summary: Get customer entitlements
+      tags:
+      - customers
+      parameters:
+      - name: customerId
+        in: path
+        description: The customer ID
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/EntitlementUsage'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /customers/external/{externalId}:
+    get:
+      operationId: get-by-external-id
+      summary: Get customer by external ID
+      tags:
+      - customers
+      parameters:
+      - name: externalId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Customer'
+    put:
+      operationId: update-by-external-id
+      summary: Update customer by external ID
+      tags:
+      - customers
+      parameters:
+      - name: externalId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Customer'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CustomerUpdate'
+    delete:
+      operationId: delete-by-external-id
+      summary: Delete customer by external ID
+      tags:
+      - customers
+      parameters:
+      - name: externalId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: Success response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/customers_deleteByExternalId_Response_204'
+  /customers/external/{externalId}/costs:
+    get:
+      operationId: get-costs-by-external-id
+      summary: Fetch cost traces for a customer by external ID
+      tags:
+      - customers
+      parameters:
+      - name: externalId
+        in: path
+        description: The external ID of the customer
+        required: true
+        schema:
+          type: string
+      - name: limit
+        in: query
+        description: Maximum number of traces to return (1-1000)
+        required: false
+        schema:
+          type: integer
+          default: 100
+      - name: offset
+        in: query
+        description: Number of traces to skip for pagination
+        required: false
+        schema:
+          type: integer
+          default: 0
+      - name: startTime
+        in: query
+        description: Filter traces starting from this time (ISO 8601 format)
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: endTime
+        in: query
+        description: Filter traces up to this time (ISO 8601 format)
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CostTracesResponse'
+        '400':
+          description: Bad request - Invalid query parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Forbidden - Invalid or missing API key
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Customer not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /customers/external/{externalId}/usage:
+    get:
+      operationId: get-usage-by-external-id
+      summary: Fetch usage summaries for a customer by external ID
+      tags:
+      - customers
+      parameters:
+      - name: externalId
+        in: path
+        description: The external ID of the customer
+        required: true
+        schema:
+          type: string
+      - name: limit
+        in: query
+        description: Maximum number of usage summaries to return (1-1000)
+        required: false
+        schema:
+          type: integer
+          default: 100
+      - name: offset
+        in: query
+        description: Number of usage summaries to skip for pagination
+        required: false
+        schema:
+          type: integer
+          default: 0
+      - name: startTime
+        in: query
+        description: Filter usage summaries starting from this time (ISO 8601 format). Returns summaries that overlap with the time range.
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: endTime
+        in: query
+        description: Filter usage summaries up to this time (ISO 8601 format). Returns summaries that overlap with the time range.
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UsageSummariesResponse'
+        '400':
+          description: Bad request - Invalid query parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Forbidden - Invalid or missing API key
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Customer not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /customers/external/{externalId}/payment-methods:
+    get:
+      operationId: list-payment-methods
+      summary: List customer payment methods by external ID
+      description: Retrieves all payment methods associated with a customer identified by their external ID.
+      tags:
+      - customers
+      parameters:
+      - name: externalId
+        in: path
+        description: The external ID of the customer
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PaymentMethod'
+        '403':
+          description: Forbidden - Invalid or missing API key
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Customer not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    post:
+      operationId: create-payment-method
+      summary: Create customer payment method by external ID
+      description: Creates a new payment method for a customer using a Stripe confirmation token.
+      tags:
+      - customers
+      parameters:
+      - name: externalId
+        in: path
+        description: The external ID of the customer
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Payment method created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaymentMethod'
+        '400':
+          description: Bad request - Missing confirmation token or invalid request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Forbidden - Invalid or missing API key
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Customer not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                confirmationToken:
+                  type: string
+                  description: Stripe confirmation token for the payment method
+                returnUrl:
+                  type: string
+                  description: URL to redirect to after payment method setup
+                metadata:
+                  type: object
+                  additionalProperties:
+                    description: Any type
+                  description: Optional metadata to attach to the payment method
+              required:
+              - confirmationToken
+              - returnUrl
+  /customers/external/{externalId}/payment-methods/{paymentMethodId}:
+    delete:
+      operationId: delete-payment-method
+      summary: Delete customer payment method by external ID
+      description: Deletes a specific payment method from a customer's account.
+      tags:
+      - customers
+      parameters:
+      - name: externalId
+        in: path
+        description: The external ID of the customer
+        required: true
+        schema:
+          type: string
+      - name: paymentMethodId
+        in: path
+        description: The ID of the payment method to delete
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: Payment method deleted successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/customers_deletePaymentMethod_Response_204'
+        '403':
+          description: Forbidden - Invalid or missing API key
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Customer or payment method not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /customers/:
+    get:
+      operationId: list-customers
+      summary: List customers
+      description: Get a list of customers for the organization
+      tags:
+      - customers
+      parameters:
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          default: 10
+      - name: offset
+        in: query
+        required: false
+        schema:
+          type: integer
+      - name: name
+        in: query
+        description: Search by customer name (case-insensitive, matches anywhere in the name).
+        required: false
+        schema:
+          type: string
+      - name: status
+        in: query
+        description: 'Filter by customer status. churned: customers marked as churned. active: everyone else.'
+        required: false
+        schema:
+          $ref: '#/components/schemas/CustomersGetParametersStatus'
+      - name: creationState
+        in: query
+        description: 'Filter by creation state: draft or active.'
+        required: false
+        schema:
+          $ref: '#/components/schemas/CustomersGetParametersCreationState'
+      - name: createdAtFrom
+        in: query
+        description: Only customers created on or after this date. Accepts an ISO 8601 date or date-time. Date-only values (e.g. 2026-06-30) are treated as UTC; date-times without an explicit timezone offset are ambiguous, so include one (e.g. 2026-06-30T00:00:00-05:00) when precision matters.
+        required: false
+        schema:
+          type: string
+      - name: createdAtTo
+        in: query
+        description: Only customers created on or before this date. Accepts an ISO 8601 date or date-time. Date-only values (e.g. 2026-06-30) are treated as UTC; date-times without an explicit timezone offset are ambiguous, so include one (e.g. 2026-06-30T00:00:00-05:00) when precision matters.
+        required: false
+        schema:
+          type: string
+      - name: externalId
+        in: query
+        description: Filter by your external customer ID (exact match).
+        required: false
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: API Key authentication using Bearer token
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomerListResponse'
+        '400':
+          description: '400'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: '403'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: '500'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    post:
+      operationId: create-customer
+      summary: Create a new customer
+      description: Creates a new customer for the organization
+      tags:
+      - customers
+      parameters:
+      - name: Authorization
+        in: header
+        description: API Key authentication using Bearer token
+        required: true
+        schema:
+          type: string
+      responses:
+        '201':
+          description: '201'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Customer_2'
+        '400':
+          description: '400'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: '403'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: '500'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        description: Body
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateCustomerRequest'
+  /customers/{id}/aliases:
+    get:
+      operationId: list-customer-aliases
+      summary: List customer aliases
+      description: List alternate external identifiers that resolve to a customer by Paid display ID.
+      tags:
+      - customers
+      parameters:
+      - name: id
+        in: path
+        description: Paid customer display id
+        required: true
+        schema:
+          type: string
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          default: 10
+      - name: offset
+        in: query
+        required: false
+        schema:
+          type: integer
+      - name: Authorization
+        in: header
+        description: API Key authentication using Bearer token
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomerAliasListResponse'
+        '400':
+          description: '400'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: '403'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: '404'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: '500'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    post:
+      operationId: create-customer-alias
+      summary: Create customer alias
+      description: Create an alternate external identifier for a customer by Paid display ID.
+      tags:
+      - customers
+      parameters:
+      - name: id
+        in: path
+        description: Paid customer display id
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: API Key authentication using Bearer token
+        required: true
+        schema:
+          type: string
+      responses:
+        '201':
+          description: '201'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomerAlias'
+        '400':
+          description: '400'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: '403'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: '404'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '409':
+          description: '409'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: '500'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        description: Body
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CustomerAliasCreateRequest'
+  /customers/{id}/aliases/{alias}:
+    delete:
+      operationId: delete-customer-alias
+      summary: Delete customer alias
+      description: Remove an alternate external identifier from a customer by Paid display ID.
+      tags:
+      - customers
+      parameters:
+      - name: id
+        in: path
+        description: Paid customer display id
+        required: true
+        schema:
+          type: string
+      - name: alias
+        in: path
+        description: Customer alias value.
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: API Key authentication using Bearer token
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmptyResponse'
+        '403':
+          description: '403'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: '404'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: '500'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /customers/{id}:
+    get:
+      operationId: get-customer-by-id
+      summary: Get customer
+      description: Get a customer by Paid display ID. Use the value returned as `customer.id`, for example `cus_abc123`. If you have your own customer ID, use `GET /api/v2/customers/external/{externalId}`.
+      tags:
+      - customers
+      parameters:
+      - name: id
+        in: path
+        description: Paid customer display id
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: API Key authentication using Bearer token
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Customer_2'
+        '403':
+          description: '403'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: '404'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: '500'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    put:
+      operationId: update-customer-by-id
+      summary: Update customer
+      description: Update a customer by Paid display ID. Use the value returned as `customer.id`, for example `cus_abc123`. If you have your own customer ID, use `PUT /api/v2/customers/external/{externalId}`.
+      tags:
+      - customers
+      parameters:
+      - name: id
+        in: path
+        description: Paid customer display id
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: API Key authentication using Bearer token
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Customer_2'
+        '400':
+          description: '400'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: '403'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: '404'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: '500'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        description: Body
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateCustomerRequest'
+    delete:
+      operationId: delete-customer-by-id
+      summary: Delete customer
+      description: Delete a customer by Paid display ID. Use the value returned as `customer.id`, for example `cus_abc123`. If you have your own customer ID, use `DELETE /api/v2/customers/external/{externalId}`.
+      tags:
+      - customers
+      parameters:
+      - name: id
+        in: path
+        description: Paid customer display id
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: API Key authentication using Bearer token
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmptyResponse'
+        '400':
+          description: '400'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: '403'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: '404'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: '500'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /customers/{id}/state:
+    get:
+      operationId: get-customer-state-by-id
+      summary: Get customer state
+      description: Get the current customer state by Paid display ID
+      tags:
+      - customers
+      parameters:
+      - name: id
+        in: path
+        description: Paid customer display id
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: API Key authentication using Bearer token
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomerState'
+        '403':
+          description: '403'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: '404'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: '500'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /customers/external/{externalId}/aliases:
+    get:
+      operationId: list-customer-aliases-by-external-id
+      summary: List customer aliases by external ID
+      description: List alternate external identifiers that resolve to a customer by external ID.
+      tags:
+      - customers
+      parameters:
+      - name: externalId
+        in: path
+        description: Customer ID from the integrator's system, stored on Paid as `externalId`.
+        required: true
+        schema:
+          type: string
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          default: 10
+      - name: offset
+        in: query
+        required: false
+        schema:
+          type: integer
+      - name: Authorization
+        in: header
+        description: API Key authentication using Bearer token
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomerAliasListResponse'
+        '400':
+          description: '400'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: '403'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: '404'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: '500'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    post:
+      operationId: create-customer-alias-by-external-id
+      summary: Create customer alias by external ID
+      description: Create an alternate external identifier for a customer by external ID.
+      tags:
+      - customers
+      parameters:
+      - name: externalId
+        in: path
+        description: Customer ID from the integrator's system, stored on Paid as `externalId`.
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: API Key authentication using Bearer token
+        required: true
+        schema:
+          type: string
+      responses:
+        '201':
+          description: '201'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomerAlias'
+        '400':
+          description: '400'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: '403'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: '404'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '409':
+          description: '409'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: '500'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        description: Body
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CustomerAliasCreateRequest'
+  /customers/external/{externalId}/aliases/{alias}:
+    delete:
+      operationId: delete-customer-alias-by-external-id
+      summary: Delete customer alias by external ID
+      description: Remove an alternate external identifier from a customer by external ID.
+      tags:
+      - customers
+      parameters:
+      - name: externalId
+        in: path
+        description: Customer ID from the integrator's system, stored on Paid as `externalId`.
+        required: true
+        schema:
+          type: string
+      - name: alias
+        in: path
+        description: Customer alias value.
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: API Key authentication using Bearer token
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmptyResponse'
+        '403':
+          description: '403'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: '404'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: '500'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /customers/external/{externalId}/state:
+    get:
+      operationId: get-customer-state-by-external-id
+      summary: Get customer state by external ID
+      description: Primary integration endpoint for agents and programmatic clients using their own customer IDs. Use the value you stored on `customer.externalId`, for example `customer_123`.
+      tags:
+      - customers
+      parameters:
+      - name: externalId
+        in: path
+        description: Customer ID from the integrator's system, stored on Paid as `externalId`.
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: API Key authentication using Bearer token
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomerState'
+        '403':
+          description: '403'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: '404'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: '500'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /customers/{id}/credits/balances:
+    get:
+      operationId: get-customer-credit-balances
+      summary: Get customer credit balances
+      description: Get current customer credit balances grouped by currency for a Paid customer display ID. Use the value returned as `customer.id`, for example `cus_abc123`. If you have your own customer ID, use `/api/v2/customers/external/{externalId}/credits/balances`.
+      tags:
+      - customers
+      parameters:
+      - name: id
+        in: path
+        description: Paid customer display id
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: API Key authentication using Bearer token
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreditBalanceListResponse'
+        '403':
+          description: '403'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: '404'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: '500'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /customers/{id}/credits/grants:
+    post:
+      operationId: grant-customer-credits
+      summary: Grant customer credits
+      description: Immediately grant credits to a customer using an active credit currency key.
+      tags:
+      - customers
+      parameters:
+      - name: id
+        in: path
+        description: Paid customer display id
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: API Key authentication using Bearer token
+        required: true
+        schema:
+          type: string
+      responses:
+        '201':
+          description: '201'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GrantCustomerCreditsResponse'
+        '400':
+          description: '400'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: '403'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: '404'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: '500'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        description: Body
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreditGrantCreateRequest'
+  /customers/external/{externalId}/credits/balances:
+    get:
+      operationId: get-customer-credit-balances-by-external-id
+      summary: Get customer credit balances by external ID
+      description: Get current customer credit balances grouped by currency, looked up by external ID
+      tags:
+      - customers
+      parameters:
+      - name: externalId
+        in: path
+        description: Customer ID from the integrator's system, stored on Paid as `externalId`.
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: API Key authentication using Bearer token
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreditBalanceListResponse'
+        '403':
+          description: '403'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: '404'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: '500'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /customers/external/{externalId}/credits/grants:
+    post:
+      operationId: grant-customer-credits-by-external-id
+      summary: Grant customer credits by external ID
+      description: Immediately grant credits to a customer looked up by external ID using an active credit currency key.
+      tags:
+      - customers
+      parameters:
+      - name: externalId
+        in: path
+        description: Customer ID from the integrator's system, stored on Paid as `externalId`.
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: API Key authentication using Bearer token
+        required: true
+        schema:
+          type: string
+      responses:
+        '201':
+          description: '201'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GrantCustomerCreditsResponse'
+        '400':
+          description: '400'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: '403'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: '404'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: '500'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        description: Body
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreditGrantCreateRequest'
+  /customers/{customerExternalId}/users/{userExternalId}:
+    put:
+      operationId: upsert-customer-user-by-external-id
+      summary: Upsert customer user by external IDs
+      description: Create or update a customer user using customer and user external IDs
+      tags:
+      - customers
+      parameters:
+      - name: customerExternalId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: userExternalId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: API Key authentication using Bearer token
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomerUser'
+        '400':
+          description: '400'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: '403'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: '404'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: '500'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        description: Body
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpsertCustomerUserRequest'
+components:
+  schemas:
+    Customer:
+      type: object
+      properties:
+        id:
+          type: string
+        organizationId:
+          type: string
+        name:
+          type: string
+        externalId:
+          type: string
+        phone:
+          type: string
+        employeeCount:
+          type: number
+          format: double
+        annualRevenue:
+          type: number
+          format: double
+        taxExemptStatus:
+          $ref: '#/components/schemas/TaxExemptStatus'
+        creationSource:
+          $ref: '#/components/schemas/CreationSource'
+        creationState:
+          $ref: '#/components/schemas/CreationState'
+        website:
+          type: string
+        billingAddress:
+          $ref: '#/components/schemas/Address'
+        metadata:
+          $ref: '#/components/schemas/CustomerMetadata'
+          description: Flexible JSON field for storing custom metadata about the customer
+      required:
+      - id
+      - organizationId
+      - name
+      title: Customer
+    UsageSummaryOrder:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        displayId:
+          type:
+          - string
+          - 'null'
+      description: Associated order information
+      title: UsageSummaryOrder
+    StripeConnection:
+      type: object
+      properties:
+        customerId:
+          type: string
+          description: Stripe customer ID.
+      required:
+      - customerId
+      description: Stripe customer link, or null when no Stripe gateway account is configured.
+      title: StripeConnection
+    CustomerCreateMetadata:
+      type: object
+      properties: {}
+      description: Flexible JSON field for storing custom metadata about the customer
+      title: CustomerCreateMetadata
+    EmptyResponse:
+      type: object
+      properties: {}
+      title: EmptyResponse
+    PaginationMeta:
+      type: object
+      properties:
+        limit:
+          type: integer
+          description: The requested limit
+        offset:
+          type: integer
+          description: The requested offset
+        count:
+          type: integer
+          description: Number of items returned in this response
+        hasMore:
+          type: boolean
+          description: Whether there are more results available
+        startTime:
+          type: string
+          format: date-time
+          description: The startTime filter that was applied (if any)
+        endTime:
+          type: string
+          format: date-time
+          description: The endTime filter that was applied (if any)
+        externalCustomerId:
+          type: string
+          description: The externalCustomerId filter that was applied (if any)
+        externalProductId:
+          type: string
+          description: The externalProductId filter that was applied (if any)
+        externalAgentId:
+          type: string
+          description: 'DEPRECATED: Use externalProductId instead. The externalAgentId filter that was applied (if any)'
+        metadata:
+          type: string
+          description: The metadata filter that was applied (if any)
+      required:
+      - limit
+      - offset
+      - count
+      - hasMore
+      description: Pagination metadata for cost traces
+      title: PaginationMeta
+    CreditGrantResult:
+      type: object
+      properties:
+        amount:
+          type: integer
+        startsAt:
+          type: string
+          format: date-time
+          description: When these credits become spendable, as an RFC3339 datetime with timezone.
+        expiresAt:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: When these credits expire, as an RFC3339 datetime with timezone. Null when the credits do not expire.
+        status:
+          $ref: '#/components/schemas/CreditGrantResultStatus'
+          description: Credit grants are active immediately when created.
+      required:
+      - amount
+      - startsAt
+      - expiresAt
+      - status
+      title: CreditGrantResult
+    CustomerCreate:
+      type: object
+      properties:
+        name:
+          type: string
+        externalId:
+          type: string
+        phone:
+          type: string
+        employeeCount:
+          type: number
+          format: double
+        annualRevenue:
+          type: number
+          format: double
+        taxExemptStatus:
+          $ref: '#/components/schemas/TaxExemptStatus'
+        creationSource:
+          $ref: '#/components/schemas/CreationSource'
+        website:
+          type: string
+        billingAddress:
+          $ref: '#/components/schemas/Address'
+        metadata:
+          $ref: '#/components/schemas/CustomerCreateMetadata'
+          description: Flexible JSON field for storing custom metadata about the customer
+        contacts:
+          type: array
+          items:
+            $ref: '#/components/schemas/ContactCreateForCustomer'
+          description: Array of contacts to create for this customer
+      required:
+      - name
+      title: CustomerCreate
+    Pagination:
+      type: object
+      properties:
+        limit:
+          type: integer
+        offset:
+          type: integer
+        total:
+          type: integer
+        hasMore:
+          type: boolean
+      required:
+      - limit
+      - offset
+      - total
+      - hasMore
+      title: Pagination
+    Salutation:
+      type: string
+      enum:
+      - Mr.
+      - Mrs.
+      - Miss
+      - Ms.
+      - Dr.
+      - Prof.
+      title: Salutation
+    CustomerStatus:
+      type: string
+      enum:
+      - active
+      - churned
+      description: 'Customer status: churned when the customer is marked as churned, active otherwise.'
+      title: CustomerStatus
+    CustomerStateSeatStatus:
+      type: string
+      enum:
+      - assigned
+      - unassigned
+      title: CustomerStateSeatStatus
+    CustomerState:
+      type: object
+      properties:
+        customer:
+          $ref: '#/components/schemas/CustomerStateCustomer'
+        defaultCurrency:
+          $ref: '#/components/schemas/CurrencyCode'
+        orders:
+          type: array
+          items:
+            $ref: '#/components/schemas/CustomerStateOrder'
+        seats:
+          $ref: '#/components/schemas/CustomerStateSeats'
+        checkoutLinks:
+          type: array
+          items:
+            $ref: '#/components/schemas/CustomerStateCheckoutLink'
+        credits:
+          $ref: '#/components/schemas/CustomerStateCreditSummary'
+        timestamp:
+          type: string
+          format: date-time
+      required:
+      - customer
+      - defaultCurrency
+      - orders
+      - seats
+      - checkoutLinks
+      - credits
+      - timestamp
+      title: CustomerState
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+        code:
+          type: string
+        details:
+          type: string
+      required:
+      - error
+      title: ErrorResponse
+    CustomerStateSeats:
+      type: object
+      properties:
+        total:
+          type: integer
+        assigned:
+          type: integer
+        unassigned:
+          type: integer
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/CustomerStateSeat'
+      required:
+      - total
+      - assigned
+      - unassigned
+      - data
+      title: CustomerStateSeats
+    CustomerStateCheckoutLink:
+      type: object
+      properties:
+        id:
+          type: string
+        url:
+          type: string
+        status:
+          $ref: '#/components/schemas/CustomerStateCheckoutLinkStatus'
+        productIds:
+          type: array
+          items:
+            type: string
+        singleUse:
+          type: boolean
+        allowedCurrencies:
+          type: array
+          items:
+            type: string
+        expiresAt:
+          type:
+          - string
+          - 'null'
+          format: date-time
+      required:
+      - id
+      - url
+      - status
+      - productIds
+      - singleUse
+      - allowedCurrencies
+      - expiresAt
+      title: CustomerStateCheckoutLink
+    CreateCustomerRequest:
+      type: object
+      properties:
+        name:
+          type: string
+        legalName:
+          type:
+          - string
+          - 'null'
+        email:
+          type: string
+          format: email
+        phone:
+          type: string
+        website:
+          type: string
+        externalId:
+          type:
+          - string
+          - 'null'
+        billingAddress:
+          $ref: '#/components/schemas/CustomerBillingAddressInput'
+        creationState:
+          $ref: '#/components/schemas/CustomerCreationState'
+        vatNumber:
+          type:
+          - string
+          - 'null'
+        metadata:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            description: Any type
+        defaultCurrency:
+          type: string
+      required:
+      - name
+      title: CreateCustomerRequest
+    CustomerBillingAddressResponse:
+      type: object
+      properties:
+        line1:
+          type: string
+        line2:
+          type: string
+        city:
+          type: string
+        state:
+          type: string
+        zipCode:
+          type: string
+        country:
+          type: string
+      description: Customer billing address, or null when no address is set.
+      title: CustomerBillingAddressResponse
+    CustomerStateSeat:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Seat UUID. Seats do not currently have display IDs; use this value as `{seatId}` with the order seat assignment endpoints.
+        orderId:
+          type: string
+        product:
+          $ref: '#/components/schemas/CustomerStateProductRef'
+        status:
+          $ref: '#/components/schemas/CustomerStateSeatStatus'
+        assignee:
+          $ref: '#/components/schemas/CustomerStateSeatAssignee'
+        credits:
+          $ref: '#/components/schemas/CustomerStateCreditSummary'
+      required:
+      - id
+      - orderId
+      - product
+      - status
+      - assignee
+      - credits
+      title: CustomerStateSeat
+    CustomerStateCreditSummary:
+      type: object
+      properties:
+        balances:
+          type: array
+          items:
+            $ref: '#/components/schemas/CustomerStateCreditBalance'
+      required:
+      - balances
+      title: CustomerStateCreditSummary
+    CostTrace:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name/type of the operation (e.g., "trace.openai.agents.on_agent")
+        vendor:
+          type: string
+          description: The vendor/provider (e.g., "openai", "anthropic", "mistral")
+        model:
+          type: string
+          description: The model used for the operation (e.g., "gpt-4o-mini", "claude-3-sonnet")
+        cost:
+          $ref: '#/components/schemas/CostAmount'
+        startTimeUnixNano:
+          type: string
+          description: Unix timestamp in nanoseconds when the operation started
+        endTimeUnixNano:
+          type: string
+          description: Unix timestamp in nanoseconds when the operation completed
+        attributes:
+          type: object
+          additionalProperties:
+            description: Any type
+          description: Additional metadata about the trace (e.g., tokens, etc.)
+      required:
+      - name
+      - vendor
+      - cost
+      - startTimeUnixNano
+      - endTimeUnixNano
+      - attributes
+      description: A single cost trace record
+      title: CostTrace
+    UsageSummary:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: The unique identifier of the usage summary
+        eventName:
+          type: string
+          description: The name of the event being tracked
+        eventsQuantity:
+          type: integer
+          format: int64
+          description: The quantity of events in this usage period
+        startDate:
+          type: string
+          format: date-time
+          description: The start date of the usage period
+        endDate:
+          type: string
+          format: date-time
+          description: The end date of the usage period
+        subtotal:
+          type: integer
+          format: int64
+          description: The subtotal amount in the smallest currency unit (e.g., cents)
+        nextBillingDate:
+          type: string
+          format: date-time
+          description: The next billing date for this usage
+        customerId:
+          type: string
+          format: uuid
+          description: The internal customer ID
+        orderId:
+          type: string
+          format: uuid
+          description: The order ID associated with this usage
+        orderLineId:
+          type: string
+          format: uuid
+          description: The order line ID associated with this usage
+        orderLineAttributeId:
+          type: string
+          format: uuid
+          description: The order line attribute ID associated with this usage
+        invoiceId:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          description: The invoice ID if this usage has been invoiced
+        invoiceLineId:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          description: The invoice line ID if this usage has been invoiced
+        createdAt:
+          type: string
+          format: date-time
+          description: When the usage summary was created
+        updatedAt:
+          type: string
+          format: date-time
+          description: When the usage summary was last updated
+        order:
+          $ref: '#/components/schemas/UsageSummaryOrder'
+          description: Associated order information
+        orderLine:
+          $ref: '#/components/schemas/UsageSummaryOrderLine'
+          description: Associated order line information
+      required:
+      - id
+      - eventName
+      - eventsQuantity
+      - startDate
+      - endDate
+      - subtotal
+      - nextBillingDate
+      - customerId
+      - orderId
+      - orderLineId
+      - orderLineAttributeId
+      - createdAt
+      - updatedAt
+      description: A single usage summary record
+      title: UsageSummary
+    CustomerUserStatus:
+      type: string
+      enum:
+      - active
+      - deactivated
+      title: CustomerUserStatus
+    PaymentMethodType:
+      type: string
+      enum:
+      - card
+      - us_bank_account
+      - sepa_debit
+      description: The type of payment method
+      title: PaymentMethodType
+    CustomerUpdate:
+      type: object
+      properties:
+        name:
+          type: string
+        externalId:
+          type: string
+        phone:
+          type: string
+        employeeCount:
+          type: number
+          format: double
+        annualRevenue:
+          type: number
+          format: double
+        taxExemptStatus:
+          $ref: '#/components/schemas/TaxExemptStatus'
+        creationSource:
+          $ref: '#/components/schemas/CreationSource'
+        website:
+          type: string
+        billingAddress:
+          $ref: '#/components/schemas/Address'
+        metadata:
+          $ref: '#/components/schemas/CustomerUpdateMetadata'
+          description: Flexible JSON field for storing custom metadata about the customer
+      title: CustomerUpdate
+    UpdateCustomerRequest:
+      type: object
+      properties:
+        name:
+          type: string
+        legalName:
+          type:
+          - string
+          - 'null'
+        email:
+          type: string
+          format: email
+        phone:
+          type: string
+        website:
+          type: string
+        externalId:
+          type:
+          - string
+          - 'null'
+        billingAddress:
+          $ref: '#/components/schemas/CustomerBillingAddressInput'
+        creationState:
+          $ref: '#/components/schemas/CustomerCreationState'
+        churnDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        vatNumber:
+          type:
+          - string
+          - 'null'
+        metadata:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            description: Any type
+      title: UpdateCustomerRequest
+    CreditGrantCustomer:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Stable Paid customer display ID.
+        externalId:
+          type:
+          - string
+          - 'null'
+          description: Customer ID from the caller's system, if set.
+      required:
+      - id
+      - externalId
+      title: CreditGrantCustomer
+    Error:
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/ApiError'
+      required:
+      - error
+      description: An error response from the Paid API
+      title: Error
+    CustomersGetParametersCreationState:
+      type: string
+      enum:
+      - draft
+      - active
+      title: CustomersGetParametersCreationState
+    CreditBalance:
+      type: object
+      properties:
+        creditsCurrencyId:
+          type: string
+        currencyName:
+          type: string
+        currencyKey:
+          type: string
+        available:
+          type: number
+          format: double
+          description: Effective spendable balance across all grants in this pool, rollover-capped during rollover windows. Equals sum(grants[].available).
+        used:
+          type: number
+          format: double
+        total:
+          type: number
+          format: double
+        periodStart:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: Aggregate min(periodStart) across grants in this pool. Does not correspond to any real billing period when grants overlap. Use grants[].periodStart instead. Will be removed in a future API version.
+        periodEnd:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: Aggregate max(periodEnd) across grants in this pool. Does not correspond to any real billing period when grants overlap. Use grants[].periodEnd or grants[].expiresAt instead. Will be removed in a future API version.
+        rolloverEndDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: Aggregate max(rolloverEndDate) across grants in this pool. Use grants[].rolloverEndDate or grants[].expiresAt instead. Will be removed in a future API version.
+        recipient:
+          $ref: '#/components/schemas/CreditBalanceRecipient'
+        grants:
+          type: array
+          items:
+            $ref: '#/components/schemas/CreditGrant'
+      required:
+      - creditsCurrencyId
+      - currencyName
+      - currencyKey
+      - available
+      - used
+      - total
+      - periodStart
+      - periodEnd
+      - rolloverEndDate
+      - recipient
+      - grants
+      title: CreditBalance
+    CustomerBillingAddressInput:
+      type: object
+      properties:
+        line1:
+          type: string
+        line2:
+          type: string
+        city:
+          type: string
+        state:
+          type: string
+        zipCode:
+          type: string
+        country:
+          type: string
+      title: CustomerBillingAddressInput
+    CustomerCreationState:
+      type: string
+      enum:
+      - draft
+      - active
+      title: CustomerCreationState
+    UpsertCustomerUserRequest:
+      type: object
+      properties:
+        name:
+          type: string
+        email:
+          type:
+          - string
+          - 'null'
+          format: email
+        metadata:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            description: Any type
+        status:
+          $ref: '#/components/schemas/CustomerUserStatus'
+      title: UpsertCustomerUserRequest
+    CreditGrantCreateRequest:
+      type: object
+      properties:
+        creditCurrencyKey:
+          type: string
+          description: Stable machine-readable key for the active credit currency to grant.
+        amount:
+          type: integer
+          description: Number of credits to grant. This is not a monetary amount.
+        startsAt:
+          type: string
+          format: date-time
+          description: When these credits become spendable, as an RFC3339 datetime with timezone. Must be at or before the current server time. Defaults to the current server time when omitted.
+        expiresAt:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: When these credits expire, as an RFC3339 datetime with timezone. Omit or set null for credits that do not expire.
+      required:
+      - creditCurrencyKey
+      - amount
+      title: CreditGrantCreateRequest
+    CustomerAliasListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/CustomerAlias'
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+      required:
+      - data
+      - pagination
+      title: CustomerAliasListResponse
+    GrantCustomerCreditsResponse:
+      type: object
+      properties:
+        created:
+          type: boolean
+          description: True when this request created a new grant.
+        customer:
+          $ref: '#/components/schemas/CreditGrantCustomer'
+        creditCurrency:
+          $ref: '#/components/schemas/CreditGrantCurrency'
+        grant:
+          $ref: '#/components/schemas/CreditGrantResult'
+        createdAt:
+          type: string
+          format: date-time
+      required:
+      - created
+      - customer
+      - creditCurrency
+      - grant
+      - createdAt
+      title: GrantCustomerCreditsResponse
+    CreditGrant:
+      type: object
+      properties:
+        available:
+          type: number
+          format: double
+        used:
+          type: number
+          format: double
+        total:
+          type: number
+          format: double
+        rolloverAmount:
+          type:
+          - number
+          - 'null'
+          format: double
+        periodStart:
+          type: string
+          format: date-time
+        periodEnd:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        rolloverEndDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        expiresAt:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        isInRolloverWindow:
+          type: boolean
+      required:
+      - available
+      - used
+      - total
+      - rolloverAmount
+      - periodStart
+      - periodEnd
+      - rolloverEndDate
+      - expiresAt
+      - isInRolloverWindow
+      title: CreditGrant
+    CostAmount:
+      type: object
+      properties:
+        amount:
+          type: number
+          format: double
+          description: The cost amount
+        currency:
+          type: string
+          description: The currency code (e.g., "USD")
+      required:
+      - amount
+      - currency
+      description: Cost amount with currency
+      title: CostAmount
+    ContactCreateForCustomer:
+      type: object
+      properties:
+        externalId:
+          type: string
+        salutation:
+          $ref: '#/components/schemas/Salutation'
+        firstName:
+          type: string
+        lastName:
+          type: string
+        accountName:
+          type: string
+        email:
+          type: string
+        phone:
+          type: string
+        billingStreet:
+          type: string
+        billingCity:
+          type: string
+        billingStateProvince:
+          type: string
+        billingCountry:
+          type: string
+        billingPostalCode:
+          type: string
+      required:
+      - salutation
+      - firstName
+      - lastName
+      - email
+      title: ContactCreateForCustomer
+    CustomerStateCheckoutLinkStatus:
+      type: string
+      enum:
+      - active
+      - completed
+      - expired
+      - archived
+      title: CustomerStateCheckoutLinkStatus
+    CustomerUser:
+      type: object
+      properties:
+        id:
+          type: string
+        externalId:
+          type: string
+        customerExternalId:
+          type: string
+        name:
+          type:
+          - string
+          - 'null'
+        email:
+          type:
+          - string
+          - 'null'
+        metadata:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            description: Any type
+        status:
+          $ref: '#/components/schemas/CustomerUserStatus'
+        created:
+          type: boolean
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+      required:
+      - id
+      - externalId
+      - customerExternalId
+      - name
+      - email
+      - metadata
+      - status
+      - created
+      - createdAt
+      - updatedAt
+      title: CustomerUser
+    customers_deletePaymentMethod_Response_204:
+      type: object
+      properties: {}
+      description: Empty response body
+      title: customers_deletePaymentMethod_Response_204
+    customers_checkEntitlement_Response_200:
+      type: object
+      properties:
+        entitled:
+          type: boolean
+          description: Whether the customer is entitled to the specified event
+      required:
+      - entitled
+      title: customers_checkEntitlement_Response_200
+    CreationState:
+      type: string
+      enum:
+      - active
+      - draft
+      title: CreationState
+    CustomersGetParametersStatus:
+      type: string
+      enum:
+      - active
+      - churned
+      title: CustomersGetParametersStatus
+    ApiError:
+      type: object
+      properties:
+        message:
+          type: string
+          description: A human-readable message providing more details about the error.
+        code:
+          type: string
+        details:
+          type: string
+      description: An API error response from the Paid API
+      title: ApiError
+    CurrencyCode:
+      type: string
+      description: ISO 4217 currency code, for example USD, EUR, or GBP.
+      title: CurrencyCode
+    CustomerConnections:
+      type: object
+      properties:
+        stripe:
+          $ref: '#/components/schemas/StripeConnection'
+      required:
+      - stripe
+      description: Linked external system IDs for this customer.
+      title: CustomerConnections
+    CustomerUpdateMetadata:
+      type: object
+      properties: {}
+      description: Flexible JSON field for storing custom metadata about the customer
+      title: CustomerUpdateMetadata
+    customers_delete_Response_204:
+      type: object
+      properties: {}
+      description: Empty response body
+      title: customers_delete_Response_204
+    CustomerStateOrder:
+      type: object
+      properties:
+        id:
+          type: string
+        externalId:
+          type:
+          - string
+          - 'null'
+        name:
+          type: string
+        state:
+          $ref: '#/components/schemas/CustomerStateOrderState'
+        currency:
+          $ref: '#/components/schemas/CurrencyCode'
+        startDate:
+          type: string
+          format: date-time
+        endDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        effectiveUntil:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: When the order stops applying; null means no scheduled end.
+      required:
+      - id
+      - externalId
+      - name
+      - state
+      - currency
+      - startDate
+      - endDate
+      - effectiveUntil
+      title: CustomerStateOrder
+    CreditBalanceListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/CreditBalance'
+      required:
+      - data
+      title: CreditBalanceListResponse
+    CustomersCustomerIdEntitlementGetParametersView:
+      type: string
+      enum:
+      - all
+      - active_only
+      default: active_only
+      title: CustomersCustomerIdEntitlementGetParametersView
+    PaymentMethodCard:
+      type: object
+      properties:
+        brand:
+          type: string
+          description: Card brand (visa, mastercard, amex, etc.)
+        last4:
+          type: string
+          description: Last 4 digits of the card number
+        expMonth:
+          type: integer
+          description: Expiration month (1-12)
+        expYear:
+          type: integer
+          description: Expiration year
+      description: Card details (present when type is 'card')
+      title: PaymentMethodCard
+    PaymentMethod:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The payment method ID (typically from Stripe)
+        type:
+          $ref: '#/components/schemas/PaymentMethodType'
+          description: The type of payment method
+        card:
+          $ref: '#/components/schemas/PaymentMethodCard'
+          description: Card details (present when type is 'card')
+        usBankAccount:
+          $ref: '#/components/schemas/PaymentMethodUsBankAccount'
+          description: US bank account details (present when type is 'us_bank_account')
+        isDefault:
+          type: boolean
+          description: Whether this is the customer's default payment method
+        createdAt:
+          type: string
+          format: date-time
+      description: A customer's payment method
+      title: PaymentMethod
+    CreditGrantCurrency:
+      type: object
+      properties:
+        key:
+          type: string
+          description: Stable machine-readable key for this credit currency.
+        name:
+          type: string
+          description: Human-readable name for this credit currency.
+      required:
+      - key
+      - name
+      title: CreditGrantCurrency
+    CreditBalanceRecipient:
+      type: string
+      enum:
+      - organization
+      - seat
+      title: CreditBalanceRecipient
+    UsageSummariesResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/UsageSummary'
+        pagination:
+          $ref: '#/components/schemas/UsagePaginationMeta'
+      required:
+      - data
+      - pagination
+      description: Response containing usage summaries and pagination metadata
+      title: UsageSummariesResponse
+    CustomerMetadata:
+      type: object
+      properties: {}
+      description: Flexible JSON field for storing custom metadata about the customer
+      title: CustomerMetadata
+    EntitlementUsage:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+        organizationId:
+          type: string
+          format: uuid
+        productId:
+          type: string
+          format: uuid
+        entitlementId:
+          type: string
+          format: uuid
+        customerId:
+          type: string
+          format: uuid
+        startDate:
+          type: string
+          format: date-time
+        endDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        total:
+          type: integer
+          format: int64
+          description: Total entitlement amount
+        available:
+          type: integer
+          format: int64
+          description: Available entitlement amount
+        used:
+          type: integer
+          format: int64
+          description: Used entitlement amount
+      required:
+      - id
+      - organizationId
+      - productId
+      - entitlementId
+      - customerId
+      - startDate
+      - total
+      - available
+      - used
+      description: Tracks the usage of an entitlement for a customer
+      title: EntitlementUsage
+    Address:
+      type: object
+      properties:
+        line1:
+          type: string
+        line2:
+          type: string
+        city:
+          type: string
+        state:
+          type: string
+        zipCode:
+          type: string
+        country:
+          type: string
+      required:
+      - line1
+      - city
+      - state
+      - zipCode
+      - country
+      title: Address
+    PaymentMethodUsBankAccount:
+      type: object
+      properties:
+        bankName:
+          type: string
+        last4:
+          type: string
+          description: Last 4 digits of the account number
+        accountType:
+          $ref: '#/components/schemas/PaymentMethodUsBankAccountAccountType'
+      description: US bank account details (present when type is 'us_bank_account')
+      title: PaymentMethodUsBankAccount
+    PaymentMethodUsBankAccountAccountType:
+      type: string
+      enum:
+      - checking
+      - savings
+      title: PaymentMethodUsBankAccountAccountType
+    UsageSummaryOrderLine:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        displayId:
+          type:
+          - string
+          - 'null'
+      description: Associated order line information
+      title: UsageSummaryOrderLine
+    CustomerStateSeatAssignee:
+      type: object
+      properties:
+        id:
+          type: string
+        externalId:
+          type: string
+        name:
+          type:
+          - string
+          - 'null'
+        email:
+          type:
+          - string
+          - 'null'
+      required:
+      - id
+      - externalId
+      - name
+      - email
+      title: CustomerStateSeatAssignee
+    CustomerStateCreditBalance:
+      type: object
+      properties:
+        creditsCurrencyId:
+          type: string
+        currencyName:
+          type: string
+        currencyKey:
+          type: string
+        balance:
+          type: number
+          format: double
+      required:
+      - creditsCurrencyId
+      - currencyName
+      - currencyKey
+      - balance
+      title: CustomerStateCreditBalance
+    CustomerListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Customer_2'
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+      required:
+      - data
+      - pagination
+      title: CustomerListResponse
+    CostTracesResponse:
+      type: object
+      properties:
+        traces:
+          type: array
+          items:
+            $ref: '#/components/schemas/CostTrace'
+        meta:
+          $ref: '#/components/schemas/PaginationMeta'
+      required:
+      - traces
+      - meta
+      description: Response containing cost traces and pagination metadata
+      title: CostTracesResponse
+    CustomerAliasCreateRequest:
+      type: object
+      properties:
+        alias:
+          type: string
+          description: Alternate external identifier that should resolve to this customer.
+        name:
+          type: string
+          description: Optional display name for this alias.
+        description:
+          type: string
+          description: Optional note describing where this alias comes from.
+      required:
+      - alias
+      title: CustomerAliasCreateRequest
+    UsagePaginationMeta:
+      type: object
+      properties:
+        limit:
+          type: integer
+          description: The requested limit
+        offset:
+          type: integer
+          description: The requested offset
+        total:
+          type: integer
+          description: Total number of usage summaries available
+        hasMore:
+          type: boolean
+          description: Whether there are more results available
+      required:
+      - limit
+      - offset
+      - total
+      - hasMore
+      description: Pagination metadata for usage summaries
+      title: UsagePaginationMeta
+    TaxExemptStatus:
+      type: string
+      enum:
+      - none
+      - exempt
+      - reverse
+      title: TaxExemptStatus
+    CustomerStateProductRef:
+      type: object
+      properties:
+        id:
+          type: string
+        externalId:
+          type:
+          - string
+          - 'null'
+        name:
+          type: string
+      required:
+      - id
+      - externalId
+      - name
+      title: CustomerStateProductRef
+    CreationSource:
+      type: string
+      enum:
+      - manual
+      - api
+      - crm
+      - other
+      title: CreationSource
+    CreditGrantResultStatus:
+      type: string
+      enum:
+      - active
+      description: Credit grants are active immediately when created.
+      title: CreditGrantResultStatus
+    customers_deleteByExternalId_Response_204:
+      type: object
+      properties: {}
+      description: Empty response body
+      title: customers_deleteByExternalId_Response_204
+    Customer_2:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Stable Paid customer display ID. Use this value as the `{id}` path parameter for customer routes, for example `GET /api/v2/customers/cus_abc123/state`.
+        name:
+          type: string
+        legalName:
+          type:
+          - string
+          - 'null'
+        email:
+          type: string
+        phone:
+          type: string
+        website:
+          type: string
+        externalId:
+          type:
+          - string
+          - 'null'
+        billingAddress:
+          $ref: '#/components/schemas/CustomerBillingAddressResponse'
+        creationState:
+          $ref: '#/components/schemas/CustomerCreationState'
+        status:
+          $ref: '#/components/schemas/CustomerStatus'
+          description: 'Customer status: churned when the customer is marked as churned, active otherwise.'
+        churnDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        vatNumber:
+          type:
+          - string
+          - 'null'
+        metadata:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            description: Any type
+        defaultCurrency:
+          $ref: '#/components/schemas/CurrencyCode'
+        connections:
+          $ref: '#/components/schemas/CustomerConnections'
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+      required:
+      - id
+      - name
+      - legalName
+      - email
+      - phone
+      - website
+      - externalId
+      - billingAddress
+      - creationState
+      - status
+      - churnDate
+      - vatNumber
+      - metadata
+      - defaultCurrency
+      - connections
+      - createdAt
+      - updatedAt
+      title: Customer
+    CustomerStateCustomer:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Stable Paid customer display ID. Use this value as the `{id}` path parameter for customer routes, for example `GET /api/v2/customers/cus_abc123/state`.
+        name:
+          type: string
+        externalId:
+          type:
+          - string
+          - 'null'
+        billingAddress:
+          $ref: '#/components/schemas/CustomerBillingAddressResponse'
+      required:
+      - id
+      - name
+      - externalId
+      - billingAddress
+      title: CustomerStateCustomer
+    CustomerStateOrderState:
+      type: string
+      enum:
+      - draft
+      - active
+      - paused
+      - ended
+      title: CustomerStateOrderState
+    CustomerAlias:
+      type: object
+      properties:
+        alias:
+          type: string
+          description: Alternate external identifier that resolves to the customer.
+        customerId:
+          type: string
+          description: Paid customer display ID this alias resolves to.
+        name:
+          type:
+          - string
+          - 'null'
+        description:
+          type:
+          - string
+          - 'null'
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+      required:
+      - alias
+      - customerId
+      - name
+      - description
+      - createdAt
+      - updatedAt
+      title: CustomerAlias
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer

@@ -1,0 +1,597 @@
+openapi: 3.1.0
+info:
+  title: API Reference agents checkouts API
+  version: 1.0.0
+servers:
+- url: https://api.agentpaid.io/api/v1
+  description: Production
+tags:
+- name: checkouts
+paths:
+  /checkouts/:
+    get:
+      operationId: list-checkouts
+      summary: List checkouts
+      description: Get a list of checkouts for the organization
+      tags:
+      - checkouts
+      parameters:
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          default: 10
+      - name: offset
+        in: query
+        required: false
+        schema:
+          type: integer
+      - name: status
+        in: query
+        required: false
+        schema:
+          $ref: '#/components/schemas/CheckoutsGetParametersStatus'
+      - name: Authorization
+        in: header
+        description: API Key authentication using Bearer token
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CheckoutListResponse'
+        '400':
+          description: '400'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: '403'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: '500'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    post:
+      operationId: create-checkout
+      summary: Create a checkout
+      description: Creates a checkout link that generates a URL for a customer to complete a purchase
+      tags:
+      - checkouts
+      parameters:
+      - name: Authorization
+        in: header
+        description: API Key authentication using Bearer token
+        required: true
+        schema:
+          type: string
+      responses:
+        '201':
+          description: '201'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Checkout'
+        '400':
+          description: '400'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: '403'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: '404'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: '500'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        description: Body
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateCheckoutRequest'
+  /checkouts/{id}:
+    get:
+      operationId: get-checkout
+      summary: Get checkout
+      description: Get a checkout by ID
+      tags:
+      - checkouts
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: API Key authentication using Bearer token
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CheckoutDetails'
+        '403':
+          description: '403'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: '404'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: '500'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    delete:
+      operationId: archive-checkout
+      summary: Archive checkout
+      description: Archive a checkout by ID
+      tags:
+      - checkouts
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: API Key authentication using Bearer token
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmptyResponse'
+        '403':
+          description: '403'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: '404'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: '500'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+components:
+  schemas:
+    CheckoutSelectedProduct:
+      type: object
+      properties:
+        id:
+          type: string
+        plan:
+          $ref: '#/components/schemas/PlanRef'
+      required:
+      - id
+      - plan
+      description: The product and plan the customer selected, once checkout completes. Null before completion.
+      title: CheckoutSelectedProduct
+    CheckoutListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Checkout'
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+      required:
+      - data
+      - pagination
+      title: CheckoutListResponse
+    EmptyResponse:
+      type: object
+      properties: {}
+      title: EmptyResponse
+    CheckoutDetails:
+      type: object
+      properties:
+        id:
+          type: string
+        url:
+          type: string
+        status:
+          $ref: '#/components/schemas/CheckoutStatus'
+        products:
+          type: array
+          items:
+            $ref: '#/components/schemas/CheckoutProduct'
+        customerId:
+          type:
+          - string
+          - 'null'
+        externalCustomerId:
+          type:
+          - string
+          - 'null'
+        successUrl:
+          type: string
+        cancelUrl:
+          type:
+          - string
+          - 'null'
+        expiresAt:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        metadata:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            description: Any type
+        collectAddress:
+          type: boolean
+        collectPhone:
+          type: boolean
+        singleUse:
+          type: boolean
+        allowedCurrencies:
+          type: array
+          items:
+            type: string
+        customCards:
+          type: array
+          items:
+            $ref: '#/components/schemas/CheckoutCustomCard'
+          description: Additional informational pricing cards rendered alongside the plans.
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+        orderId:
+          type:
+          - string
+          - 'null'
+          description: The resulting order ID once checkout has completed. Null until an order is created.
+        selectedProduct:
+          $ref: '#/components/schemas/CheckoutSelectedProduct'
+      required:
+      - id
+      - url
+      - status
+      - products
+      - customerId
+      - externalCustomerId
+      - successUrl
+      - cancelUrl
+      - expiresAt
+      - metadata
+      - collectAddress
+      - collectPhone
+      - singleUse
+      - allowedCurrencies
+      - createdAt
+      - updatedAt
+      - orderId
+      - selectedProduct
+      title: CheckoutDetails
+    CheckoutCustomCard:
+      type: object
+      properties:
+        label:
+          type: string
+          description: Card title.
+        priceText:
+          type: string
+          description: Headline price text, e.g. "$99/mo".
+        buttonText:
+          type: string
+          description: Call-to-action button label.
+        buttonUrl:
+          type: string
+          description: Call-to-action button URL.
+      required:
+      - label
+      title: CheckoutCustomCard
+    PlanRef:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type:
+          - string
+          - 'null'
+        externalId:
+          type:
+          - string
+          - 'null'
+      required:
+      - id
+      - name
+      - externalId
+      title: PlanRef
+    CheckoutCustomCardInput:
+      type: object
+      properties:
+        label:
+          type: string
+          description: Card title.
+        priceText:
+          type: string
+          description: Headline price text, e.g. "$99/mo".
+        buttonText:
+          type: string
+          description: Call-to-action button label.
+        buttonUrl:
+          type: string
+          format: uri
+          description: Call-to-action button URL.
+      required:
+      - label
+      title: CheckoutCustomCardInput
+    CheckoutProduct:
+      type: object
+      properties:
+        id:
+          type: string
+        plans:
+          type: array
+          items:
+            $ref: '#/components/schemas/CheckoutPlan'
+          description: Plans selected within this product. Absent when the product is offered with all of its plans and none are individually configured.
+      required:
+      - id
+      title: CheckoutProduct
+    CheckoutStatus:
+      type: string
+      enum:
+      - active
+      - completed
+      - expired
+      - archived
+      title: CheckoutStatus
+    CheckoutProductInput:
+      type: object
+      properties:
+        id:
+          type: string
+        plans:
+          type: array
+          items:
+            $ref: '#/components/schemas/CheckoutPlanInput'
+          description: Select specific plans within this product. Omit to offer all of the product's plans.
+      required:
+      - id
+      title: CheckoutProductInput
+    CreateCheckoutRequest:
+      type: object
+      properties:
+        products:
+          type: array
+          items:
+            $ref: '#/components/schemas/CheckoutProductInput'
+        customerId:
+          type: string
+        externalCustomerId:
+          type: string
+          description: External customer identifier. Creates the customer on first use, resolves to the existing customer on subsequent uses.
+        successUrl:
+          type: string
+          format: uri
+        cancelUrl:
+          type: string
+          format: uri
+        expiresAt:
+          type: string
+          format: date-time
+        metadata:
+          type: object
+          additionalProperties:
+            description: Any type
+        collectAddress:
+          type: boolean
+          default: true
+        collectPhone:
+          type: boolean
+          default: false
+        singleUse:
+          type: boolean
+          default: true
+        currency:
+          type: string
+          description: Lock checkout to a specific currency. Omit to allow all currencies supported by the selected plans. If the checkout is for a customer with an active subscription, the currency must match that subscription's currency — subscriptions cannot change currency.
+        customCards:
+          type: array
+          items:
+            $ref: '#/components/schemas/CheckoutCustomCardInput'
+          description: Additional informational pricing cards rendered alongside the plans.
+      required:
+      - products
+      - successUrl
+      title: CreateCheckoutRequest
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+        code:
+          type: string
+        details:
+          type: string
+      required:
+      - error
+      title: ErrorResponse
+    Pagination:
+      type: object
+      properties:
+        limit:
+          type: integer
+        offset:
+          type: integer
+        total:
+          type: integer
+        hasMore:
+          type: boolean
+      required:
+      - limit
+      - offset
+      - total
+      - hasMore
+      title: Pagination
+    Checkout:
+      type: object
+      properties:
+        id:
+          type: string
+        url:
+          type: string
+        status:
+          $ref: '#/components/schemas/CheckoutStatus'
+        products:
+          type: array
+          items:
+            $ref: '#/components/schemas/CheckoutProduct'
+        customerId:
+          type:
+          - string
+          - 'null'
+        externalCustomerId:
+          type:
+          - string
+          - 'null'
+        successUrl:
+          type: string
+        cancelUrl:
+          type:
+          - string
+          - 'null'
+        expiresAt:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        metadata:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            description: Any type
+        collectAddress:
+          type: boolean
+        collectPhone:
+          type: boolean
+        singleUse:
+          type: boolean
+        allowedCurrencies:
+          type: array
+          items:
+            type: string
+        customCards:
+          type: array
+          items:
+            $ref: '#/components/schemas/CheckoutCustomCard'
+          description: Additional informational pricing cards rendered alongside the plans.
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+      required:
+      - id
+      - url
+      - status
+      - products
+      - customerId
+      - externalCustomerId
+      - successUrl
+      - cancelUrl
+      - expiresAt
+      - metadata
+      - collectAddress
+      - collectPhone
+      - singleUse
+      - allowedCurrencies
+      - createdAt
+      - updatedAt
+      title: Checkout
+    CheckoutPlanInput:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Plan identifier, as returned by the list plans endpoint. Selects a specific plan within the product.
+        features:
+          type: array
+          items:
+            type: string
+          description: Override the feature bullet points shown for this plan on the hosted checkout page.
+      required:
+      - id
+      title: CheckoutPlanInput
+    CheckoutPlan:
+      type: object
+      properties:
+        id:
+          type: string
+        features:
+          type: array
+          items:
+            type: string
+      required:
+      - id
+      title: CheckoutPlan
+    CheckoutsGetParametersStatus:
+      type: string
+      enum:
+      - active
+      - completed
+      - archived
+      title: CheckoutsGetParametersStatus
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer

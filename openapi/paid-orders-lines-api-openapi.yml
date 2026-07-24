@@ -1,0 +1,434 @@
+openapi: 3.1.0
+info:
+  title: API Reference agents orders > lines API
+  version: 1.0.0
+servers:
+- url: https://api.agentpaid.io/api/v1
+  description: Production
+tags:
+- name: orders > lines
+paths:
+  /orders/{orderId}/lines:
+    put:
+      operationId: update
+      summary: Update order lines
+      tags:
+      - orders > lines
+      parameters:
+      - name: orderId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                lines:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/OrderLineCreate'
+components:
+  schemas:
+    Address:
+      type: object
+      properties:
+        line1:
+          type: string
+        line2:
+          type: string
+        city:
+          type: string
+        state:
+          type: string
+        zipCode:
+          type: string
+        country:
+          type: string
+      required:
+      - line1
+      - city
+      - state
+      - zipCode
+      - country
+      title: Address
+    Agent:
+      type: object
+      properties:
+        id:
+          type: string
+        externalId:
+          type: string
+        organizationId:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        active:
+          type: boolean
+        agentCode:
+          type: string
+        agentAttributes:
+          type: array
+          items:
+            $ref: '#/components/schemas/AgentAttribute'
+      required:
+      - id
+      - organizationId
+      - name
+      - active
+      title: Agent
+    ChargeType:
+      type: string
+      enum:
+      - oneTime
+      - recurring
+      - usage
+      - seatBased
+      title: ChargeType
+    Customer:
+      type: object
+      properties:
+        id:
+          type: string
+        organizationId:
+          type: string
+        name:
+          type: string
+        externalId:
+          type: string
+        phone:
+          type: string
+        employeeCount:
+          type: number
+          format: double
+        annualRevenue:
+          type: number
+          format: double
+        taxExemptStatus:
+          $ref: '#/components/schemas/TaxExemptStatus'
+        creationSource:
+          $ref: '#/components/schemas/CreationSource'
+        creationState:
+          $ref: '#/components/schemas/CreationState'
+        website:
+          type: string
+        billingAddress:
+          $ref: '#/components/schemas/Address'
+        metadata:
+          $ref: '#/components/schemas/CustomerMetadata'
+          description: Flexible JSON field for storing custom metadata about the customer
+      required:
+      - id
+      - organizationId
+      - name
+      title: Customer
+    Pricing:
+      type: object
+      properties:
+        eventName:
+          type: string
+        taxable:
+          type: boolean
+        creditCost:
+          type: number
+          format: double
+        chargeType:
+          $ref: '#/components/schemas/ChargeType'
+        pricingModel:
+          $ref: '#/components/schemas/PricingModelType'
+        billingFrequency:
+          $ref: '#/components/schemas/BillingFrequency'
+        pricePoints:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/AgentPricePoint'
+      required:
+      - taxable
+      - chargeType
+      - pricingModel
+      - billingFrequency
+      - pricePoints
+      title: Pricing
+    PricingModelType:
+      type: string
+      enum:
+      - PerUnit
+      - VolumePricing
+      - GraduatedPricing
+      - PrepaidCredits
+      title: PricingModelType
+    BillingFrequency:
+      type: string
+      enum:
+      - monthly
+      - quarterly
+      - annual
+      title: BillingFrequency
+    CreationState:
+      type: string
+      enum:
+      - active
+      - draft
+      title: CreationState
+    OrderLineAttributeCreate:
+      oneOf:
+      - description: Any type
+      - description: Any type
+      title: OrderLineAttributeCreate
+    AgentAttribute:
+      type: object
+      properties:
+        name:
+          type: string
+        active:
+          type: boolean
+        pricing:
+          $ref: '#/components/schemas/Pricing'
+      required:
+      - name
+      - active
+      - pricing
+      title: AgentAttribute
+    OrderLineCreate:
+      type: object
+      properties:
+        productId:
+          type: string
+          description: Paid's internal ID for the product
+        productExternalId:
+          type: string
+          description: The external ID of the product i.e. the id within your system
+        agentId:
+          type: string
+          description: 'DEPRECATED: Use productId instead. Paid''s internal ID for the agent/product'
+        agentExternalId:
+          type: string
+          description: 'DEPRECATED: Use productExternalId instead. The external ID of the agent/product i.e. the id within your system'
+        name:
+          type: string
+          description: Name of the order line
+        description:
+          type: string
+          description: Description of the order line
+        ProductAttribute:
+          type: array
+          items:
+            $ref: '#/components/schemas/OrderLineAttributeCreate'
+          description: Optional array of custom product attributes to override default pricing, allowing per customer pricing. If not provided, attributes will be auto-generated from the product definition.
+        agentAttributes:
+          type: array
+          items:
+            $ref: '#/components/schemas/OrderLineAttributeCreate'
+          description: 'DEPRECATED: Use ProductAttribute instead. Optional array of custom agent attributes to override default pricing, allowing per customer pricing. If not provided, attributes will be auto-generated from the product definition.'
+      title: OrderLineCreate
+    OrderLine:
+      type: object
+      properties:
+        id:
+          type: string
+        orderId:
+          type: string
+        agentId:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        startDate:
+          type: string
+        endDate:
+          type: string
+        totalAmount:
+          type: number
+          format: double
+        billedAmountWithoutTax:
+          type: number
+          format: double
+        billedTax:
+          type: number
+          format: double
+        totalBilledAmount:
+          type: number
+          format: double
+        creationState:
+          $ref: '#/components/schemas/CreationState'
+        agent:
+          $ref: '#/components/schemas/Agent'
+        orderLineAttributes:
+          type: array
+          items:
+            $ref: '#/components/schemas/OrderLineAttribute'
+      title: OrderLine
+    OrderLineAttributePricing:
+      type: object
+      properties:
+        eventName:
+          type: string
+        chargeType:
+          $ref: '#/components/schemas/ChargeType'
+        pricePoint:
+          $ref: '#/components/schemas/PricePoint'
+        pricingModel:
+          $ref: '#/components/schemas/PricingModelType'
+        billingFrequency:
+          $ref: '#/components/schemas/BillingFrequency'
+      title: OrderLineAttributePricing
+    PricePoint:
+      type: object
+      properties:
+        currency:
+          type: string
+        unitPrice:
+          type: number
+          format: double
+        minQuantity:
+          type: number
+          format: double
+        tiers:
+          type: array
+          items:
+            $ref: '#/components/schemas/Tier'
+      title: PricePoint
+    TaxExemptStatus:
+      type: string
+      enum:
+      - none
+      - exempt
+      - reverse
+      title: TaxExemptStatus
+    CreationSource:
+      type: string
+      enum:
+      - manual
+      - api
+      - crm
+      - other
+      title: CreationSource
+    Tier:
+      type: object
+      properties:
+        lowerBound:
+          type: number
+          format: double
+        upperBound:
+          type: number
+          format: double
+        price:
+          type: number
+          format: double
+      title: Tier
+    OrderLineAttribute:
+      type: object
+      properties:
+        agentAttributeId:
+          type: string
+        quantity:
+          type: number
+          format: double
+        currency:
+          type: string
+        pricing:
+          $ref: '#/components/schemas/OrderLineAttributePricing'
+      title: OrderLineAttribute
+    Order:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        customerId:
+          type: string
+        organizationId:
+          type: string
+        startDate:
+          type: string
+        endDate:
+          type: string
+        totalAmount:
+          type: number
+          format: double
+        estimatedTax:
+          type: number
+          format: double
+        billedAmountNoTax:
+          type: number
+          format: double
+        billedTax:
+          type: number
+          format: double
+        totalBilledAmount:
+          type: number
+          format: double
+        pendingBillingAmount:
+          type: number
+          format: double
+        creationState:
+          $ref: '#/components/schemas/CreationState'
+        orderLines:
+          type: array
+          items:
+            $ref: '#/components/schemas/OrderLine'
+        customer:
+          $ref: '#/components/schemas/Customer'
+      title: Order
+    CustomerMetadata:
+      type: object
+      properties: {}
+      description: Flexible JSON field for storing custom metadata about the customer
+      title: CustomerMetadata
+    AgentPricePointTiers:
+      type: object
+      properties:
+        minQuantity:
+          type: number
+          format: double
+        maxQuantity:
+          type: number
+          format: double
+        unitPrice:
+          type: number
+          format: double
+      required:
+      - unitPrice
+      title: AgentPricePointTiers
+    AgentPricePoint:
+      type: object
+      properties:
+        unitPrice:
+          type: number
+          format: double
+        minQuantity:
+          type: number
+          format: double
+        includedQuantity:
+          type: number
+          format: double
+        tiers:
+          type: array
+          items:
+            $ref: '#/components/schemas/AgentPricePointTiers'
+      title: AgentPricePoint
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer

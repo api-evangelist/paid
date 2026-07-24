@@ -1,0 +1,257 @@
+openapi: 3.1.0
+info:
+  title: API Reference agents usage API
+  version: 1.0.0
+servers:
+- url: https://api.agentpaid.io/api/v1
+  description: Production
+tags:
+- name: usage
+paths:
+  /usage/signals/bulk:
+    post:
+      operationId: record-bulk
+      summary: Record usage signals in bulk
+      description: 'DEPRECATED: Use POST /usage/v2/signals/bulk instead for cleaner field names.'
+      tags:
+      - usage
+      parameters:
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      responses:
+        '201':
+          description: Success response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/usage_recordBulk_Response_201'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                signals:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Signal'
+  /usage/v2/signals/bulk:
+    post:
+      operationId: usage-record-bulk-v-2
+      summary: Record usage signals in bulk (V2 - Clean field names)
+      tags:
+      - usage
+      parameters:
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      responses:
+        '201':
+          description: Success response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/usage_usageRecordBulkV2_Response_201'
+        '400':
+          description: Bad request - Each signal must provide exactly one customer ID (customer_id OR external_customer_id) and exactly one product ID (product_id OR external_product_id). Providing both or neither will result in an error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '409':
+          description: Conflict - One or more signals have idempotency keys that have already been used. The entire batch is rejected.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                signals:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/SignalV2'
+  /usage/check-usage:
+    post:
+      operationId: check-usage
+      summary: Check if usage is allowed for a customer and product
+      tags:
+      - usage
+      parameters:
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Usage check response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/usage_checkUsage_Response_200'
+        '400':
+          description: Bad request - Invalid API key, missing authorization, or missing required fields (externalCustomerId, externalProductId)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Not found - Order, plan, or product not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                externalCustomerId:
+                  type: string
+                  description: External customer ID
+                externalProductId:
+                  type: string
+                  description: External product ID (the external ID of the product/agent)
+              required:
+              - externalCustomerId
+              - externalProductId
+components:
+  schemas:
+    SignalV2:
+      type: object
+      properties:
+        event_name:
+          type: string
+          description: The name of the event being tracked
+        product_id:
+          type: string
+          description: Paid's display ID for the product (e.g., prod_abc123). Cannot be used with external_product_id. Either this or external_product_id is required.
+        external_product_id:
+          type: string
+          description: Your system's product ID. Cannot be used with product_id. Either this or product_id is required.
+        customer_id:
+          type: string
+          description: Paid's display ID for the customer (e.g., cus_xyz789). Cannot be used with external_customer_id. Either this or external_customer_id is required.
+        external_customer_id:
+          type: string
+          description: Your system's customer ID. Cannot be used with customer_id. Either this or customer_id is required.
+        data:
+          type: object
+          additionalProperties:
+            description: Any type
+          description: Optional additional data/metadata for the signal
+        idempotency_key:
+          type: string
+          description: A unique key to ensure idempotent signal processing. If a signal with the same idempotency key has already been processed, the entire batch will be rejected with a 409 Conflict error.
+      required:
+      - event_name
+      description: 'V2 signal schema with clean field names. IMPORTANT: Exactly one customer ID field (customer_id OR external_customer_id) and exactly one product ID field (product_id OR external_product_id) must be provided per signal.'
+      title: SignalV2
+    usage_checkUsage_Response_200:
+      type: object
+      properties:
+        allowed:
+          type: boolean
+          description: Whether usage is allowed
+        message:
+          type: string
+          description: Human-readable message about the usage check result
+        eventName:
+          type: string
+          description: Event name (only present when usage is not allowed)
+        available:
+          type: number
+          format: double
+          description: Available credits (only present for PrepaidCredits when insufficient)
+        eventsQuantity:
+          type: number
+          format: double
+          description: Current events quantity (only present when usage exceeds limit)
+        limit:
+          type: number
+          format: double
+          description: Usage limit (only present when usage exceeds limit)
+      title: usage_checkUsage_Response_200
+    usage_usageRecordBulkV2_Response_201:
+      type: object
+      properties: {}
+      description: Empty response body
+      title: usage_usageRecordBulkV2_Response_201
+    Signal:
+      type: object
+      properties:
+        event_name:
+          type: string
+        agent_id:
+          type: string
+          description: 'DEPRECATED: Use product_id in SignalV2 instead.'
+        external_agent_id:
+          type: string
+          description: 'DEPRECATED: Use external_product_id in SignalV2 instead.'
+        customer_id:
+          type: string
+          description: 'DEPRECATED: The external customer id. Use `external_customer_id` or `internal_customer_id` instead.'
+        data:
+          type: object
+          additionalProperties:
+            description: Any type
+        idempotency_key:
+          type: string
+          description: A unique key to ensure idempotent signal processing
+        internal_customer_id:
+          type: string
+          description: 'DEPRECATED: Use customer_id in SignalV2 instead. This was Paid''s internal customer ID.'
+        external_customer_id:
+          type: string
+          description: Your system's customer ID
+      description: 'DEPRECATED: Use SignalV2 instead for cleaner field names.'
+      title: Signal
+    usage_recordBulk_Response_201:
+      type: object
+      properties: {}
+      description: Empty response body
+      title: usage_recordBulk_Response_201
+    ApiError:
+      type: object
+      properties:
+        message:
+          type: string
+          description: A human-readable message providing more details about the error.
+        code:
+          type: string
+        details:
+          type: string
+      description: An API error response from the Paid API
+      title: ApiError
+    Error:
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/ApiError'
+      required:
+      - error
+      description: An error response from the Paid API
+      title: Error
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer

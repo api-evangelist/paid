@@ -1,0 +1,274 @@
+openapi: 3.1.0
+info:
+  title: API Reference agents credits API
+  version: 1.0.0
+servers:
+- url: https://api.agentpaid.io/api/v1
+  description: Production
+tags:
+- name: credits
+paths:
+  /credits/currencies:
+    get:
+      operationId: list-credit-currencies
+      summary: List credit currencies
+      description: List credit currencies for the organization. Includes active and archived currencies by default; use the status query parameter to filter.
+      tags:
+      - credits
+      parameters:
+      - name: status
+        in: query
+        description: Filter credit currencies by status. Defaults to `all` so archived currencies remain readable after they are archived.
+        required: false
+        schema:
+          $ref: '#/components/schemas/CreditsCurrenciesGetParametersStatus'
+      - name: Authorization
+        in: header
+        description: API Key authentication using Bearer token
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreditCurrencyListResponse'
+        '403':
+          description: '403'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: '500'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    post:
+      operationId: create-credit-currency
+      summary: Create credit currency
+      description: Creates a credit currency for the organization.
+      tags:
+      - credits
+      parameters:
+      - name: Authorization
+        in: header
+        description: API Key authentication using Bearer token
+        required: true
+        schema:
+          type: string
+      responses:
+        '201':
+          description: '201'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreditCurrency'
+        '400':
+          description: '400'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: '403'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: '500'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        description: Body
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateCreditCurrencyRequest'
+  /credits/currencies/{id}:
+    put:
+      operationId: update-credit-currency-by-id
+      summary: Update credit currency
+      description: Update a credit currency description or set its active/archive status.
+      tags:
+      - credits
+      parameters:
+      - name: id
+        in: path
+        description: Credit currency ID.
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: API Key authentication using Bearer token
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreditCurrency'
+        '400':
+          description: '400'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: '403'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: '404'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: '500'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        description: Body
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateCreditCurrencyRequest'
+components:
+  schemas:
+    CreditCurrencyListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/CreditCurrency'
+      required:
+      - data
+      title: CreditCurrencyListResponse
+    CreateCreditCurrencyRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Human-readable name shown for this credit currency.
+        key:
+          type: string
+          description: Stable machine-readable key for this credit currency. Use lowercase letters, numbers, underscores, and hyphens. Keys are unique within an organization.
+        description:
+          type:
+          - string
+          - 'null'
+          description: Optional description for this credit currency.
+      required:
+      - name
+      - key
+      title: CreateCreditCurrencyRequest
+    UpdateCreditCurrencyRequestStatus:
+      type: string
+      enum:
+      - active
+      - archived
+      description: Set to `archived` to archive this credit currency, or `active` to restore it.
+      title: UpdateCreditCurrencyRequestStatus
+    CreditCurrencyStatus:
+      type: string
+      enum:
+      - active
+      - archived
+      description: Whether this credit currency is active or archived.
+      title: CreditCurrencyStatus
+    CreditCurrency:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier for this credit currency.
+        name:
+          type: string
+          description: Human-readable name shown for this credit currency.
+        key:
+          type: string
+          description: Stable machine-readable key for this credit currency. Keys are unique within an organization.
+        status:
+          $ref: '#/components/schemas/CreditCurrencyStatus'
+          description: Whether this credit currency is active or archived.
+        description:
+          type:
+          - string
+          - 'null'
+          description: Optional description for this credit currency.
+        archivedAt:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: When this credit currency was archived. Null means the currency is active.
+        createdAt:
+          type: string
+          format: date-time
+          description: When this credit currency was created.
+        updatedAt:
+          type: string
+          format: date-time
+          description: When this credit currency was last updated.
+      required:
+      - id
+      - name
+      - key
+      - status
+      - description
+      - archivedAt
+      - createdAt
+      - updatedAt
+      title: CreditCurrency
+    CreditsCurrenciesGetParametersStatus:
+      type: string
+      enum:
+      - active
+      - archived
+      - all
+      default: all
+      title: CreditsCurrenciesGetParametersStatus
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+        code:
+          type: string
+        details:
+          type: string
+      required:
+      - error
+      title: ErrorResponse
+    UpdateCreditCurrencyRequest:
+      type: object
+      properties:
+        description:
+          type:
+          - string
+          - 'null'
+          description: Updated description for this credit currency. Use null to clear the description.
+        status:
+          $ref: '#/components/schemas/UpdateCreditCurrencyRequestStatus'
+          description: Set to `archived` to archive this credit currency, or `active` to restore it.
+      title: UpdateCreditCurrencyRequest
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer

@@ -1,0 +1,255 @@
+openapi: 3.1.0
+info:
+  title: API Reference agents traces API
+  version: 1.0.0
+servers:
+- url: https://api.agentpaid.io/api/v1
+  description: Production
+tags:
+- name: traces
+paths:
+  /traces:
+    get:
+      operationId: get-traces
+      summary: Fetch cost traces for an organization
+      tags:
+      - traces
+      parameters:
+      - name: limit
+        in: query
+        description: Maximum number of traces to return (1-1000)
+        required: false
+        schema:
+          type: integer
+          default: 100
+      - name: offset
+        in: query
+        description: Number of traces to skip for pagination
+        required: false
+        schema:
+          type: integer
+          default: 0
+      - name: startTime
+        in: query
+        description: Filter traces starting from this time (ISO 8601 format)
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: endTime
+        in: query
+        description: Filter traces up to this time (ISO 8601 format)
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: externalCustomerId
+        in: query
+        description: Filter traces by external customer ID
+        required: false
+        schema:
+          type: string
+      - name: externalProductId
+        in: query
+        description: Filter traces by external product ID
+        required: false
+        schema:
+          type: string
+      - name: externalAgentId
+        in: query
+        description: 'DEPRECATED: Use externalProductId instead. Filter traces by external agent ID'
+        required: false
+        schema:
+          type: string
+      - name: metadata
+        in: query
+        description: Filter traces by metadata fields. Must be a valid JSON object (e.g., {"key1":"value1","key2":"value2"}). All specified fields must match (AND logic).
+        required: false
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TracesResponse'
+        '400':
+          description: Bad request - Invalid query parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Forbidden - Invalid or missing API key
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  schemas:
+    PaginationMeta:
+      type: object
+      properties:
+        limit:
+          type: integer
+          description: The requested limit
+        offset:
+          type: integer
+          description: The requested offset
+        count:
+          type: integer
+          description: Number of items returned in this response
+        hasMore:
+          type: boolean
+          description: Whether there are more results available
+        startTime:
+          type: string
+          format: date-time
+          description: The startTime filter that was applied (if any)
+        endTime:
+          type: string
+          format: date-time
+          description: The endTime filter that was applied (if any)
+        externalCustomerId:
+          type: string
+          description: The externalCustomerId filter that was applied (if any)
+        externalProductId:
+          type: string
+          description: The externalProductId filter that was applied (if any)
+        externalAgentId:
+          type: string
+          description: 'DEPRECATED: Use externalProductId instead. The externalAgentId filter that was applied (if any)'
+        metadata:
+          type: string
+          description: The metadata filter that was applied (if any)
+      required:
+      - limit
+      - offset
+      - count
+      - hasMore
+      description: Pagination metadata for cost traces
+      title: PaginationMeta
+    Trace:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name/type of the operation (e.g., "trace.openai.agents.on_agent")
+        vendor:
+          type: string
+          description: The vendor/provider (e.g., "openai", "anthropic", "mistral")
+        model:
+          type: string
+          description: The model used for the operation (e.g., "gpt-4o-mini", "claude-3-sonnet")
+        cost:
+          $ref: '#/components/schemas/CostAmount'
+        startTimeUnixNano:
+          type: string
+          description: Unix timestamp in nanoseconds when the operation started
+        endTimeUnixNano:
+          type: string
+          description: Unix timestamp in nanoseconds when the operation completed
+        attributes:
+          type: object
+          additionalProperties:
+            description: Any type
+          description: Additional metadata about the trace (e.g., tokens, etc.)
+        customerId:
+          type: string
+          description: The internal customer ID associated with this trace
+        externalCustomerId:
+          type:
+          - string
+          - 'null'
+          description: Your system's customer ID associated with this trace
+        productId:
+          type:
+          - string
+          - 'null'
+          description: The product ID associated with this trace
+        externalProductId:
+          type:
+          - string
+          - 'null'
+          description: Your system's product ID associated with this trace
+        agentId:
+          type:
+          - string
+          - 'null'
+          description: 'DEPRECATED: Use productId instead. The product/agent ID associated with this trace.'
+        externalAgentId:
+          type:
+          - string
+          - 'null'
+          description: 'DEPRECATED: Use externalProductId instead. Your system''s agent/product ID.'
+      required:
+      - name
+      - vendor
+      - model
+      - cost
+      - startTimeUnixNano
+      - endTimeUnixNano
+      - attributes
+      description: A single cost trace record with customer and product info
+      title: Trace
+    CostAmount:
+      type: object
+      properties:
+        amount:
+          type: number
+          format: double
+          description: The cost amount
+        currency:
+          type: string
+          description: The currency code (e.g., "USD")
+      required:
+      - amount
+      - currency
+      description: Cost amount with currency
+      title: CostAmount
+    TracesResponse:
+      type: object
+      properties:
+        traces:
+          type: array
+          items:
+            $ref: '#/components/schemas/Trace'
+        meta:
+          $ref: '#/components/schemas/PaginationMeta'
+      required:
+      - traces
+      - meta
+      description: Response containing cost traces and pagination metadata
+      title: TracesResponse
+    ApiError:
+      type: object
+      properties:
+        message:
+          type: string
+          description: A human-readable message providing more details about the error.
+        code:
+          type: string
+        details:
+          type: string
+      description: An API error response from the Paid API
+      title: ApiError
+    Error:
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/ApiError'
+      required:
+      - error
+      description: An error response from the Paid API
+      title: Error
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer

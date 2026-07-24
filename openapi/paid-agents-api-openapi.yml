@@ -1,0 +1,394 @@
+openapi: 3.1.0
+info:
+  title: API Reference agents API
+  version: 1.0.0
+servers:
+- url: https://api.agentpaid.io/api/v1
+  description: Production
+tags:
+- name: agents
+paths:
+  /agents:
+    get:
+      operationId: list
+      summary: List agents
+      description: 'DEPRECATED: Use /products instead. Agents are now products with type=''agent''.'
+      tags:
+      - agents
+      parameters:
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Agent'
+    post:
+      operationId: create
+      summary: Create Agent
+      description: 'DEPRECATED: Use POST /products instead.'
+      tags:
+      - agents
+      parameters:
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      responses:
+        '201':
+          description: Success response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Agent'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AgentCreate'
+  /agents/{agentId}:
+    get:
+      operationId: get
+      summary: Get agent by ID
+      description: 'DEPRECATED: Use GET /products/{productId} instead.'
+      tags:
+      - agents
+      parameters:
+      - name: agentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Agent'
+    put:
+      operationId: update
+      summary: Update Agent
+      description: 'DEPRECATED: Use PUT /products/{productId} instead.'
+      tags:
+      - agents
+      parameters:
+      - name: agentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Agent'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AgentUpdate'
+    delete:
+      operationId: delete
+      summary: Delete agent
+      description: 'DEPRECATED: Use DELETE /products/{productId} instead.'
+      tags:
+      - agents
+      parameters:
+      - name: agentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: Success response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/agents_delete_Response_204'
+  /agents/external/{externalId}:
+    get:
+      operationId: get-by-external-id
+      summary: Get agent by external ID
+      description: 'DEPRECATED: Use GET /products/external/{externalId} instead.'
+      tags:
+      - agents
+      parameters:
+      - name: externalId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Agent'
+    put:
+      operationId: update-by-external-id
+      summary: Update agent by external ID
+      description: 'DEPRECATED: Use PUT /products/external/{externalId} instead.'
+      tags:
+      - agents
+      parameters:
+      - name: externalId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Agent'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AgentUpdate'
+    delete:
+      operationId: delete-by-external-id
+      summary: Delete agent by external ID
+      description: 'DEPRECATED: Use DELETE /products/external/{externalId} instead.'
+      tags:
+      - agents
+      parameters:
+      - name: externalId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: Success response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/agents_deleteByExternalId_Response_204'
+components:
+  schemas:
+    AgentUpdate:
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        externalId:
+          type: string
+        active:
+          type: boolean
+        agentCode:
+          type: string
+        agentAttributes:
+          type: array
+          items:
+            $ref: '#/components/schemas/AgentAttribute'
+      title: AgentUpdate
+    Agent:
+      type: object
+      properties:
+        id:
+          type: string
+        externalId:
+          type: string
+        organizationId:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        active:
+          type: boolean
+        agentCode:
+          type: string
+        agentAttributes:
+          type: array
+          items:
+            $ref: '#/components/schemas/AgentAttribute'
+      required:
+      - id
+      - organizationId
+      - name
+      - active
+      title: Agent
+    ChargeType:
+      type: string
+      enum:
+      - oneTime
+      - recurring
+      - usage
+      - seatBased
+      title: ChargeType
+    agents_deleteByExternalId_Response_204:
+      type: object
+      properties: {}
+      description: Empty response body
+      title: agents_deleteByExternalId_Response_204
+    AgentCreate:
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        agentCode:
+          type: string
+        externalId:
+          type: string
+        active:
+          type: boolean
+      required:
+      - name
+      - description
+      title: AgentCreate
+    Pricing:
+      type: object
+      properties:
+        eventName:
+          type: string
+        taxable:
+          type: boolean
+        creditCost:
+          type: number
+          format: double
+        chargeType:
+          $ref: '#/components/schemas/ChargeType'
+        pricingModel:
+          $ref: '#/components/schemas/PricingModelType'
+        billingFrequency:
+          $ref: '#/components/schemas/BillingFrequency'
+        pricePoints:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/AgentPricePoint'
+      required:
+      - taxable
+      - chargeType
+      - pricingModel
+      - billingFrequency
+      - pricePoints
+      title: Pricing
+    PricingModelType:
+      type: string
+      enum:
+      - PerUnit
+      - VolumePricing
+      - GraduatedPricing
+      - PrepaidCredits
+      title: PricingModelType
+    BillingFrequency:
+      type: string
+      enum:
+      - monthly
+      - quarterly
+      - annual
+      title: BillingFrequency
+    AgentPricePointTiers:
+      type: object
+      properties:
+        minQuantity:
+          type: number
+          format: double
+        maxQuantity:
+          type: number
+          format: double
+        unitPrice:
+          type: number
+          format: double
+      required:
+      - unitPrice
+      title: AgentPricePointTiers
+    agents_delete_Response_204:
+      type: object
+      properties: {}
+      description: Empty response body
+      title: agents_delete_Response_204
+    AgentAttribute:
+      type: object
+      properties:
+        name:
+          type: string
+        active:
+          type: boolean
+        pricing:
+          $ref: '#/components/schemas/Pricing'
+      required:
+      - name
+      - active
+      - pricing
+      title: AgentAttribute
+    AgentPricePoint:
+      type: object
+      properties:
+        unitPrice:
+          type: number
+          format: double
+        minQuantity:
+          type: number
+          format: double
+        includedQuantity:
+          type: number
+          format: double
+        tiers:
+          type: array
+          items:
+            $ref: '#/components/schemas/AgentPricePointTiers'
+      title: AgentPricePoint
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
