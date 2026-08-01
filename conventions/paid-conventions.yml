@@ -1,0 +1,38 @@
+generated: '2026-07-20'
+method: searched
+source: openapi/paid-v2.json, openapi/paid-v1.json, https://docs.paid.ai/documentation/billing/webhooks
+summary: Cross-cutting request/response semantics for the Paid API, derived from the
+  OpenAPI descriptions and documentation.
+auth:
+  style: bearer
+  scheme: http bearer (API key as bearer token)
+  header: 'Authorization: Bearer paid_xxx'
+  ref: authentication/paid-authentication.yml
+pagination:
+  style: limit-offset
+  params:
+  - limit
+  - offset
+external_ids:
+  note: Most resources support a parallel /external/{externalId} addressing scheme
+    alongside the Paid-native {id}, letting callers key resources by their own identifiers.
+idempotency:
+  supported: false
+  note: No idempotency-key header is declared in the OpenAPI or documented.
+versioning:
+  style: path
+  current: v2
+  ref: lifecycle/paid-lifecycle.yml
+errors:
+  content_type: application/json
+  envelope: '{ error, code, details }'
+  rfc9457: false
+  ref: errors/paid-problem-types.yml
+webhooks:
+  signature_header: x-webhook-signature
+  verification: HMAC signature over the raw request body using the org signing secret
+  secret_rotation: POST /webhooks/rotate-secret
+  ref: asyncapi/paid-webhooks.yml
+rate_limiting:
+  signal: HTTP 429 returned on limit exceeded
+  headers: not documented

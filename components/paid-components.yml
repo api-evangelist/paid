@@ -1,0 +1,25 @@
+generated: '2026-07-20'
+method: searched
+source: npm (@paid-ai/embed, @paid-ai/paid-blocks), github.com/paid-ai
+summary: Client-side / embeddable UI surfaces from Paid, distinct from the API SDKs -
+  a browser embed loader for publicly shareable Paid resources and a Next.js component
+  library.
+families:
+- name: Paid Embed
+  package: '@paid-ai/embed'
+  version: 0.2.0
+  kind: browser-sdk / embed-loader
+  official: true
+  url: https://www.npmjs.com/package/@paid-ai/embed
+  repository: https://github.com/paid-ai/embed
+  description: Browser SDK for embedding publicly-shareable Paid resources (value receipts
+    today) rendered via JWT-authorized embed tokens.
+  reference_app: https://github.com/paid-ai/embed-example
+- name: Paid Blocks
+  package: '@paid-ai/paid-blocks'
+  version: 0.5.5
+  kind: react/next.js component library
+  official: true
+  url: https://www.npmjs.com/package/@paid-ai/paid-blocks
+  repository: https://github.com/paid-ai/paid-blocks
+  description: Official Next.js component SDK for the Paid APIs (Paid Blocks).

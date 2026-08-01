@@ -1,0 +1,31 @@
+generated: '2026-07-20'
+method: searched
+source: https://docs.paid.ai/cli/cli/command-reference, https://docs.paid.ai/documentation/getting-started/quickstart
+summary: Paid models environments as named CLI/API-key profiles. The Paid CLI creates
+  a Sandbox profile by default, and a separate Production profile is selected explicitly.
+  Environments are keyed by API key and an optional custom base URL.
+environments:
+  model: profile-based
+  default_profile: sandbox
+  profiles:
+  - name: sandbox
+    label: Sandbox
+    default: true
+  - name: production
+    label: Production
+api_keys:
+  prefix: paid_
+  issued_at: https://app.paid.ai/settings/api-keys
+  scheme: bearer
+  note: 'API keys are entered as `paid_xxx`; the CLI stores one key per profile.'
+tooling:
+  cli:
+    init: paid init            # creates a Sandbox profile by default
+    select_env: paid --env production <command>
+    switch: paid env switch production
+    custom_base_url_flag: --base-url
+selectors:
+  base_url_override: supported via CLI --base-url and SDK client option
+caveats:
+- No published set of static test cards / test bank accounts / hosted test tokens
+  or test-clock time-simulation tooling was found; do not assume Stripe-style fixtures.

@@ -1,0 +1,62 @@
+generated: '2026-07-20'
+method: derived
+source: openapi/paid-v2.json (components.schemas $ref + id-reference fields)
+summary: Entity-relationship graph for the Paid v2 API, derived from id-reference fields
+  on the core billing resources. Most resources also carry an externalId for caller-owned
+  addressing.
+entities:
+- name: Product
+  id: id
+  external_id: externalId
+- name: Plan
+  id: id
+  external_id: externalId
+  relationships:
+  - type: belongs_to
+    target: Product
+    via: productId
+- name: Customer
+  id: id
+  external_id: externalId
+- name: Contact
+  id: id
+  external_id: externalId
+  relationships:
+  - type: belongs_to
+    target: Customer
+    via: customerId
+- name: Order
+  id: id
+  relationships:
+  - type: belongs_to
+    target: Customer
+    via: customerId
+  - type: belongs_to
+    target: Customer
+    via: billingCustomerId
+- name: Invoice
+  id: id
+  relationships:
+  - type: belongs_to
+    target: Order
+    via: orderId
+  - type: belongs_to
+    target: Customer
+    via: customerId
+  - type: belongs_to
+    target: Contact
+    via: billingContactId
+- name: Checkout
+  id: id
+  relationships:
+  - type: belongs_to
+    target: Customer
+    via: customerId
+- name: CreditCurrency
+  id: id
+- name: Signal
+  id: null
+  note: Usage event submitted in bulk (POST /signals/bulk); matched to product usage
+    pricing by event name.
+- name: Webhook
+  id: id

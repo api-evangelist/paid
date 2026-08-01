@@ -1,0 +1,39 @@
+generated: '2026-07-20'
+method: searched
+source: https://docs.paid.ai/cli/cli/command-reference, https://www.npmjs.com/package/@paid-ai/cli
+summary: First-party command-line interface for managing Paid resources from the terminal.
+name: Paid CLI
+package: '@paid-ai/cli'
+version: 1.0.0
+official: true
+docs: https://docs.paid.ai/cli/cli/quickstart
+reference: https://docs.paid.ai/cli/cli/command-reference
+repository: https://github.com/paid-ai/gargantua
+install:
+- npm install -g @paid-ai/cli
+- npx @paid-ai/cli
+auth:
+  init: paid init
+  key_prefix: paid_
+  profiles: sandbox (default), production
+command_groups:
+- name: init
+  purpose: Save a Paid API key and set the active profile.
+- name: env
+  purpose: Show / switch the active environment profile and API URL.
+- name: product
+  purpose: Create, list, retrieve, and update products.
+- name: customer
+  purpose: Manage customers, credit balances, and customer users.
+- name: contact
+  purpose: Manage customer contacts.
+- name: order
+  purpose: Manage orders, order lines, seats, and seat assignments.
+- name: invoice
+  purpose: List, retrieve, and update invoices and invoice lines.
+- name: signal
+  purpose: Send usage signals in bulk.
+- name: checkout
+  purpose: Create, list, retrieve, and archive checkout links.
+- name: credit
+  purpose: List credit currencies.

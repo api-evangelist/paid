@@ -1,0 +1,26 @@
+generated: '2026-07-20'
+method: searched
+source: https://docs.paid.ai/llms.txt, https://docs.paid.ai/documentation/custom-views/create-a-custom-view-with-claude
+summary: Paid publishes a hosted, remote MCP server over its documentation surface
+  for AI clients (Claude Code, Cursor, etc.); it also drives conversational custom-view
+  generation over the Paid platform.
+servers:
+- name: Paid Documentation MCP
+  transport: http-remote
+  url: https://docs.paid.ai/_mcp/server
+  status: published
+  official: true
+  description: Remote MCP server for AI client integration. Exposes Paid documentation
+    and supports conversational workflows such as generating per-customer custom-view
+    dashboards with Claude over the Paid platform.
+  clients:
+  - Claude Code
+  - Cursor
+  versions:
+  - url: https://docs.paid.ai/v-2/_mcp/server
+    label: v2 (default)
+  - url: https://docs.paid.ai/v-1/_mcp/server
+    label: v1
+notes: The Paid REST API (api.agentpaid.io) additionally has 110+ operations across
+  v1/v2 that could back a resource-oriented MCP server; no such product MCP server
+  is published beyond the documentation MCP above.

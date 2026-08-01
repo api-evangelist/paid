@@ -1,0 +1,18 @@
+generated: '2026-07-20'
+method: searched
+source: https://github.com/paid-ai/skills
+summary: Paid publishes a first-party Agent Skill for coding agents (Claude Code, Codex,
+  Cursor) that wraps the Paid CLI and integration flows. Saved verbatim.
+skills:
+- name: paid-cli
+  file: paid-cli-SKILL.md
+  official: true
+  install: npx skills add paid-ai/skills --skill paid-cli
+  repository: https://github.com/paid-ai/skills
+  api: Paid API (v1 + v2)
+  description: Helps agents use `npx @paid-ai/cli` safely, inspect environments, discover
+    commands, set up Paid signals/tracing, and implement Paid checkout.
+  references:
+  - checkout.md
+  - cost-traces.md
+  - signals-and-tracing.md

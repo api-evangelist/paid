@@ -1,0 +1,36 @@
+generated: '2026-07-20'
+method: derived
+source: openapi/paid-v2.json, openapi/paid-v1.json, https://docs.paid.ai
+summary: Cross-cutting standards conformance asserted from the OpenAPI descriptions
+  and documentation. Paid uses bearer-token API keys (not full OAuth 2.0) and a custom
+  JSON error envelope (not RFC 9457).
+standards:
+- id: openapi-3.1
+  conforms: true
+  evidence: Both public descriptions declare openapi 3.1.0 (paid-v2.json, paid-v1.json).
+- id: oauth2
+  conforms: false
+  evidence: securitySchemes declares http bearer (API key as bearer token), not an
+    oauth2 flow.
+- id: openid-connect
+  conforms: false
+  evidence: No openIdConnect scheme; no /.well-known/openid-configuration.
+- id: rfc9457
+  conforms: false
+  evidence: Error responses use application/json with a custom {error,code,details}
+    envelope, not application/problem+json.
+- id: rfc9727-api-catalog
+  conforms: true
+  evidence: docs.paid.ai serves /.well-known/api-catalog as an RFC 9727 linkset.
+- id: json-api
+  conforms: false
+  evidence: Responses are resource-shaped JSON, not JSON:API media type.
+- id: pagination
+  conforms: true
+  evidence: List operations expose limit/offset query parameters.
+- id: idempotency
+  conforms: false
+  evidence: No idempotency key header is declared in the OpenAPI or documented.
+- id: webhooks
+  conforms: true
+  evidence: Documented billing webhook catalog with x-webhook-signature HMAC verification.

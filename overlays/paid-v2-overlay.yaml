@@ -1,0 +1,33 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for the Paid API (v2)
+  version: 1.0.0
+extends: ../openapi/paid-v2.json
+x-generated: '2026-07-20'
+x-method: generated
+x-source: API Evangelist enrichment pipeline
+actions:
+- target: $.info
+  description: Annotate contact, docs, and lifecycle metadata harvested during enrichment.
+  update:
+    x-provider: Paid
+    x-homepage: https://paid.ai/
+    x-documentation: https://docs.paid.ai/
+    x-getting-started: https://docs.paid.ai/documentation/getting-started/quickstart
+    x-lifecycle-stage: current
+    x-api-version-channel: v2
+- target: $
+  description: Record the production API catalog and companion v1 description.
+  update:
+    x-api-catalog: https://docs.paid.ai/.well-known/api-catalog
+    x-companion-version: ../openapi/paid-v1.json
+- target: $.components.securitySchemes.bearerAuth
+  description: Clarify that the bearer token is a Paid API key.
+  update:
+    x-key-prefix: paid_
+    x-issued-at: https://app.paid.ai/settings/api-keys
+- target: $
+  description: Note the webhook event surface that complements the REST API.
+  update:
+    x-webhooks-catalog: ../asyncapi/paid-webhooks.yml
+    x-webhook-signature-header: x-webhook-signature

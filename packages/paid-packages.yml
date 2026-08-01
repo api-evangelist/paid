@@ -1,0 +1,37 @@
+generated: '2026-07-20'
+method: searched
+source: npm, PyPI, pkg.go.dev, github.com/paid-ai
+summary: First-party client SDKs for the Paid API, published by paid-ai across Node,
+  Python, Go, and Java.
+packages:
+- name: '@paid-ai/paid-node'
+  registry: npm
+  language: javascript
+  official: true
+  version: 1.7.1
+  url: https://www.npmjs.com/package/@paid-ai/paid-node
+  repository: https://github.com/paid-ai/paid-node
+  description: Official TypeScript (Node) library for Paid.
+- name: paid-python
+  registry: pypi
+  language: python
+  official: true
+  version: 1.11.0
+  url: https://pypi.org/project/paid-python/
+  repository: https://github.com/paid-ai/paid-python
+  description: Official Python library for Paid.
+- name: github.com/paid-ai/paid-go
+  registry: pkg.go.dev
+  language: go
+  official: true
+  url: https://pkg.go.dev/github.com/paid-ai/paid-go
+  repository: https://github.com/paid-ai/paid-go
+  description: Official Go library for Paid.
+- name: paid-java
+  registry: github
+  language: java
+  official: true
+  url: https://github.com/paid-ai/paid-java
+  repository: https://github.com/paid-ai/paid-java
+  description: Official Java library for Paid (source distribution; not published to
+    Maven Central as of this pass).

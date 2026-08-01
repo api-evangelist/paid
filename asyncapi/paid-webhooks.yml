@@ -1,0 +1,47 @@
+generated: '2026-07-20'
+method: searched
+source: https://docs.paid.ai/documentation/billing/webhooks
+type: Webhooks
+summary: Paid delivers billing events as HTTP POST webhooks. Payloads are signed with
+  an HMAC over the raw body carried in the x-webhook-signature header; the signing
+  secret is managed per organization. No AsyncAPI document is published.
+delivery:
+  transport: https
+  method: POST
+  signature_header: x-webhook-signature
+  verification: Verify the HMAC over the raw request body before parsing JSON.
+management:
+  ui: https://app.paid.ai/settings/webhooks
+  api:
+    list: GET /webhooks/
+    update: PATCH /webhooks/{webhookName}
+    test: POST /webhooks/{webhookName}/test
+    rotate_secret: POST /webhooks/rotate-secret
+events:
+- name: billing-invoice-created
+  fires: A new invoice is created.
+  payload_key: invoice
+- name: billing-invoice-paid
+  fires: An invoice becomes fully paid.
+  payload_key: invoice
+- name: billing-checkout-created
+  fires: A checkout session is created.
+  payload_key: checkout
+- name: billing-checkout-completed
+  fires: A checkout payment completes.
+  payload_key: checkout
+- name: billing-checkout-expired
+  fires: A checkout session expires.
+  payload_key: checkout
+- name: billing-payment-succeeded
+  fires: A payment succeeds.
+  payload_key: payment
+- name: billing-payment-failed
+  fires: A payment attempt fails.
+  payload_key: payment
+- name: billing-credits-depleted
+  fires: A customer runs out of prepaid credits.
+  payload_key: credits
+- name: billing-overage-incurred
+  fires: Usage exceeds the included threshold and creates an overage condition.
+  payload_key: overage

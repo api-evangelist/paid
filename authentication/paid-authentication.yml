@@ -1,0 +1,19 @@
+generated: '2026-07-20'
+method: searched
+source: openapi/paid-v1.json, openapi/paid-v2.json, https://docs.paid.ai/documentation/getting-started/quickstart
+docs: https://docs.paid.ai/cli/cli/command-reference
+summary:
+  types:
+  - http
+schemes:
+- name: bearerAuth
+  type: http
+  scheme: bearer
+  description: API key authentication using a Bearer token. Keys are prefixed `paid_`
+    and issued from the Paid app.
+  key_prefix: paid_
+  header: 'Authorization: Bearer paid_xxx'
+  issued_at: https://app.paid.ai/settings/api-keys
+  sources:
+  - openapi/paid-v1.json
+  - openapi/paid-v2.json

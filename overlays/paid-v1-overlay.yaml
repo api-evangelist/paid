@@ -1,0 +1,27 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for the Paid API (v1)
+  version: 1.0.0
+extends: ../openapi/paid-v1.json
+x-generated: '2026-07-20'
+x-method: generated
+x-source: API Evangelist enrichment pipeline
+actions:
+- target: $.info
+  description: Annotate provider metadata and mark v1 relative to the current v2 channel.
+  update:
+    x-provider: Paid
+    x-homepage: https://paid.ai/
+    x-documentation: https://docs.paid.ai/
+    x-api-version-channel: v1
+    x-current-version: v2
+- target: $
+  description: Record the production API catalog and the current v2 description.
+  update:
+    x-api-catalog: https://docs.paid.ai/.well-known/api-catalog
+    x-successor-version: ../openapi/paid-v2.json
+- target: $.components.securitySchemes.bearerAuth
+  description: Clarify that the bearer token is a Paid API key.
+  update:
+    x-key-prefix: paid_
+    x-issued-at: https://app.paid.ai/settings/api-keys

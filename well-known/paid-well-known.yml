@@ -1,0 +1,26 @@
+generated: '2026-07-20'
+method: probed
+source: live probes of /.well-known/ across Paid hosts
+summary: Only docs.paid.ai publishes a well-known document, an RFC 9727 API catalog
+  linkset pointing at the v1 and v2 OpenAPI descriptions.
+entries:
+- host: docs.paid.ai
+  path: /.well-known/api-catalog
+  status: 200
+  type: WellKnown
+  content_type: application/linkset+json
+  profile: https://www.rfc-editor.org/info/rfc9727
+  file: paid-api-catalog.json
+probed_absent:
+- path: /.well-known/security.txt
+  hosts: [docs.paid.ai, api.agentpaid.io, app.paid.ai, paid.ai]
+  status: not-found
+- path: /.well-known/openid-configuration
+  hosts: [docs.paid.ai, api.agentpaid.io, app.paid.ai, paid.ai]
+  status: not-found
+- path: /.well-known/oauth-authorization-server
+  hosts: [docs.paid.ai, api.agentpaid.io, app.paid.ai, paid.ai]
+  status: not-found
+- path: /.well-known/ai-plugin.json
+  hosts: [docs.paid.ai, api.agentpaid.io, app.paid.ai, paid.ai]
+  status: not-found

@@ -1,8 +1,26 @@
 aid: paid
+accessModel:
+  pricing: unknown
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Self-serve signup
+  confidence: medium
+  source:
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/paid.png
 name: Paid
-description: 'Paid is a company surfaced as a portfolio company of eqt-ventures, lightspeed-venture-partners,
-  seedcamp, techstars and added to the API Evangelist network as a stub for enrichment. Sector: ai. This
-  profile is a lead awaiting the enrichment pipeline.'
+description: 'Paid (paid.ai) is the monetization platform for AI agents. It gives teams
+  that build and sell AI agents the pricing, billing, and margin infrastructure to
+  charge with flexible models — credits, usage-based, seat-based, and outcome-based
+  pricing — while tracking the AI costs and delivered value behind every customer.
+  Paid exposes a REST API (v1 and v2 on api.agentpaid.io), first-party SDKs for Node,
+  Python, Go, and Java, a CLI, embeddable UI components, billing webhooks, an agent
+  skill, and a hosted MCP server. Backed by EQT Ventures, Lightspeed Venture Partners,
+  Seedcamp, and Techstars.'
 url: https://raw.githubusercontent.com/api-evangelist/paid/refs/heads/main/apis.yml
 x-type: company
 x-source: vc-portfolio
@@ -11,15 +29,285 @@ x-backed-by:
 - lightspeed-venture-partners
 - seedcamp
 - techstars
-x-tier: stub
+x-tier: enriched
 x-tier-reason: portfolio-lead
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-17'
+modified: '2026-07-20'
 tags:
 - Company
-- Ai
-apis: []
+- AI
+- Billing
+- Monetization
+- Payments
+- Usage-Based Pricing
+- AI Agents
+- FinOps
+apis:
+- aid: paid:paid-agents-api
+  name: Paid agents API
+  description: The agents API from Paid — 3 operation(s) for agents.
+  humanURL: https://docs.paid.ai/api-reference/api-reference
+  baseURL: https://api.agentpaid.io/api/v2
+  tags:
+  - agents
+  properties:
+  - type: OpenAPI
+    url: openapi/paid-agents-api-openapi.yml
+  - type: Documentation
+    url: https://docs.paid.ai/
+- aid: paid:paid-analyticsexperimental-api
+  name: Paid analyticsExperimental API
+  description: The analyticsExperimental API from Paid — 3 operation(s) for analyticsexperimental.
+  humanURL: https://docs.paid.ai/api-reference/api-reference
+  baseURL: https://api.agentpaid.io/api/v2
+  tags:
+  - analyticsExperimental
+  properties:
+  - type: OpenAPI
+    url: openapi/paid-analyticsexperimental-api-openapi.yml
+  - type: Documentation
+    url: https://docs.paid.ai/
+- aid: paid:paid-checkouts-api
+  name: Paid checkouts API
+  description: The checkouts API from Paid — 2 operation(s) for checkouts.
+  humanURL: https://docs.paid.ai/api-reference/api-reference
+  baseURL: https://api.agentpaid.io/api/v2
+  tags:
+  - checkouts
+  properties:
+  - type: OpenAPI
+    url: openapi/paid-checkouts-api-openapi.yml
+  - type: Documentation
+    url: https://docs.paid.ai/
+- aid: paid:paid-contacts-api
+  name: Paid contacts API
+  description: The contacts API from Paid — 5 operation(s) for contacts.
+  humanURL: https://docs.paid.ai/api-reference/api-reference
+  baseURL: https://api.agentpaid.io/api/v2
+  tags:
+  - contacts
+  properties:
+  - type: OpenAPI
+    url: openapi/paid-contacts-api-openapi.yml
+  - type: Documentation
+    url: https://docs.paid.ai/
+- aid: paid:paid-costs-api
+  name: Paid costs API
+  description: The costs API from Paid — 1 operation(s) for costs.
+  humanURL: https://docs.paid.ai/api-reference/api-reference
+  baseURL: https://api.agentpaid.io/api/v2
+  tags:
+  - costs
+  properties:
+  - type: OpenAPI
+    url: openapi/paid-costs-api-openapi.yml
+  - type: Documentation
+    url: https://docs.paid.ai/
+- aid: paid:paid-credits-api
+  name: Paid credits API
+  description: The credits API from Paid — 2 operation(s) for credits.
+  humanURL: https://docs.paid.ai/api-reference/api-reference
+  baseURL: https://api.agentpaid.io/api/v2
+  tags:
+  - credits
+  properties:
+  - type: OpenAPI
+    url: openapi/paid-credits-api-openapi.yml
+  - type: Documentation
+    url: https://docs.paid.ai/
+- aid: paid:paid-customer-groups-api
+  name: Paid customer-groups API
+  description: The customer-groups API from Paid — 3 operation(s) for customer-groups.
+  humanURL: https://docs.paid.ai/api-reference/api-reference
+  baseURL: https://api.agentpaid.io/api/v2
+  tags:
+  - customer-groups
+  properties:
+  - type: OpenAPI
+    url: openapi/paid-customer-groups-api-openapi.yml
+  - type: Documentation
+    url: https://docs.paid.ai/
+- aid: paid:paid-customer-portals-api
+  name: Paid customer-portals API
+  description: The customer-portals API from Paid — 1 operation(s) for customer-portals.
+  humanURL: https://docs.paid.ai/api-reference/api-reference
+  baseURL: https://api.agentpaid.io/api/v2
+  tags:
+  - customer-portals
+  properties:
+  - type: OpenAPI
+    url: openapi/paid-customer-portals-api-openapi.yml
+  - type: Documentation
+    url: https://docs.paid.ai/
+- aid: paid:paid-customers-api
+  name: Paid customers API
+  description: The customers API from Paid — 22 operation(s) for customers.
+  humanURL: https://docs.paid.ai/api-reference/api-reference
+  baseURL: https://api.agentpaid.io/api/v2
+  tags:
+  - customers
+  properties:
+  - type: OpenAPI
+    url: openapi/paid-customers-api-openapi.yml
+  - type: Documentation
+    url: https://docs.paid.ai/
+- aid: paid:paid-customviewsexperimental-api
+  name: Paid customViewsExperimental API
+  description: The customViewsExperimental API from Paid — 6 operation(s) for customviewsexperimental.
+  humanURL: https://docs.paid.ai/api-reference/api-reference
+  baseURL: https://api.agentpaid.io/api/v2
+  tags:
+  - customViewsExperimental
+  properties:
+  - type: OpenAPI
+    url: openapi/paid-customviewsexperimental-api-openapi.yml
+  - type: Documentation
+    url: https://docs.paid.ai/
+- aid: paid:paid-invoices-api
+  name: Paid invoices API
+  description: The invoices API from Paid — 3 operation(s) for invoices.
+  humanURL: https://docs.paid.ai/api-reference/api-reference
+  baseURL: https://api.agentpaid.io/api/v2
+  tags:
+  - invoices
+  properties:
+  - type: OpenAPI
+    url: openapi/paid-invoices-api-openapi.yml
+  - type: Documentation
+    url: https://docs.paid.ai/
+- aid: paid:paid-orders-api
+  name: Paid orders API
+  description: The orders API from Paid — 14 operation(s) for orders.
+  humanURL: https://docs.paid.ai/api-reference/api-reference
+  baseURL: https://api.agentpaid.io/api/v2
+  tags:
+  - orders
+  properties:
+  - type: OpenAPI
+    url: openapi/paid-orders-api-openapi.yml
+  - type: Documentation
+    url: https://docs.paid.ai/
+- aid: paid:paid-orders-lines-api
+  name: Paid orders > lines API
+  description: The orders > lines API from Paid — 1 operation(s) for orders > lines.
+  humanURL: https://docs.paid.ai/api-reference/api-reference
+  baseURL: https://api.agentpaid.io/api/v2
+  tags:
+  - orders > lines
+  properties:
+  - type: OpenAPI
+    url: openapi/paid-orders-lines-api-openapi.yml
+  - type: Documentation
+    url: https://docs.paid.ai/
+- aid: paid:paid-plans-api
+  name: Paid plans API
+  description: The plans API from Paid — 12 operation(s) for plans.
+  humanURL: https://docs.paid.ai/api-reference/api-reference
+  baseURL: https://api.agentpaid.io/api/v2
+  tags:
+  - plans
+  properties:
+  - type: OpenAPI
+    url: openapi/paid-plans-api-openapi.yml
+  - type: Documentation
+    url: https://docs.paid.ai/
+- aid: paid:paid-pricing-api
+  name: Paid pricing API
+  description: The pricing API from Paid — 2 operation(s) for pricing.
+  humanURL: https://docs.paid.ai/api-reference/api-reference
+  baseURL: https://api.agentpaid.io/api/v2
+  tags:
+  - pricing
+  properties:
+  - type: OpenAPI
+    url: openapi/paid-pricing-api-openapi.yml
+  - type: Documentation
+    url: https://docs.paid.ai/
+- aid: paid:paid-products-api
+  name: Paid products API
+  description: The products API from Paid — 5 operation(s) for products.
+  humanURL: https://docs.paid.ai/api-reference/api-reference
+  baseURL: https://api.agentpaid.io/api/v2
+  tags:
+  - products
+  properties:
+  - type: OpenAPI
+    url: openapi/paid-products-api-openapi.yml
+  - type: Documentation
+    url: https://docs.paid.ai/
+- aid: paid:paid-signals-api
+  name: Paid signals API
+  description: The signals API from Paid — 1 operation(s) for signals.
+  humanURL: https://docs.paid.ai/api-reference/api-reference
+  baseURL: https://api.agentpaid.io/api/v2
+  tags:
+  - signals
+  properties:
+  - type: OpenAPI
+    url: openapi/paid-signals-api-openapi.yml
+  - type: Documentation
+    url: https://docs.paid.ai/
+- aid: paid:paid-traces-api
+  name: Paid traces API
+  description: The traces API from Paid — 1 operation(s) for traces.
+  humanURL: https://docs.paid.ai/api-reference/api-reference
+  baseURL: https://api.agentpaid.io/api/v2
+  tags:
+  - traces
+  properties:
+  - type: OpenAPI
+    url: openapi/paid-traces-api-openapi.yml
+  - type: Documentation
+    url: https://docs.paid.ai/
+- aid: paid:paid-usage-api
+  name: Paid usage API
+  description: The usage API from Paid — 3 operation(s) for usage.
+  humanURL: https://docs.paid.ai/api-reference/api-reference
+  baseURL: https://api.agentpaid.io/api/v2
+  tags:
+  - usage
+  properties:
+  - type: OpenAPI
+    url: openapi/paid-usage-api-openapi.yml
+  - type: Documentation
+    url: https://docs.paid.ai/
+- aid: paid:paid-value-models-api
+  name: Paid value-models API
+  description: The value-models API from Paid — 4 operation(s) for value-models.
+  humanURL: https://docs.paid.ai/api-reference/api-reference
+  baseURL: https://api.agentpaid.io/api/v2
+  tags:
+  - value-models
+  properties:
+  - type: OpenAPI
+    url: openapi/paid-value-models-api-openapi.yml
+  - type: Documentation
+    url: https://docs.paid.ai/
+- aid: paid:paid-value-receipts-api
+  name: Paid value-receipts API
+  description: The value-receipts API from Paid — 9 operation(s) for value-receipts.
+  humanURL: https://docs.paid.ai/api-reference/api-reference
+  baseURL: https://api.agentpaid.io/api/v2
+  tags:
+  - value-receipts
+  properties:
+  - type: OpenAPI
+    url: openapi/paid-value-receipts-api-openapi.yml
+  - type: Documentation
+    url: https://docs.paid.ai/
+- aid: paid:paid-webhooks-api
+  name: Paid webhooks API
+  description: The webhooks API from Paid — 4 operation(s) for webhooks.
+  humanURL: https://docs.paid.ai/api-reference/api-reference
+  baseURL: https://api.agentpaid.io/api/v2
+  tags:
+  - webhooks
+  properties:
+  - type: OpenAPI
+    url: openapi/paid-webhooks-api-openapi.yml
+  - type: Documentation
+    url: https://docs.paid.ai/
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
@@ -27,4 +315,63 @@ maintainers:
   email: info@apis.io
 common:
 - type: Website
-  url: https://www.agentpaid.ai/
+  url: https://paid.ai/
+- type: DeveloperPortal
+  url: https://docs.paid.ai/
+- type: Documentation
+  url: https://docs.paid.ai/
+- type: APIReference
+  url: https://docs.paid.ai/api-reference/api-reference
+- type: GettingStarted
+  url: https://docs.paid.ai/documentation/getting-started/quickstart
+- type: SignUp
+  url: https://app.paid.ai
+- type: Pricing
+  url: https://paid.ai/pricing
+- type: Blog
+  url: https://paid.ai/blog
+- type: GitHubOrganization
+  url: https://github.com/paid-ai
+- type: TermsOfService
+  url: https://paid.ai/legal/terms
+- type: PrivacyPolicy
+  url: https://paid.ai/legal/privacy
+- type: Authentication
+  url: authentication/paid-authentication.yml
+- type: DomainSecurity
+  url: security/paid-domain-security.yml
+- type: Packages
+  url: packages/paid-packages.yml
+- type: SDKs
+  url: packages/paid-packages.yml
+- type: CLI
+  url: cli/paid-cli.yml
+- type: Components
+  url: components/paid-components.yml
+- type: WellKnown
+  url: well-known/paid-well-known.yml
+- type: MCPServer
+  url: mcp/paid-mcp.yml
+- type: LLMsTxt
+  url: llms/paid-llms.txt
+- type: Conformance
+  url: conformance/paid-conformance.yml
+- type: ErrorCatalog
+  url: errors/paid-problem-types.yml
+- type: Lifecycle
+  url: lifecycle/paid-lifecycle.yml
+- type: Conventions
+  url: conventions/paid-conventions.yml
+- type: DataModel
+  url: data-model/paid-data-model.yml
+- type: Sandbox
+  url: sandbox/paid-sandbox.yml
+- type: Webhooks
+  url: asyncapi/paid-webhooks.yml
+- type: AgentSkill
+  url: skills/_index.yml
+x-enrichment:
+  date: '2026-07-20'
+  status: enriched
+  artifacts_added: 22
+  pass: local-v1

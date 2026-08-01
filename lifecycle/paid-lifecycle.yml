@@ -1,0 +1,25 @@
+generated: '2026-07-20'
+method: searched
+source: https://docs.paid.ai, openapi/paid-v1.json, openapi/paid-v2.json, https://docs.paid.ai/.well-known/api-catalog
+summary: Paid runs two concurrently published API versions (v1 and v2) under path-based
+  versioning; v2 is the default and current. Several v2 endpoints are explicitly labeled
+  experimental. No public status page or formal Sunset/Deprecation-header policy was
+  found.
+versioning:
+  style: path
+  current: v2
+  base_urls:
+    v2: https://api.agentpaid.io/api/v2
+    v1: https://api.agentpaid.io/api/v1
+  catalog: https://docs.paid.ai/.well-known/api-catalog
+experimental:
+  note: v2 exposes an experimental surface that may change without notice.
+  areas:
+  - analytics (execute-analytics-query, get-analytics-schema, get-signals-metadata)
+  - custom-views (list/create/publish/update custom views)
+status_page:
+  found: false
+deprecation_policy:
+  found: false
+  note: No documented Sunset/Deprecation (RFC 8594) header policy or dated deprecation
+    schedule was located during this pass.

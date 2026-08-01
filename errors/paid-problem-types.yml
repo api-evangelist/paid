@@ -1,0 +1,38 @@
+generated: '2026-07-20'
+method: derived
+source: openapi/paid-v2.json (4xx/5xx responses + components.schemas.ErrorResponse)
+format: custom-json
+envelope:
+  content_type: application/json
+  schema: ErrorResponse
+  fields:
+  - name: error
+    description: Human-readable error message.
+  - name: code
+    description: Machine-readable error code string.
+  - name: details
+    description: Optional structured detail about the error.
+summary: The Paid API returns a consistent JSON error envelope (error/code/details);
+  it does not use RFC 9457 application/problem+json.
+statuses:
+- status: 400
+  title: Bad Request
+  meaning: The request was malformed or failed validation.
+- status: 403
+  title: Forbidden
+  meaning: The API key is not permitted to perform this action.
+- status: 404
+  title: Not Found
+  meaning: The referenced resource does not exist.
+- status: 408
+  title: Request Timeout
+  meaning: The request took too long to process.
+- status: 409
+  title: Conflict
+  meaning: The request conflicts with existing state (e.g. duplicate resource).
+- status: 429
+  title: Too Many Requests
+  meaning: Rate limit exceeded; retry after backing off.
+- status: 500
+  title: Internal Server Error
+  meaning: An unexpected error occurred on the Paid platform.
