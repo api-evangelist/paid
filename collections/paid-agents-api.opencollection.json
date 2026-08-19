@@ -1,0 +1,208 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "API Reference agents API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "agents",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List agents",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.agentpaid.io/api/v1/agents",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "DEPRECATED: Use /products instead. Agents are now products with type='agent'."
+        },
+        {
+          "info": {
+            "name": "Create Agent",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.agentpaid.io/api/v1/agents",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "DEPRECATED: Use POST /products instead."
+        },
+        {
+          "info": {
+            "name": "Get agent by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.agentpaid.io/api/v1/agents/:agentId",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "agentId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "DEPRECATED: Use GET /products/{productId} instead."
+        },
+        {
+          "info": {
+            "name": "Update Agent",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.agentpaid.io/api/v1/agents/:agentId",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "agentId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "DEPRECATED: Use PUT /products/{productId} instead."
+        },
+        {
+          "info": {
+            "name": "Delete agent",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.agentpaid.io/api/v1/agents/:agentId",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "agentId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "DEPRECATED: Use DELETE /products/{productId} instead."
+        },
+        {
+          "info": {
+            "name": "Get agent by external ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.agentpaid.io/api/v1/agents/external/:externalId",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "externalId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "DEPRECATED: Use GET /products/external/{externalId} instead."
+        },
+        {
+          "info": {
+            "name": "Update agent by external ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.agentpaid.io/api/v1/agents/external/:externalId",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "externalId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "DEPRECATED: Use PUT /products/external/{externalId} instead."
+        },
+        {
+          "info": {
+            "name": "Delete agent by external ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.agentpaid.io/api/v1/agents/external/:externalId",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "externalId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "DEPRECATED: Use DELETE /products/external/{externalId} instead."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

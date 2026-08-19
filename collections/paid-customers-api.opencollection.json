@@ -1,0 +1,999 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "API Reference agents customers API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "customers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List customers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.agentpaid.io/api/v1/customers",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "List customers"
+        },
+        {
+          "info": {
+            "name": "Create a new customer",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.agentpaid.io/api/v1/customers",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new customer"
+        },
+        {
+          "info": {
+            "name": "Get customer by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.agentpaid.io/api/v1/customers/:customerId",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "customerId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get customer by ID"
+        },
+        {
+          "info": {
+            "name": "Update customer",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.agentpaid.io/api/v1/customers/:customerId",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "customerId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update customer"
+        },
+        {
+          "info": {
+            "name": "Delete customer",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.agentpaid.io/api/v1/customers/:customerId",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "customerId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete customer"
+        },
+        {
+          "info": {
+            "name": "Check customer entitlement for an event",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.agentpaid.io/api/v1/customers/:customerId/entitlement",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "customerId",
+                "value": "",
+                "type": "path",
+                "description": "The customer ID"
+              },
+              {
+                "name": "event_name",
+                "value": "",
+                "type": "query",
+                "description": "The name of the usage event to check entitlement for"
+              },
+              {
+                "name": "view",
+                "value": "",
+                "type": "query",
+                "description": "Filter view - 'all' returns all entitlements regardless of status, 'active_only' returns only currently active entitlements with available credits"
+              }
+            ]
+          },
+          "docs": "Check customer entitlement for an event"
+        },
+        {
+          "info": {
+            "name": "Get customer entitlements",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.agentpaid.io/api/v1/customers/:customerId/credit-bundles",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "customerId",
+                "value": "",
+                "type": "path",
+                "description": "The customer ID"
+              }
+            ]
+          },
+          "docs": "Get customer entitlements"
+        },
+        {
+          "info": {
+            "name": "Get customer by external ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.agentpaid.io/api/v1/customers/external/:externalId",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "externalId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get customer by external ID"
+        },
+        {
+          "info": {
+            "name": "Update customer by external ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.agentpaid.io/api/v1/customers/external/:externalId",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "externalId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update customer by external ID"
+        },
+        {
+          "info": {
+            "name": "Delete customer by external ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.agentpaid.io/api/v1/customers/external/:externalId",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "externalId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete customer by external ID"
+        },
+        {
+          "info": {
+            "name": "Fetch cost traces for a customer by external ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.agentpaid.io/api/v1/customers/external/:externalId/costs",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "externalId",
+                "value": "",
+                "type": "path",
+                "description": "The external ID of the customer"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of traces to return (1-1000)"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of traces to skip for pagination"
+              },
+              {
+                "name": "startTime",
+                "value": "",
+                "type": "query",
+                "description": "Filter traces starting from this time (ISO 8601 format)"
+              },
+              {
+                "name": "endTime",
+                "value": "",
+                "type": "query",
+                "description": "Filter traces up to this time (ISO 8601 format)"
+              }
+            ]
+          },
+          "docs": "Fetch cost traces for a customer by external ID"
+        },
+        {
+          "info": {
+            "name": "Fetch usage summaries for a customer by external ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.agentpaid.io/api/v1/customers/external/:externalId/usage",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "externalId",
+                "value": "",
+                "type": "path",
+                "description": "The external ID of the customer"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of usage summaries to return (1-1000)"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of usage summaries to skip for pagination"
+              },
+              {
+                "name": "startTime",
+                "value": "",
+                "type": "query",
+                "description": "Filter usage summaries starting from this time (ISO 8601 format). Returns summaries that overlap with the time range."
+              },
+              {
+                "name": "endTime",
+                "value": "",
+                "type": "query",
+                "description": "Filter usage summaries up to this time (ISO 8601 format). Returns summaries that overlap with the time range."
+              }
+            ]
+          },
+          "docs": "Fetch usage summaries for a customer by external ID"
+        },
+        {
+          "info": {
+            "name": "List customer payment methods by external ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.agentpaid.io/api/v1/customers/external/:externalId/payment-methods",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "externalId",
+                "value": "",
+                "type": "path",
+                "description": "The external ID of the customer"
+              }
+            ]
+          },
+          "docs": "Retrieves all payment methods associated with a customer identified by their external ID."
+        },
+        {
+          "info": {
+            "name": "Create customer payment method by external ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.agentpaid.io/api/v1/customers/external/:externalId/payment-methods",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "externalId",
+                "value": "",
+                "type": "path",
+                "description": "The external ID of the customer"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new payment method for a customer using a Stripe confirmation token."
+        },
+        {
+          "info": {
+            "name": "Delete customer payment method by external ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.agentpaid.io/api/v1/customers/external/:externalId/payment-methods/:paymentMethodId",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "externalId",
+                "value": "",
+                "type": "path",
+                "description": "The external ID of the customer"
+              },
+              {
+                "name": "paymentMethodId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the payment method to delete"
+              }
+            ]
+          },
+          "docs": "Deletes a specific payment method from a customer's account."
+        },
+        {
+          "info": {
+            "name": "List customers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.agentpaid.io/api/v1/customers/",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "Search by customer name (case-insensitive, matches anywhere in the name)."
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Filter by customer status. churned: customers marked as churned. active: everyone else."
+              },
+              {
+                "name": "creationState",
+                "value": "",
+                "type": "query",
+                "description": "Filter by creation state: draft or active."
+              },
+              {
+                "name": "createdAtFrom",
+                "value": "",
+                "type": "query",
+                "description": "Only customers created on or after this date. Accepts an ISO 8601 date or date-time. Date-only values (e.g. 2026-06-30) are treated as UTC; date-times without an explicit timezone offset are ambiguous, so include one (e.g. 2026-06-30T00:00:00-05:00) when precision matters."
+              },
+              {
+                "name": "createdAtTo",
+                "value": "",
+                "type": "query",
+                "description": "Only customers created on or before this date. Accepts an ISO 8601 date or date-time. Date-only values (e.g. 2026-06-30) are treated as UTC; date-times without an explicit timezone offset are ambiguous, so include one (e.g. 2026-06-30T00:00:00-05:00) when precision matters."
+              },
+              {
+                "name": "externalId",
+                "value": "",
+                "type": "query",
+                "description": "Filter by your external customer ID (exact match)."
+              }
+            ]
+          },
+          "docs": "Get a list of customers for the organization"
+        },
+        {
+          "info": {
+            "name": "Create a new customer",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.agentpaid.io/api/v1/customers/",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new customer for the organization"
+        },
+        {
+          "info": {
+            "name": "List customer aliases",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.agentpaid.io/api/v1/customers/:id/aliases",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Paid customer display id"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List alternate external identifiers that resolve to a customer by Paid display ID."
+        },
+        {
+          "info": {
+            "name": "Create customer alias",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.agentpaid.io/api/v1/customers/:id/aliases",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Paid customer display id"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create an alternate external identifier for a customer by Paid display ID."
+        },
+        {
+          "info": {
+            "name": "Delete customer alias",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.agentpaid.io/api/v1/customers/:id/aliases/:alias",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Paid customer display id"
+              },
+              {
+                "name": "alias",
+                "value": "",
+                "type": "path",
+                "description": "Customer alias value."
+              }
+            ]
+          },
+          "docs": "Remove an alternate external identifier from a customer by Paid display ID."
+        },
+        {
+          "info": {
+            "name": "Get customer",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.agentpaid.io/api/v1/customers/:id",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Paid customer display id"
+              }
+            ]
+          },
+          "docs": "Get a customer by Paid display ID. Use the value returned as `customer.id`, for example `cus_abc123`. If you have your own customer ID, use `GET /api/v2/customers/external/{externalId}`."
+        },
+        {
+          "info": {
+            "name": "Update customer",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.agentpaid.io/api/v1/customers/:id",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Paid customer display id"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update a customer by Paid display ID. Use the value returned as `customer.id`, for example `cus_abc123`. If you have your own customer ID, use `PUT /api/v2/customers/external/{externalId}`."
+        },
+        {
+          "info": {
+            "name": "Delete customer",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.agentpaid.io/api/v1/customers/:id",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Paid customer display id"
+              }
+            ]
+          },
+          "docs": "Delete a customer by Paid display ID. Use the value returned as `customer.id`, for example `cus_abc123`. If you have your own customer ID, use `DELETE /api/v2/customers/external/{externalId}`."
+        },
+        {
+          "info": {
+            "name": "Get customer state",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.agentpaid.io/api/v1/customers/:id/state",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Paid customer display id"
+              }
+            ]
+          },
+          "docs": "Get the current customer state by Paid display ID"
+        },
+        {
+          "info": {
+            "name": "List customer aliases by external ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.agentpaid.io/api/v1/customers/external/:externalId/aliases",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "externalId",
+                "value": "",
+                "type": "path",
+                "description": "Customer ID from the integrator's system, stored on Paid as `externalId`."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List alternate external identifiers that resolve to a customer by external ID."
+        },
+        {
+          "info": {
+            "name": "Create customer alias by external ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.agentpaid.io/api/v1/customers/external/:externalId/aliases",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "externalId",
+                "value": "",
+                "type": "path",
+                "description": "Customer ID from the integrator's system, stored on Paid as `externalId`."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create an alternate external identifier for a customer by external ID."
+        },
+        {
+          "info": {
+            "name": "Delete customer alias by external ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.agentpaid.io/api/v1/customers/external/:externalId/aliases/:alias",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "externalId",
+                "value": "",
+                "type": "path",
+                "description": "Customer ID from the integrator's system, stored on Paid as `externalId`."
+              },
+              {
+                "name": "alias",
+                "value": "",
+                "type": "path",
+                "description": "Customer alias value."
+              }
+            ]
+          },
+          "docs": "Remove an alternate external identifier from a customer by external ID."
+        },
+        {
+          "info": {
+            "name": "Get customer state by external ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.agentpaid.io/api/v1/customers/external/:externalId/state",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "externalId",
+                "value": "",
+                "type": "path",
+                "description": "Customer ID from the integrator's system, stored on Paid as `externalId`."
+              }
+            ]
+          },
+          "docs": "Primary integration endpoint for agents and programmatic clients using their own customer IDs. Use the value you stored on `customer.externalId`, for example `customer_123`."
+        },
+        {
+          "info": {
+            "name": "Get customer credit balances",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.agentpaid.io/api/v1/customers/:id/credits/balances",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Paid customer display id"
+              }
+            ]
+          },
+          "docs": "Get current customer credit balances grouped by currency for a Paid customer display ID. Use the value returned as `customer.id`, for example `cus_abc123`. If you have your own customer ID, use `/api/v2/customers/external/{externalId}/credits/balances`."
+        },
+        {
+          "info": {
+            "name": "Grant customer credits",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.agentpaid.io/api/v1/customers/:id/credits/grants",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Paid customer display id"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Immediately grant credits to a customer using an active credit currency key."
+        },
+        {
+          "info": {
+            "name": "Get customer credit balances by external ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.agentpaid.io/api/v1/customers/external/:externalId/credits/balances",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "externalId",
+                "value": "",
+                "type": "path",
+                "description": "Customer ID from the integrator's system, stored on Paid as `externalId`."
+              }
+            ]
+          },
+          "docs": "Get current customer credit balances grouped by currency, looked up by external ID"
+        },
+        {
+          "info": {
+            "name": "Grant customer credits by external ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.agentpaid.io/api/v1/customers/external/:externalId/credits/grants",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "externalId",
+                "value": "",
+                "type": "path",
+                "description": "Customer ID from the integrator's system, stored on Paid as `externalId`."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Immediately grant credits to a customer looked up by external ID using an active credit currency key."
+        },
+        {
+          "info": {
+            "name": "Upsert customer user by external IDs",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.agentpaid.io/api/v1/customers/:customerExternalId/users/:userExternalId",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "customerExternalId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "userExternalId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create or update a customer user using customer and user external IDs"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

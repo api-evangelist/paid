@@ -1,0 +1,46 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "API Reference agents orders > lines API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "orders > lines",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Update order lines",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.agentpaid.io/api/v1/orders/:orderId/lines",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "orderId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update order lines"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

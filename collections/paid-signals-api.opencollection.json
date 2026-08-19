@@ -1,0 +1,39 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "API Reference agents signals API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "signals",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create signals in bulk",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.agentpaid.io/api/v1/signals/bulk",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create multiple signals (usage events) in a single request. Each signal must include a customer attribution (either customerId or externalCustomerId) and a product attribution (either productId or externalProductId)."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

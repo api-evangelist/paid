@@ -1,0 +1,121 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "API Reference agents checkouts API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "checkouts",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List checkouts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.agentpaid.io/api/v1/checkouts/",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Get a list of checkouts for the organization"
+        },
+        {
+          "info": {
+            "name": "Create a checkout",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.agentpaid.io/api/v1/checkouts/",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a checkout link that generates a URL for a customer to complete a purchase"
+        },
+        {
+          "info": {
+            "name": "Get checkout",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.agentpaid.io/api/v1/checkouts/:id",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get a checkout by ID"
+        },
+        {
+          "info": {
+            "name": "Archive checkout",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.agentpaid.io/api/v1/checkouts/:id",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Archive a checkout by ID"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

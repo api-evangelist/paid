@@ -1,0 +1,2698 @@
+{
+  "item": [
+    {
+      "id": "6cb01dfe-116c-4fc4-b1e4-23ad0c567f16",
+      "name": "customViewsExperimental",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "62f57a6a-bb04-4fbb-a038-3bc8c5ee997d",
+          "name": "List custom views (experimental)",
+          "request": {
+            "name": "List custom views (experimental)",
+            "description": {
+              "content": "⚠️ **Experimental** — this endpoint may change or be removed without notice and is not subject to v2 backwards-compatibility guarantees. Do not build production-critical integrations against it yet.\n\nLists the organization's custom views (newest first) with lightweight summary info — name, status, query count, default date range, created date. Does not return the SQL or render bundle; fetch a single view via getCustomView for those.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "experimental",
+                "views",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "17dc0647-e0a0-4fd7-9254-55f0c391e777",
+              "name": "200",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "experimental",
+                    "views",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API Key authentication using Bearer token",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"views\": [\n    {\n      \"displayId\": \"string\",\n      \"name\": \"string\",\n      \"description\": \"string\",\n      \"status\": \"PUBLISHED\",\n      \"queryCount\": 1441,\n      \"period\": {\n        \"kind\": \"absolute\",\n        \"unit\": \"year\",\n        \"amount\": 6326,\n        \"start\": \"string\",\n        \"end\": \"string\"\n      },\n      \"createdAt\": \"string\",\n      \"scope\": \"customer\"\n    },\n    {\n      \"displayId\": \"string\",\n      \"name\": \"string\",\n      \"description\": \"string\",\n      \"status\": \"DRAFT\",\n      \"queryCount\": 5931,\n      \"period\": {\n        \"kind\": \"absolute\",\n        \"unit\": \"day\",\n        \"amount\": 7994,\n        \"start\": \"string\",\n        \"end\": \"string\"\n      },\n      \"createdAt\": \"string\",\n      \"scope\": \"customer\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4321a81e-ff32-4997-8b87-3134362b43ec",
+              "name": "403",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "experimental",
+                    "views",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API Key authentication using Bearer token",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"code\": \"string\",\n  \"details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "63a203d6-c3fc-45d0-9380-8a59366ce0dd",
+              "name": "500",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "experimental",
+                    "views",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API Key authentication using Bearer token",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"code\": \"string\",\n  \"details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9d56cb94-eb31-4aab-83a9-4b52e49d7285",
+          "name": "Create a custom view (experimental)",
+          "request": {
+            "name": "Create a custom view (experimental)",
+            "description": {
+              "content": "⚠️ **Experimental** — this endpoint may change or be removed without notice and is not subject to v2 backwards-compatibility guarantees. Do not build production-critical integrations against it yet.\n\n⚠️ Only call this when the user has EXPLICITLY asked to save or create the view. After generating or previewing a dashboard, do NOT automatically save a draft — show it to the user and wait for them to ask you to save it. Creating saves a DRAFT only; it is NOT permission to publish — never chain a publish onto a create. After saving, hand the user the previewUrl and wait for their feedback before doing anything else. Saves named analytics queries + a self-contained HTML render bundle as a DRAFT custom view. **Call getCustomViewAuthoringGuide (GET /experimental/views/authoring-guide) first** — it returns the full guide and a copy-paste interactive template. Key rules: (1) Do NOT add a customer filter to the SQL — the database scopes every query to the viewing customer at embed time. (2) Each query's SQL must be SELECT-only; return clearly-named columns. Compute metric VALUES in SQL (e.g. (count()*2)/5 AS custom_metric) — derive a number in the render bundle only when it depends on user interaction (toggle/filter/hover) or is pure formatting of a value a query already returns. (3) The render bundle must be SELF-CONTAINED — inline all CSS/JS/charting, NO external loads or fetch (the sandbox has connect-src 'none'); it must listen for the `paid:data` message (data keyed by query id) and re-render on each one. (4) Make it INTERACTIVE — mousemove hover tooltips and at least one addEventListener-wired control that re-renders (a static chart feels broken). (5) The render bundle is the single source of truth — BEFORE saving, preview the EXACT bundle in the user's current client (call getCustomViewPreviewHarness with your bundle + sample data and render the HTML it returns) and show it to the user; that preview in the current client is how the user first sees the dashboard. Do NOT save a draft just to preview it in Paid — creating writes to the user's real account and is never a preview step. Do NOT build a separate chart, and only show numbers that come from a declared query. (6) A view is a FULL dashboard — include as many charts/KPIs as the analysis has. Keep every element derived from the single viewing customer (KPIs, trends, type mix); drop only cross-customer comparisons (rankings, share-of-total, 'N customers'). Don't simplify to one chart. (7) To make the date range adjustable (e.g. the user says 'last month'), write the date boundary as `{period_start:DateTime}` / `{period_end:DateTime}` placeholders in the SQL and pass a default `period` (relative like {kind:'relative',unit:'month',amount:1}, or absolute start/end). The org user can then change it in Paid without re-authoring. A query using the placeholders REQUIRES a period. Do NOT add your own date-range picker to the render bundle — Paid owns the timeframe and the bundle receives already-filtered data; a second in-bundle picker cannot re-run the SQL. (8) Check your draft with validateCustomView (POST /experimental/views/validate) BEFORE asking the user to save — it runs these same gates without persisting and reports every problem at once. The response returns a `previewUrl` — give it to the user so they can open the new view in Paid.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "experimental",
+                "views",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"queries\": [\n    {\n      \"id\": \"<string>\",\n      \"sql\": \"<string>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"sql\": \"<string>\"\n    }\n  ],\n  \"renderBundle\": \"<string>\",\n  \"description\": \"<string>\",\n  \"period\": {\n    \"kind\": \"<string>\",\n    \"unit\": \"<string>\",\n    \"amount\": \"<integer>\",\n    \"start\": \"<string>\",\n    \"end\": \"<string>\"\n  },\n  \"scope\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "7905cd80-b0e5-42ba-b833-f15817c07573",
+              "name": "201",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "experimental",
+                    "views",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API Key authentication using Bearer token",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"queries\": [\n    {\n      \"id\": \"string\",\n      \"sql\": \"string\"\n    },\n    {\n      \"id\": \"string\",\n      \"sql\": \"string\"\n    }\n  ],\n  \"renderBundle\": \"<string>\",\n  \"description\": \"<string>\",\n  \"period\": {\n    \"kind\": \"relative\",\n    \"unit\": \"month\",\n    \"amount\": 9198,\n    \"start\": \"string\",\n    \"end\": \"string\"\n  },\n  \"scope\": \"organization\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"displayId\": \"string\",\n  \"name\": \"string\",\n  \"status\": \"DRAFT\",\n  \"previewUrl\": \"https://KaLEdByfG.nfuqZfJ4VQHG5vvf-u6v3TrFGJmqfWGOUI7Q8C.duQNwp3cYuHcs0YBPrjVPqkzyp\",\n  \"scope\": \"customer\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d2839e04-c827-4347-ab18-bca2e3950248",
+              "name": "400",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "experimental",
+                    "views",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API Key authentication using Bearer token",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"queries\": [\n    {\n      \"id\": \"string\",\n      \"sql\": \"string\"\n    },\n    {\n      \"id\": \"string\",\n      \"sql\": \"string\"\n    }\n  ],\n  \"renderBundle\": \"<string>\",\n  \"description\": \"<string>\",\n  \"period\": {\n    \"kind\": \"relative\",\n    \"unit\": \"month\",\n    \"amount\": 9198,\n    \"start\": \"string\",\n    \"end\": \"string\"\n  },\n  \"scope\": \"organization\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"code\": \"string\",\n  \"details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3f85c2c4-5af4-48d4-98a4-55b3bae65d18",
+              "name": "403",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "experimental",
+                    "views",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API Key authentication using Bearer token",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"queries\": [\n    {\n      \"id\": \"string\",\n      \"sql\": \"string\"\n    },\n    {\n      \"id\": \"string\",\n      \"sql\": \"string\"\n    }\n  ],\n  \"renderBundle\": \"<string>\",\n  \"description\": \"<string>\",\n  \"period\": {\n    \"kind\": \"relative\",\n    \"unit\": \"month\",\n    \"amount\": 9198,\n    \"start\": \"string\",\n    \"end\": \"string\"\n  },\n  \"scope\": \"organization\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"code\": \"string\",\n  \"details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f7f9f1aa-0eb0-4e8f-87c8-2b35a1fe6413",
+              "name": "500",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "experimental",
+                    "views",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API Key authentication using Bearer token",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"queries\": [\n    {\n      \"id\": \"string\",\n      \"sql\": \"string\"\n    },\n    {\n      \"id\": \"string\",\n      \"sql\": \"string\"\n    }\n  ],\n  \"renderBundle\": \"<string>\",\n  \"description\": \"<string>\",\n  \"period\": {\n    \"kind\": \"relative\",\n    \"unit\": \"month\",\n    \"amount\": 9198,\n    \"start\": \"string\",\n    \"end\": \"string\"\n  },\n  \"scope\": \"organization\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"code\": \"string\",\n  \"details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "25b7fd44-116f-4f84-ac21-ab585fe30b0d",
+          "name": "Publish a custom view (experimental)",
+          "request": {
+            "name": "Publish a custom view (experimental)",
+            "description": {
+              "content": "⚠️ **Experimental** — this endpoint may change or be removed without notice and is not subject to v2 backwards-compatibility guarantees. Do not build production-critical integrations against it yet.\n\n⚠️ Never publish as an automatic follow-up to creating or generating a view. Only call this after you have shown the user the built/previewed view and they have EXPLICITLY approved publishing — building and publishing are separate user decisions, and answering an earlier question (e.g. the view's scope) is NOT publish approval. Flips the view from DRAFT to PUBLISHED. Only PUBLISHED views are served on the embed data path — this is the gate that stops an unreviewed view reaching end-customers. Idempotent: publishing an already-published view is a no-op success. The response returns a `previewUrl` — give it to the user so they can open the view in Paid.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "experimental",
+                "views",
+                ":displayId",
+                "publish"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "displayId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "46c3327a-3e98-495c-9212-6313dad6731b",
+              "name": "200",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "experimental",
+                    "views",
+                    ":displayId",
+                    "publish"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "displayId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API Key authentication using Bearer token",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"displayId\": \"string\",\n  \"name\": \"string\",\n  \"status\": \"DRAFT\",\n  \"previewUrl\": \"https://KaLEdByfG.nfuqZfJ4VQHG5vvf-u6v3TrFGJmqfWGOUI7Q8C.duQNwp3cYuHcs0YBPrjVPqkzyp\",\n  \"scope\": \"customer\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ef1bd811-38b9-46ba-947f-5227e0e8a1f0",
+              "name": "403",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "experimental",
+                    "views",
+                    ":displayId",
+                    "publish"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "displayId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API Key authentication using Bearer token",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"code\": \"string\",\n  \"details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3d2a7191-c3af-4aca-875e-c66365fff8b8",
+              "name": "404",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "experimental",
+                    "views",
+                    ":displayId",
+                    "publish"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "displayId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API Key authentication using Bearer token",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"code\": \"string\",\n  \"details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e6d275b5-3d92-4e99-9e16-d49c3c523571",
+              "name": "500",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "experimental",
+                    "views",
+                    ":displayId",
+                    "publish"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "displayId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API Key authentication using Bearer token",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"code\": \"string\",\n  \"details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a4c943ff-7b0f-4711-b737-714ba08aa92c",
+          "name": "Change a custom view's date range (experimental)",
+          "request": {
+            "name": "Change a custom view's date range (experimental)",
+            "description": {
+              "content": "⚠️ **Experimental** — this endpoint may change or be removed without notice and is not subject to v2 backwards-compatibility guarantees. Do not build production-critical integrations against it yet.\n\nUpdates the view's default date range (the period applied to queries that use the `{period_start:DateTime}` / `{period_end:DateTime}` placeholders). Accepts a relative rolling window (e.g. last 30 days) or a fixed start/end range. Lets the period be changed after deployment without re-authoring the SQL. Applies to DRAFT or PUBLISHED views.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "experimental",
+                "views",
+                ":displayId",
+                "period"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "displayId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"period\": {\n    \"kind\": \"<string>\",\n    \"unit\": \"<string>\",\n    \"amount\": \"<integer>\",\n    \"start\": \"<string>\",\n    \"end\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "38dfcb78-3e9f-473b-9b38-3655ca7df100",
+              "name": "200",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "experimental",
+                    "views",
+                    ":displayId",
+                    "period"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "displayId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API Key authentication using Bearer token",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"period\": {\n    \"kind\": \"absolute\",\n    \"unit\": \"year\",\n    \"amount\": 8377,\n    \"start\": \"string\",\n    \"end\": \"string\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"displayId\": \"string\",\n  \"name\": \"string\",\n  \"status\": \"DRAFT\",\n  \"previewUrl\": \"https://KaLEdByfG.nfuqZfJ4VQHG5vvf-u6v3TrFGJmqfWGOUI7Q8C.duQNwp3cYuHcs0YBPrjVPqkzyp\",\n  \"scope\": \"customer\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c1c2a4ce-05e6-4027-9dc9-dd35cd8c6ba6",
+              "name": "400",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "experimental",
+                    "views",
+                    ":displayId",
+                    "period"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "displayId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API Key authentication using Bearer token",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"period\": {\n    \"kind\": \"absolute\",\n    \"unit\": \"year\",\n    \"amount\": 8377,\n    \"start\": \"string\",\n    \"end\": \"string\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"code\": \"string\",\n  \"details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5faf08fc-7c75-48d9-9c6b-c5f0634b39ae",
+              "name": "403",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "experimental",
+                    "views",
+                    ":displayId",
+                    "period"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "displayId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API Key authentication using Bearer token",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"period\": {\n    \"kind\": \"absolute\",\n    \"unit\": \"year\",\n    \"amount\": 8377,\n    \"start\": \"string\",\n    \"end\": \"string\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"code\": \"string\",\n  \"details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9a2185d2-2d8f-48ba-935e-0f6d2229c97f",
+              "name": "404",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "experimental",
+                    "views",
+                    ":displayId",
+                    "period"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "displayId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API Key authentication using Bearer token",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"period\": {\n    \"kind\": \"absolute\",\n    \"unit\": \"year\",\n    \"amount\": 8377,\n    \"start\": \"string\",\n    \"end\": \"string\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"code\": \"string\",\n  \"details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "815a1acd-bd0c-4db2-9a5e-6d4a7bc91b6e",
+              "name": "500",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "experimental",
+                    "views",
+                    ":displayId",
+                    "period"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "displayId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API Key authentication using Bearer token",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"period\": {\n    \"kind\": \"absolute\",\n    \"unit\": \"year\",\n    \"amount\": 8377,\n    \"start\": \"string\",\n    \"end\": \"string\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"code\": \"string\",\n  \"details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4479ac02-4eb7-4574-ace7-42d8e3c082cf",
+          "name": "Get a custom view's metadata + render bundle (experimental)",
+          "request": {
+            "name": "Get a custom view's metadata + render bundle (experimental)",
+            "description": {
+              "content": "⚠️ **Experimental** — this endpoint may change or be removed without notice and is not subject to v2 backwards-compatibility guarantees. Do not build production-critical integrations against it yet.\n\nReturns the view's name, status, query ids, and the author render bundle for the owning organization (DRAFT or PUBLISHED). Used by the trusted preview/embed frame to render the sandbox; the per-customer data is fetched separately via /:displayId/data.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "experimental",
+                "views",
+                ":displayId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "displayId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "428fdc2f-3d1b-44ed-97c7-a79ff75b6c50",
+              "name": "200",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "experimental",
+                    "views",
+                    ":displayId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "displayId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API Key authentication using Bearer token",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"displayId\": \"string\",\n  \"name\": \"string\",\n  \"description\": \"string\",\n  \"status\": \"DRAFT\",\n  \"queryIds\": [\n    \"string\",\n    \"string\"\n  ],\n  \"renderBundle\": \"string\",\n  \"period\": {\n    \"kind\": \"relative\",\n    \"unit\": \"month\",\n    \"amount\": 8604,\n    \"start\": \"string\",\n    \"end\": \"string\"\n  },\n  \"scope\": \"customer\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9f1c78e6-76e5-46b6-a1fc-5f9b45520716",
+              "name": "403",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "experimental",
+                    "views",
+                    ":displayId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "displayId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API Key authentication using Bearer token",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"code\": \"string\",\n  \"details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "57d09a7f-ebdc-4947-9b7f-8ccffc36ee31",
+              "name": "404",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "experimental",
+                    "views",
+                    ":displayId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "displayId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API Key authentication using Bearer token",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"code\": \"string\",\n  \"details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ad94e3ef-93e2-40b6-807a-0b1001f132c5",
+              "name": "500",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "experimental",
+                    "views",
+                    ":displayId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "displayId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API Key authentication using Bearer token",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"code\": \"string\",\n  \"details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7b77bec9-86df-4bde-b480-6af46b275a6f",
+          "name": "Update a custom view (experimental)",
+          "request": {
+            "name": "Update a custom view (experimental)",
+            "description": {
+              "content": "⚠️ **Experimental** — this endpoint may change or be removed without notice and is not subject to v2 backwards-compatibility guarantees. Do not build production-critical integrations against it yet.\n\nPartially updates a view. Omitted fields are left unchanged. For REVISIONS, prefer the incremental fields — `bundleEdits` (exact search-and-replace on the stored render bundle) and `queryUpserts`/`queryRemovals` (per-query changes) — so you transmit only what changed instead of re-sending the whole payload. The full-replacement fields remain for rewrites: `renderBundle`, and `queries` (a FULL replacement of the query list — never drop queries the user didn't ask to remove). Replacement and incremental forms of the same aspect cannot be combined. The resulting SQL and bundle pass the same validation as createCustomView (SELECT-only, size cap, self-contained, paid:data listener). Works on DRAFT or PUBLISHED views — published embeds pick the change up on their next load.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "experimental",
+                "views",
+                ":displayId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "displayId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string,null>\",\n  \"queries\": [\n    {\n      \"id\": \"<string>\",\n      \"sql\": \"<string>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"sql\": \"<string>\"\n    }\n  ],\n  \"renderBundle\": \"<string>\",\n  \"bundleEdits\": [\n    {\n      \"oldText\": \"<string>\",\n      \"newText\": \"<string>\",\n      \"replaceAll\": \"<boolean>\"\n    },\n    {\n      \"oldText\": \"<string>\",\n      \"newText\": \"<string>\",\n      \"replaceAll\": \"<boolean>\"\n    }\n  ],\n  \"queryUpserts\": [\n    {\n      \"id\": \"<string>\",\n      \"sql\": \"<string>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"sql\": \"<string>\"\n    }\n  ],\n  \"queryRemovals\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "01b344e4-9b4b-4a88-9d86-3f99f10cc8aa",
+              "name": "200",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "experimental",
+                    "views",
+                    ":displayId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "displayId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API Key authentication using Bearer token",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string,null>\",\n  \"queries\": [\n    {\n      \"id\": \"string\",\n      \"sql\": \"string\"\n    },\n    {\n      \"id\": \"string\",\n      \"sql\": \"string\"\n    }\n  ],\n  \"renderBundle\": \"<string>\",\n  \"bundleEdits\": [\n    {\n      \"oldText\": \"string\",\n      \"newText\": \"string\",\n      \"replaceAll\": true\n    },\n    {\n      \"oldText\": \"string\",\n      \"newText\": \"string\",\n      \"replaceAll\": true\n    }\n  ],\n  \"queryUpserts\": [\n    {\n      \"id\": \"string\",\n      \"sql\": \"string\"\n    },\n    {\n      \"id\": \"string\",\n      \"sql\": \"string\"\n    }\n  ],\n  \"queryRemovals\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"displayId\": \"string\",\n  \"name\": \"string\",\n  \"status\": \"DRAFT\",\n  \"previewUrl\": \"https://KaLEdByfG.nfuqZfJ4VQHG5vvf-u6v3TrFGJmqfWGOUI7Q8C.duQNwp3cYuHcs0YBPrjVPqkzyp\",\n  \"scope\": \"customer\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6f89a649-66fe-46ed-8baa-acc9fcec19e2",
+              "name": "400",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "experimental",
+                    "views",
+                    ":displayId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "displayId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API Key authentication using Bearer token",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string,null>\",\n  \"queries\": [\n    {\n      \"id\": \"string\",\n      \"sql\": \"string\"\n    },\n    {\n      \"id\": \"string\",\n      \"sql\": \"string\"\n    }\n  ],\n  \"renderBundle\": \"<string>\",\n  \"bundleEdits\": [\n    {\n      \"oldText\": \"string\",\n      \"newText\": \"string\",\n      \"replaceAll\": true\n    },\n    {\n      \"oldText\": \"string\",\n      \"newText\": \"string\",\n      \"replaceAll\": true\n    }\n  ],\n  \"queryUpserts\": [\n    {\n      \"id\": \"string\",\n      \"sql\": \"string\"\n    },\n    {\n      \"id\": \"string\",\n      \"sql\": \"string\"\n    }\n  ],\n  \"queryRemovals\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"code\": \"string\",\n  \"details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e972b6bd-34d2-483b-9001-d124503ffdcf",
+              "name": "403",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "experimental",
+                    "views",
+                    ":displayId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "displayId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API Key authentication using Bearer token",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string,null>\",\n  \"queries\": [\n    {\n      \"id\": \"string\",\n      \"sql\": \"string\"\n    },\n    {\n      \"id\": \"string\",\n      \"sql\": \"string\"\n    }\n  ],\n  \"renderBundle\": \"<string>\",\n  \"bundleEdits\": [\n    {\n      \"oldText\": \"string\",\n      \"newText\": \"string\",\n      \"replaceAll\": true\n    },\n    {\n      \"oldText\": \"string\",\n      \"newText\": \"string\",\n      \"replaceAll\": true\n    }\n  ],\n  \"queryUpserts\": [\n    {\n      \"id\": \"string\",\n      \"sql\": \"string\"\n    },\n    {\n      \"id\": \"string\",\n      \"sql\": \"string\"\n    }\n  ],\n  \"queryRemovals\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"code\": \"string\",\n  \"details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "12b8dff4-625c-4581-ba56-2963794148b4",
+              "name": "404",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "experimental",
+                    "views",
+                    ":displayId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "displayId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API Key authentication using Bearer token",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string,null>\",\n  \"queries\": [\n    {\n      \"id\": \"string\",\n      \"sql\": \"string\"\n    },\n    {\n      \"id\": \"string\",\n      \"sql\": \"string\"\n    }\n  ],\n  \"renderBundle\": \"<string>\",\n  \"bundleEdits\": [\n    {\n      \"oldText\": \"string\",\n      \"newText\": \"string\",\n      \"replaceAll\": true\n    },\n    {\n      \"oldText\": \"string\",\n      \"newText\": \"string\",\n      \"replaceAll\": true\n    }\n  ],\n  \"queryUpserts\": [\n    {\n      \"id\": \"string\",\n      \"sql\": \"string\"\n    },\n    {\n      \"id\": \"string\",\n      \"sql\": \"string\"\n    }\n  ],\n  \"queryRemovals\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"code\": \"string\",\n  \"details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c396198e-6f7b-4d18-970c-f72bd50c037e",
+              "name": "500",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "experimental",
+                    "views",
+                    ":displayId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "displayId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API Key authentication using Bearer token",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string,null>\",\n  \"queries\": [\n    {\n      \"id\": \"string\",\n      \"sql\": \"string\"\n    },\n    {\n      \"id\": \"string\",\n      \"sql\": \"string\"\n    }\n  ],\n  \"renderBundle\": \"<string>\",\n  \"bundleEdits\": [\n    {\n      \"oldText\": \"string\",\n      \"newText\": \"string\",\n      \"replaceAll\": true\n    },\n    {\n      \"oldText\": \"string\",\n      \"newText\": \"string\",\n      \"replaceAll\": true\n    }\n  ],\n  \"queryUpserts\": [\n    {\n      \"id\": \"string\",\n      \"sql\": \"string\"\n    },\n    {\n      \"id\": \"string\",\n      \"sql\": \"string\"\n    }\n  ],\n  \"queryRemovals\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"code\": \"string\",\n  \"details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "81a172c0-849f-4c29-b326-718ec2ca1fad",
+          "name": "Fetch a custom view's data, scoped to a customer or the organization (experimental)",
+          "request": {
+            "name": "Fetch a custom view's data, scoped to a customer or the organization (experimental)",
+            "description": {
+              "content": "⚠️ **Experimental** — this endpoint may change or be removed without notice and is not subject to v2 backwards-compatibility guarantees. Do not build production-critical integrations against it yet.\n\nRuns every stored query of the view on the read-only analytics database and returns the result sets keyed by query id. For a customer-scoped view (the default), the query is scoped to the caller's organization AND the given `customerId` (both enforced as ClickHouse row filters) — `customerId` is required. For an organization-scoped view, the data is org-wide (scoped only to the caller's organization) and `customerId` is ignored. The scope is enforced by the database — it cannot be widened by the stored SQL.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "experimental",
+                "views",
+                ":displayId",
+                "data"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "customerId",
+                  "value": "<string>",
+                  "description": "Customer to scope the data to (dev/preview only; the embed derives this from the verified token). Required for customer-scoped views; ignored for organization-scoped views (their data is org-wide)."
+                },
+                {
+                  "disabled": false,
+                  "key": "periodKind",
+                  "value": "<string>",
+                  "description": "Override the view's default date range for this request only. 'relative' = rolling window (set periodUnit + periodAmount); 'absolute' = fixed range (set periodStart + periodEnd)."
+                },
+                {
+                  "disabled": false,
+                  "key": "periodUnit",
+                  "value": "<string>",
+                  "description": "relative override only: unit of the rolling window."
+                },
+                {
+                  "disabled": false,
+                  "key": "periodAmount",
+                  "value": "<integer>",
+                  "description": "relative override only: how many units back from today."
+                },
+                {
+                  "disabled": false,
+                  "key": "periodStart",
+                  "value": "<string>",
+                  "description": "absolute override only: inclusive start date (YYYY-MM-DD)."
+                },
+                {
+                  "disabled": false,
+                  "key": "periodEnd",
+                  "value": "<string>",
+                  "description": "absolute override only: inclusive end date (YYYY-MM-DD)."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "displayId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "84d2c3e8-61ff-48d5-91af-c94d1d6a0c90",
+              "name": "200",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "experimental",
+                    "views",
+                    ":displayId",
+                    "data"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "customerId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "periodKind",
+                      "value": "relative"
+                    },
+                    {
+                      "key": "periodUnit",
+                      "value": "month"
+                    },
+                    {
+                      "key": "periodAmount",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "periodStart",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "periodEnd",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "displayId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API Key authentication using Bearer token",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"key_0\": [\n      {\n        \"key_0\": {},\n        \"key_1\": {},\n        \"key_2\": {}\n      },\n      {\n        \"key_0\": {},\n        \"key_1\": {}\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5ece6952-84fa-4255-849d-64f289613fb8",
+              "name": "400",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "experimental",
+                    "views",
+                    ":displayId",
+                    "data"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "customerId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "periodKind",
+                      "value": "relative"
+                    },
+                    {
+                      "key": "periodUnit",
+                      "value": "month"
+                    },
+                    {
+                      "key": "periodAmount",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "periodStart",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "periodEnd",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "displayId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API Key authentication using Bearer token",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"code\": \"string\",\n  \"details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4581f0aa-5400-45af-89a1-9602ebef22da",
+              "name": "403",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "experimental",
+                    "views",
+                    ":displayId",
+                    "data"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "customerId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "periodKind",
+                      "value": "relative"
+                    },
+                    {
+                      "key": "periodUnit",
+                      "value": "month"
+                    },
+                    {
+                      "key": "periodAmount",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "periodStart",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "periodEnd",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "displayId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API Key authentication using Bearer token",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"code\": \"string\",\n  \"details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8424566b-fc45-44d6-b809-ee05251c210c",
+              "name": "404",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "experimental",
+                    "views",
+                    ":displayId",
+                    "data"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "customerId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "periodKind",
+                      "value": "relative"
+                    },
+                    {
+                      "key": "periodUnit",
+                      "value": "month"
+                    },
+                    {
+                      "key": "periodAmount",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "periodStart",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "periodEnd",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "displayId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API Key authentication using Bearer token",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"code\": \"string\",\n  \"details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a44c6a48-0ae6-46dc-aa63-d1282878d88b",
+              "name": "408",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "experimental",
+                    "views",
+                    ":displayId",
+                    "data"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "customerId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "periodKind",
+                      "value": "relative"
+                    },
+                    {
+                      "key": "periodUnit",
+                      "value": "month"
+                    },
+                    {
+                      "key": "periodAmount",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "periodStart",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "periodEnd",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "displayId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API Key authentication using Bearer token",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Request Timeout",
+              "code": 408,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"code\": \"string\",\n  \"details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e80a9a2e-8ed6-4b7a-9735-e4c221f985cd",
+              "name": "429",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "experimental",
+                    "views",
+                    ":displayId",
+                    "data"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "customerId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "periodKind",
+                      "value": "relative"
+                    },
+                    {
+                      "key": "periodUnit",
+                      "value": "month"
+                    },
+                    {
+                      "key": "periodAmount",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "periodStart",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "periodEnd",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "displayId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API Key authentication using Bearer token",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"code\": \"string\",\n  \"details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8497a91c-884c-40e3-9ac4-ff9f4199bed4",
+              "name": "500",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "experimental",
+                    "views",
+                    ":displayId",
+                    "data"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "customerId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "periodKind",
+                      "value": "relative"
+                    },
+                    {
+                      "key": "periodUnit",
+                      "value": "month"
+                    },
+                    {
+                      "key": "periodAmount",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "periodStart",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "periodEnd",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "displayId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API Key authentication using Bearer token",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"code\": \"string\",\n  \"details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8e889f62-385e-4080-91ab-f5477b15e891",
+          "name": "Get an embed token for a custom view",
+          "request": {
+            "name": "Get an embed token for a custom view",
+            "description": {
+              "content": "⚠️ **Experimental** — this endpoint may change or be removed without notice and is not subject to v2 backwards-compatibility guarantees. Do not build production-critical integrations against it yet.\n\nMints a short-lived, customer-scoped token for embedding a published custom view. Call this from your server with your API key, then pass the returned token to the embed SDK. Organization-scoped views cannot be embedded per-customer — this returns a 400 (`ORG_SCOPED_VIEW_NOT_EMBEDDABLE`) for one.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "experimental",
+                "views",
+                ":displayId",
+                "embed-token"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "customerId",
+                  "value": "<string>",
+                  "description": "(Required) The customer to scope the view to: external id, Paid display id (cus_…), or internal id."
+                },
+                {
+                  "disabled": false,
+                  "key": "ttlSeconds",
+                  "value": "<integer>",
+                  "description": "Token lifetime in seconds (capped at 3600)."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "displayId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "eb4c5f22-7d38-4a3a-8d83-40fe6e01818a",
+              "name": "200",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "experimental",
+                    "views",
+                    ":displayId",
+                    "embed-token"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "customerId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ttlSeconds",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "displayId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API Key authentication using Bearer token",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"token\": \"string\",\n  \"expiresAt\": \"1992-02-06T18:30:27.597Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c78af93c-2072-4f71-b2d9-1cea623a6101",
+              "name": "400",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "experimental",
+                    "views",
+                    ":displayId",
+                    "embed-token"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "customerId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ttlSeconds",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "displayId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API Key authentication using Bearer token",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"code\": \"string\",\n  \"details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4ea2d433-e032-44b8-ad69-de77ab47407d",
+              "name": "403",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "experimental",
+                    "views",
+                    ":displayId",
+                    "embed-token"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "customerId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ttlSeconds",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "displayId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API Key authentication using Bearer token",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"code\": \"string\",\n  \"details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f5a6e742-d899-41ea-84cc-87cf9dcef354",
+              "name": "404",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "experimental",
+                    "views",
+                    ":displayId",
+                    "embed-token"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "customerId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ttlSeconds",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "displayId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API Key authentication using Bearer token",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"code\": \"string\",\n  \"details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "73a9c392-1b2c-47fa-9f95-6121064f1e9b",
+              "name": "500",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "experimental",
+                    "views",
+                    ":displayId",
+                    "embed-token"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "customerId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ttlSeconds",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "displayId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API Key authentication using Bearer token",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"code\": \"string\",\n  \"details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.agentpaid.io/api/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "fab7ad96-5694-42c0-9f0f-59815b1278b9",
+    "name": "API Reference agents customViewsExperimental API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

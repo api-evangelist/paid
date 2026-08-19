@@ -1,0 +1,817 @@
+{
+  "item": [
+    {
+      "id": "6699a0a6-5493-4094-b6db-20f35a4010a3",
+      "name": "agents",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "35b276cd-5112-46f9-a12a-7eced92def2b",
+          "name": "List agents",
+          "request": {
+            "name": "List agents",
+            "description": {
+              "content": "DEPRECATED: Use /products instead. Agents are now products with type='agent'.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "agents"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "65454110-392a-445f-8744-664be06fcbd5",
+              "name": "Success response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "agents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"string\",\n    \"organizationId\": \"string\",\n    \"name\": \"string\",\n    \"active\": false,\n    \"externalId\": \"string\",\n    \"description\": \"string\",\n    \"agentCode\": \"string\",\n    \"agentAttributes\": [\n      {\n        \"name\": \"string\",\n        \"active\": true,\n        \"pricing\": {\n          \"taxable\": false,\n          \"chargeType\": \"oneTime\",\n          \"pricingModel\": \"PerUnit\",\n          \"billingFrequency\": \"annual\",\n          \"pricePoints\": {\n            \"key_0\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"key_1\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"key_2\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"eventName\": \"string\",\n          \"creditCost\": 9863.625088404115\n        }\n      },\n      {\n        \"name\": \"string\",\n        \"active\": false,\n        \"pricing\": {\n          \"taxable\": false,\n          \"chargeType\": \"seatBased\",\n          \"pricingModel\": \"PerUnit\",\n          \"billingFrequency\": \"quarterly\",\n          \"pricePoints\": {\n            \"key_0\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"key_1\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"eventName\": \"string\",\n          \"creditCost\": 8383.93054209444\n        }\n      }\n    ]\n  },\n  {\n    \"id\": \"string\",\n    \"organizationId\": \"string\",\n    \"name\": \"string\",\n    \"active\": true,\n    \"externalId\": \"string\",\n    \"description\": \"string\",\n    \"agentCode\": \"string\",\n    \"agentAttributes\": [\n      {\n        \"name\": \"string\",\n        \"active\": true,\n        \"pricing\": {\n          \"taxable\": false,\n          \"chargeType\": \"usage\",\n          \"pricingModel\": \"PrepaidCredits\",\n          \"billingFrequency\": \"annual\",\n          \"pricePoints\": {\n            \"key_0\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"key_1\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"key_2\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"eventName\": \"string\",\n          \"creditCost\": 684.3584502336131\n        }\n      },\n      {\n        \"name\": \"string\",\n        \"active\": false,\n        \"pricing\": {\n          \"taxable\": true,\n          \"chargeType\": \"recurring\",\n          \"pricingModel\": \"PrepaidCredits\",\n          \"billingFrequency\": \"quarterly\",\n          \"pricePoints\": {\n            \"key_0\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"key_1\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"eventName\": \"string\",\n          \"creditCost\": 5696.786702386213\n        }\n      }\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "aa6669c9-05c7-4726-b172-b30386d17213",
+          "name": "Create Agent",
+          "request": {
+            "name": "Create Agent",
+            "description": {
+              "content": "DEPRECATED: Use POST /products instead.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "agents"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"agentCode\": \"<string>\",\n  \"externalId\": \"<string>\",\n  \"active\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "6a332594-724d-4b85-8d53-1c514bbc4908",
+              "name": "Success response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "agents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"agentCode\": \"<string>\",\n  \"externalId\": \"<string>\",\n  \"active\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"organizationId\": \"string\",\n  \"name\": \"string\",\n  \"active\": true,\n  \"externalId\": \"string\",\n  \"description\": \"string\",\n  \"agentCode\": \"string\",\n  \"agentAttributes\": [\n    {\n      \"name\": \"string\",\n      \"active\": true,\n      \"pricing\": {\n        \"taxable\": false,\n        \"chargeType\": \"usage\",\n        \"pricingModel\": \"PrepaidCredits\",\n        \"billingFrequency\": \"quarterly\",\n        \"pricePoints\": {\n          \"key_0\": {\n            \"unitPrice\": 5742.16775392272,\n            \"minQuantity\": 9938.636841627924,\n            \"includedQuantity\": 4155.627295609753,\n            \"tiers\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          },\n          \"key_1\": {\n            \"unitPrice\": 8026.118534434906,\n            \"minQuantity\": 545.2980270183982,\n            \"includedQuantity\": 2117.40954577195,\n            \"tiers\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          }\n        },\n        \"eventName\": \"string\",\n        \"creditCost\": 7342.530550786302\n      }\n    },\n    {\n      \"name\": \"string\",\n      \"active\": true,\n      \"pricing\": {\n        \"taxable\": true,\n        \"chargeType\": \"recurring\",\n        \"pricingModel\": \"VolumePricing\",\n        \"billingFrequency\": \"quarterly\",\n        \"pricePoints\": {\n          \"key_0\": {\n            \"unitPrice\": 4057.6460423621484,\n            \"minQuantity\": 7437.657407157252,\n            \"includedQuantity\": 4767.552368815436,\n            \"tiers\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          }\n        },\n        \"eventName\": \"string\",\n        \"creditCost\": 7236.0414276097345\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "027f1adb-1f3a-45f2-8e9e-26491570e625",
+          "name": "Get agent by ID",
+          "request": {
+            "name": "Get agent by ID",
+            "description": {
+              "content": "DEPRECATED: Use GET /products/{productId} instead.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "agents",
+                ":agentId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "agentId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "764be367-bca5-4188-96e7-a0ba26a816d3",
+              "name": "Success response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "agents",
+                    ":agentId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "agentId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"organizationId\": \"string\",\n  \"name\": \"string\",\n  \"active\": true,\n  \"externalId\": \"string\",\n  \"description\": \"string\",\n  \"agentCode\": \"string\",\n  \"agentAttributes\": [\n    {\n      \"name\": \"string\",\n      \"active\": true,\n      \"pricing\": {\n        \"taxable\": false,\n        \"chargeType\": \"usage\",\n        \"pricingModel\": \"PrepaidCredits\",\n        \"billingFrequency\": \"quarterly\",\n        \"pricePoints\": {\n          \"key_0\": {\n            \"unitPrice\": 5742.16775392272,\n            \"minQuantity\": 9938.636841627924,\n            \"includedQuantity\": 4155.627295609753,\n            \"tiers\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          },\n          \"key_1\": {\n            \"unitPrice\": 8026.118534434906,\n            \"minQuantity\": 545.2980270183982,\n            \"includedQuantity\": 2117.40954577195,\n            \"tiers\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          }\n        },\n        \"eventName\": \"string\",\n        \"creditCost\": 7342.530550786302\n      }\n    },\n    {\n      \"name\": \"string\",\n      \"active\": true,\n      \"pricing\": {\n        \"taxable\": true,\n        \"chargeType\": \"recurring\",\n        \"pricingModel\": \"VolumePricing\",\n        \"billingFrequency\": \"quarterly\",\n        \"pricePoints\": {\n          \"key_0\": {\n            \"unitPrice\": 4057.6460423621484,\n            \"minQuantity\": 7437.657407157252,\n            \"includedQuantity\": 4767.552368815436,\n            \"tiers\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          }\n        },\n        \"eventName\": \"string\",\n        \"creditCost\": 7236.0414276097345\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c9877d8d-e125-400e-bcab-1b8c36bf3405",
+          "name": "Update Agent",
+          "request": {
+            "name": "Update Agent",
+            "description": {
+              "content": "DEPRECATED: Use PUT /products/{productId} instead.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "agents",
+                ":agentId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "agentId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"externalId\": \"<string>\",\n  \"active\": \"<boolean>\",\n  \"agentCode\": \"<string>\",\n  \"agentAttributes\": [\n    {\n      \"name\": \"<string>\",\n      \"active\": \"<boolean>\",\n      \"pricing\": {\n        \"taxable\": \"<boolean>\",\n        \"chargeType\": \"<string>\",\n        \"pricingModel\": \"<string>\",\n        \"billingFrequency\": \"<string>\",\n        \"pricePoints\": {\n          \"key_0\": {\n            \"unitPrice\": \"<double>\",\n            \"minQuantity\": \"<double>\",\n            \"includedQuantity\": \"<double>\",\n            \"tiers\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          },\n          \"key_1\": {\n            \"unitPrice\": \"<double>\",\n            \"minQuantity\": \"<double>\",\n            \"includedQuantity\": \"<double>\",\n            \"tiers\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          },\n          \"key_2\": {\n            \"unitPrice\": \"<double>\",\n            \"minQuantity\": \"<double>\",\n            \"includedQuantity\": \"<double>\",\n            \"tiers\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          }\n        },\n        \"eventName\": \"<string>\",\n        \"creditCost\": \"<double>\"\n      }\n    },\n    {\n      \"name\": \"<string>\",\n      \"active\": \"<boolean>\",\n      \"pricing\": {\n        \"taxable\": \"<boolean>\",\n        \"chargeType\": \"<string>\",\n        \"pricingModel\": \"<string>\",\n        \"billingFrequency\": \"<string>\",\n        \"pricePoints\": {\n          \"key_0\": {\n            \"unitPrice\": \"<double>\",\n            \"minQuantity\": \"<double>\",\n            \"includedQuantity\": \"<double>\",\n            \"tiers\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          },\n          \"key_1\": {\n            \"unitPrice\": \"<double>\",\n            \"minQuantity\": \"<double>\",\n            \"includedQuantity\": \"<double>\",\n            \"tiers\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          },\n          \"key_2\": {\n            \"unitPrice\": \"<double>\",\n            \"minQuantity\": \"<double>\",\n            \"includedQuantity\": \"<double>\",\n            \"tiers\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          }\n        },\n        \"eventName\": \"<string>\",\n        \"creditCost\": \"<double>\"\n      }\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "d425485d-ffb7-422a-8bed-bc734331f096",
+              "name": "Success response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "agents",
+                    ":agentId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "agentId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"externalId\": \"<string>\",\n  \"active\": \"<boolean>\",\n  \"agentCode\": \"<string>\",\n  \"agentAttributes\": [\n    {\n      \"name\": \"string\",\n      \"active\": true,\n      \"pricing\": {\n        \"taxable\": true,\n        \"chargeType\": \"seatBased\",\n        \"pricingModel\": \"GraduatedPricing\",\n        \"billingFrequency\": \"quarterly\",\n        \"pricePoints\": {\n          \"key_0\": {\n            \"unitPrice\": 1502.1881192888663,\n            \"minQuantity\": 1350.8828502647275,\n            \"includedQuantity\": 8370.057846079639,\n            \"tiers\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          }\n        },\n        \"eventName\": \"string\",\n        \"creditCost\": 5452.5115299758\n      }\n    },\n    {\n      \"name\": \"string\",\n      \"active\": true,\n      \"pricing\": {\n        \"taxable\": false,\n        \"chargeType\": \"usage\",\n        \"pricingModel\": \"PerUnit\",\n        \"billingFrequency\": \"annual\",\n        \"pricePoints\": {\n          \"key_0\": {\n            \"unitPrice\": 4139.973801696644,\n            \"minQuantity\": 9210.844078757043,\n            \"includedQuantity\": 9370.367681084394,\n            \"tiers\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          },\n          \"key_1\": {\n            \"unitPrice\": 4306.357604303246,\n            \"minQuantity\": 5311.247353694429,\n            \"includedQuantity\": 5869.951215874453,\n            \"tiers\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          }\n        },\n        \"eventName\": \"string\",\n        \"creditCost\": 2703.963074600538\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"organizationId\": \"string\",\n  \"name\": \"string\",\n  \"active\": true,\n  \"externalId\": \"string\",\n  \"description\": \"string\",\n  \"agentCode\": \"string\",\n  \"agentAttributes\": [\n    {\n      \"name\": \"string\",\n      \"active\": true,\n      \"pricing\": {\n        \"taxable\": false,\n        \"chargeType\": \"usage\",\n        \"pricingModel\": \"PrepaidCredits\",\n        \"billingFrequency\": \"quarterly\",\n        \"pricePoints\": {\n          \"key_0\": {\n            \"unitPrice\": 5742.16775392272,\n            \"minQuantity\": 9938.636841627924,\n            \"includedQuantity\": 4155.627295609753,\n            \"tiers\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          },\n          \"key_1\": {\n            \"unitPrice\": 8026.118534434906,\n            \"minQuantity\": 545.2980270183982,\n            \"includedQuantity\": 2117.40954577195,\n            \"tiers\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          }\n        },\n        \"eventName\": \"string\",\n        \"creditCost\": 7342.530550786302\n      }\n    },\n    {\n      \"name\": \"string\",\n      \"active\": true,\n      \"pricing\": {\n        \"taxable\": true,\n        \"chargeType\": \"recurring\",\n        \"pricingModel\": \"VolumePricing\",\n        \"billingFrequency\": \"quarterly\",\n        \"pricePoints\": {\n          \"key_0\": {\n            \"unitPrice\": 4057.6460423621484,\n            \"minQuantity\": 7437.657407157252,\n            \"includedQuantity\": 4767.552368815436,\n            \"tiers\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          }\n        },\n        \"eventName\": \"string\",\n        \"creditCost\": 7236.0414276097345\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9119b848-432f-43a6-8993-565d27a152ac",
+          "name": "Delete agent",
+          "request": {
+            "name": "Delete agent",
+            "description": {
+              "content": "DEPRECATED: Use DELETE /products/{productId} instead.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "agents",
+                ":agentId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "agentId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "31b5db86-2def-408e-bcb4-7af1ed67cc7f",
+              "name": "Success response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "agents",
+                    ":agentId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "agentId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7320934c-261c-47d4-96c7-47d4cdc8328a",
+          "name": "Get agent by external ID",
+          "request": {
+            "name": "Get agent by external ID",
+            "description": {
+              "content": "DEPRECATED: Use GET /products/external/{externalId} instead.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "agents",
+                "external",
+                ":externalId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "externalId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "38641e00-815d-428c-ae78-d9be359d0a4e",
+              "name": "Success response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "agents",
+                    "external",
+                    ":externalId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "externalId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"organizationId\": \"string\",\n  \"name\": \"string\",\n  \"active\": true,\n  \"externalId\": \"string\",\n  \"description\": \"string\",\n  \"agentCode\": \"string\",\n  \"agentAttributes\": [\n    {\n      \"name\": \"string\",\n      \"active\": true,\n      \"pricing\": {\n        \"taxable\": false,\n        \"chargeType\": \"usage\",\n        \"pricingModel\": \"PrepaidCredits\",\n        \"billingFrequency\": \"quarterly\",\n        \"pricePoints\": {\n          \"key_0\": {\n            \"unitPrice\": 5742.16775392272,\n            \"minQuantity\": 9938.636841627924,\n            \"includedQuantity\": 4155.627295609753,\n            \"tiers\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          },\n          \"key_1\": {\n            \"unitPrice\": 8026.118534434906,\n            \"minQuantity\": 545.2980270183982,\n            \"includedQuantity\": 2117.40954577195,\n            \"tiers\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          }\n        },\n        \"eventName\": \"string\",\n        \"creditCost\": 7342.530550786302\n      }\n    },\n    {\n      \"name\": \"string\",\n      \"active\": true,\n      \"pricing\": {\n        \"taxable\": true,\n        \"chargeType\": \"recurring\",\n        \"pricingModel\": \"VolumePricing\",\n        \"billingFrequency\": \"quarterly\",\n        \"pricePoints\": {\n          \"key_0\": {\n            \"unitPrice\": 4057.6460423621484,\n            \"minQuantity\": 7437.657407157252,\n            \"includedQuantity\": 4767.552368815436,\n            \"tiers\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          }\n        },\n        \"eventName\": \"string\",\n        \"creditCost\": 7236.0414276097345\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "79fffb21-c6ac-4251-aeaa-c67db1112858",
+          "name": "Update agent by external ID",
+          "request": {
+            "name": "Update agent by external ID",
+            "description": {
+              "content": "DEPRECATED: Use PUT /products/external/{externalId} instead.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "agents",
+                "external",
+                ":externalId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "externalId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"externalId\": \"<string>\",\n  \"active\": \"<boolean>\",\n  \"agentCode\": \"<string>\",\n  \"agentAttributes\": [\n    {\n      \"name\": \"<string>\",\n      \"active\": \"<boolean>\",\n      \"pricing\": {\n        \"taxable\": \"<boolean>\",\n        \"chargeType\": \"<string>\",\n        \"pricingModel\": \"<string>\",\n        \"billingFrequency\": \"<string>\",\n        \"pricePoints\": {\n          \"key_0\": {\n            \"unitPrice\": \"<double>\",\n            \"minQuantity\": \"<double>\",\n            \"includedQuantity\": \"<double>\",\n            \"tiers\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          },\n          \"key_1\": {\n            \"unitPrice\": \"<double>\",\n            \"minQuantity\": \"<double>\",\n            \"includedQuantity\": \"<double>\",\n            \"tiers\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          },\n          \"key_2\": {\n            \"unitPrice\": \"<double>\",\n            \"minQuantity\": \"<double>\",\n            \"includedQuantity\": \"<double>\",\n            \"tiers\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          }\n        },\n        \"eventName\": \"<string>\",\n        \"creditCost\": \"<double>\"\n      }\n    },\n    {\n      \"name\": \"<string>\",\n      \"active\": \"<boolean>\",\n      \"pricing\": {\n        \"taxable\": \"<boolean>\",\n        \"chargeType\": \"<string>\",\n        \"pricingModel\": \"<string>\",\n        \"billingFrequency\": \"<string>\",\n        \"pricePoints\": {\n          \"key_0\": {\n            \"unitPrice\": \"<double>\",\n            \"minQuantity\": \"<double>\",\n            \"includedQuantity\": \"<double>\",\n            \"tiers\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          },\n          \"key_1\": {\n            \"unitPrice\": \"<double>\",\n            \"minQuantity\": \"<double>\",\n            \"includedQuantity\": \"<double>\",\n            \"tiers\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          },\n          \"key_2\": {\n            \"unitPrice\": \"<double>\",\n            \"minQuantity\": \"<double>\",\n            \"includedQuantity\": \"<double>\",\n            \"tiers\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          }\n        },\n        \"eventName\": \"<string>\",\n        \"creditCost\": \"<double>\"\n      }\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "b569f734-ccc9-43b0-a910-ac32b4034965",
+              "name": "Success response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "agents",
+                    "external",
+                    ":externalId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "externalId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"externalId\": \"<string>\",\n  \"active\": \"<boolean>\",\n  \"agentCode\": \"<string>\",\n  \"agentAttributes\": [\n    {\n      \"name\": \"string\",\n      \"active\": true,\n      \"pricing\": {\n        \"taxable\": true,\n        \"chargeType\": \"seatBased\",\n        \"pricingModel\": \"GraduatedPricing\",\n        \"billingFrequency\": \"quarterly\",\n        \"pricePoints\": {\n          \"key_0\": {\n            \"unitPrice\": 1502.1881192888663,\n            \"minQuantity\": 1350.8828502647275,\n            \"includedQuantity\": 8370.057846079639,\n            \"tiers\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          }\n        },\n        \"eventName\": \"string\",\n        \"creditCost\": 5452.5115299758\n      }\n    },\n    {\n      \"name\": \"string\",\n      \"active\": true,\n      \"pricing\": {\n        \"taxable\": false,\n        \"chargeType\": \"usage\",\n        \"pricingModel\": \"PerUnit\",\n        \"billingFrequency\": \"annual\",\n        \"pricePoints\": {\n          \"key_0\": {\n            \"unitPrice\": 4139.973801696644,\n            \"minQuantity\": 9210.844078757043,\n            \"includedQuantity\": 9370.367681084394,\n            \"tiers\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          },\n          \"key_1\": {\n            \"unitPrice\": 4306.357604303246,\n            \"minQuantity\": 5311.247353694429,\n            \"includedQuantity\": 5869.951215874453,\n            \"tiers\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          }\n        },\n        \"eventName\": \"string\",\n        \"creditCost\": 2703.963074600538\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"organizationId\": \"string\",\n  \"name\": \"string\",\n  \"active\": true,\n  \"externalId\": \"string\",\n  \"description\": \"string\",\n  \"agentCode\": \"string\",\n  \"agentAttributes\": [\n    {\n      \"name\": \"string\",\n      \"active\": true,\n      \"pricing\": {\n        \"taxable\": false,\n        \"chargeType\": \"usage\",\n        \"pricingModel\": \"PrepaidCredits\",\n        \"billingFrequency\": \"quarterly\",\n        \"pricePoints\": {\n          \"key_0\": {\n            \"unitPrice\": 5742.16775392272,\n            \"minQuantity\": 9938.636841627924,\n            \"includedQuantity\": 4155.627295609753,\n            \"tiers\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          },\n          \"key_1\": {\n            \"unitPrice\": 8026.118534434906,\n            \"minQuantity\": 545.2980270183982,\n            \"includedQuantity\": 2117.40954577195,\n            \"tiers\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          }\n        },\n        \"eventName\": \"string\",\n        \"creditCost\": 7342.530550786302\n      }\n    },\n    {\n      \"name\": \"string\",\n      \"active\": true,\n      \"pricing\": {\n        \"taxable\": true,\n        \"chargeType\": \"recurring\",\n        \"pricingModel\": \"VolumePricing\",\n        \"billingFrequency\": \"quarterly\",\n        \"pricePoints\": {\n          \"key_0\": {\n            \"unitPrice\": 4057.6460423621484,\n            \"minQuantity\": 7437.657407157252,\n            \"includedQuantity\": 4767.552368815436,\n            \"tiers\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          }\n        },\n        \"eventName\": \"string\",\n        \"creditCost\": 7236.0414276097345\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "62576d31-acf5-41bc-a7d1-eef56961676f",
+          "name": "Delete agent by external ID",
+          "request": {
+            "name": "Delete agent by external ID",
+            "description": {
+              "content": "DEPRECATED: Use DELETE /products/external/{externalId} instead.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "agents",
+                "external",
+                ":externalId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "externalId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c37b3502-dce0-45e8-b1f6-5d034f2f2428",
+              "name": "Success response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "agents",
+                    "external",
+                    ":externalId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "externalId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.agentpaid.io/api/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "87bcdc7b-72ef-4706-bbdc-4fa0c00fe6dc",
+    "name": "API Reference agents API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

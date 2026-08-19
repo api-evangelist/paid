@@ -1,0 +1,95 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "API Reference agents pricing API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "pricing",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List pricing for a product",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.agentpaid.io/api/v1/pricing/",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "productId",
+                "value": "",
+                "type": "query",
+                "description": "Product display ID or UUID"
+              }
+            ]
+          },
+          "docs": "Returns pricing for all product attributes of a product. Each entry includes the attribute's pricing configuration and credit benefits."
+        },
+        {
+          "info": {
+            "name": "Get pricing for a product attribute",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.agentpaid.io/api/v1/pricing/:productAttributeId",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "productAttributeId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns pricing and credit benefits for a single product attribute."
+        },
+        {
+          "info": {
+            "name": "Update pricing for a product attribute",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.agentpaid.io/api/v1/pricing/:productAttributeId",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "productAttributeId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates pricing on an existing product attribute. If creditBenefits is provided, it fully replaces existing benefits. If omitted, existing benefits are preserved."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

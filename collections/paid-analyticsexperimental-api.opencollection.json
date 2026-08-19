@@ -1,0 +1,93 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "API Reference agents analyticsExperimental API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "analyticsExperimental",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Execute a SQL query against your analytics data (experimental)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.agentpaid.io/api/v1/experimental/analytics/query",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "⚠️ **Experimental** — this endpoint may change or be removed without notice and is not subject to v2 backwards-compatibility guarantees. Do not build production-critical integrations against it yet.\n\nRuns a single ClickHouse SELECT (or WITH … SELECT) against your organization's analytics views. Before writing a query, call `getAnalyticsSchema` (GET /schema) for the available views and columns, and `getSignalsMetadata` (GET /signals/metadata) for the JSON paths inside `fact_signal.data`. Results "
+        },
+        {
+          "info": {
+            "name": "List queryable analytics views, columns, and types (experimental)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.agentpaid.io/api/v1/experimental/analytics/schema",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "⚠️ **Experimental** — this endpoint may change or be removed without notice and is not subject to v2 backwards-compatibility guarantees. Do not build production-critical integrations against it yet.\n\nReturns the analytics views available to POST /query, with column names, ClickHouse types, and descriptions. Dimensions (`dim_*`) describe entities; facts (`fact_*`) are event/transaction tables that join to dimensions via the `*_id` columns described in each comment."
+        },
+        {
+          "info": {
+            "name": "Discover metadata keys present in your signals (experimental)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.agentpaid.io/api/v1/experimental/analytics/signals/metadata",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "signalName",
+                "value": "",
+                "type": "query",
+                "description": "Restrict discovery to a single signal name."
+              },
+              {
+                "name": "fromDate",
+                "value": "",
+                "type": "query",
+                "description": "Start of the discovery window. Defaults to 30 days ago."
+              },
+              {
+                "name": "toDate",
+                "value": "",
+                "type": "query",
+                "description": "End of the discovery window. Defaults to now."
+              }
+            ]
+          },
+          "docs": "⚠️ **Experimental** — this endpoint may change or be removed without notice and is not subject to v2 backwards-compatibility guarantees. Do not build production-critical integrations against it yet.\n\nLists the JSON paths (and their observed types) present in the `data` payload of your signals within a time window (default: last 30 days), grouped by signal name. Use the returned paths in queries against `fact_signal`, e.g. `WHERE data.<path>::String = '...'`."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

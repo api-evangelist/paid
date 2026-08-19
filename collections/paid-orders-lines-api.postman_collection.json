@@ -1,0 +1,146 @@
+{
+  "item": [
+    {
+      "id": "a869b200-a1ae-4aba-8c6f-8d41b3eec8e0",
+      "name": "orders > lines",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "ce99fc89-b428-43db-b024-3a05bf66614f",
+          "name": "Update order lines",
+          "request": {
+            "name": "Update order lines",
+            "description": {},
+            "url": {
+              "path": [
+                "orders",
+                ":orderId",
+                "lines"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "orderId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"lines\": [\n    {\n      \"productId\": \"<string>\",\n      \"productExternalId\": \"<string>\",\n      \"agentId\": \"<string>\",\n      \"agentExternalId\": \"<string>\",\n      \"name\": \"<string>\",\n      \"description\": \"<string>\"\n    },\n    {\n      \"productId\": \"<string>\",\n      \"productExternalId\": \"<string>\",\n      \"agentId\": \"<string>\",\n      \"agentExternalId\": \"<string>\",\n      \"name\": \"<string>\",\n      \"description\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "d3ef9dec-2bc8-4536-a3e1-697d0ca6621e",
+              "name": "Success response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "orders",
+                    ":orderId",
+                    "lines"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orderId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"lines\": [\n    {\n      \"productId\": \"string\",\n      \"productExternalId\": \"string\",\n      \"agentId\": \"string\",\n      \"agentExternalId\": \"string\",\n      \"name\": \"string\",\n      \"description\": \"string\"\n    },\n    {\n      \"productId\": \"string\",\n      \"productExternalId\": \"string\",\n      \"agentId\": \"string\",\n      \"agentExternalId\": \"string\",\n      \"name\": \"string\",\n      \"description\": \"string\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"name\": \"string\",\n  \"description\": \"string\",\n  \"customerId\": \"string\",\n  \"organizationId\": \"string\",\n  \"startDate\": \"string\",\n  \"endDate\": \"string\",\n  \"totalAmount\": 6610.331531449676,\n  \"estimatedTax\": 8325.911088599263,\n  \"billedAmountNoTax\": 2106.6826962784835,\n  \"billedTax\": 1387.0501647009737,\n  \"totalBilledAmount\": 3650.891112062875,\n  \"pendingBillingAmount\": 6140.828488486341,\n  \"creationState\": \"active\",\n  \"orderLines\": [\n    {\n      \"id\": \"string\",\n      \"orderId\": \"string\",\n      \"agentId\": \"string\",\n      \"name\": \"string\",\n      \"description\": \"string\",\n      \"startDate\": \"string\",\n      \"endDate\": \"string\",\n      \"totalAmount\": 1458.1610695609381,\n      \"billedAmountWithoutTax\": 427.0601379410965,\n      \"billedTax\": 774.7617035535282,\n      \"totalBilledAmount\": 3651.1635569095533,\n      \"creationState\": \"active\",\n      \"agent\": {\n        \"id\": \"string\",\n        \"organizationId\": \"string\",\n        \"name\": \"string\",\n        \"active\": true,\n        \"externalId\": \"string\",\n        \"description\": \"string\",\n        \"agentCode\": \"string\",\n        \"agentAttributes\": [\n          {\n            \"name\": \"string\",\n            \"active\": true,\n            \"pricing\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"name\": \"string\",\n            \"active\": true,\n            \"pricing\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ]\n      },\n      \"orderLineAttributes\": [\n        {\n          \"agentAttributeId\": \"string\",\n          \"quantity\": 892.483212211076,\n          \"currency\": \"string\",\n          \"pricing\": {\n            \"eventName\": \"string\",\n            \"chargeType\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"pricePoint\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"pricingModel\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"billingFrequency\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        },\n        {\n          \"agentAttributeId\": \"string\",\n          \"quantity\": 3962.1441305292437,\n          \"currency\": \"string\",\n          \"pricing\": {\n            \"eventName\": \"string\",\n            \"chargeType\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"pricePoint\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"pricingModel\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"billingFrequency\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        }\n      ]\n    },\n    {\n      \"id\": \"string\",\n      \"orderId\": \"string\",\n      \"agentId\": \"string\",\n      \"name\": \"string\",\n      \"description\": \"string\",\n      \"startDate\": \"string\",\n      \"endDate\": \"string\",\n      \"totalAmount\": 5432.885734855967,\n      \"billedAmountWithoutTax\": 2170.455886509318,\n      \"billedTax\": 275.1796082931124,\n      \"totalBilledAmount\": 1405.9750873449195,\n      \"creationState\": \"active\",\n      \"agent\": {\n        \"id\": \"string\",\n        \"organizationId\": \"string\",\n        \"name\": \"string\",\n        \"active\": true,\n        \"externalId\": \"string\",\n        \"description\": \"string\",\n        \"agentCode\": \"string\",\n        \"agentAttributes\": [\n          {\n            \"name\": \"string\",\n            \"active\": false,\n            \"pricing\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"name\": \"string\",\n            \"active\": true,\n            \"pricing\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ]\n      },\n      \"orderLineAttributes\": [\n        {\n          \"agentAttributeId\": \"string\",\n          \"quantity\": 3239.837314267634,\n          \"currency\": \"string\",\n          \"pricing\": {\n            \"eventName\": \"string\",\n            \"chargeType\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"pricePoint\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"pricingModel\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"billingFrequency\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        },\n        {\n          \"agentAttributeId\": \"string\",\n          \"quantity\": 1216.00160343313,\n          \"currency\": \"string\",\n          \"pricing\": {\n            \"eventName\": \"string\",\n            \"chargeType\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"pricePoint\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"pricingModel\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"billingFrequency\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        }\n      ]\n    }\n  ],\n  \"customer\": {\n    \"id\": \"string\",\n    \"organizationId\": \"string\",\n    \"name\": \"string\",\n    \"externalId\": \"string\",\n    \"phone\": \"string\",\n    \"employeeCount\": 3357.3095485469707,\n    \"annualRevenue\": 310.712389910186,\n    \"taxExemptStatus\": \"reverse\",\n    \"creationSource\": \"crm\",\n    \"creationState\": \"draft\",\n    \"website\": \"string\",\n    \"billingAddress\": {\n      \"line1\": \"string\",\n      \"city\": \"string\",\n      \"state\": \"string\",\n      \"zipCode\": \"string\",\n      \"country\": \"string\",\n      \"line2\": \"string\"\n    },\n    \"metadata\": {}\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.agentpaid.io/api/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "5698b906-fa01-4361-8508-bb04119d2569",
+    "name": "API Reference agents orders > lines API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

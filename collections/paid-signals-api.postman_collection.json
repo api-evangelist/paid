@@ -1,0 +1,281 @@
+{
+  "item": [
+    {
+      "id": "eb4270be-608b-4c99-9bc9-0bbd306ae85b",
+      "name": "signals",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "bc30367a-a006-4e0c-b1d7-326f0068822c",
+          "name": "Create signals in bulk",
+          "request": {
+            "name": "Create signals in bulk",
+            "description": {
+              "content": "Create multiple signals (usage events) in a single request. Each signal must include a customer attribution (either customerId or externalCustomerId) and a product attribution (either productId or externalProductId).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "signals",
+                "bulk"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"signals\": [\n    {\n      \"eventName\": \"<string>\",\n      \"customer\": {\n        \"customerId\": \"<string>\"\n      },\n      \"attribution\": {\n        \"productId\": \"<string>\"\n      },\n      \"timestamp\": \"<dateTime>\",\n      \"data\": {\n        \"key_0\": {}\n      },\n      \"idempotencyKey\": \"<string>\"\n    },\n    {\n      \"eventName\": \"<string>\",\n      \"customer\": {\n        \"customerId\": \"<string>\"\n      },\n      \"attribution\": {\n        \"productId\": \"<string>\"\n      },\n      \"timestamp\": \"<dateTime>\",\n      \"data\": {\n        \"key_0\": {},\n        \"key_1\": {}\n      },\n      \"idempotencyKey\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "facbbc11-614e-4dc3-a0e5-c37d857ce8ca",
+              "name": "200",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "signals",
+                    "bulk"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API Key authentication using Bearer token",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"signals\": [\n    {\n      \"eventName\": \"string\",\n      \"customer\": {\n        \"customerId\": \"string\"\n      },\n      \"attribution\": {\n        \"productId\": \"string\"\n      },\n      \"timestamp\": \"1983-01-18T13:00:57.079Z\",\n      \"data\": {\n        \"key_0\": {},\n        \"key_1\": {}\n      },\n      \"idempotencyKey\": \"string\"\n    },\n    {\n      \"eventName\": \"string\",\n      \"customer\": {\n        \"customerId\": \"string\"\n      },\n      \"attribution\": {\n        \"productId\": \"string\"\n      },\n      \"timestamp\": \"2010-02-23T15:01:17.704Z\",\n      \"data\": {\n        \"key_0\": {},\n        \"key_1\": {},\n        \"key_2\": {},\n        \"key_3\": {}\n      },\n      \"idempotencyKey\": \"string\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ingested\": 6979,\n  \"duplicates\": 8257,\n  \"failed\": 2849\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1aa02f3a-4738-4808-807c-ee26352a5756",
+              "name": "400",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "signals",
+                    "bulk"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API Key authentication using Bearer token",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"signals\": [\n    {\n      \"eventName\": \"string\",\n      \"customer\": {\n        \"customerId\": \"string\"\n      },\n      \"attribution\": {\n        \"productId\": \"string\"\n      },\n      \"timestamp\": \"1983-01-18T13:00:57.079Z\",\n      \"data\": {\n        \"key_0\": {},\n        \"key_1\": {}\n      },\n      \"idempotencyKey\": \"string\"\n    },\n    {\n      \"eventName\": \"string\",\n      \"customer\": {\n        \"customerId\": \"string\"\n      },\n      \"attribution\": {\n        \"productId\": \"string\"\n      },\n      \"timestamp\": \"2010-02-23T15:01:17.704Z\",\n      \"data\": {\n        \"key_0\": {},\n        \"key_1\": {},\n        \"key_2\": {},\n        \"key_3\": {}\n      },\n      \"idempotencyKey\": \"string\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"code\": \"string\",\n  \"details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c5df1a73-cfa1-470f-b80b-be5188b21f46",
+              "name": "403",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "signals",
+                    "bulk"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API Key authentication using Bearer token",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"signals\": [\n    {\n      \"eventName\": \"string\",\n      \"customer\": {\n        \"customerId\": \"string\"\n      },\n      \"attribution\": {\n        \"productId\": \"string\"\n      },\n      \"timestamp\": \"1983-01-18T13:00:57.079Z\",\n      \"data\": {\n        \"key_0\": {},\n        \"key_1\": {}\n      },\n      \"idempotencyKey\": \"string\"\n    },\n    {\n      \"eventName\": \"string\",\n      \"customer\": {\n        \"customerId\": \"string\"\n      },\n      \"attribution\": {\n        \"productId\": \"string\"\n      },\n      \"timestamp\": \"2010-02-23T15:01:17.704Z\",\n      \"data\": {\n        \"key_0\": {},\n        \"key_1\": {},\n        \"key_2\": {},\n        \"key_3\": {}\n      },\n      \"idempotencyKey\": \"string\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"code\": \"string\",\n  \"details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8069f847-b086-40f3-b092-92b251b9e4ec",
+              "name": "500",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "signals",
+                    "bulk"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API Key authentication using Bearer token",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"signals\": [\n    {\n      \"eventName\": \"string\",\n      \"customer\": {\n        \"customerId\": \"string\"\n      },\n      \"attribution\": {\n        \"productId\": \"string\"\n      },\n      \"timestamp\": \"1983-01-18T13:00:57.079Z\",\n      \"data\": {\n        \"key_0\": {},\n        \"key_1\": {}\n      },\n      \"idempotencyKey\": \"string\"\n    },\n    {\n      \"eventName\": \"string\",\n      \"customer\": {\n        \"customerId\": \"string\"\n      },\n      \"attribution\": {\n        \"productId\": \"string\"\n      },\n      \"timestamp\": \"2010-02-23T15:01:17.704Z\",\n      \"data\": {\n        \"key_0\": {},\n        \"key_1\": {},\n        \"key_2\": {},\n        \"key_3\": {}\n      },\n      \"idempotencyKey\": \"string\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"code\": \"string\",\n  \"details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.agentpaid.io/api/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "977a1af8-1d4c-4a44-987e-5e293a2d06a1",
+    "name": "API Reference agents signals API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

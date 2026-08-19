@@ -1,0 +1,281 @@
+{
+  "item": [
+    {
+      "id": "2d335fbb-52c6-4f92-ae43-6e37ce488d01",
+      "name": "costs",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "2f393c57-c812-41df-9b03-7aac0244edc1",
+          "name": "Submit cost and/or usage data",
+          "request": {
+            "name": "Submit cost and/or usage data",
+            "description": {
+              "content": "Ingests a batch of cost records. Each record is either a pre-computed `cost` (caller supplies amount + currency) or a `usage` record (caller supplies vendor/model/token counts and Paid prices it server-side). The batch is all-or-nothing: if any record fails validation, the entire request is rejected with a 400 and nothing is persisted.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "costs",
+                "bulk"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"costs\": [\n    {\n      \"type\": \"<string>\",\n      \"customer\": {\n        \"customerId\": \"<string>\"\n      },\n      \"amount\": \"<double>\",\n      \"currency\": \"<string>\",\n      \"timestamp\": \"<dateTime>\",\n      \"product\": {\n        \"productId\": \"<string>\"\n      },\n      \"metadata\": {\n        \"key_0\": {},\n        \"key_1\": {},\n        \"key_2\": {},\n        \"key_3\": {},\n        \"key_4\": {}\n      },\n      \"vendor\": \"<string>\",\n      \"model\": \"<string>\"\n    },\n    {\n      \"type\": \"<string>\",\n      \"customer\": {\n        \"customerId\": \"<string>\"\n      },\n      \"amount\": \"<double>\",\n      \"currency\": \"<string>\",\n      \"timestamp\": \"<dateTime>\",\n      \"product\": {\n        \"productId\": \"<string>\"\n      },\n      \"metadata\": {\n        \"key_0\": {},\n        \"key_1\": {}\n      },\n      \"vendor\": \"<string>\",\n      \"model\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "3ab638be-3b74-42dd-ba56-de45b50f1d4c",
+              "name": "200",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "costs",
+                    "bulk"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API Key authentication using Bearer token",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"costs\": [\n    {\n      \"type\": \"cost\",\n      \"customer\": {\n        \"customerId\": \"string\"\n      },\n      \"amount\": 5056.3094411909815,\n      \"currency\": \"string\",\n      \"timestamp\": \"1973-08-19T02:17:36.526Z\",\n      \"product\": {\n        \"productId\": \"string\"\n      },\n      \"metadata\": {\n        \"key_0\": {},\n        \"key_1\": {},\n        \"key_2\": {}\n      },\n      \"vendor\": \"string\",\n      \"model\": \"string\"\n    },\n    {\n      \"type\": \"cost\",\n      \"customer\": {\n        \"customerId\": \"string\"\n      },\n      \"amount\": 5577.426045026264,\n      \"currency\": \"string\",\n      \"timestamp\": \"1971-08-31T12:56:05.809Z\",\n      \"product\": {\n        \"productId\": \"string\"\n      },\n      \"metadata\": {\n        \"key_0\": {}\n      },\n      \"vendor\": \"string\",\n      \"model\": \"string\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ingested\": 6878,\n  \"duplicates\": 3128\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "17361f99-cf61-4d3e-b6f2-757cb24fe724",
+              "name": "400",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "costs",
+                    "bulk"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API Key authentication using Bearer token",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"costs\": [\n    {\n      \"type\": \"cost\",\n      \"customer\": {\n        \"customerId\": \"string\"\n      },\n      \"amount\": 5056.3094411909815,\n      \"currency\": \"string\",\n      \"timestamp\": \"1973-08-19T02:17:36.526Z\",\n      \"product\": {\n        \"productId\": \"string\"\n      },\n      \"metadata\": {\n        \"key_0\": {},\n        \"key_1\": {},\n        \"key_2\": {}\n      },\n      \"vendor\": \"string\",\n      \"model\": \"string\"\n    },\n    {\n      \"type\": \"cost\",\n      \"customer\": {\n        \"customerId\": \"string\"\n      },\n      \"amount\": 5577.426045026264,\n      \"currency\": \"string\",\n      \"timestamp\": \"1971-08-31T12:56:05.809Z\",\n      \"product\": {\n        \"productId\": \"string\"\n      },\n      \"metadata\": {\n        \"key_0\": {}\n      },\n      \"vendor\": \"string\",\n      \"model\": \"string\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"code\": \"string\",\n  \"details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7d82149c-0f96-4347-a164-ee12125f9384",
+              "name": "403",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "costs",
+                    "bulk"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API Key authentication using Bearer token",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"costs\": [\n    {\n      \"type\": \"cost\",\n      \"customer\": {\n        \"customerId\": \"string\"\n      },\n      \"amount\": 5056.3094411909815,\n      \"currency\": \"string\",\n      \"timestamp\": \"1973-08-19T02:17:36.526Z\",\n      \"product\": {\n        \"productId\": \"string\"\n      },\n      \"metadata\": {\n        \"key_0\": {},\n        \"key_1\": {},\n        \"key_2\": {}\n      },\n      \"vendor\": \"string\",\n      \"model\": \"string\"\n    },\n    {\n      \"type\": \"cost\",\n      \"customer\": {\n        \"customerId\": \"string\"\n      },\n      \"amount\": 5577.426045026264,\n      \"currency\": \"string\",\n      \"timestamp\": \"1971-08-31T12:56:05.809Z\",\n      \"product\": {\n        \"productId\": \"string\"\n      },\n      \"metadata\": {\n        \"key_0\": {}\n      },\n      \"vendor\": \"string\",\n      \"model\": \"string\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"code\": \"string\",\n  \"details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7cce8d7f-50e2-4a3f-bda9-7a3bd0381a57",
+              "name": "500",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "costs",
+                    "bulk"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API Key authentication using Bearer token",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"costs\": [\n    {\n      \"type\": \"cost\",\n      \"customer\": {\n        \"customerId\": \"string\"\n      },\n      \"amount\": 5056.3094411909815,\n      \"currency\": \"string\",\n      \"timestamp\": \"1973-08-19T02:17:36.526Z\",\n      \"product\": {\n        \"productId\": \"string\"\n      },\n      \"metadata\": {\n        \"key_0\": {},\n        \"key_1\": {},\n        \"key_2\": {}\n      },\n      \"vendor\": \"string\",\n      \"model\": \"string\"\n    },\n    {\n      \"type\": \"cost\",\n      \"customer\": {\n        \"customerId\": \"string\"\n      },\n      \"amount\": 5577.426045026264,\n      \"currency\": \"string\",\n      \"timestamp\": \"1971-08-31T12:56:05.809Z\",\n      \"product\": {\n        \"productId\": \"string\"\n      },\n      \"metadata\": {\n        \"key_0\": {}\n      },\n      \"vendor\": \"string\",\n      \"model\": \"string\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"code\": \"string\",\n  \"details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.agentpaid.io/api/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "eb7a62fd-edea-47b2-ac9e-1e7f0d99bc3d",
+    "name": "API Reference agents costs API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

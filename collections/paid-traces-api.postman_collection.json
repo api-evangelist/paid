@@ -1,0 +1,335 @@
+{
+  "item": [
+    {
+      "id": "78d2068c-2e9a-4e85-8f34-e1065a58c1da",
+      "name": "traces",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "c46fb77f-8393-4f50-bc47-3c0399c8a275",
+          "name": "Fetch cost traces for an organization",
+          "request": {
+            "name": "Fetch cost traces for an organization",
+            "description": {},
+            "url": {
+              "path": [
+                "traces"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "100",
+                  "description": "Maximum number of traces to return (1-1000)"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "Number of traces to skip for pagination"
+                },
+                {
+                  "disabled": false,
+                  "key": "startTime",
+                  "value": "<dateTime>",
+                  "description": "Filter traces starting from this time (ISO 8601 format)"
+                },
+                {
+                  "disabled": false,
+                  "key": "endTime",
+                  "value": "<dateTime>",
+                  "description": "Filter traces up to this time (ISO 8601 format)"
+                },
+                {
+                  "disabled": false,
+                  "key": "externalCustomerId",
+                  "value": "<string>",
+                  "description": "Filter traces by external customer ID"
+                },
+                {
+                  "disabled": false,
+                  "key": "externalProductId",
+                  "value": "<string>",
+                  "description": "Filter traces by external product ID"
+                },
+                {
+                  "disabled": false,
+                  "key": "externalAgentId",
+                  "value": "<string>",
+                  "description": "DEPRECATED: Use externalProductId instead. Filter traces by external agent ID"
+                },
+                {
+                  "disabled": false,
+                  "key": "metadata",
+                  "value": "<string>",
+                  "description": "Filter traces by metadata fields. Must be a valid JSON object (e.g., {\"key1\":\"value1\",\"key2\":\"value2\"}). All specified fields must match (AND logic)."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e582540e-0793-4ab8-be2c-f6c82adf7700",
+              "name": "Success response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "traces"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "startTime",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "endTime",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "externalCustomerId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "externalProductId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "externalAgentId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "metadata",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"traces\": [\n    {\n      \"name\": \"string\",\n      \"vendor\": \"string\",\n      \"model\": \"string\",\n      \"cost\": {\n        \"amount\": 8759.315678324432,\n        \"currency\": \"string\"\n      },\n      \"startTimeUnixNano\": \"string\",\n      \"endTimeUnixNano\": \"string\",\n      \"attributes\": {\n        \"key_0\": {},\n        \"key_1\": {}\n      },\n      \"customerId\": \"string\",\n      \"externalCustomerId\": \"string\",\n      \"productId\": \"string\",\n      \"externalProductId\": \"string\",\n      \"agentId\": \"string\",\n      \"externalAgentId\": \"string\"\n    },\n    {\n      \"name\": \"string\",\n      \"vendor\": \"string\",\n      \"model\": \"string\",\n      \"cost\": {\n        \"amount\": 6725.072793877696,\n        \"currency\": \"string\"\n      },\n      \"startTimeUnixNano\": \"string\",\n      \"endTimeUnixNano\": \"string\",\n      \"attributes\": {\n        \"key_0\": {}\n      },\n      \"customerId\": \"string\",\n      \"externalCustomerId\": \"string\",\n      \"productId\": \"string\",\n      \"externalProductId\": \"string\",\n      \"agentId\": \"string\",\n      \"externalAgentId\": \"string\"\n    }\n  ],\n  \"meta\": {\n    \"limit\": 6593,\n    \"offset\": 8531,\n    \"count\": 4661,\n    \"hasMore\": false,\n    \"startTime\": \"1996-08-05T23:58:36.297Z\",\n    \"endTime\": \"1948-06-14T22:13:30.951Z\",\n    \"externalCustomerId\": \"string\",\n    \"externalProductId\": \"string\",\n    \"externalAgentId\": \"string\",\n    \"metadata\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a83b2cb3-ae0e-42cb-b2d8-3490fecab0ae",
+              "name": "Bad request - Invalid query parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "traces"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "startTime",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "endTime",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "externalCustomerId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "externalProductId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "externalAgentId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "metadata",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"message\": \"string\",\n    \"code\": \"string\",\n    \"details\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c4f95498-147e-4389-be4a-2e93f87d9be1",
+              "name": "Forbidden - Invalid or missing API key",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "traces"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "startTime",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "endTime",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "externalCustomerId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "externalProductId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "externalAgentId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "metadata",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"message\": \"string\",\n    \"code\": \"string\",\n    \"details\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.agentpaid.io/api/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "2e487c4e-4b82-4730-a87d-6281b6be468f",
+    "name": "API Reference agents traces API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

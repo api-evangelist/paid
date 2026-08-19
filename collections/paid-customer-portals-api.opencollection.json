@@ -1,0 +1,39 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "API Reference agents customer-portals API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "customer-portals",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create a customer portal session",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.agentpaid.io/api/v1/customer-portals/",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a portal session for the customer. Returns a short-lived URL to the customer portal."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,469 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "API Reference agents plans API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "plans",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get customer's current plan",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.agentpaid.io/api/v1/plans/current",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "customerExternalId",
+                "value": "",
+                "type": "query",
+                "description": "The external ID of the customer"
+              }
+            ]
+          },
+          "docs": "Retrieves the currently active plan subscription for a customer by their external ID. Returns the plan details and subscription information."
+        },
+        {
+          "info": {
+            "name": "Get plan by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.agentpaid.io/api/v1/plans/:planId",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "planId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the plan"
+              }
+            ]
+          },
+          "docs": "Get plan by ID"
+        },
+        {
+          "info": {
+            "name": "Fetch usage summaries for a plan and customer",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.agentpaid.io/api/v1/plans/:planId/usage",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "planId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the plan"
+              },
+              {
+                "name": "externalId",
+                "value": "",
+                "type": "query",
+                "description": "The external ID of the customer"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of usage summaries to return (1-1000)"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of usage summaries to skip for pagination"
+              },
+              {
+                "name": "startTime",
+                "value": "",
+                "type": "query",
+                "description": "Filter usage summaries starting from this time (ISO 8601 format). Returns summaries that overlap with the time range."
+              },
+              {
+                "name": "endTime",
+                "value": "",
+                "type": "query",
+                "description": "Filter usage summaries up to this time (ISO 8601 format). Returns summaries that overlap with the time range."
+              }
+            ]
+          },
+          "docs": "Fetch usage summaries for a plan and customer"
+        },
+        {
+          "info": {
+            "name": "Subscribe customer to plan",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.agentpaid.io/api/v1/plans/:planId/subscribe",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "planId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the plan"
+              },
+              {
+                "name": "customerExternalId",
+                "value": "",
+                "type": "query",
+                "description": "The external ID of the customer"
+              },
+              {
+                "name": "currency",
+                "value": "",
+                "type": "query",
+                "description": "The currency code for the order (e.g., \"USD\", \"EUR\")"
+              }
+            ]
+          },
+          "docs": "Creates a new order for a customer subscribing to a plan. The order will be created with the plan's products and pricing attributes."
+        },
+        {
+          "info": {
+            "name": "Unsubscribe customer from plan",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.agentpaid.io/api/v1/plans/:planId/unsubscribe",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "planId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the plan"
+              },
+              {
+                "name": "customerExternalId",
+                "value": "",
+                "type": "query",
+                "description": "The external ID of the customer"
+              }
+            ]
+          },
+          "docs": "Cancels the renewal of an active order for a customer's plan subscription. The order will remain active until the cancellation date."
+        },
+        {
+          "info": {
+            "name": "Upgrade customer to a new plan",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.agentpaid.io/api/v1/plans/upgrade",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "customerExternalId",
+                "value": "",
+                "type": "query",
+                "description": "The external ID of the customer"
+              },
+              {
+                "name": "oldPlanId",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the current plan"
+              },
+              {
+                "name": "newPlanId",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the plan to upgrade to"
+              }
+            ]
+          },
+          "docs": "Upgrades a customer from one plan to another with automatic proration. Credits are applied for the unused portion of the current billing period, and the order is updated with the new plan's pricing."
+        },
+        {
+          "info": {
+            "name": "Get plan group by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.agentpaid.io/api/v1/plans/planGroup/:planGroupId",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "planGroupId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the plan group"
+              }
+            ]
+          },
+          "docs": "Get plan group by ID"
+        },
+        {
+          "info": {
+            "name": "Get plans for a plan group",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.agentpaid.io/api/v1/plans/planGroup/:planGroupId/plans",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "planGroupId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the plan group"
+              }
+            ]
+          },
+          "docs": "Retrieves all plans in a plan group with their features (product-attribute pairs)"
+        },
+        {
+          "info": {
+            "name": "List plans",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.agentpaid.io/api/v1/plans/",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "productId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "externalProductId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "includeArchived",
+                "value": "",
+                "type": "query",
+                "description": "Whether to include archived plans in the response. Defaults to true."
+              }
+            ]
+          },
+          "docs": "Returns plans for your organization, including archived plans by default, optionally filtered to a product."
+        },
+        {
+          "info": {
+            "name": "Create a new plan",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.agentpaid.io/api/v1/plans/",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new plan for a product."
+        },
+        {
+          "info": {
+            "name": "Update plan upgrade path",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.agentpaid.io/api/v1/plans/upgrade-path",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates upgrade path ordering for plans within a product, grouped by billing frequency."
+        },
+        {
+          "info": {
+            "name": "Get plan",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.agentpaid.io/api/v1/plans/:id",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get a plan by Paid plan ID."
+        },
+        {
+          "info": {
+            "name": "Update plan",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.agentpaid.io/api/v1/plans/:id",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update a plan by Paid plan ID. If attributes are provided, they replace the plan's existing attributes. Set status to archive or restore the plan."
+        },
+        {
+          "info": {
+            "name": "Get plan by external ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.agentpaid.io/api/v1/plans/external/:externalId",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "externalId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get a plan by your external plan ID."
+        },
+        {
+          "info": {
+            "name": "Update plan by external ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.agentpaid.io/api/v1/plans/external/:externalId",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "externalId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update a plan by your external plan ID. If attributes are provided, they replace the plan's existing attributes. Set status to archive or restore the plan."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,93 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "API Reference agents credits API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "credits",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List credit currencies",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.agentpaid.io/api/v1/credits/currencies",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Filter credit currencies by status. Defaults to `all` so archived currencies remain readable after they are archived."
+              }
+            ]
+          },
+          "docs": "List credit currencies for the organization. Includes active and archived currencies by default; use the status query parameter to filter."
+        },
+        {
+          "info": {
+            "name": "Create credit currency",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.agentpaid.io/api/v1/credits/currencies",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a credit currency for the organization."
+        },
+        {
+          "info": {
+            "name": "Update credit currency",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.agentpaid.io/api/v1/credits/currencies/:id",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Credit currency ID."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update a credit currency description or set its active/archive status."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

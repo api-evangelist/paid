@@ -1,0 +1,1091 @@
+{
+  "item": [
+    {
+      "id": "cf2c1c45-738b-4e17-a5fc-cd389a32371e",
+      "name": "checkouts",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "a03c0f5a-f02a-4ea2-bdf1-c6b2efb26bab",
+          "name": "List checkouts",
+          "request": {
+            "name": "List checkouts",
+            "description": {
+              "content": "Get a list of checkouts for the organization",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "checkouts",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "10"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d9d1333d-229f-434e-aad6-8ea92ed66682",
+              "name": "200",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "checkouts",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "archived"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API Key authentication using Bearer token",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"string\",\n      \"url\": \"string\",\n      \"status\": \"active\",\n      \"products\": [\n        {\n          \"id\": \"string\",\n          \"plans\": [\n            {\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"features\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"features\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        },\n        {\n          \"id\": \"string\",\n          \"plans\": [\n            {\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"features\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"features\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        }\n      ],\n      \"customerId\": \"string\",\n      \"externalCustomerId\": \"string\",\n      \"successUrl\": \"string\",\n      \"cancelUrl\": \"string\",\n      \"expiresAt\": \"1996-10-16T08:04:38.900Z\",\n      \"metadata\": {\n        \"key_0\": {},\n        \"key_1\": {}\n      },\n      \"collectAddress\": true,\n      \"collectPhone\": true,\n      \"singleUse\": true,\n      \"allowedCurrencies\": [\n        \"string\",\n        \"string\"\n      ],\n      \"createdAt\": \"1963-09-30T04:09:11.407Z\",\n      \"updatedAt\": \"2019-03-21T05:07:46.943Z\",\n      \"customCards\": [\n        {\n          \"label\": \"string\",\n          \"priceText\": \"string\",\n          \"buttonText\": \"string\",\n          \"buttonUrl\": \"string\"\n        },\n        {\n          \"label\": \"string\",\n          \"priceText\": \"string\",\n          \"buttonText\": \"string\",\n          \"buttonUrl\": \"string\"\n        }\n      ]\n    },\n    {\n      \"id\": \"string\",\n      \"url\": \"string\",\n      \"status\": \"active\",\n      \"products\": [\n        {\n          \"id\": \"string\",\n          \"plans\": [\n            {\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"features\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"features\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        },\n        {\n          \"id\": \"string\",\n          \"plans\": [\n            {\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"features\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"features\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        }\n      ],\n      \"customerId\": \"string\",\n      \"externalCustomerId\": \"string\",\n      \"successUrl\": \"string\",\n      \"cancelUrl\": \"string\",\n      \"expiresAt\": \"1978-08-05T01:39:20.345Z\",\n      \"metadata\": {\n        \"key_0\": {},\n        \"key_1\": {},\n        \"key_2\": {}\n      },\n      \"collectAddress\": false,\n      \"collectPhone\": true,\n      \"singleUse\": false,\n      \"allowedCurrencies\": [\n        \"string\",\n        \"string\"\n      ],\n      \"createdAt\": \"2004-08-14T23:55:58.727Z\",\n      \"updatedAt\": \"1982-10-08T22:59:52.259Z\",\n      \"customCards\": [\n        {\n          \"label\": \"string\",\n          \"priceText\": \"string\",\n          \"buttonText\": \"string\",\n          \"buttonUrl\": \"string\"\n        },\n        {\n          \"label\": \"string\",\n          \"priceText\": \"string\",\n          \"buttonText\": \"string\",\n          \"buttonUrl\": \"string\"\n        }\n      ]\n    }\n  ],\n  \"pagination\": {\n    \"limit\": 8343,\n    \"offset\": 3968,\n    \"total\": 759,\n    \"hasMore\": true\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fa698a0c-e1e0-47a2-9e50-b2cac234bb62",
+              "name": "400",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "checkouts",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "archived"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API Key authentication using Bearer token",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"code\": \"string\",\n  \"details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "eebccd47-df7d-4235-bba9-42901f6e92c4",
+              "name": "403",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "checkouts",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "archived"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API Key authentication using Bearer token",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"code\": \"string\",\n  \"details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "97c2ba4c-9c66-4fa4-9101-73c9fcce4efc",
+              "name": "500",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "checkouts",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "archived"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API Key authentication using Bearer token",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"code\": \"string\",\n  \"details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b3a61967-cdad-453f-b53d-ecf5b905ad1b",
+          "name": "Create a checkout",
+          "request": {
+            "name": "Create a checkout",
+            "description": {
+              "content": "Creates a checkout link that generates a URL for a customer to complete a purchase",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "checkouts",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"products\": [\n    {\n      \"id\": \"<string>\",\n      \"plans\": [\n        {\n          \"id\": \"<string>\",\n          \"features\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        },\n        {\n          \"id\": \"<string>\",\n          \"features\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        }\n      ]\n    },\n    {\n      \"id\": \"<string>\",\n      \"plans\": [\n        {\n          \"id\": \"<string>\",\n          \"features\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        },\n        {\n          \"id\": \"<string>\",\n          \"features\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        }\n      ]\n    }\n  ],\n  \"successUrl\": \"<uri>\",\n  \"customerId\": \"<string>\",\n  \"externalCustomerId\": \"<string>\",\n  \"cancelUrl\": \"<uri>\",\n  \"expiresAt\": \"<dateTime>\",\n  \"metadata\": {\n    \"key_0\": {}\n  },\n  \"collectAddress\": true,\n  \"collectPhone\": false,\n  \"singleUse\": true,\n  \"currency\": \"<string>\",\n  \"customCards\": [\n    {\n      \"label\": \"<string>\",\n      \"priceText\": \"<string>\",\n      \"buttonText\": \"<string>\",\n      \"buttonUrl\": \"<uri>\"\n    },\n    {\n      \"label\": \"<string>\",\n      \"priceText\": \"<string>\",\n      \"buttonText\": \"<string>\",\n      \"buttonUrl\": \"<uri>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "03940ade-e195-4ef8-9012-1737576c5fff",
+              "name": "201",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "checkouts",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API Key authentication using Bearer token",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"products\": [\n    {\n      \"id\": \"string\",\n      \"plans\": [\n        {\n          \"id\": \"string\",\n          \"features\": [\n            \"string\",\n            \"string\"\n          ]\n        },\n        {\n          \"id\": \"string\",\n          \"features\": [\n            \"string\",\n            \"string\"\n          ]\n        }\n      ]\n    },\n    {\n      \"id\": \"string\",\n      \"plans\": [\n        {\n          \"id\": \"string\",\n          \"features\": [\n            \"string\",\n            \"string\"\n          ]\n        },\n        {\n          \"id\": \"string\",\n          \"features\": [\n            \"string\",\n            \"string\"\n          ]\n        }\n      ]\n    }\n  ],\n  \"successUrl\": \"<uri>\",\n  \"customerId\": \"<string>\",\n  \"externalCustomerId\": \"<string>\",\n  \"cancelUrl\": \"<uri>\",\n  \"expiresAt\": \"<dateTime>\",\n  \"metadata\": {\n    \"key_0\": {},\n    \"key_1\": {},\n    \"key_2\": {}\n  },\n  \"collectAddress\": true,\n  \"collectPhone\": false,\n  \"singleUse\": true,\n  \"currency\": \"<string>\",\n  \"customCards\": [\n    {\n      \"label\": \"string\",\n      \"priceText\": \"string\",\n      \"buttonText\": \"string\",\n      \"buttonUrl\": \"http://sWpwnRneOXRxRqmeFPCgNGbUXqhDWFR.epnLXSeYoElsbyHKGwtBz1FKDDaloh-oVitCEL,r7DDGkg4c-\"\n    },\n    {\n      \"label\": \"string\",\n      \"priceText\": \"string\",\n      \"buttonText\": \"string\",\n      \"buttonUrl\": \"http://sCqtxdnNRTJo.aaH01PA+fVkqSMw9CnZrOmY\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"url\": \"string\",\n  \"status\": \"completed\",\n  \"products\": [\n    {\n      \"id\": \"string\",\n      \"plans\": [\n        {\n          \"id\": \"string\",\n          \"features\": [\n            \"string\",\n            \"string\"\n          ]\n        },\n        {\n          \"id\": \"string\",\n          \"features\": [\n            \"string\",\n            \"string\"\n          ]\n        }\n      ]\n    },\n    {\n      \"id\": \"string\",\n      \"plans\": [\n        {\n          \"id\": \"string\",\n          \"features\": [\n            \"string\",\n            \"string\"\n          ]\n        },\n        {\n          \"id\": \"string\",\n          \"features\": [\n            \"string\",\n            \"string\"\n          ]\n        }\n      ]\n    }\n  ],\n  \"customerId\": \"string\",\n  \"externalCustomerId\": \"string\",\n  \"successUrl\": \"string\",\n  \"cancelUrl\": \"string\",\n  \"expiresAt\": \"1999-04-08T15:34:19.347Z\",\n  \"metadata\": {\n    \"key_0\": {},\n    \"key_1\": {},\n    \"key_2\": {}\n  },\n  \"collectAddress\": true,\n  \"collectPhone\": false,\n  \"singleUse\": false,\n  \"allowedCurrencies\": [\n    \"string\",\n    \"string\"\n  ],\n  \"createdAt\": \"2010-07-30T19:04:36.477Z\",\n  \"updatedAt\": \"2005-09-09T04:11:05.569Z\",\n  \"customCards\": [\n    {\n      \"label\": \"string\",\n      \"priceText\": \"string\",\n      \"buttonText\": \"string\",\n      \"buttonUrl\": \"string\"\n    },\n    {\n      \"label\": \"string\",\n      \"priceText\": \"string\",\n      \"buttonText\": \"string\",\n      \"buttonUrl\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ede85c43-a06d-4967-8d40-4809af732a03",
+              "name": "400",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "checkouts",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API Key authentication using Bearer token",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"products\": [\n    {\n      \"id\": \"string\",\n      \"plans\": [\n        {\n          \"id\": \"string\",\n          \"features\": [\n            \"string\",\n            \"string\"\n          ]\n        },\n        {\n          \"id\": \"string\",\n          \"features\": [\n            \"string\",\n            \"string\"\n          ]\n        }\n      ]\n    },\n    {\n      \"id\": \"string\",\n      \"plans\": [\n        {\n          \"id\": \"string\",\n          \"features\": [\n            \"string\",\n            \"string\"\n          ]\n        },\n        {\n          \"id\": \"string\",\n          \"features\": [\n            \"string\",\n            \"string\"\n          ]\n        }\n      ]\n    }\n  ],\n  \"successUrl\": \"<uri>\",\n  \"customerId\": \"<string>\",\n  \"externalCustomerId\": \"<string>\",\n  \"cancelUrl\": \"<uri>\",\n  \"expiresAt\": \"<dateTime>\",\n  \"metadata\": {\n    \"key_0\": {},\n    \"key_1\": {},\n    \"key_2\": {}\n  },\n  \"collectAddress\": true,\n  \"collectPhone\": false,\n  \"singleUse\": true,\n  \"currency\": \"<string>\",\n  \"customCards\": [\n    {\n      \"label\": \"string\",\n      \"priceText\": \"string\",\n      \"buttonText\": \"string\",\n      \"buttonUrl\": \"http://sWpwnRneOXRxRqmeFPCgNGbUXqhDWFR.epnLXSeYoElsbyHKGwtBz1FKDDaloh-oVitCEL,r7DDGkg4c-\"\n    },\n    {\n      \"label\": \"string\",\n      \"priceText\": \"string\",\n      \"buttonText\": \"string\",\n      \"buttonUrl\": \"http://sCqtxdnNRTJo.aaH01PA+fVkqSMw9CnZrOmY\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"code\": \"string\",\n  \"details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2765b603-30df-4532-ba62-48e6b51f2698",
+              "name": "403",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "checkouts",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API Key authentication using Bearer token",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"products\": [\n    {\n      \"id\": \"string\",\n      \"plans\": [\n        {\n          \"id\": \"string\",\n          \"features\": [\n            \"string\",\n            \"string\"\n          ]\n        },\n        {\n          \"id\": \"string\",\n          \"features\": [\n            \"string\",\n            \"string\"\n          ]\n        }\n      ]\n    },\n    {\n      \"id\": \"string\",\n      \"plans\": [\n        {\n          \"id\": \"string\",\n          \"features\": [\n            \"string\",\n            \"string\"\n          ]\n        },\n        {\n          \"id\": \"string\",\n          \"features\": [\n            \"string\",\n            \"string\"\n          ]\n        }\n      ]\n    }\n  ],\n  \"successUrl\": \"<uri>\",\n  \"customerId\": \"<string>\",\n  \"externalCustomerId\": \"<string>\",\n  \"cancelUrl\": \"<uri>\",\n  \"expiresAt\": \"<dateTime>\",\n  \"metadata\": {\n    \"key_0\": {},\n    \"key_1\": {},\n    \"key_2\": {}\n  },\n  \"collectAddress\": true,\n  \"collectPhone\": false,\n  \"singleUse\": true,\n  \"currency\": \"<string>\",\n  \"customCards\": [\n    {\n      \"label\": \"string\",\n      \"priceText\": \"string\",\n      \"buttonText\": \"string\",\n      \"buttonUrl\": \"http://sWpwnRneOXRxRqmeFPCgNGbUXqhDWFR.epnLXSeYoElsbyHKGwtBz1FKDDaloh-oVitCEL,r7DDGkg4c-\"\n    },\n    {\n      \"label\": \"string\",\n      \"priceText\": \"string\",\n      \"buttonText\": \"string\",\n      \"buttonUrl\": \"http://sCqtxdnNRTJo.aaH01PA+fVkqSMw9CnZrOmY\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"code\": \"string\",\n  \"details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "84e343c4-14b5-49f7-9eca-ed41676e0103",
+              "name": "404",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "checkouts",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API Key authentication using Bearer token",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"products\": [\n    {\n      \"id\": \"string\",\n      \"plans\": [\n        {\n          \"id\": \"string\",\n          \"features\": [\n            \"string\",\n            \"string\"\n          ]\n        },\n        {\n          \"id\": \"string\",\n          \"features\": [\n            \"string\",\n            \"string\"\n          ]\n        }\n      ]\n    },\n    {\n      \"id\": \"string\",\n      \"plans\": [\n        {\n          \"id\": \"string\",\n          \"features\": [\n            \"string\",\n            \"string\"\n          ]\n        },\n        {\n          \"id\": \"string\",\n          \"features\": [\n            \"string\",\n            \"string\"\n          ]\n        }\n      ]\n    }\n  ],\n  \"successUrl\": \"<uri>\",\n  \"customerId\": \"<string>\",\n  \"externalCustomerId\": \"<string>\",\n  \"cancelUrl\": \"<uri>\",\n  \"expiresAt\": \"<dateTime>\",\n  \"metadata\": {\n    \"key_0\": {},\n    \"key_1\": {},\n    \"key_2\": {}\n  },\n  \"collectAddress\": true,\n  \"collectPhone\": false,\n  \"singleUse\": true,\n  \"currency\": \"<string>\",\n  \"customCards\": [\n    {\n      \"label\": \"string\",\n      \"priceText\": \"string\",\n      \"buttonText\": \"string\",\n      \"buttonUrl\": \"http://sWpwnRneOXRxRqmeFPCgNGbUXqhDWFR.epnLXSeYoElsbyHKGwtBz1FKDDaloh-oVitCEL,r7DDGkg4c-\"\n    },\n    {\n      \"label\": \"string\",\n      \"priceText\": \"string\",\n      \"buttonText\": \"string\",\n      \"buttonUrl\": \"http://sCqtxdnNRTJo.aaH01PA+fVkqSMw9CnZrOmY\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"code\": \"string\",\n  \"details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6a4e9b5e-9787-4ffe-abf4-48f345dbc098",
+              "name": "500",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "checkouts",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API Key authentication using Bearer token",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"products\": [\n    {\n      \"id\": \"string\",\n      \"plans\": [\n        {\n          \"id\": \"string\",\n          \"features\": [\n            \"string\",\n            \"string\"\n          ]\n        },\n        {\n          \"id\": \"string\",\n          \"features\": [\n            \"string\",\n            \"string\"\n          ]\n        }\n      ]\n    },\n    {\n      \"id\": \"string\",\n      \"plans\": [\n        {\n          \"id\": \"string\",\n          \"features\": [\n            \"string\",\n            \"string\"\n          ]\n        },\n        {\n          \"id\": \"string\",\n          \"features\": [\n            \"string\",\n            \"string\"\n          ]\n        }\n      ]\n    }\n  ],\n  \"successUrl\": \"<uri>\",\n  \"customerId\": \"<string>\",\n  \"externalCustomerId\": \"<string>\",\n  \"cancelUrl\": \"<uri>\",\n  \"expiresAt\": \"<dateTime>\",\n  \"metadata\": {\n    \"key_0\": {},\n    \"key_1\": {},\n    \"key_2\": {}\n  },\n  \"collectAddress\": true,\n  \"collectPhone\": false,\n  \"singleUse\": true,\n  \"currency\": \"<string>\",\n  \"customCards\": [\n    {\n      \"label\": \"string\",\n      \"priceText\": \"string\",\n      \"buttonText\": \"string\",\n      \"buttonUrl\": \"http://sWpwnRneOXRxRqmeFPCgNGbUXqhDWFR.epnLXSeYoElsbyHKGwtBz1FKDDaloh-oVitCEL,r7DDGkg4c-\"\n    },\n    {\n      \"label\": \"string\",\n      \"priceText\": \"string\",\n      \"buttonText\": \"string\",\n      \"buttonUrl\": \"http://sCqtxdnNRTJo.aaH01PA+fVkqSMw9CnZrOmY\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"code\": \"string\",\n  \"details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "237b9e77-96c7-4ea9-ad5d-3ae51e59e38b",
+          "name": "Get checkout",
+          "request": {
+            "name": "Get checkout",
+            "description": {
+              "content": "Get a checkout by ID",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "checkouts",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d3ce9963-5fa3-49c5-87ba-9b9e5dea1b2c",
+              "name": "200",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "checkouts",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API Key authentication using Bearer token",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"url\": \"string\",\n  \"status\": \"archived\",\n  \"products\": [\n    {\n      \"id\": \"string\",\n      \"plans\": [\n        {\n          \"id\": \"string\",\n          \"features\": [\n            \"string\",\n            \"string\"\n          ]\n        },\n        {\n          \"id\": \"string\",\n          \"features\": [\n            \"string\",\n            \"string\"\n          ]\n        }\n      ]\n    },\n    {\n      \"id\": \"string\",\n      \"plans\": [\n        {\n          \"id\": \"string\",\n          \"features\": [\n            \"string\",\n            \"string\"\n          ]\n        },\n        {\n          \"id\": \"string\",\n          \"features\": [\n            \"string\",\n            \"string\"\n          ]\n        }\n      ]\n    }\n  ],\n  \"customerId\": \"string\",\n  \"externalCustomerId\": \"string\",\n  \"successUrl\": \"string\",\n  \"cancelUrl\": \"string\",\n  \"expiresAt\": \"1961-01-12T08:49:18.969Z\",\n  \"metadata\": {\n    \"key_0\": {}\n  },\n  \"collectAddress\": false,\n  \"collectPhone\": true,\n  \"singleUse\": true,\n  \"allowedCurrencies\": [\n    \"string\",\n    \"string\"\n  ],\n  \"createdAt\": \"1990-10-01T23:35:16.513Z\",\n  \"updatedAt\": \"2019-04-29T07:52:20.179Z\",\n  \"orderId\": \"string\",\n  \"selectedProduct\": {\n    \"id\": \"string\",\n    \"plan\": {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"externalId\": \"string\"\n    }\n  },\n  \"customCards\": [\n    {\n      \"label\": \"string\",\n      \"priceText\": \"string\",\n      \"buttonText\": \"string\",\n      \"buttonUrl\": \"string\"\n    },\n    {\n      \"label\": \"string\",\n      \"priceText\": \"string\",\n      \"buttonText\": \"string\",\n      \"buttonUrl\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "04cd7b10-753b-412d-bc95-cb6fd28d8614",
+              "name": "403",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "checkouts",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API Key authentication using Bearer token",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"code\": \"string\",\n  \"details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fd78e9e6-36a5-4b14-839f-989206623fd9",
+              "name": "404",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "checkouts",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API Key authentication using Bearer token",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"code\": \"string\",\n  \"details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "94710578-269c-497d-ad02-51bbf212ea68",
+              "name": "500",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "checkouts",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API Key authentication using Bearer token",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"code\": \"string\",\n  \"details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0d2665a2-f49f-4df5-a4ba-e98a4e9069de",
+          "name": "Archive checkout",
+          "request": {
+            "name": "Archive checkout",
+            "description": {
+              "content": "Archive a checkout by ID",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "checkouts",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "64d7d295-018e-4752-862c-5bc3e2b75224",
+              "name": "200",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "checkouts",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API Key authentication using Bearer token",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9956e916-bb56-4631-9e44-d7711eb232e9",
+              "name": "403",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "checkouts",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API Key authentication using Bearer token",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"code\": \"string\",\n  \"details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cbd2c6ef-3f41-431c-99c6-2bc218b7882d",
+              "name": "404",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "checkouts",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API Key authentication using Bearer token",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"code\": \"string\",\n  \"details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "069f5a41-a9cc-487b-80c0-c734e78a0159",
+              "name": "500",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "checkouts",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API Key authentication using Bearer token",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"code\": \"string\",\n  \"details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.agentpaid.io/api/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "8c74a7f5-a5f0-4df8-9a4f-8f0b24d16bce",
+    "name": "API Reference agents checkouts API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

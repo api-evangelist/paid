@@ -1,0 +1,81 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "API Reference agents usage API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "usage",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Record usage signals in bulk",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.agentpaid.io/api/v1/usage/signals/bulk",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "DEPRECATED: Use POST /usage/v2/signals/bulk instead for cleaner field names."
+        },
+        {
+          "info": {
+            "name": "Record usage signals in bulk (V2 - Clean field names)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.agentpaid.io/api/v1/usage/v2/signals/bulk",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Record usage signals in bulk (V2 - Clean field names)"
+        },
+        {
+          "info": {
+            "name": "Check if usage is allowed for a customer and product",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.agentpaid.io/api/v1/usage/check-usage",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Check if usage is allowed for a customer and product"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,85 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "API Reference agents traces API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "traces",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Fetch cost traces for an organization",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.agentpaid.io/api/v1/traces",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of traces to return (1-1000)"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of traces to skip for pagination"
+              },
+              {
+                "name": "startTime",
+                "value": "",
+                "type": "query",
+                "description": "Filter traces starting from this time (ISO 8601 format)"
+              },
+              {
+                "name": "endTime",
+                "value": "",
+                "type": "query",
+                "description": "Filter traces up to this time (ISO 8601 format)"
+              },
+              {
+                "name": "externalCustomerId",
+                "value": "",
+                "type": "query",
+                "description": "Filter traces by external customer ID"
+              },
+              {
+                "name": "externalProductId",
+                "value": "",
+                "type": "query",
+                "description": "Filter traces by external product ID"
+              },
+              {
+                "name": "externalAgentId",
+                "value": "",
+                "type": "query",
+                "description": "DEPRECATED: Use externalProductId instead. Filter traces by external agent ID"
+              },
+              {
+                "name": "metadata",
+                "value": "",
+                "type": "query",
+                "description": "Filter traces by metadata fields. Must be a valid JSON object (e.g., {\"key1\":\"value1\",\"key2\":\"value2\"}). All specified fields must match (AND logic)."
+              }
+            ]
+          },
+          "docs": "Fetch cost traces for an organization"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

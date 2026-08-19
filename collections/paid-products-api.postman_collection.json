@@ -1,0 +1,1950 @@
+{
+  "item": [
+    {
+      "id": "fd7c2a03-898d-463c-8908-fc8df5534c34",
+      "name": "products",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "676a43aa-4b5a-4fe1-baf2-8e5b892dc0b3",
+          "name": "List products",
+          "request": {
+            "name": "List products",
+            "description": {},
+            "url": {
+              "path": [
+                "products"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "26163d5a-26a5-42e0-b423-0cf56862cc65",
+              "name": "Success response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "products"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"549d151b-e67d-ed08-b275-08bebc964870\",\n    \"organizationId\": \"65b9f33b-35b0-7028-e522-3fe836f52c0b\",\n    \"name\": \"string\",\n    \"type\": \"product\",\n    \"active\": true,\n    \"externalId\": \"string\",\n    \"displayId\": \"string\",\n    \"description\": \"string\",\n    \"productCode\": \"string\",\n    \"ProductAttribute\": [\n      {\n        \"name\": \"string\",\n        \"active\": true,\n        \"pricing\": {\n          \"taxable\": true,\n          \"chargeType\": \"usage\",\n          \"pricingModel\": \"PrepaidCredits\",\n          \"billingFrequency\": \"monthly\",\n          \"pricePoints\": {\n            \"key_0\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"key_1\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"eventName\": \"string\",\n          \"creditCost\": 625.7714428204408\n        }\n      },\n      {\n        \"name\": \"string\",\n        \"active\": false,\n        \"pricing\": {\n          \"taxable\": false,\n          \"chargeType\": \"recurring\",\n          \"pricingModel\": \"VolumePricing\",\n          \"billingFrequency\": \"monthly\",\n          \"pricePoints\": {\n            \"key_0\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"key_1\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"key_2\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"key_3\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"eventName\": \"string\",\n          \"creditCost\": 8071.032572469854\n        }\n      }\n    ],\n    \"metadata\": {\n      \"key_0\": {}\n    },\n    \"createdAt\": \"1978-10-02T13:48:13.875Z\",\n    \"updatedAt\": \"1947-08-30T09:48:47.535Z\"\n  },\n  {\n    \"id\": \"6b7b5131-10cc-f86e-6082-d072d7088abc\",\n    \"organizationId\": \"8b55ce21-7a81-1f54-2670-b85c368feb22\",\n    \"name\": \"string\",\n    \"type\": \"product\",\n    \"active\": false,\n    \"externalId\": \"string\",\n    \"displayId\": \"string\",\n    \"description\": \"string\",\n    \"productCode\": \"string\",\n    \"ProductAttribute\": [\n      {\n        \"name\": \"string\",\n        \"active\": false,\n        \"pricing\": {\n          \"taxable\": false,\n          \"chargeType\": \"oneTime\",\n          \"pricingModel\": \"PrepaidCredits\",\n          \"billingFrequency\": \"quarterly\",\n          \"pricePoints\": {\n            \"key_0\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"key_1\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"eventName\": \"string\",\n          \"creditCost\": 8771.928433367724\n        }\n      },\n      {\n        \"name\": \"string\",\n        \"active\": false,\n        \"pricing\": {\n          \"taxable\": true,\n          \"chargeType\": \"seatBased\",\n          \"pricingModel\": \"VolumePricing\",\n          \"billingFrequency\": \"monthly\",\n          \"pricePoints\": {\n            \"key_0\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"eventName\": \"string\",\n          \"creditCost\": 856.5800842788029\n        }\n      }\n    ],\n    \"metadata\": {\n      \"key_0\": {}\n    },\n    \"createdAt\": \"1993-03-19T01:29:35.855Z\",\n    \"updatedAt\": \"2003-02-28T20:34:34.485Z\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "80f1cce7-8727-4122-a156-db7d20d26a1d",
+          "name": "Create product",
+          "request": {
+            "name": "Create product",
+            "description": {},
+            "url": {
+              "path": [
+                "products"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"externalId\": \"<string>\",\n  \"type\": \"product\",\n  \"active\": false,\n  \"productCode\": \"<string>\",\n  \"metadata\": {\n    \"key_0\": {}\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "bd22171c-961c-472f-a1c5-b14923658c5d",
+              "name": "Success response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "products"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"externalId\": \"<string>\",\n  \"type\": \"product\",\n  \"active\": false,\n  \"productCode\": \"<string>\",\n  \"metadata\": {\n    \"key_0\": {},\n    \"key_1\": {},\n    \"key_2\": {}\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"98c205a9-fdbc-ede5-ec16-c5d7ae252233\",\n  \"organizationId\": \"9efaa8bb-ca3f-032a-d436-d6dc0c218dd6\",\n  \"name\": \"string\",\n  \"type\": \"product\",\n  \"active\": true,\n  \"externalId\": \"string\",\n  \"displayId\": \"string\",\n  \"description\": \"string\",\n  \"productCode\": \"string\",\n  \"ProductAttribute\": [\n    {\n      \"name\": \"string\",\n      \"active\": true,\n      \"pricing\": {\n        \"taxable\": false,\n        \"chargeType\": \"usage\",\n        \"pricingModel\": \"VolumePricing\",\n        \"billingFrequency\": \"quarterly\",\n        \"pricePoints\": {\n          \"key_0\": {\n            \"unitPrice\": 8696.701773018967,\n            \"minQuantity\": 6098.66473322025,\n            \"includedQuantity\": 5844.491038906883,\n            \"tiers\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          },\n          \"key_1\": {\n            \"unitPrice\": 9864.531150471625,\n            \"minQuantity\": 7074.891830089877,\n            \"includedQuantity\": 2490.2938079032265,\n            \"tiers\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          }\n        },\n        \"eventName\": \"string\",\n        \"creditCost\": 6379.285013344802\n      }\n    },\n    {\n      \"name\": \"string\",\n      \"active\": false,\n      \"pricing\": {\n        \"taxable\": false,\n        \"chargeType\": \"recurring\",\n        \"pricingModel\": \"VolumePricing\",\n        \"billingFrequency\": \"annual\",\n        \"pricePoints\": {\n          \"key_0\": {\n            \"unitPrice\": 9998.87761379269,\n            \"minQuantity\": 2029.5744737446064,\n            \"includedQuantity\": 8631.609754417035,\n            \"tiers\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          }\n        },\n        \"eventName\": \"string\",\n        \"creditCost\": 2507.977623942632\n      }\n    }\n  ],\n  \"metadata\": {\n    \"key_0\": {}\n  },\n  \"createdAt\": \"2015-09-16T10:40:30.684Z\",\n  \"updatedAt\": \"2010-05-12T07:52:52.508Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e81f2715-da34-44ea-93b9-241664d9fc98",
+          "name": "Get product by ID",
+          "request": {
+            "name": "Get product by ID",
+            "description": {},
+            "url": {
+              "path": [
+                "products",
+                ":productId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "productId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "efceed1b-f075-400b-833b-92301b042dae",
+              "name": "Success response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "products",
+                    ":productId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "productId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"98c205a9-fdbc-ede5-ec16-c5d7ae252233\",\n  \"organizationId\": \"9efaa8bb-ca3f-032a-d436-d6dc0c218dd6\",\n  \"name\": \"string\",\n  \"type\": \"product\",\n  \"active\": true,\n  \"externalId\": \"string\",\n  \"displayId\": \"string\",\n  \"description\": \"string\",\n  \"productCode\": \"string\",\n  \"ProductAttribute\": [\n    {\n      \"name\": \"string\",\n      \"active\": true,\n      \"pricing\": {\n        \"taxable\": false,\n        \"chargeType\": \"usage\",\n        \"pricingModel\": \"VolumePricing\",\n        \"billingFrequency\": \"quarterly\",\n        \"pricePoints\": {\n          \"key_0\": {\n            \"unitPrice\": 8696.701773018967,\n            \"minQuantity\": 6098.66473322025,\n            \"includedQuantity\": 5844.491038906883,\n            \"tiers\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          },\n          \"key_1\": {\n            \"unitPrice\": 9864.531150471625,\n            \"minQuantity\": 7074.891830089877,\n            \"includedQuantity\": 2490.2938079032265,\n            \"tiers\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          }\n        },\n        \"eventName\": \"string\",\n        \"creditCost\": 6379.285013344802\n      }\n    },\n    {\n      \"name\": \"string\",\n      \"active\": false,\n      \"pricing\": {\n        \"taxable\": false,\n        \"chargeType\": \"recurring\",\n        \"pricingModel\": \"VolumePricing\",\n        \"billingFrequency\": \"annual\",\n        \"pricePoints\": {\n          \"key_0\": {\n            \"unitPrice\": 9998.87761379269,\n            \"minQuantity\": 2029.5744737446064,\n            \"includedQuantity\": 8631.609754417035,\n            \"tiers\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          }\n        },\n        \"eventName\": \"string\",\n        \"creditCost\": 2507.977623942632\n      }\n    }\n  ],\n  \"metadata\": {\n    \"key_0\": {}\n  },\n  \"createdAt\": \"2015-09-16T10:40:30.684Z\",\n  \"updatedAt\": \"2010-05-12T07:52:52.508Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "69f8c42e-40ef-47e6-b3dc-b8ac77f249f4",
+          "name": "Update product",
+          "request": {
+            "name": "Update product",
+            "description": {},
+            "url": {
+              "path": [
+                "products",
+                ":productId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "productId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"externalId\": \"<string>\",\n  \"type\": \"<string>\",\n  \"active\": \"<boolean>\",\n  \"productCode\": \"<string>\",\n  \"ProductAttribute\": [\n    {\n      \"name\": \"<string>\",\n      \"active\": \"<boolean>\",\n      \"pricing\": {\n        \"taxable\": \"<boolean>\",\n        \"chargeType\": \"<string>\",\n        \"pricingModel\": \"<string>\",\n        \"billingFrequency\": \"<string>\",\n        \"pricePoints\": {\n          \"key_0\": {\n            \"unitPrice\": \"<double>\",\n            \"minQuantity\": \"<double>\",\n            \"includedQuantity\": \"<double>\",\n            \"tiers\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          }\n        },\n        \"eventName\": \"<string>\",\n        \"creditCost\": \"<double>\"\n      }\n    },\n    {\n      \"name\": \"<string>\",\n      \"active\": \"<boolean>\",\n      \"pricing\": {\n        \"taxable\": \"<boolean>\",\n        \"chargeType\": \"<string>\",\n        \"pricingModel\": \"<string>\",\n        \"billingFrequency\": \"<string>\",\n        \"pricePoints\": {\n          \"key_0\": {\n            \"unitPrice\": \"<double>\",\n            \"minQuantity\": \"<double>\",\n            \"includedQuantity\": \"<double>\",\n            \"tiers\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          },\n          \"key_1\": {\n            \"unitPrice\": \"<double>\",\n            \"minQuantity\": \"<double>\",\n            \"includedQuantity\": \"<double>\",\n            \"tiers\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          }\n        },\n        \"eventName\": \"<string>\",\n        \"creditCost\": \"<double>\"\n      }\n    }\n  ],\n  \"metadata\": {\n    \"key_0\": {},\n    \"key_1\": {},\n    \"key_2\": {}\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "7525bde2-6634-4e6d-a578-213eaed287bf",
+              "name": "Success response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "products",
+                    ":productId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "productId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"externalId\": \"<string>\",\n  \"type\": \"prepaidCreditBundle\",\n  \"active\": \"<boolean>\",\n  \"productCode\": \"<string>\",\n  \"ProductAttribute\": [\n    {\n      \"name\": \"string\",\n      \"active\": false,\n      \"pricing\": {\n        \"taxable\": false,\n        \"chargeType\": \"oneTime\",\n        \"pricingModel\": \"PerUnit\",\n        \"billingFrequency\": \"monthly\",\n        \"pricePoints\": {\n          \"key_0\": {\n            \"unitPrice\": 299.54461086350136,\n            \"minQuantity\": 536.8152475794419,\n            \"includedQuantity\": 5175.355975194648,\n            \"tiers\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          },\n          \"key_1\": {\n            \"unitPrice\": 8440.746396439965,\n            \"minQuantity\": 7383.923175894161,\n            \"includedQuantity\": 4895.834587798653,\n            \"tiers\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          },\n          \"key_2\": {\n            \"unitPrice\": 5075.860624940535,\n            \"minQuantity\": 1554.4138816993336,\n            \"includedQuantity\": 118.99809527774252,\n            \"tiers\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          }\n        },\n        \"eventName\": \"string\",\n        \"creditCost\": 1030.4848929003385\n      }\n    },\n    {\n      \"name\": \"string\",\n      \"active\": false,\n      \"pricing\": {\n        \"taxable\": false,\n        \"chargeType\": \"recurring\",\n        \"pricingModel\": \"VolumePricing\",\n        \"billingFrequency\": \"quarterly\",\n        \"pricePoints\": {\n          \"key_0\": {\n            \"unitPrice\": 8772.497081900121,\n            \"minQuantity\": 6042.724441273126,\n            \"includedQuantity\": 879.7088811853693,\n            \"tiers\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          },\n          \"key_1\": {\n            \"unitPrice\": 4500.172065999257,\n            \"minQuantity\": 8038.525839963345,\n            \"includedQuantity\": 7900.4812165290705,\n            \"tiers\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          },\n          \"key_2\": {\n            \"unitPrice\": 5534.752277177944,\n            \"minQuantity\": 5364.605413159821,\n            \"includedQuantity\": 6267.738513713616,\n            \"tiers\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          }\n        },\n        \"eventName\": \"string\",\n        \"creditCost\": 5550.175403152649\n      }\n    }\n  ],\n  \"metadata\": {\n    \"key_0\": {},\n    \"key_1\": {}\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"98c205a9-fdbc-ede5-ec16-c5d7ae252233\",\n  \"organizationId\": \"9efaa8bb-ca3f-032a-d436-d6dc0c218dd6\",\n  \"name\": \"string\",\n  \"type\": \"product\",\n  \"active\": true,\n  \"externalId\": \"string\",\n  \"displayId\": \"string\",\n  \"description\": \"string\",\n  \"productCode\": \"string\",\n  \"ProductAttribute\": [\n    {\n      \"name\": \"string\",\n      \"active\": true,\n      \"pricing\": {\n        \"taxable\": false,\n        \"chargeType\": \"usage\",\n        \"pricingModel\": \"VolumePricing\",\n        \"billingFrequency\": \"quarterly\",\n        \"pricePoints\": {\n          \"key_0\": {\n            \"unitPrice\": 8696.701773018967,\n            \"minQuantity\": 6098.66473322025,\n            \"includedQuantity\": 5844.491038906883,\n            \"tiers\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          },\n          \"key_1\": {\n            \"unitPrice\": 9864.531150471625,\n            \"minQuantity\": 7074.891830089877,\n            \"includedQuantity\": 2490.2938079032265,\n            \"tiers\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          }\n        },\n        \"eventName\": \"string\",\n        \"creditCost\": 6379.285013344802\n      }\n    },\n    {\n      \"name\": \"string\",\n      \"active\": false,\n      \"pricing\": {\n        \"taxable\": false,\n        \"chargeType\": \"recurring\",\n        \"pricingModel\": \"VolumePricing\",\n        \"billingFrequency\": \"annual\",\n        \"pricePoints\": {\n          \"key_0\": {\n            \"unitPrice\": 9998.87761379269,\n            \"minQuantity\": 2029.5744737446064,\n            \"includedQuantity\": 8631.609754417035,\n            \"tiers\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          }\n        },\n        \"eventName\": \"string\",\n        \"creditCost\": 2507.977623942632\n      }\n    }\n  ],\n  \"metadata\": {\n    \"key_0\": {}\n  },\n  \"createdAt\": \"2015-09-16T10:40:30.684Z\",\n  \"updatedAt\": \"2010-05-12T07:52:52.508Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c185980c-581e-4b12-b0d2-d05228e053ac",
+          "name": "Delete product",
+          "request": {
+            "name": "Delete product",
+            "description": {},
+            "url": {
+              "path": [
+                "products",
+                ":productId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "productId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "02e7f4bf-852b-4ec5-bfcf-0e0784e93395",
+              "name": "Success response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "products",
+                    ":productId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "productId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "095f424a-385f-4551-aa8f-3e444a2eed74",
+          "name": "Get product by external ID",
+          "request": {
+            "name": "Get product by external ID",
+            "description": {},
+            "url": {
+              "path": [
+                "products",
+                "external",
+                ":externalId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "externalId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "dbee8bab-ee69-4825-ac69-59848625906a",
+              "name": "Success response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "products",
+                    "external",
+                    ":externalId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "externalId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"98c205a9-fdbc-ede5-ec16-c5d7ae252233\",\n  \"organizationId\": \"9efaa8bb-ca3f-032a-d436-d6dc0c218dd6\",\n  \"name\": \"string\",\n  \"type\": \"product\",\n  \"active\": true,\n  \"externalId\": \"string\",\n  \"displayId\": \"string\",\n  \"description\": \"string\",\n  \"productCode\": \"string\",\n  \"ProductAttribute\": [\n    {\n      \"name\": \"string\",\n      \"active\": true,\n      \"pricing\": {\n        \"taxable\": false,\n        \"chargeType\": \"usage\",\n        \"pricingModel\": \"VolumePricing\",\n        \"billingFrequency\": \"quarterly\",\n        \"pricePoints\": {\n          \"key_0\": {\n            \"unitPrice\": 8696.701773018967,\n            \"minQuantity\": 6098.66473322025,\n            \"includedQuantity\": 5844.491038906883,\n            \"tiers\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          },\n          \"key_1\": {\n            \"unitPrice\": 9864.531150471625,\n            \"minQuantity\": 7074.891830089877,\n            \"includedQuantity\": 2490.2938079032265,\n            \"tiers\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          }\n        },\n        \"eventName\": \"string\",\n        \"creditCost\": 6379.285013344802\n      }\n    },\n    {\n      \"name\": \"string\",\n      \"active\": false,\n      \"pricing\": {\n        \"taxable\": false,\n        \"chargeType\": \"recurring\",\n        \"pricingModel\": \"VolumePricing\",\n        \"billingFrequency\": \"annual\",\n        \"pricePoints\": {\n          \"key_0\": {\n            \"unitPrice\": 9998.87761379269,\n            \"minQuantity\": 2029.5744737446064,\n            \"includedQuantity\": 8631.609754417035,\n            \"tiers\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          }\n        },\n        \"eventName\": \"string\",\n        \"creditCost\": 2507.977623942632\n      }\n    }\n  ],\n  \"metadata\": {\n    \"key_0\": {}\n  },\n  \"createdAt\": \"2015-09-16T10:40:30.684Z\",\n  \"updatedAt\": \"2010-05-12T07:52:52.508Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "cfc72d72-b774-4c55-ab90-2827e665e8f0",
+          "name": "Update product by external ID",
+          "request": {
+            "name": "Update product by external ID",
+            "description": {},
+            "url": {
+              "path": [
+                "products",
+                "external",
+                ":externalId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "externalId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"externalId\": \"<string>\",\n  \"type\": \"<string>\",\n  \"active\": \"<boolean>\",\n  \"productCode\": \"<string>\",\n  \"ProductAttribute\": [\n    {\n      \"name\": \"<string>\",\n      \"active\": \"<boolean>\",\n      \"pricing\": {\n        \"taxable\": \"<boolean>\",\n        \"chargeType\": \"<string>\",\n        \"pricingModel\": \"<string>\",\n        \"billingFrequency\": \"<string>\",\n        \"pricePoints\": {\n          \"key_0\": {\n            \"unitPrice\": \"<double>\",\n            \"minQuantity\": \"<double>\",\n            \"includedQuantity\": \"<double>\",\n            \"tiers\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          }\n        },\n        \"eventName\": \"<string>\",\n        \"creditCost\": \"<double>\"\n      }\n    },\n    {\n      \"name\": \"<string>\",\n      \"active\": \"<boolean>\",\n      \"pricing\": {\n        \"taxable\": \"<boolean>\",\n        \"chargeType\": \"<string>\",\n        \"pricingModel\": \"<string>\",\n        \"billingFrequency\": \"<string>\",\n        \"pricePoints\": {\n          \"key_0\": {\n            \"unitPrice\": \"<double>\",\n            \"minQuantity\": \"<double>\",\n            \"includedQuantity\": \"<double>\",\n            \"tiers\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          },\n          \"key_1\": {\n            \"unitPrice\": \"<double>\",\n            \"minQuantity\": \"<double>\",\n            \"includedQuantity\": \"<double>\",\n            \"tiers\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          }\n        },\n        \"eventName\": \"<string>\",\n        \"creditCost\": \"<double>\"\n      }\n    }\n  ],\n  \"metadata\": {\n    \"key_0\": {},\n    \"key_1\": {},\n    \"key_2\": {}\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "c0edcbac-d397-4c31-a5c2-2da3a8c7185d",
+              "name": "Success response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "products",
+                    "external",
+                    ":externalId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "externalId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"externalId\": \"<string>\",\n  \"type\": \"prepaidCreditBundle\",\n  \"active\": \"<boolean>\",\n  \"productCode\": \"<string>\",\n  \"ProductAttribute\": [\n    {\n      \"name\": \"string\",\n      \"active\": false,\n      \"pricing\": {\n        \"taxable\": false,\n        \"chargeType\": \"oneTime\",\n        \"pricingModel\": \"PerUnit\",\n        \"billingFrequency\": \"monthly\",\n        \"pricePoints\": {\n          \"key_0\": {\n            \"unitPrice\": 299.54461086350136,\n            \"minQuantity\": 536.8152475794419,\n            \"includedQuantity\": 5175.355975194648,\n            \"tiers\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          },\n          \"key_1\": {\n            \"unitPrice\": 8440.746396439965,\n            \"minQuantity\": 7383.923175894161,\n            \"includedQuantity\": 4895.834587798653,\n            \"tiers\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          },\n          \"key_2\": {\n            \"unitPrice\": 5075.860624940535,\n            \"minQuantity\": 1554.4138816993336,\n            \"includedQuantity\": 118.99809527774252,\n            \"tiers\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          }\n        },\n        \"eventName\": \"string\",\n        \"creditCost\": 1030.4848929003385\n      }\n    },\n    {\n      \"name\": \"string\",\n      \"active\": false,\n      \"pricing\": {\n        \"taxable\": false,\n        \"chargeType\": \"recurring\",\n        \"pricingModel\": \"VolumePricing\",\n        \"billingFrequency\": \"quarterly\",\n        \"pricePoints\": {\n          \"key_0\": {\n            \"unitPrice\": 8772.497081900121,\n            \"minQuantity\": 6042.724441273126,\n            \"includedQuantity\": 879.7088811853693,\n            \"tiers\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          },\n          \"key_1\": {\n            \"unitPrice\": 4500.172065999257,\n            \"minQuantity\": 8038.525839963345,\n            \"includedQuantity\": 7900.4812165290705,\n            \"tiers\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          },\n          \"key_2\": {\n            \"unitPrice\": 5534.752277177944,\n            \"minQuantity\": 5364.605413159821,\n            \"includedQuantity\": 6267.738513713616,\n            \"tiers\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          }\n        },\n        \"eventName\": \"string\",\n        \"creditCost\": 5550.175403152649\n      }\n    }\n  ],\n  \"metadata\": {\n    \"key_0\": {},\n    \"key_1\": {}\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"98c205a9-fdbc-ede5-ec16-c5d7ae252233\",\n  \"organizationId\": \"9efaa8bb-ca3f-032a-d436-d6dc0c218dd6\",\n  \"name\": \"string\",\n  \"type\": \"product\",\n  \"active\": true,\n  \"externalId\": \"string\",\n  \"displayId\": \"string\",\n  \"description\": \"string\",\n  \"productCode\": \"string\",\n  \"ProductAttribute\": [\n    {\n      \"name\": \"string\",\n      \"active\": true,\n      \"pricing\": {\n        \"taxable\": false,\n        \"chargeType\": \"usage\",\n        \"pricingModel\": \"VolumePricing\",\n        \"billingFrequency\": \"quarterly\",\n        \"pricePoints\": {\n          \"key_0\": {\n            \"unitPrice\": 8696.701773018967,\n            \"minQuantity\": 6098.66473322025,\n            \"includedQuantity\": 5844.491038906883,\n            \"tiers\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          },\n          \"key_1\": {\n            \"unitPrice\": 9864.531150471625,\n            \"minQuantity\": 7074.891830089877,\n            \"includedQuantity\": 2490.2938079032265,\n            \"tiers\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          }\n        },\n        \"eventName\": \"string\",\n        \"creditCost\": 6379.285013344802\n      }\n    },\n    {\n      \"name\": \"string\",\n      \"active\": false,\n      \"pricing\": {\n        \"taxable\": false,\n        \"chargeType\": \"recurring\",\n        \"pricingModel\": \"VolumePricing\",\n        \"billingFrequency\": \"annual\",\n        \"pricePoints\": {\n          \"key_0\": {\n            \"unitPrice\": 9998.87761379269,\n            \"minQuantity\": 2029.5744737446064,\n            \"includedQuantity\": 8631.609754417035,\n            \"tiers\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          }\n        },\n        \"eventName\": \"string\",\n        \"creditCost\": 2507.977623942632\n      }\n    }\n  ],\n  \"metadata\": {\n    \"key_0\": {}\n  },\n  \"createdAt\": \"2015-09-16T10:40:30.684Z\",\n  \"updatedAt\": \"2010-05-12T07:52:52.508Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4d41073a-db1c-452f-aeb2-645409fb71ba",
+          "name": "Delete product by external ID",
+          "request": {
+            "name": "Delete product by external ID",
+            "description": {},
+            "url": {
+              "path": [
+                "products",
+                "external",
+                ":externalId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "externalId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "05a70714-b819-4435-8b84-3e875789e03e",
+              "name": "Success response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "products",
+                    "external",
+                    ":externalId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "externalId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b3f008dc-8b01-466b-8c91-47f27bdc233a",
+          "name": "List products",
+          "request": {
+            "name": "List products",
+            "description": {
+              "content": "Get a list of products for the organization",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "products",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "10"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>",
+                  "description": "Search by product name (case-insensitive, matches anywhere in the name)."
+                },
+                {
+                  "disabled": false,
+                  "key": "active",
+                  "value": "<boolean>",
+                  "description": "Filter by the product's active flag: true or false."
+                },
+                {
+                  "disabled": false,
+                  "key": "archived",
+                  "value": "<boolean>",
+                  "description": "Filter by archived state: true returns only archived products, false only non-archived. Omit to include both."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "38e5a592-8dd9-409d-8b6b-211dd4cddae7",
+              "name": "200",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "products",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "active",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "archived",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API Key authentication using Bearer token",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"description\": \"string\",\n      \"createdAt\": \"2007-09-22T02:29:44.114Z\",\n      \"updatedAt\": \"2025-03-28T08:11:36.608Z\",\n      \"active\": true,\n      \"productCode\": \"string\",\n      \"externalId\": \"string\",\n      \"archivedAt\": \"1974-04-18T23:56:47.089Z\",\n      \"metadata\": {\n        \"key_0\": {}\n      }\n    },\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"description\": \"string\",\n      \"createdAt\": \"1948-07-18T18:34:25.981Z\",\n      \"updatedAt\": \"1974-02-19T05:02:38.157Z\",\n      \"active\": false,\n      \"productCode\": \"string\",\n      \"externalId\": \"string\",\n      \"archivedAt\": \"1953-12-04T01:07:40.877Z\",\n      \"metadata\": {\n        \"key_0\": {}\n      }\n    }\n  ],\n  \"pagination\": {\n    \"limit\": 1374,\n    \"offset\": 9482,\n    \"total\": 1608,\n    \"hasMore\": false\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9c477f5f-b9e7-4822-89c0-85456bc1bd93",
+              "name": "400",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "products",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "active",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "archived",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API Key authentication using Bearer token",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"code\": \"string\",\n  \"details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fdc4f03b-7c00-4033-81d7-b025ab99c4d7",
+              "name": "403",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "products",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "active",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "archived",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API Key authentication using Bearer token",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"code\": \"string\",\n  \"details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b330808e-7bbf-46cf-b50c-50e4e3c3078f",
+              "name": "500",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "products",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "active",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "archived",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API Key authentication using Bearer token",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"code\": \"string\",\n  \"details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b07f82b1-f418-499c-b074-c64c3b004ae6",
+          "name": "Create a new product",
+          "request": {
+            "name": "Create a new product",
+            "description": {
+              "content": "Creates a new product for the organization",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "products",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string,null>\",\n  \"active\": false,\n  \"productCode\": \"<string,null>\",\n  \"externalId\": \"<string,null>\",\n  \"metadata\": {\n    \"key_0\": {}\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "d4482edd-c2c8-4b0c-ba8e-f22bc0d2fb1d",
+              "name": "201",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "products",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API Key authentication using Bearer token",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string,null>\",\n  \"active\": false,\n  \"productCode\": \"<string,null>\",\n  \"externalId\": \"<string,null>\",\n  \"metadata\": {\n    \"key_0\": {}\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"name\": \"string\",\n  \"description\": \"string\",\n  \"createdAt\": \"1990-12-02T08:58:00.915Z\",\n  \"updatedAt\": \"2002-01-04T17:46:34.534Z\",\n  \"active\": true,\n  \"productCode\": \"string\",\n  \"externalId\": \"string\",\n  \"archivedAt\": \"2012-12-03T16:53:23.176Z\",\n  \"metadata\": {\n    \"key_0\": {}\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4af4064b-1215-44e3-afd0-7746c2b131b9",
+              "name": "400",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "products",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API Key authentication using Bearer token",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string,null>\",\n  \"active\": false,\n  \"productCode\": \"<string,null>\",\n  \"externalId\": \"<string,null>\",\n  \"metadata\": {\n    \"key_0\": {}\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"code\": \"string\",\n  \"details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3130f871-190c-4956-a1cc-2ed203a186cd",
+              "name": "403",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "products",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API Key authentication using Bearer token",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string,null>\",\n  \"active\": false,\n  \"productCode\": \"<string,null>\",\n  \"externalId\": \"<string,null>\",\n  \"metadata\": {\n    \"key_0\": {}\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"code\": \"string\",\n  \"details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fec69260-8af5-43db-b704-a1fe45950205",
+              "name": "500",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "products",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API Key authentication using Bearer token",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string,null>\",\n  \"active\": false,\n  \"productCode\": \"<string,null>\",\n  \"externalId\": \"<string,null>\",\n  \"metadata\": {\n    \"key_0\": {}\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"code\": \"string\",\n  \"details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5b2ba515-0c54-44bf-8ef8-f0a471c676e4",
+          "name": "Get product",
+          "request": {
+            "name": "Get product",
+            "description": {
+              "content": "Get a product by ID, including its product attributes with pricing details",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "products",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e24c0abc-4c03-4f66-8bab-74733061939f",
+              "name": "200",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "products",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API Key authentication using Bearer token",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"name\": \"string\",\n  \"description\": \"string\",\n  \"createdAt\": \"1995-04-08T05:40:02.375Z\",\n  \"updatedAt\": \"1947-05-24T00:59:26.809Z\",\n  \"active\": true,\n  \"productCode\": \"string\",\n  \"externalId\": \"string\",\n  \"archivedAt\": \"2004-07-03T19:22:18.388Z\",\n  \"metadata\": {\n    \"key_0\": {},\n    \"key_1\": {}\n  },\n  \"productAttributes\": [\n    {\n      \"productAttributeId\": \"string\",\n      \"name\": \"string\",\n      \"active\": true,\n      \"pricing\": {\n        \"pricingType\": \"RecurringGraduated\",\n        \"chargeType\": \"string\",\n        \"pricePoints\": [\n          {\n            \"currency\": \"string\",\n            \"unitPrice\": 3992.934007706167,\n            \"tiers\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"minQuantity\": 3305.8991835327724,\n            \"maxQuantity\": 3795.865486589779,\n            \"includedQuantity\": 2411.663524983102\n          },\n          {\n            \"currency\": \"string\",\n            \"unitPrice\": 990.0379927444425,\n            \"tiers\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"minQuantity\": 2771.9718971511365,\n            \"maxQuantity\": 7078.012183809479,\n            \"includedQuantity\": 1573.9040559107664\n          }\n        ],\n        \"pricingModel\": \"string\",\n        \"eventName\": \"string\",\n        \"signalType\": \"outcome\",\n        \"billingFrequency\": \"string\",\n        \"billingType\": \"string\",\n        \"creditsCurrencyId\": \"string\",\n        \"creditCost\": 8385.632678678134,\n        \"unitValue\": 2862.256693886932,\n        \"percentageValue\": 3849.426543971177,\n        \"costPlusMultiplier\": 5827.416447849124\n      },\n      \"creditBenefits\": [\n        {\n          \"id\": \"string\",\n          \"creditsCurrencyId\": \"string\",\n          \"amount\": 8703.13825805834,\n          \"recipient\": \"string\",\n          \"isInfiniteTotal\": false,\n          \"allocationCadence\": \"string\",\n          \"creditGrantTiming\": \"string\",\n          \"overageUnitPrice\": 6998.150179582847,\n          \"rolloverAmount\": 4403.712228722554,\n          \"rolloverDuration\": 4615.928662841952,\n          \"rolloverDurationUnit\": \"string\"\n        },\n        {\n          \"id\": \"string\",\n          \"creditsCurrencyId\": \"string\",\n          \"amount\": 9032.284857768887,\n          \"recipient\": \"string\",\n          \"isInfiniteTotal\": false,\n          \"allocationCadence\": \"string\",\n          \"creditGrantTiming\": \"string\",\n          \"overageUnitPrice\": 553.5258140193699,\n          \"rolloverAmount\": 230.1810898377832,\n          \"rolloverDuration\": 1139.723905926936,\n          \"rolloverDurationUnit\": \"string\"\n        }\n      ]\n    },\n    {\n      \"productAttributeId\": \"string\",\n      \"name\": \"string\",\n      \"active\": true,\n      \"pricing\": {\n        \"pricingType\": \"RecurringPercentOfTotal\",\n        \"chargeType\": \"string\",\n        \"pricePoints\": [\n          {\n            \"currency\": \"string\",\n            \"unitPrice\": 4051.804970486087,\n            \"tiers\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"minQuantity\": 4807.204193769916,\n            \"maxQuantity\": 8487.628585662416,\n            \"includedQuantity\": 2478.158735581575\n          },\n          {\n            \"currency\": \"string\",\n            \"unitPrice\": 5622.625199138192,\n            \"tiers\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"minQuantity\": 3654.7443444655205,\n            \"maxQuantity\": 7041.366144172017,\n            \"includedQuantity\": 2126.2955624688893\n          }\n        ],\n        \"pricingModel\": \"string\",\n        \"eventName\": \"string\",\n        \"signalType\": \"outcome\",\n        \"billingFrequency\": \"string\",\n        \"billingType\": \"string\",\n        \"creditsCurrencyId\": \"string\",\n        \"creditCost\": 7949.136387443288,\n        \"unitValue\": 4010.4797152960946,\n        \"percentageValue\": 6137.345056814304,\n        \"costPlusMultiplier\": 6687.528632644027\n      },\n      \"creditBenefits\": [\n        {\n          \"id\": \"string\",\n          \"creditsCurrencyId\": \"string\",\n          \"amount\": 6769.162502419602,\n          \"recipient\": \"string\",\n          \"isInfiniteTotal\": false,\n          \"allocationCadence\": \"string\",\n          \"creditGrantTiming\": \"string\",\n          \"overageUnitPrice\": 1436.029554575059,\n          \"rolloverAmount\": 9785.884754070392,\n          \"rolloverDuration\": 8552.943519829267,\n          \"rolloverDurationUnit\": \"string\"\n        },\n        {\n          \"id\": \"string\",\n          \"creditsCurrencyId\": \"string\",\n          \"amount\": 4031.3902999108363,\n          \"recipient\": \"string\",\n          \"isInfiniteTotal\": false,\n          \"allocationCadence\": \"string\",\n          \"creditGrantTiming\": \"string\",\n          \"overageUnitPrice\": 2587.209768248603,\n          \"rolloverAmount\": 968.9935301296637,\n          \"rolloverDuration\": 3598.2998858665715,\n          \"rolloverDurationUnit\": \"string\"\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "66e923c6-fd52-4821-a05f-9022c8e978c1",
+              "name": "403",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "products",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API Key authentication using Bearer token",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"code\": \"string\",\n  \"details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "344e094c-611d-4a07-8e5f-1cfa116cfada",
+              "name": "404",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "products",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API Key authentication using Bearer token",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"code\": \"string\",\n  \"details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "093103e1-ce39-4759-bb20-afa0e32e5d62",
+              "name": "500",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "products",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API Key authentication using Bearer token",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"code\": \"string\",\n  \"details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5ca86e4d-cd8e-40ec-b992-bcec68a801c6",
+          "name": "Update product",
+          "request": {
+            "name": "Update product",
+            "description": {
+              "content": "Update a product by ID. Optionally upsert product attributes with pricing.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "products",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string,null>\",\n  \"active\": \"<boolean>\",\n  \"productCode\": \"<string,null>\",\n  \"externalId\": \"<string,null>\",\n  \"metadata\": {\n    \"key_0\": {}\n  },\n  \"productAttributes\": [\n    {\n      \"name\": \"<string>\",\n      \"pricing\": {\n        \"pricingType\": \"<string>\",\n        \"billingFrequency\": \"<string>\",\n        \"pricePoints\": [\n          {\n            \"currency\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"unitPrice\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"tiers\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"minQuantity\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"maxQuantity\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"includedQuantity\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"currency\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"unitPrice\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"tiers\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"minQuantity\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"maxQuantity\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"includedQuantity\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"billingFrequencyCustomMonths\": \"<integer>\",\n        \"billingType\": \"Advance\"\n      },\n      \"productAttributeId\": \"<uuid>\",\n      \"active\": \"<boolean>\",\n      \"creditBenefits\": [\n        {\n          \"creditsCurrencyId\": \"<string>\",\n          \"amount\": \"<double>\",\n          \"recipient\": \"organization\",\n          \"isInfiniteTotal\": false,\n          \"allocationCadence\": \"upfront\",\n          \"creditGrantTiming\": \"<string>\",\n          \"overageUnitPrice\": \"<number,null-double>\",\n          \"rolloverAmount\": \"<number,null-double>\",\n          \"rolloverDuration\": \"<number,null-double>\",\n          \"rolloverDurationUnit\": \"<string,null>\"\n        },\n        {\n          \"creditsCurrencyId\": \"<string>\",\n          \"amount\": \"<double>\",\n          \"recipient\": \"organization\",\n          \"isInfiniteTotal\": false,\n          \"allocationCadence\": \"upfront\",\n          \"creditGrantTiming\": \"<string>\",\n          \"overageUnitPrice\": \"<number,null-double>\",\n          \"rolloverAmount\": \"<number,null-double>\",\n          \"rolloverDuration\": \"<number,null-double>\",\n          \"rolloverDurationUnit\": \"<string,null>\"\n        }\n      ]\n    },\n    {\n      \"name\": \"<string>\",\n      \"pricing\": {\n        \"pricingType\": \"<string>\",\n        \"billingFrequency\": \"<string>\",\n        \"pricePoints\": [\n          {\n            \"currency\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"unitPrice\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"tiers\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"minQuantity\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"maxQuantity\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"includedQuantity\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"currency\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"unitPrice\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"tiers\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"minQuantity\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"maxQuantity\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"includedQuantity\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"billingFrequencyCustomMonths\": \"<integer>\",\n        \"billingType\": \"Advance\"\n      },\n      \"productAttributeId\": \"<uuid>\",\n      \"active\": \"<boolean>\",\n      \"creditBenefits\": [\n        {\n          \"creditsCurrencyId\": \"<string>\",\n          \"amount\": \"<double>\",\n          \"recipient\": \"organization\",\n          \"isInfiniteTotal\": false,\n          \"allocationCadence\": \"upfront\",\n          \"creditGrantTiming\": \"<string>\",\n          \"overageUnitPrice\": \"<number,null-double>\",\n          \"rolloverAmount\": \"<number,null-double>\",\n          \"rolloverDuration\": \"<number,null-double>\",\n          \"rolloverDurationUnit\": \"<string,null>\"\n        },\n        {\n          \"creditsCurrencyId\": \"<string>\",\n          \"amount\": \"<double>\",\n          \"recipient\": \"organization\",\n          \"isInfiniteTotal\": false,\n          \"allocationCadence\": \"upfront\",\n          \"creditGrantTiming\": \"<string>\",\n          \"overageUnitPrice\": \"<number,null-double>\",\n          \"rolloverAmount\": \"<number,null-double>\",\n          \"rolloverDuration\": \"<number,null-double>\",\n          \"rolloverDurationUnit\": \"<string,null>\"\n        }\n      ]\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "942cbe37-a667-4bff-98d0-1cb38a3aba94",
+              "name": "200",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "products",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API Key authentication using Bearer token",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string,null>\",\n  \"active\": \"<boolean>\",\n  \"productCode\": \"<string,null>\",\n  \"externalId\": \"<string,null>\",\n  \"metadata\": {\n    \"key_0\": {}\n  },\n  \"productAttributes\": [\n    {\n      \"name\": \"string\",\n      \"pricing\": {\n        \"pricingType\": \"RecurringPerUnit\",\n        \"billingFrequency\": \"Custom\",\n        \"pricePoints\": [\n          {\n            \"currency\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"unitPrice\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"tiers\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"minQuantity\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"maxQuantity\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"includedQuantity\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"currency\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"unitPrice\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"tiers\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"minQuantity\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"maxQuantity\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"includedQuantity\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"billingFrequencyCustomMonths\": 4882,\n        \"billingType\": \"Advance\"\n      },\n      \"productAttributeId\": \"c83848be-5735-84b0-afc4-e169ad185ea6\",\n      \"active\": true,\n      \"creditBenefits\": [\n        {\n          \"creditsCurrencyId\": \"string\",\n          \"amount\": 9300.199809277268,\n          \"recipient\": \"organization\",\n          \"isInfiniteTotal\": false,\n          \"allocationCadence\": \"upfront\",\n          \"creditGrantTiming\": \"on_payment\",\n          \"overageUnitPrice\": 9241.577955070634,\n          \"rolloverAmount\": 395.2141740462245,\n          \"rolloverDuration\": 7746.887178433435,\n          \"rolloverDurationUnit\": \"string\"\n        },\n        {\n          \"creditsCurrencyId\": \"string\",\n          \"amount\": 8381.623435879963,\n          \"recipient\": \"organization\",\n          \"isInfiniteTotal\": false,\n          \"allocationCadence\": \"upfront\",\n          \"creditGrantTiming\": \"on_order_activation\",\n          \"overageUnitPrice\": 479.8785688898466,\n          \"rolloverAmount\": 1797.954344646119,\n          \"rolloverDuration\": 2276.9730874869197,\n          \"rolloverDurationUnit\": \"string\"\n        }\n      ]\n    },\n    {\n      \"name\": \"string\",\n      \"pricing\": {\n        \"pricingType\": \"RecurringPerUnit\",\n        \"billingFrequency\": \"Semi-Annually\",\n        \"pricePoints\": [\n          {\n            \"currency\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"unitPrice\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"tiers\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"minQuantity\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"maxQuantity\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"includedQuantity\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"currency\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"unitPrice\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"tiers\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"minQuantity\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"maxQuantity\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"includedQuantity\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"billingFrequencyCustomMonths\": 1163,\n        \"billingType\": \"Advance\"\n      },\n      \"productAttributeId\": \"92813681-8573-fa67-8ab8-494482faee0b\",\n      \"active\": true,\n      \"creditBenefits\": [\n        {\n          \"creditsCurrencyId\": \"string\",\n          \"amount\": 7520.697006750913,\n          \"recipient\": \"organization\",\n          \"isInfiniteTotal\": false,\n          \"allocationCadence\": \"upfront\",\n          \"creditGrantTiming\": \"on_payment\",\n          \"overageUnitPrice\": 9828.851625447285,\n          \"rolloverAmount\": 8030.676454353196,\n          \"rolloverDuration\": 5127.568834075299,\n          \"rolloverDurationUnit\": \"string\"\n        },\n        {\n          \"creditsCurrencyId\": \"string\",\n          \"amount\": 4063.5983163677,\n          \"recipient\": \"organization\",\n          \"isInfiniteTotal\": false,\n          \"allocationCadence\": \"upfront\",\n          \"creditGrantTiming\": \"on_order_activation\",\n          \"overageUnitPrice\": 2371.690595113247,\n          \"rolloverAmount\": 1149.5656504357921,\n          \"rolloverDuration\": 9768.630777700084,\n          \"rolloverDurationUnit\": \"string\"\n        }\n      ]\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"name\": \"string\",\n  \"description\": \"string\",\n  \"createdAt\": \"1995-04-08T05:40:02.375Z\",\n  \"updatedAt\": \"1947-05-24T00:59:26.809Z\",\n  \"active\": true,\n  \"productCode\": \"string\",\n  \"externalId\": \"string\",\n  \"archivedAt\": \"2004-07-03T19:22:18.388Z\",\n  \"metadata\": {\n    \"key_0\": {},\n    \"key_1\": {}\n  },\n  \"productAttributes\": [\n    {\n      \"productAttributeId\": \"string\",\n      \"name\": \"string\",\n      \"active\": true,\n      \"pricing\": {\n        \"pricingType\": \"RecurringGraduated\",\n        \"chargeType\": \"string\",\n        \"pricePoints\": [\n          {\n            \"currency\": \"string\",\n            \"unitPrice\": 3992.934007706167,\n            \"tiers\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"minQuantity\": 3305.8991835327724,\n            \"maxQuantity\": 3795.865486589779,\n            \"includedQuantity\": 2411.663524983102\n          },\n          {\n            \"currency\": \"string\",\n            \"unitPrice\": 990.0379927444425,\n            \"tiers\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"minQuantity\": 2771.9718971511365,\n            \"maxQuantity\": 7078.012183809479,\n            \"includedQuantity\": 1573.9040559107664\n          }\n        ],\n        \"pricingModel\": \"string\",\n        \"eventName\": \"string\",\n        \"signalType\": \"outcome\",\n        \"billingFrequency\": \"string\",\n        \"billingType\": \"string\",\n        \"creditsCurrencyId\": \"string\",\n        \"creditCost\": 8385.632678678134,\n        \"unitValue\": 2862.256693886932,\n        \"percentageValue\": 3849.426543971177,\n        \"costPlusMultiplier\": 5827.416447849124\n      },\n      \"creditBenefits\": [\n        {\n          \"id\": \"string\",\n          \"creditsCurrencyId\": \"string\",\n          \"amount\": 8703.13825805834,\n          \"recipient\": \"string\",\n          \"isInfiniteTotal\": false,\n          \"allocationCadence\": \"string\",\n          \"creditGrantTiming\": \"string\",\n          \"overageUnitPrice\": 6998.150179582847,\n          \"rolloverAmount\": 4403.712228722554,\n          \"rolloverDuration\": 4615.928662841952,\n          \"rolloverDurationUnit\": \"string\"\n        },\n        {\n          \"id\": \"string\",\n          \"creditsCurrencyId\": \"string\",\n          \"amount\": 9032.284857768887,\n          \"recipient\": \"string\",\n          \"isInfiniteTotal\": false,\n          \"allocationCadence\": \"string\",\n          \"creditGrantTiming\": \"string\",\n          \"overageUnitPrice\": 553.5258140193699,\n          \"rolloverAmount\": 230.1810898377832,\n          \"rolloverDuration\": 1139.723905926936,\n          \"rolloverDurationUnit\": \"string\"\n        }\n      ]\n    },\n    {\n      \"productAttributeId\": \"string\",\n      \"name\": \"string\",\n      \"active\": true,\n      \"pricing\": {\n        \"pricingType\": \"RecurringPercentOfTotal\",\n        \"chargeType\": \"string\",\n        \"pricePoints\": [\n          {\n            \"currency\": \"string\",\n            \"unitPrice\": 4051.804970486087,\n            \"tiers\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"minQuantity\": 4807.204193769916,\n            \"maxQuantity\": 8487.628585662416,\n            \"includedQuantity\": 2478.158735581575\n          },\n          {\n            \"currency\": \"string\",\n            \"unitPrice\": 5622.625199138192,\n            \"tiers\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"minQuantity\": 3654.7443444655205,\n            \"maxQuantity\": 7041.366144172017,\n            \"includedQuantity\": 2126.2955624688893\n          }\n        ],\n        \"pricingModel\": \"string\",\n        \"eventName\": \"string\",\n        \"signalType\": \"outcome\",\n        \"billingFrequency\": \"string\",\n        \"billingType\": \"string\",\n        \"creditsCurrencyId\": \"string\",\n        \"creditCost\": 7949.136387443288,\n        \"unitValue\": 4010.4797152960946,\n        \"percentageValue\": 6137.345056814304,\n        \"costPlusMultiplier\": 6687.528632644027\n      },\n      \"creditBenefits\": [\n        {\n          \"id\": \"string\",\n          \"creditsCurrencyId\": \"string\",\n          \"amount\": 6769.162502419602,\n          \"recipient\": \"string\",\n          \"isInfiniteTotal\": false,\n          \"allocationCadence\": \"string\",\n          \"creditGrantTiming\": \"string\",\n          \"overageUnitPrice\": 1436.029554575059,\n          \"rolloverAmount\": 9785.884754070392,\n          \"rolloverDuration\": 8552.943519829267,\n          \"rolloverDurationUnit\": \"string\"\n        },\n        {\n          \"id\": \"string\",\n          \"creditsCurrencyId\": \"string\",\n          \"amount\": 4031.3902999108363,\n          \"recipient\": \"string\",\n          \"isInfiniteTotal\": false,\n          \"allocationCadence\": \"string\",\n          \"creditGrantTiming\": \"string\",\n          \"overageUnitPrice\": 2587.209768248603,\n          \"rolloverAmount\": 968.9935301296637,\n          \"rolloverDuration\": 3598.2998858665715,\n          \"rolloverDurationUnit\": \"string\"\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0520b68b-302b-4443-a7ad-55be0065ec96",
+              "name": "400",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "products",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API Key authentication using Bearer token",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string,null>\",\n  \"active\": \"<boolean>\",\n  \"productCode\": \"<string,null>\",\n  \"externalId\": \"<string,null>\",\n  \"metadata\": {\n    \"key_0\": {}\n  },\n  \"productAttributes\": [\n    {\n      \"name\": \"string\",\n      \"pricing\": {\n        \"pricingType\": \"RecurringPerUnit\",\n        \"billingFrequency\": \"Custom\",\n        \"pricePoints\": [\n          {\n            \"currency\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"unitPrice\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"tiers\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"minQuantity\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"maxQuantity\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"includedQuantity\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"currency\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"unitPrice\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"tiers\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"minQuantity\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"maxQuantity\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"includedQuantity\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"billingFrequencyCustomMonths\": 4882,\n        \"billingType\": \"Advance\"\n      },\n      \"productAttributeId\": \"c83848be-5735-84b0-afc4-e169ad185ea6\",\n      \"active\": true,\n      \"creditBenefits\": [\n        {\n          \"creditsCurrencyId\": \"string\",\n          \"amount\": 9300.199809277268,\n          \"recipient\": \"organization\",\n          \"isInfiniteTotal\": false,\n          \"allocationCadence\": \"upfront\",\n          \"creditGrantTiming\": \"on_payment\",\n          \"overageUnitPrice\": 9241.577955070634,\n          \"rolloverAmount\": 395.2141740462245,\n          \"rolloverDuration\": 7746.887178433435,\n          \"rolloverDurationUnit\": \"string\"\n        },\n        {\n          \"creditsCurrencyId\": \"string\",\n          \"amount\": 8381.623435879963,\n          \"recipient\": \"organization\",\n          \"isInfiniteTotal\": false,\n          \"allocationCadence\": \"upfront\",\n          \"creditGrantTiming\": \"on_order_activation\",\n          \"overageUnitPrice\": 479.8785688898466,\n          \"rolloverAmount\": 1797.954344646119,\n          \"rolloverDuration\": 2276.9730874869197,\n          \"rolloverDurationUnit\": \"string\"\n        }\n      ]\n    },\n    {\n      \"name\": \"string\",\n      \"pricing\": {\n        \"pricingType\": \"RecurringPerUnit\",\n        \"billingFrequency\": \"Semi-Annually\",\n        \"pricePoints\": [\n          {\n            \"currency\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"unitPrice\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"tiers\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"minQuantity\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"maxQuantity\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"includedQuantity\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"currency\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"unitPrice\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"tiers\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"minQuantity\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"maxQuantity\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"includedQuantity\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"billingFrequencyCustomMonths\": 1163,\n        \"billingType\": \"Advance\"\n      },\n      \"productAttributeId\": \"92813681-8573-fa67-8ab8-494482faee0b\",\n      \"active\": true,\n      \"creditBenefits\": [\n        {\n          \"creditsCurrencyId\": \"string\",\n          \"amount\": 7520.697006750913,\n          \"recipient\": \"organization\",\n          \"isInfiniteTotal\": false,\n          \"allocationCadence\": \"upfront\",\n          \"creditGrantTiming\": \"on_payment\",\n          \"overageUnitPrice\": 9828.851625447285,\n          \"rolloverAmount\": 8030.676454353196,\n          \"rolloverDuration\": 5127.568834075299,\n          \"rolloverDurationUnit\": \"string\"\n        },\n        {\n          \"creditsCurrencyId\": \"string\",\n          \"amount\": 4063.5983163677,\n          \"recipient\": \"organization\",\n          \"isInfiniteTotal\": false,\n          \"allocationCadence\": \"upfront\",\n          \"creditGrantTiming\": \"on_order_activation\",\n          \"overageUnitPrice\": 2371.690595113247,\n          \"rolloverAmount\": 1149.5656504357921,\n          \"rolloverDuration\": 9768.630777700084,\n          \"rolloverDurationUnit\": \"string\"\n        }\n      ]\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"code\": \"string\",\n  \"details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5ce81552-bcc2-4dba-811d-c4187f6cb6af",
+              "name": "403",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "products",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API Key authentication using Bearer token",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string,null>\",\n  \"active\": \"<boolean>\",\n  \"productCode\": \"<string,null>\",\n  \"externalId\": \"<string,null>\",\n  \"metadata\": {\n    \"key_0\": {}\n  },\n  \"productAttributes\": [\n    {\n      \"name\": \"string\",\n      \"pricing\": {\n        \"pricingType\": \"RecurringPerUnit\",\n        \"billingFrequency\": \"Custom\",\n        \"pricePoints\": [\n          {\n            \"currency\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"unitPrice\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"tiers\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"minQuantity\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"maxQuantity\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"includedQuantity\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"currency\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"unitPrice\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"tiers\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"minQuantity\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"maxQuantity\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"includedQuantity\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"billingFrequencyCustomMonths\": 4882,\n        \"billingType\": \"Advance\"\n      },\n      \"productAttributeId\": \"c83848be-5735-84b0-afc4-e169ad185ea6\",\n      \"active\": true,\n      \"creditBenefits\": [\n        {\n          \"creditsCurrencyId\": \"string\",\n          \"amount\": 9300.199809277268,\n          \"recipient\": \"organization\",\n          \"isInfiniteTotal\": false,\n          \"allocationCadence\": \"upfront\",\n          \"creditGrantTiming\": \"on_payment\",\n          \"overageUnitPrice\": 9241.577955070634,\n          \"rolloverAmount\": 395.2141740462245,\n          \"rolloverDuration\": 7746.887178433435,\n          \"rolloverDurationUnit\": \"string\"\n        },\n        {\n          \"creditsCurrencyId\": \"string\",\n          \"amount\": 8381.623435879963,\n          \"recipient\": \"organization\",\n          \"isInfiniteTotal\": false,\n          \"allocationCadence\": \"upfront\",\n          \"creditGrantTiming\": \"on_order_activation\",\n          \"overageUnitPrice\": 479.8785688898466,\n          \"rolloverAmount\": 1797.954344646119,\n          \"rolloverDuration\": 2276.9730874869197,\n          \"rolloverDurationUnit\": \"string\"\n        }\n      ]\n    },\n    {\n      \"name\": \"string\",\n      \"pricing\": {\n        \"pricingType\": \"RecurringPerUnit\",\n        \"billingFrequency\": \"Semi-Annually\",\n        \"pricePoints\": [\n          {\n            \"currency\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"unitPrice\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"tiers\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"minQuantity\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"maxQuantity\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"includedQuantity\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"currency\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"unitPrice\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"tiers\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"minQuantity\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"maxQuantity\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"includedQuantity\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"billingFrequencyCustomMonths\": 1163,\n        \"billingType\": \"Advance\"\n      },\n      \"productAttributeId\": \"92813681-8573-fa67-8ab8-494482faee0b\",\n      \"active\": true,\n      \"creditBenefits\": [\n        {\n          \"creditsCurrencyId\": \"string\",\n          \"amount\": 7520.697006750913,\n          \"recipient\": \"organization\",\n          \"isInfiniteTotal\": false,\n          \"allocationCadence\": \"upfront\",\n          \"creditGrantTiming\": \"on_payment\",\n          \"overageUnitPrice\": 9828.851625447285,\n          \"rolloverAmount\": 8030.676454353196,\n          \"rolloverDuration\": 5127.568834075299,\n          \"rolloverDurationUnit\": \"string\"\n        },\n        {\n          \"creditsCurrencyId\": \"string\",\n          \"amount\": 4063.5983163677,\n          \"recipient\": \"organization\",\n          \"isInfiniteTotal\": false,\n          \"allocationCadence\": \"upfront\",\n          \"creditGrantTiming\": \"on_order_activation\",\n          \"overageUnitPrice\": 2371.690595113247,\n          \"rolloverAmount\": 1149.5656504357921,\n          \"rolloverDuration\": 9768.630777700084,\n          \"rolloverDurationUnit\": \"string\"\n        }\n      ]\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"code\": \"string\",\n  \"details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0d1c2c01-7525-42c9-8de7-2c5fd027ee93",
+              "name": "404",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "products",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API Key authentication using Bearer token",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string,null>\",\n  \"active\": \"<boolean>\",\n  \"productCode\": \"<string,null>\",\n  \"externalId\": \"<string,null>\",\n  \"metadata\": {\n    \"key_0\": {}\n  },\n  \"productAttributes\": [\n    {\n      \"name\": \"string\",\n      \"pricing\": {\n        \"pricingType\": \"RecurringPerUnit\",\n        \"billingFrequency\": \"Custom\",\n        \"pricePoints\": [\n          {\n            \"currency\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"unitPrice\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"tiers\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"minQuantity\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"maxQuantity\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"includedQuantity\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"currency\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"unitPrice\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"tiers\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"minQuantity\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"maxQuantity\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"includedQuantity\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"billingFrequencyCustomMonths\": 4882,\n        \"billingType\": \"Advance\"\n      },\n      \"productAttributeId\": \"c83848be-5735-84b0-afc4-e169ad185ea6\",\n      \"active\": true,\n      \"creditBenefits\": [\n        {\n          \"creditsCurrencyId\": \"string\",\n          \"amount\": 9300.199809277268,\n          \"recipient\": \"organization\",\n          \"isInfiniteTotal\": false,\n          \"allocationCadence\": \"upfront\",\n          \"creditGrantTiming\": \"on_payment\",\n          \"overageUnitPrice\": 9241.577955070634,\n          \"rolloverAmount\": 395.2141740462245,\n          \"rolloverDuration\": 7746.887178433435,\n          \"rolloverDurationUnit\": \"string\"\n        },\n        {\n          \"creditsCurrencyId\": \"string\",\n          \"amount\": 8381.623435879963,\n          \"recipient\": \"organization\",\n          \"isInfiniteTotal\": false,\n          \"allocationCadence\": \"upfront\",\n          \"creditGrantTiming\": \"on_order_activation\",\n          \"overageUnitPrice\": 479.8785688898466,\n          \"rolloverAmount\": 1797.954344646119,\n          \"rolloverDuration\": 2276.9730874869197,\n          \"rolloverDurationUnit\": \"string\"\n        }\n      ]\n    },\n    {\n      \"name\": \"string\",\n      \"pricing\": {\n        \"pricingType\": \"RecurringPerUnit\",\n        \"billingFrequency\": \"Semi-Annually\",\n        \"pricePoints\": [\n          {\n            \"currency\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"unitPrice\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"tiers\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"minQuantity\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"maxQuantity\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"includedQuantity\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"currency\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"unitPrice\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"tiers\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"minQuantity\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"maxQuantity\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"includedQuantity\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"billingFrequencyCustomMonths\": 1163,\n        \"billingType\": \"Advance\"\n      },\n      \"productAttributeId\": \"92813681-8573-fa67-8ab8-494482faee0b\",\n      \"active\": true,\n      \"creditBenefits\": [\n        {\n          \"creditsCurrencyId\": \"string\",\n          \"amount\": 7520.697006750913,\n          \"recipient\": \"organization\",\n          \"isInfiniteTotal\": false,\n          \"allocationCadence\": \"upfront\",\n          \"creditGrantTiming\": \"on_payment\",\n          \"overageUnitPrice\": 9828.851625447285,\n          \"rolloverAmount\": 8030.676454353196,\n          \"rolloverDuration\": 5127.568834075299,\n          \"rolloverDurationUnit\": \"string\"\n        },\n        {\n          \"creditsCurrencyId\": \"string\",\n          \"amount\": 4063.5983163677,\n          \"recipient\": \"organization\",\n          \"isInfiniteTotal\": false,\n          \"allocationCadence\": \"upfront\",\n          \"creditGrantTiming\": \"on_order_activation\",\n          \"overageUnitPrice\": 2371.690595113247,\n          \"rolloverAmount\": 1149.5656504357921,\n          \"rolloverDuration\": 9768.630777700084,\n          \"rolloverDurationUnit\": \"string\"\n        }\n      ]\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"code\": \"string\",\n  \"details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "dd7ef125-cedf-4dee-8419-15e69f57f4df",
+              "name": "500",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "products",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API Key authentication using Bearer token",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string,null>\",\n  \"active\": \"<boolean>\",\n  \"productCode\": \"<string,null>\",\n  \"externalId\": \"<string,null>\",\n  \"metadata\": {\n    \"key_0\": {}\n  },\n  \"productAttributes\": [\n    {\n      \"name\": \"string\",\n      \"pricing\": {\n        \"pricingType\": \"RecurringPerUnit\",\n        \"billingFrequency\": \"Custom\",\n        \"pricePoints\": [\n          {\n            \"currency\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"unitPrice\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"tiers\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"minQuantity\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"maxQuantity\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"includedQuantity\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"currency\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"unitPrice\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"tiers\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"minQuantity\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"maxQuantity\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"includedQuantity\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"billingFrequencyCustomMonths\": 4882,\n        \"billingType\": \"Advance\"\n      },\n      \"productAttributeId\": \"c83848be-5735-84b0-afc4-e169ad185ea6\",\n      \"active\": true,\n      \"creditBenefits\": [\n        {\n          \"creditsCurrencyId\": \"string\",\n          \"amount\": 9300.199809277268,\n          \"recipient\": \"organization\",\n          \"isInfiniteTotal\": false,\n          \"allocationCadence\": \"upfront\",\n          \"creditGrantTiming\": \"on_payment\",\n          \"overageUnitPrice\": 9241.577955070634,\n          \"rolloverAmount\": 395.2141740462245,\n          \"rolloverDuration\": 7746.887178433435,\n          \"rolloverDurationUnit\": \"string\"\n        },\n        {\n          \"creditsCurrencyId\": \"string\",\n          \"amount\": 8381.623435879963,\n          \"recipient\": \"organization\",\n          \"isInfiniteTotal\": false,\n          \"allocationCadence\": \"upfront\",\n          \"creditGrantTiming\": \"on_order_activation\",\n          \"overageUnitPrice\": 479.8785688898466,\n          \"rolloverAmount\": 1797.954344646119,\n          \"rolloverDuration\": 2276.9730874869197,\n          \"rolloverDurationUnit\": \"string\"\n        }\n      ]\n    },\n    {\n      \"name\": \"string\",\n      \"pricing\": {\n        \"pricingType\": \"RecurringPerUnit\",\n        \"billingFrequency\": \"Semi-Annually\",\n        \"pricePoints\": [\n          {\n            \"currency\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"unitPrice\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"tiers\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"minQuantity\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"maxQuantity\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"includedQuantity\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"currency\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"unitPrice\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"tiers\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"minQuantity\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"maxQuantity\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"includedQuantity\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"billingFrequencyCustomMonths\": 1163,\n        \"billingType\": \"Advance\"\n      },\n      \"productAttributeId\": \"92813681-8573-fa67-8ab8-494482faee0b\",\n      \"active\": true,\n      \"creditBenefits\": [\n        {\n          \"creditsCurrencyId\": \"string\",\n          \"amount\": 7520.697006750913,\n          \"recipient\": \"organization\",\n          \"isInfiniteTotal\": false,\n          \"allocationCadence\": \"upfront\",\n          \"creditGrantTiming\": \"on_payment\",\n          \"overageUnitPrice\": 9828.851625447285,\n          \"rolloverAmount\": 8030.676454353196,\n          \"rolloverDuration\": 5127.568834075299,\n          \"rolloverDurationUnit\": \"string\"\n        },\n        {\n          \"creditsCurrencyId\": \"string\",\n          \"amount\": 4063.5983163677,\n          \"recipient\": \"organization\",\n          \"isInfiniteTotal\": false,\n          \"allocationCadence\": \"upfront\",\n          \"creditGrantTiming\": \"on_order_activation\",\n          \"overageUnitPrice\": 2371.690595113247,\n          \"rolloverAmount\": 1149.5656504357921,\n          \"rolloverDuration\": 9768.630777700084,\n          \"rolloverDurationUnit\": \"string\"\n        }\n      ]\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"code\": \"string\",\n  \"details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.agentpaid.io/api/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "c3bae5f5-aac3-41db-b48e-b1b93cb106ad",
+    "name": "API Reference agents products API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

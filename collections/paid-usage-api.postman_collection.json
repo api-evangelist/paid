@@ -1,0 +1,583 @@
+{
+  "item": [
+    {
+      "id": "38089e31-55f2-4097-938c-484305f0e736",
+      "name": "usage",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "301ed0a3-af33-4932-a1c4-1e3d22b4728a",
+          "name": "Record usage signals in bulk",
+          "request": {
+            "name": "Record usage signals in bulk",
+            "description": {
+              "content": "DEPRECATED: Use POST /usage/v2/signals/bulk instead for cleaner field names.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "usage",
+                "signals",
+                "bulk"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"signals\": [\n    {\n      \"event_name\": \"<string>\",\n      \"agent_id\": \"<string>\",\n      \"external_agent_id\": \"<string>\",\n      \"customer_id\": \"<string>\",\n      \"data\": {\n        \"key_0\": {}\n      },\n      \"idempotency_key\": \"<string>\",\n      \"internal_customer_id\": \"<string>\",\n      \"external_customer_id\": \"<string>\"\n    },\n    {\n      \"event_name\": \"<string>\",\n      \"agent_id\": \"<string>\",\n      \"external_agent_id\": \"<string>\",\n      \"customer_id\": \"<string>\",\n      \"data\": {\n        \"key_0\": {}\n      },\n      \"idempotency_key\": \"<string>\",\n      \"internal_customer_id\": \"<string>\",\n      \"external_customer_id\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "76c454f9-98b0-4d34-b01a-8992a47917f8",
+              "name": "Success response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "usage",
+                    "signals",
+                    "bulk"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"signals\": [\n    {\n      \"event_name\": \"string\",\n      \"agent_id\": \"string\",\n      \"external_agent_id\": \"string\",\n      \"customer_id\": \"string\",\n      \"data\": {\n        \"key_0\": {},\n        \"key_1\": {},\n        \"key_2\": {}\n      },\n      \"idempotency_key\": \"string\",\n      \"internal_customer_id\": \"string\",\n      \"external_customer_id\": \"string\"\n    },\n    {\n      \"event_name\": \"string\",\n      \"agent_id\": \"string\",\n      \"external_agent_id\": \"string\",\n      \"customer_id\": \"string\",\n      \"data\": {\n        \"key_0\": {},\n        \"key_1\": {}\n      },\n      \"idempotency_key\": \"string\",\n      \"internal_customer_id\": \"string\",\n      \"external_customer_id\": \"string\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8f1d1e6a-7a34-48b9-a220-6704b35fabd9",
+          "name": "Record usage signals in bulk (V2 - Clean field names)",
+          "request": {
+            "name": "Record usage signals in bulk (V2 - Clean field names)",
+            "description": {},
+            "url": {
+              "path": [
+                "usage",
+                "v2",
+                "signals",
+                "bulk"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"signals\": [\n    {\n      \"event_name\": \"<string>\",\n      \"product_id\": \"<string>\",\n      \"external_product_id\": \"<string>\",\n      \"customer_id\": \"<string>\",\n      \"external_customer_id\": \"<string>\",\n      \"data\": {\n        \"key_0\": {},\n        \"key_1\": {},\n        \"key_2\": {}\n      },\n      \"idempotency_key\": \"<string>\"\n    },\n    {\n      \"event_name\": \"<string>\",\n      \"product_id\": \"<string>\",\n      \"external_product_id\": \"<string>\",\n      \"customer_id\": \"<string>\",\n      \"external_customer_id\": \"<string>\",\n      \"data\": {\n        \"key_0\": {},\n        \"key_1\": {}\n      },\n      \"idempotency_key\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "09bc4175-1fe5-4e9c-a79c-b58d5cf26851",
+              "name": "Success response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "usage",
+                    "v2",
+                    "signals",
+                    "bulk"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"signals\": [\n    {\n      \"event_name\": \"string\",\n      \"product_id\": \"string\",\n      \"external_product_id\": \"string\",\n      \"customer_id\": \"string\",\n      \"external_customer_id\": \"string\",\n      \"data\": {\n        \"key_0\": {}\n      },\n      \"idempotency_key\": \"string\"\n    },\n    {\n      \"event_name\": \"string\",\n      \"product_id\": \"string\",\n      \"external_product_id\": \"string\",\n      \"customer_id\": \"string\",\n      \"external_customer_id\": \"string\",\n      \"data\": {\n        \"key_0\": {}\n      },\n      \"idempotency_key\": \"string\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "92fd58be-c92d-4738-8a33-57a8ffbbdd37",
+              "name": "Bad request - Each signal must provide exactly one customer ID (customer_id OR external_customer_id) and exactly one product ID (product_id OR external_product_id). Providing both or neither will result in an error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "usage",
+                    "v2",
+                    "signals",
+                    "bulk"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"signals\": [\n    {\n      \"event_name\": \"string\",\n      \"product_id\": \"string\",\n      \"external_product_id\": \"string\",\n      \"customer_id\": \"string\",\n      \"external_customer_id\": \"string\",\n      \"data\": {\n        \"key_0\": {}\n      },\n      \"idempotency_key\": \"string\"\n    },\n    {\n      \"event_name\": \"string\",\n      \"product_id\": \"string\",\n      \"external_product_id\": \"string\",\n      \"customer_id\": \"string\",\n      \"external_customer_id\": \"string\",\n      \"data\": {\n        \"key_0\": {}\n      },\n      \"idempotency_key\": \"string\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"message\": \"string\",\n    \"code\": \"string\",\n    \"details\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c9afc989-70cb-4ccc-97a9-9d335ac7af20",
+              "name": "Conflict - One or more signals have idempotency keys that have already been used. The entire batch is rejected.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "usage",
+                    "v2",
+                    "signals",
+                    "bulk"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"signals\": [\n    {\n      \"event_name\": \"string\",\n      \"product_id\": \"string\",\n      \"external_product_id\": \"string\",\n      \"customer_id\": \"string\",\n      \"external_customer_id\": \"string\",\n      \"data\": {\n        \"key_0\": {}\n      },\n      \"idempotency_key\": \"string\"\n    },\n    {\n      \"event_name\": \"string\",\n      \"product_id\": \"string\",\n      \"external_product_id\": \"string\",\n      \"customer_id\": \"string\",\n      \"external_customer_id\": \"string\",\n      \"data\": {\n        \"key_0\": {}\n      },\n      \"idempotency_key\": \"string\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"message\": \"string\",\n    \"code\": \"string\",\n    \"details\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "608f7688-73e9-49c9-91b9-d5de4679943b",
+          "name": "Check if usage is allowed for a customer and product",
+          "request": {
+            "name": "Check if usage is allowed for a customer and product",
+            "description": {},
+            "url": {
+              "path": [
+                "usage",
+                "check-usage"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"externalCustomerId\": \"<string>\",\n  \"externalProductId\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "7887b16a-f21f-4240-9727-eca64a1ff211",
+              "name": "Usage check response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "usage",
+                    "check-usage"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"externalCustomerId\": \"<string>\",\n  \"externalProductId\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"allowed\": true,\n  \"message\": \"string\",\n  \"eventName\": \"string\",\n  \"available\": 4350.46933605322,\n  \"eventsQuantity\": 3889.19995364687,\n  \"limit\": 139.2151648846085\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f84c6af5-7559-4d71-bdb0-b825b44ce063",
+              "name": "Bad request - Invalid API key, missing authorization, or missing required fields (externalCustomerId, externalProductId)",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "usage",
+                    "check-usage"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"externalCustomerId\": \"<string>\",\n  \"externalProductId\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"message\": \"string\",\n    \"code\": \"string\",\n    \"details\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "885d307f-a6b7-4b2b-a4c7-030b66a977f0",
+              "name": "Not found - Order, plan, or product not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "usage",
+                    "check-usage"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"externalCustomerId\": \"<string>\",\n  \"externalProductId\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"message\": \"string\",\n    \"code\": \"string\",\n    \"details\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7854bb03-d294-459f-bf02-dc4f242618b7",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "usage",
+                    "check-usage"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"externalCustomerId\": \"<string>\",\n  \"externalProductId\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"message\": \"string\",\n    \"code\": \"string\",\n    \"details\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.agentpaid.io/api/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "4b99da0a-6121-483c-b2dc-5e54e00a75c6",
+    "name": "API Reference agents usage API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

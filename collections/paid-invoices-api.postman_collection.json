@@ -1,0 +1,1434 @@
+{
+  "item": [
+    {
+      "id": "d9ce2419-7caa-47af-89c5-6f8f63cd8960",
+      "name": "invoices",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "c2d4347f-646b-4a33-a1d9-fbb66b538ed4",
+          "name": "List invoices",
+          "request": {
+            "name": "List invoices",
+            "description": {
+              "content": "Get a list of invoices for the organization",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "invoices",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "10"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "customerId",
+                  "value": "<string>",
+                  "description": "Filter by customer ID."
+                },
+                {
+                  "disabled": false,
+                  "key": "externalCustomerId",
+                  "value": "<string>",
+                  "description": "Filter by customer external ID."
+                },
+                {
+                  "disabled": false,
+                  "key": "orderId",
+                  "value": "<string>",
+                  "description": "Filter by the order this invoice was generated from."
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "Filter by invoice status."
+                },
+                {
+                  "disabled": false,
+                  "key": "paymentStatus",
+                  "value": "<string>",
+                  "description": "Filter by payment status."
+                },
+                {
+                  "disabled": false,
+                  "key": "issueDateFrom",
+                  "value": "<string>",
+                  "description": "Only invoices whose issue date is on or after this date. Accepts an ISO 8601 date or date-time. Date-only values (e.g. 2026-06-30) are treated as UTC; date-times without an explicit timezone offset are ambiguous, so include one (e.g. 2026-06-30T00:00:00-05:00) when precision matters."
+                },
+                {
+                  "disabled": false,
+                  "key": "issueDateTo",
+                  "value": "<string>",
+                  "description": "Only invoices whose issue date is on or before this date. Accepts an ISO 8601 date or date-time. Date-only values (e.g. 2026-06-30) are treated as UTC; date-times without an explicit timezone offset are ambiguous, so include one (e.g. 2026-06-30T00:00:00-05:00) when precision matters."
+                },
+                {
+                  "disabled": false,
+                  "key": "dueDateFrom",
+                  "value": "<string>",
+                  "description": "Only invoices whose due date is on or after this date. Invoices without a due date are not matched. Accepts an ISO 8601 date or date-time. Date-only values (e.g. 2026-06-30) are treated as UTC; date-times without an explicit timezone offset are ambiguous, so include one (e.g. 2026-06-30T00:00:00-05:00) when precision matters."
+                },
+                {
+                  "disabled": false,
+                  "key": "dueDateTo",
+                  "value": "<string>",
+                  "description": "Only invoices whose due date is on or before this date. Invoices without a due date are not matched. Accepts an ISO 8601 date or date-time. Date-only values (e.g. 2026-06-30) are treated as UTC; date-times without an explicit timezone offset are ambiguous, so include one (e.g. 2026-06-30T00:00:00-05:00) when precision matters."
+                },
+                {
+                  "disabled": false,
+                  "key": "displayNumber",
+                  "value": "<string>",
+                  "description": "Filter by the invoice number shown on the invoice, whether draft or posted (exact match)."
+                },
+                {
+                  "disabled": false,
+                  "key": "purchaseOrderReference",
+                  "value": "<string>",
+                  "description": "Filter by purchase order reference (exact match, whitespace-sensitive)."
+                },
+                {
+                  "disabled": false,
+                  "key": "currency",
+                  "value": "<string>",
+                  "description": "Filter by invoice currency code (case-insensitive, e.g. USD)."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ded83350-1912-4b77-b53b-9d99cc3ca73a",
+              "name": "200",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "invoices",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "customerId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "externalCustomerId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "orderId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "pending"
+                    },
+                    {
+                      "key": "paymentStatus",
+                      "value": "overdue"
+                    },
+                    {
+                      "key": "issueDateFrom",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "issueDateTo",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dueDateFrom",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dueDateTo",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "displayNumber",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "purchaseOrderReference",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "currency",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API Key authentication using Bearer token",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"string\",\n      \"customerId\": \"string\",\n      \"status\": \"voided\",\n      \"paymentStatus\": \"error\",\n      \"source\": \"order_based\",\n      \"startDate\": \"2005-05-07T06:45:15.095Z\",\n      \"issueDate\": \"1950-06-20T18:40:15.194Z\",\n      \"currency\": \"string\",\n      \"taxAmount\": 421.46674835477626,\n      \"taxRate\": 3097.662153426711,\n      \"taxStatus\": \"failed\",\n      \"invoiceTotalExcludingTax\": 5987.26813557765,\n      \"invoiceTotal\": 3354.3280503879105,\n      \"amountDue\": 6454.03450290244,\n      \"amountPaid\": 3520.119099822576,\n      \"amountRemaining\": 5429.990465596918,\n      \"creditNotesTotal\": 1585.9212952828693,\n      \"createdAt\": \"2006-06-22T07:07:32.781Z\",\n      \"updatedAt\": \"2026-08-03T01:31:33.456Z\",\n      \"taxExempt\": false,\n      \"displayNumber\": \"string\",\n      \"orderId\": \"string\",\n      \"endDate\": \"2013-05-31T05:39:24.292Z\",\n      \"postedDate\": \"1982-05-28T13:22:29.989Z\",\n      \"dueDate\": \"2004-02-28T00:58:52.955Z\",\n      \"metadata\": {\n        \"key_0\": {},\n        \"key_1\": {}\n      },\n      \"paymentLink\": \"string\",\n      \"disputeLink\": \"string\",\n      \"publicUrlToken\": \"string\",\n      \"billingContactId\": \"string\",\n      \"purchaseOrderReference\": \"string\"\n    },\n    {\n      \"id\": \"string\",\n      \"customerId\": \"string\",\n      \"status\": \"pending\",\n      \"paymentStatus\": \"partiallyPaid\",\n      \"source\": \"order_based\",\n      \"startDate\": \"1979-12-03T04:30:37.221Z\",\n      \"issueDate\": \"1949-06-28T16:46:09.240Z\",\n      \"currency\": \"string\",\n      \"taxAmount\": 1284.5171236794472,\n      \"taxRate\": 1099.4992112248003,\n      \"taxStatus\": \"failed\",\n      \"invoiceTotalExcludingTax\": 2988.333340405853,\n      \"invoiceTotal\": 7104.55259740641,\n      \"amountDue\": 2562.0544332553795,\n      \"amountPaid\": 2974.5460019151137,\n      \"amountRemaining\": 3555.069870411648,\n      \"creditNotesTotal\": 6608.169551368195,\n      \"createdAt\": \"1952-04-13T21:46:39.201Z\",\n      \"updatedAt\": \"1978-10-01T06:00:15.613Z\",\n      \"taxExempt\": true,\n      \"displayNumber\": \"string\",\n      \"orderId\": \"string\",\n      \"endDate\": \"1996-12-06T22:23:56.625Z\",\n      \"postedDate\": \"1999-02-09T13:28:49.831Z\",\n      \"dueDate\": \"1987-04-29T06:55:05.668Z\",\n      \"metadata\": {\n        \"key_0\": {},\n        \"key_1\": {}\n      },\n      \"paymentLink\": \"string\",\n      \"disputeLink\": \"string\",\n      \"publicUrlToken\": \"string\",\n      \"billingContactId\": \"string\",\n      \"purchaseOrderReference\": \"string\"\n    }\n  ],\n  \"pagination\": {\n    \"limit\": 145,\n    \"offset\": 2215,\n    \"total\": 6064,\n    \"hasMore\": false\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "21ca4c80-8e94-4446-8cc8-bc75c38df87e",
+              "name": "400",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "invoices",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "customerId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "externalCustomerId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "orderId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "pending"
+                    },
+                    {
+                      "key": "paymentStatus",
+                      "value": "overdue"
+                    },
+                    {
+                      "key": "issueDateFrom",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "issueDateTo",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dueDateFrom",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dueDateTo",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "displayNumber",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "purchaseOrderReference",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "currency",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API Key authentication using Bearer token",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"code\": \"string\",\n  \"details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9829e657-f04f-4ba3-99d4-472e330d6076",
+              "name": "403",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "invoices",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "customerId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "externalCustomerId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "orderId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "pending"
+                    },
+                    {
+                      "key": "paymentStatus",
+                      "value": "overdue"
+                    },
+                    {
+                      "key": "issueDateFrom",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "issueDateTo",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dueDateFrom",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dueDateTo",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "displayNumber",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "purchaseOrderReference",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "currency",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API Key authentication using Bearer token",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"code\": \"string\",\n  \"details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d80e059b-0504-4d40-a772-d663108e4cae",
+              "name": "500",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "invoices",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "customerId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "externalCustomerId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "orderId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "pending"
+                    },
+                    {
+                      "key": "paymentStatus",
+                      "value": "overdue"
+                    },
+                    {
+                      "key": "issueDateFrom",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "issueDateTo",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dueDateFrom",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dueDateTo",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "displayNumber",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "purchaseOrderReference",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "currency",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API Key authentication using Bearer token",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"code\": \"string\",\n  \"details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7d1cbfd0-37f8-4244-8795-3f9947ea5e9a",
+          "name": "Get invoice",
+          "request": {
+            "name": "Get invoice",
+            "description": {
+              "content": "Get an invoice by ID",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "invoices",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "eb2b2f84-1e70-4f0b-9752-4878a87d6b53",
+              "name": "200",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "invoices",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API Key authentication using Bearer token",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"customerId\": \"string\",\n  \"status\": \"building\",\n  \"paymentStatus\": \"paid\",\n  \"source\": \"manual\",\n  \"startDate\": \"1965-08-23T00:06:44.915Z\",\n  \"issueDate\": \"2020-07-27T08:24:00.130Z\",\n  \"currency\": \"string\",\n  \"taxAmount\": 4165.059950343551,\n  \"taxRate\": 5907.404500934301,\n  \"taxStatus\": \"voided\",\n  \"invoiceTotalExcludingTax\": 7079.924442023699,\n  \"invoiceTotal\": 6632.8755353116785,\n  \"amountDue\": 9488.674772645383,\n  \"amountPaid\": 4655.805126247765,\n  \"amountRemaining\": 3747.874404131125,\n  \"creditNotesTotal\": 7800.532097247287,\n  \"createdAt\": \"1999-02-18T07:28:17.039Z\",\n  \"updatedAt\": \"1963-05-21T18:49:42.824Z\",\n  \"taxExempt\": true,\n  \"displayNumber\": \"string\",\n  \"orderId\": \"string\",\n  \"endDate\": \"1947-04-30T02:20:02.261Z\",\n  \"postedDate\": \"1966-02-07T04:12:40.405Z\",\n  \"dueDate\": \"1968-05-03T19:22:22.315Z\",\n  \"metadata\": {\n    \"key_0\": {},\n    \"key_1\": {},\n    \"key_2\": {}\n  },\n  \"paymentLink\": \"string\",\n  \"disputeLink\": \"string\",\n  \"publicUrlToken\": \"string\",\n  \"billingContactId\": \"string\",\n  \"purchaseOrderReference\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2046922e-4e9a-4b8a-bd6b-fcdf4efc8d87",
+              "name": "403",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "invoices",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API Key authentication using Bearer token",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"code\": \"string\",\n  \"details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a36e33d1-59b3-405c-a94f-5a8080124b80",
+              "name": "404",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "invoices",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API Key authentication using Bearer token",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"code\": \"string\",\n  \"details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "63276852-2ae3-432a-90cb-d35d81f024ab",
+              "name": "500",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "invoices",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API Key authentication using Bearer token",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"code\": \"string\",\n  \"details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e65ddb2a-560f-4f7f-a2d9-b5dc164e9bc0",
+          "name": "Update invoice",
+          "request": {
+            "name": "Update invoice",
+            "description": {
+              "content": "Update an invoice by ID",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "invoices",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"metadata\": {\n    \"key_0\": {},\n    \"key_1\": {}\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "ddc00623-35f1-49d9-a790-bacfdca5cd78",
+              "name": "200",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "invoices",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API Key authentication using Bearer token",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"metadata\": {\n    \"key_0\": {},\n    \"key_1\": {},\n    \"key_2\": {}\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"customerId\": \"string\",\n  \"status\": \"building\",\n  \"paymentStatus\": \"paid\",\n  \"source\": \"manual\",\n  \"startDate\": \"1965-08-23T00:06:44.915Z\",\n  \"issueDate\": \"2020-07-27T08:24:00.130Z\",\n  \"currency\": \"string\",\n  \"taxAmount\": 4165.059950343551,\n  \"taxRate\": 5907.404500934301,\n  \"taxStatus\": \"voided\",\n  \"invoiceTotalExcludingTax\": 7079.924442023699,\n  \"invoiceTotal\": 6632.8755353116785,\n  \"amountDue\": 9488.674772645383,\n  \"amountPaid\": 4655.805126247765,\n  \"amountRemaining\": 3747.874404131125,\n  \"creditNotesTotal\": 7800.532097247287,\n  \"createdAt\": \"1999-02-18T07:28:17.039Z\",\n  \"updatedAt\": \"1963-05-21T18:49:42.824Z\",\n  \"taxExempt\": true,\n  \"displayNumber\": \"string\",\n  \"orderId\": \"string\",\n  \"endDate\": \"1947-04-30T02:20:02.261Z\",\n  \"postedDate\": \"1966-02-07T04:12:40.405Z\",\n  \"dueDate\": \"1968-05-03T19:22:22.315Z\",\n  \"metadata\": {\n    \"key_0\": {},\n    \"key_1\": {},\n    \"key_2\": {}\n  },\n  \"paymentLink\": \"string\",\n  \"disputeLink\": \"string\",\n  \"publicUrlToken\": \"string\",\n  \"billingContactId\": \"string\",\n  \"purchaseOrderReference\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "31c5ddcd-a705-45a9-8655-8274fe96d635",
+              "name": "400",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "invoices",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API Key authentication using Bearer token",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"metadata\": {\n    \"key_0\": {},\n    \"key_1\": {},\n    \"key_2\": {}\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"code\": \"string\",\n  \"details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4a1c7c56-1d88-432c-ba75-f49b3dc0c3fb",
+              "name": "403",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "invoices",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API Key authentication using Bearer token",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"metadata\": {\n    \"key_0\": {},\n    \"key_1\": {},\n    \"key_2\": {}\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"code\": \"string\",\n  \"details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ac4d56ef-c6be-4f03-a8b2-320a070e5e61",
+              "name": "404",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "invoices",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API Key authentication using Bearer token",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"metadata\": {\n    \"key_0\": {},\n    \"key_1\": {},\n    \"key_2\": {}\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"code\": \"string\",\n  \"details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "05706110-da8c-495c-92eb-7ea27cdf5590",
+              "name": "500",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "invoices",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API Key authentication using Bearer token",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"metadata\": {\n    \"key_0\": {},\n    \"key_1\": {},\n    \"key_2\": {}\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"code\": \"string\",\n  \"details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6664d187-9b44-47bb-bb6f-e414a5c99ba6",
+          "name": "Get invoice lines",
+          "request": {
+            "name": "Get invoice lines",
+            "description": {
+              "content": "Get the invoice lines for an invoice by ID",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "invoices",
+                ":id",
+                "lines"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "10"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ce17e829-ad66-483b-aa09-4c95783f83b7",
+              "name": "200",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "invoices",
+                    ":id",
+                    "lines"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API Key authentication using Bearer token",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"string\",\n      \"orderId\": \"string\",\n      \"orderLineId\": \"string\",\n      \"orderLineAttributeId\": \"string\",\n      \"startDate\": \"2006-08-14T23:07:43.288Z\",\n      \"endDate\": \"2017-05-23T13:26:27.493Z\",\n      \"paymentStatus\": \"paid\",\n      \"quantity\": 9733,\n      \"totalPriceBeforeTax\": 3323.3656215902097,\n      \"tax\": 3094.8685328971405,\n      \"taxRate\": 1724.7245129021949,\n      \"totalPriceAfterTax\": 5051.4682979444815,\n      \"currency\": \"string\",\n      \"description\": \"string\",\n      \"balanceAmount\": 9233.469879000917,\n      \"creditedAmount\": 9362.825301847706,\n      \"createdAt\": \"2007-05-08T18:50:27.257Z\",\n      \"updatedAt\": \"1948-04-29T08:59:52.650Z\"\n    },\n    {\n      \"id\": \"string\",\n      \"orderId\": \"string\",\n      \"orderLineId\": \"string\",\n      \"orderLineAttributeId\": \"string\",\n      \"startDate\": \"1995-02-27T19:30:22.258Z\",\n      \"endDate\": \"2006-04-28T20:23:14.283Z\",\n      \"paymentStatus\": \"error\",\n      \"quantity\": 5442,\n      \"totalPriceBeforeTax\": 3354.751600357453,\n      \"tax\": 2551.2295132114537,\n      \"taxRate\": 2562.2599251317224,\n      \"totalPriceAfterTax\": 2685.74275427416,\n      \"currency\": \"string\",\n      \"description\": \"string\",\n      \"balanceAmount\": 3392.0238874532715,\n      \"creditedAmount\": 6346.738823048087,\n      \"createdAt\": \"2021-12-04T03:10:27.860Z\",\n      \"updatedAt\": \"2003-10-05T14:34:47.753Z\"\n    }\n  ],\n  \"pagination\": {\n    \"limit\": 3708,\n    \"offset\": 2450,\n    \"total\": 5424,\n    \"hasMore\": false\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4e44b75f-8e5c-4d5a-846d-70b53d460049",
+              "name": "403",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "invoices",
+                    ":id",
+                    "lines"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API Key authentication using Bearer token",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"code\": \"string\",\n  \"details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "06c5ffe8-a69c-4be8-bdf0-9d1ef4c264ca",
+              "name": "404",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "invoices",
+                    ":id",
+                    "lines"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API Key authentication using Bearer token",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"code\": \"string\",\n  \"details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "45d2a4ee-72fc-48d7-a200-31eb54d56e23",
+              "name": "500",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "invoices",
+                    ":id",
+                    "lines"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API Key authentication using Bearer token",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"code\": \"string\",\n  \"details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.agentpaid.io/api/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "45a3acdf-2900-4d5d-b10a-535b61dd5aec",
+    "name": "API Reference agents invoices API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

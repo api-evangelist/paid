@@ -1,0 +1,205 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "API Reference agents invoices API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "invoices",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List invoices",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.agentpaid.io/api/v1/invoices/",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "customerId",
+                "value": "",
+                "type": "query",
+                "description": "Filter by customer ID."
+              },
+              {
+                "name": "externalCustomerId",
+                "value": "",
+                "type": "query",
+                "description": "Filter by customer external ID."
+              },
+              {
+                "name": "orderId",
+                "value": "",
+                "type": "query",
+                "description": "Filter by the order this invoice was generated from."
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Filter by invoice status."
+              },
+              {
+                "name": "paymentStatus",
+                "value": "",
+                "type": "query",
+                "description": "Filter by payment status."
+              },
+              {
+                "name": "issueDateFrom",
+                "value": "",
+                "type": "query",
+                "description": "Only invoices whose issue date is on or after this date. Accepts an ISO 8601 date or date-time. Date-only values (e.g. 2026-06-30) are treated as UTC; date-times without an explicit timezone offset are ambiguous, so include one (e.g. 2026-06-30T00:00:00-05:00) when precision matters."
+              },
+              {
+                "name": "issueDateTo",
+                "value": "",
+                "type": "query",
+                "description": "Only invoices whose issue date is on or before this date. Accepts an ISO 8601 date or date-time. Date-only values (e.g. 2026-06-30) are treated as UTC; date-times without an explicit timezone offset are ambiguous, so include one (e.g. 2026-06-30T00:00:00-05:00) when precision matters."
+              },
+              {
+                "name": "dueDateFrom",
+                "value": "",
+                "type": "query",
+                "description": "Only invoices whose due date is on or after this date. Invoices without a due date are not matched. Accepts an ISO 8601 date or date-time. Date-only values (e.g. 2026-06-30) are treated as UTC; date-times without an explicit timezone offset are ambiguous, so include one (e.g. 2026-06-30T00:00:00-05:00) when precision matters."
+              },
+              {
+                "name": "dueDateTo",
+                "value": "",
+                "type": "query",
+                "description": "Only invoices whose due date is on or before this date. Invoices without a due date are not matched. Accepts an ISO 8601 date or date-time. Date-only values (e.g. 2026-06-30) are treated as UTC; date-times without an explicit timezone offset are ambiguous, so include one (e.g. 2026-06-30T00:00:00-05:00) when precision matters."
+              },
+              {
+                "name": "displayNumber",
+                "value": "",
+                "type": "query",
+                "description": "Filter by the invoice number shown on the invoice, whether draft or posted (exact match)."
+              },
+              {
+                "name": "purchaseOrderReference",
+                "value": "",
+                "type": "query",
+                "description": "Filter by purchase order reference (exact match, whitespace-sensitive)."
+              },
+              {
+                "name": "currency",
+                "value": "",
+                "type": "query",
+                "description": "Filter by invoice currency code (case-insensitive, e.g. USD)."
+              }
+            ]
+          },
+          "docs": "Get a list of invoices for the organization"
+        },
+        {
+          "info": {
+            "name": "Get invoice",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.agentpaid.io/api/v1/invoices/:id",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get an invoice by ID"
+        },
+        {
+          "info": {
+            "name": "Update invoice",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.agentpaid.io/api/v1/invoices/:id",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update an invoice by ID"
+        },
+        {
+          "info": {
+            "name": "Get invoice lines",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.agentpaid.io/api/v1/invoices/:id/lines",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Get the invoice lines for an invoice by ID"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

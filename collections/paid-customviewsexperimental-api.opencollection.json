@@ -1,0 +1,260 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "API Reference agents customViewsExperimental API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "customViewsExperimental",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List custom views (experimental)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.agentpaid.io/api/v1/experimental/views/",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "⚠️ **Experimental** — this endpoint may change or be removed without notice and is not subject to v2 backwards-compatibility guarantees. Do not build production-critical integrations against it yet.\n\nLists the organization's custom views (newest first) with lightweight summary info — name, status, query count, default date range, created date. Does not return the SQL or render bundle; fetch a single view via getCustomView for those."
+        },
+        {
+          "info": {
+            "name": "Create a custom view (experimental)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.agentpaid.io/api/v1/experimental/views/",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "⚠️ **Experimental** — this endpoint may change or be removed without notice and is not subject to v2 backwards-compatibility guarantees. Do not build production-critical integrations against it yet.\n\n⚠️ Only call this when the user has EXPLICITLY asked to save or create the view. After generating or previewing a dashboard, do NOT automatically save a draft — show it to the user and wait for them to ask you to save it. Creating saves a DRAFT only; it is NOT permission to publish — never chain a p"
+        },
+        {
+          "info": {
+            "name": "Publish a custom view (experimental)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.agentpaid.io/api/v1/experimental/views/:displayId/publish",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "displayId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "⚠️ **Experimental** — this endpoint may change or be removed without notice and is not subject to v2 backwards-compatibility guarantees. Do not build production-critical integrations against it yet.\n\n⚠️ Never publish as an automatic follow-up to creating or generating a view. Only call this after you have shown the user the built/previewed view and they have EXPLICITLY approved publishing — building and publishing are separate user decisions, and answering an earlier question (e.g. the view's sc"
+        },
+        {
+          "info": {
+            "name": "Change a custom view's date range (experimental)",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.agentpaid.io/api/v1/experimental/views/:displayId/period",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "displayId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "⚠️ **Experimental** — this endpoint may change or be removed without notice and is not subject to v2 backwards-compatibility guarantees. Do not build production-critical integrations against it yet.\n\nUpdates the view's default date range (the period applied to queries that use the `{period_start:DateTime}` / `{period_end:DateTime}` placeholders). Accepts a relative rolling window (e.g. last 30 days) or a fixed start/end range. Lets the period be changed after deployment without re-authoring the "
+        },
+        {
+          "info": {
+            "name": "Get a custom view's metadata + render bundle (experimental)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.agentpaid.io/api/v1/experimental/views/:displayId",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "displayId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "⚠️ **Experimental** — this endpoint may change or be removed without notice and is not subject to v2 backwards-compatibility guarantees. Do not build production-critical integrations against it yet.\n\nReturns the view's name, status, query ids, and the author render bundle for the owning organization (DRAFT or PUBLISHED). Used by the trusted preview/embed frame to render the sandbox; the per-customer data is fetched separately via /:displayId/data."
+        },
+        {
+          "info": {
+            "name": "Update a custom view (experimental)",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.agentpaid.io/api/v1/experimental/views/:displayId",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "displayId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "⚠️ **Experimental** — this endpoint may change or be removed without notice and is not subject to v2 backwards-compatibility guarantees. Do not build production-critical integrations against it yet.\n\nPartially updates a view. Omitted fields are left unchanged. For REVISIONS, prefer the incremental fields — `bundleEdits` (exact search-and-replace on the stored render bundle) and `queryUpserts`/`queryRemovals` (per-query changes) — so you transmit only what changed instead of re-sending the whole "
+        },
+        {
+          "info": {
+            "name": "Fetch a custom view's data, scoped to a customer or the organization (experimental)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.agentpaid.io/api/v1/experimental/views/:displayId/data",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "displayId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "customerId",
+                "value": "",
+                "type": "query",
+                "description": "Customer to scope the data to (dev/preview only; the embed derives this from the verified token). Required for customer-scoped views; ignored for organization-scoped views (their data is org-wide)."
+              },
+              {
+                "name": "periodKind",
+                "value": "",
+                "type": "query",
+                "description": "Override the view's default date range for this request only. 'relative' = rolling window (set periodUnit + periodAmount); 'absolute' = fixed range (set periodStart + periodEnd)."
+              },
+              {
+                "name": "periodUnit",
+                "value": "",
+                "type": "query",
+                "description": "relative override only: unit of the rolling window."
+              },
+              {
+                "name": "periodAmount",
+                "value": "",
+                "type": "query",
+                "description": "relative override only: how many units back from today."
+              },
+              {
+                "name": "periodStart",
+                "value": "",
+                "type": "query",
+                "description": "absolute override only: inclusive start date (YYYY-MM-DD)."
+              },
+              {
+                "name": "periodEnd",
+                "value": "",
+                "type": "query",
+                "description": "absolute override only: inclusive end date (YYYY-MM-DD)."
+              }
+            ]
+          },
+          "docs": "⚠️ **Experimental** — this endpoint may change or be removed without notice and is not subject to v2 backwards-compatibility guarantees. Do not build production-critical integrations against it yet.\n\nRuns every stored query of the view on the read-only analytics database and returns the result sets keyed by query id. For a customer-scoped view (the default), the query is scoped to the caller's organization AND the given `customerId` (both enforced as ClickHouse row filters) — `customerId` is req"
+        },
+        {
+          "info": {
+            "name": "Get an embed token for a custom view",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.agentpaid.io/api/v1/experimental/views/:displayId/embed-token",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "displayId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "customerId",
+                "value": "",
+                "type": "query",
+                "description": "The customer to scope the view to: external id, Paid display id (cus_…), or internal id."
+              },
+              {
+                "name": "ttlSeconds",
+                "value": "",
+                "type": "query",
+                "description": "Token lifetime in seconds (capped at 3600)."
+              }
+            ]
+          },
+          "docs": "⚠️ **Experimental** — this endpoint may change or be removed without notice and is not subject to v2 backwards-compatibility guarantees. Do not build production-critical integrations against it yet.\n\nMints a short-lived, customer-scoped token for embedding a published custom view. Call this from your server with your API key, then pass the returned token to the embed SDK. Organization-scoped views cannot be embedded per-customer — this returns a 400 (`ORG_SCOPED_VIEW_NOT_EMBEDDABLE`) for one."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
