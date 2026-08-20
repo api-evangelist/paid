@@ -36,6 +36,15 @@ created: '2026-07-17'
 modified: '2026-07-20'
 tags:
 - Company
+- Artificial Intelligence
+- Billing
+- Monetization
+- Payments
+- Usage-Based Pricing
+- AI Agents
+- FinOps
+tags_raw:
+- Company
 - AI
 - Billing
 - Monetization
@@ -50,6 +59,8 @@ apis:
   humanURL: https://docs.paid.ai/api-reference/api-reference
   baseURL: https://api.agentpaid.io/api/v2
   tags:
+  - Agents
+  tags_raw:
   - agents
   properties:
   - type: OpenAPI
@@ -61,7 +72,8 @@ apis:
   description: The analyticsExperimental API from Paid — 3 operation(s) for analyticsexperimental.
   humanURL: https://docs.paid.ai/api-reference/api-reference
   baseURL: https://api.agentpaid.io/api/v2
-  tags:
+  tags: []
+  tags_raw:
   - analyticsExperimental
   properties:
   - type: OpenAPI
@@ -74,6 +86,8 @@ apis:
   humanURL: https://docs.paid.ai/api-reference/api-reference
   baseURL: https://api.agentpaid.io/api/v2
   tags:
+  - Checkouts
+  tags_raw:
   - checkouts
   properties:
   - type: OpenAPI
@@ -86,6 +100,8 @@ apis:
   humanURL: https://docs.paid.ai/api-reference/api-reference
   baseURL: https://api.agentpaid.io/api/v2
   tags:
+  - Contacts
+  tags_raw:
   - contacts
   properties:
   - type: OpenAPI
@@ -98,6 +114,8 @@ apis:
   humanURL: https://docs.paid.ai/api-reference/api-reference
   baseURL: https://api.agentpaid.io/api/v2
   tags:
+  - Costs
+  tags_raw:
   - costs
   properties:
   - type: OpenAPI
@@ -110,6 +128,8 @@ apis:
   humanURL: https://docs.paid.ai/api-reference/api-reference
   baseURL: https://api.agentpaid.io/api/v2
   tags:
+  - Credits
+  tags_raw:
   - credits
   properties:
   - type: OpenAPI
@@ -122,6 +142,8 @@ apis:
   humanURL: https://docs.paid.ai/api-reference/api-reference
   baseURL: https://api.agentpaid.io/api/v2
   tags:
+  - Customer Groups
+  tags_raw:
   - customer-groups
   properties:
   - type: OpenAPI
@@ -146,6 +168,8 @@ apis:
   humanURL: https://docs.paid.ai/api-reference/api-reference
   baseURL: https://api.agentpaid.io/api/v2
   tags:
+  - Customers
+  tags_raw:
   - customers
   properties:
   - type: OpenAPI
@@ -157,7 +181,8 @@ apis:
   description: The customViewsExperimental API from Paid — 6 operation(s) for customviewsexperimental.
   humanURL: https://docs.paid.ai/api-reference/api-reference
   baseURL: https://api.agentpaid.io/api/v2
-  tags:
+  tags: []
+  tags_raw:
   - customViewsExperimental
   properties:
   - type: OpenAPI
@@ -170,6 +195,8 @@ apis:
   humanURL: https://docs.paid.ai/api-reference/api-reference
   baseURL: https://api.agentpaid.io/api/v2
   tags:
+  - Invoices
+  tags_raw:
   - invoices
   properties:
   - type: OpenAPI
@@ -182,6 +209,8 @@ apis:
   humanURL: https://docs.paid.ai/api-reference/api-reference
   baseURL: https://api.agentpaid.io/api/v2
   tags:
+  - Order
+  tags_raw:
   - orders
   properties:
   - type: OpenAPI
@@ -206,6 +235,8 @@ apis:
   humanURL: https://docs.paid.ai/api-reference/api-reference
   baseURL: https://api.agentpaid.io/api/v2
   tags:
+  - Plans
+  tags_raw:
   - plans
   properties:
   - type: OpenAPI
@@ -218,6 +249,8 @@ apis:
   humanURL: https://docs.paid.ai/api-reference/api-reference
   baseURL: https://api.agentpaid.io/api/v2
   tags:
+  - Pricing
+  tags_raw:
   - pricing
   properties:
   - type: OpenAPI
@@ -230,6 +263,8 @@ apis:
   humanURL: https://docs.paid.ai/api-reference/api-reference
   baseURL: https://api.agentpaid.io/api/v2
   tags:
+  - Product
+  tags_raw:
   - products
   properties:
   - type: OpenAPI
@@ -242,6 +277,8 @@ apis:
   humanURL: https://docs.paid.ai/api-reference/api-reference
   baseURL: https://api.agentpaid.io/api/v2
   tags:
+  - Signals
+  tags_raw:
   - signals
   properties:
   - type: OpenAPI
@@ -254,6 +291,8 @@ apis:
   humanURL: https://docs.paid.ai/api-reference/api-reference
   baseURL: https://api.agentpaid.io/api/v2
   tags:
+  - Traces
+  tags_raw:
   - traces
   properties:
   - type: OpenAPI
@@ -266,6 +305,8 @@ apis:
   humanURL: https://docs.paid.ai/api-reference/api-reference
   baseURL: https://api.agentpaid.io/api/v2
   tags:
+  - Usage
+  tags_raw:
   - usage
   properties:
   - type: OpenAPI
@@ -302,6 +343,8 @@ apis:
   humanURL: https://docs.paid.ai/api-reference/api-reference
   baseURL: https://api.agentpaid.io/api/v2
   tags:
+  - Webhook
+  tags_raw:
   - webhooks
   properties:
   - type: OpenAPI
