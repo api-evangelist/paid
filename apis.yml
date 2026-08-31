@@ -98,7 +98,7 @@ apis:
   humanURL: https://docs.paid.ai/api-reference/api-reference
   baseURL: https://api.agentpaid.io/api/v2
   tags:
-  - Checkouts
+  - checkouts
   tags_raw:
   - checkouts
   properties:
@@ -154,7 +154,7 @@ apis:
   humanURL: https://docs.paid.ai/api-reference/api-reference
   baseURL: https://api.agentpaid.io/api/v2
   tags:
-  - Customer Groups
+  - customer-groups
   tags_raw:
   - customer-groups
   properties:
@@ -303,7 +303,7 @@ apis:
   humanURL: https://docs.paid.ai/api-reference/api-reference
   baseURL: https://api.agentpaid.io/api/v2
   tags:
-  - Traces
+  - traces
   tags_raw:
   - traces
   properties:
