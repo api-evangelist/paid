@@ -100,7 +100,7 @@ apis:
   humanURL: https://docs.paid.ai/api-reference/api-reference
   baseURL: https://api.agentpaid.io/api/v2
   tags:
-  - Checkouts
+  - Checkout
   tags_raw:
   - checkouts
   properties:
@@ -142,7 +142,7 @@ apis:
   humanURL: https://docs.paid.ai/api-reference/api-reference
   baseURL: https://api.agentpaid.io/api/v2
   tags:
-  - Credits
+  - Credit
   tags_raw:
   - credits
   properties:
