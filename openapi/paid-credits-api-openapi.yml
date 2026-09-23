@@ -1,12 +1,12 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: API Reference agents credits API
+  title: Reference Credits API
   version: 1.0.0
 servers:
-- url: https://api.agentpaid.io/api/v1
-  description: Production
+- url: https://api.agentpaid.io/api/v2
+  description: Production API
 tags:
-- name: credits
+- name: Credits
 paths:
   /credits/currencies:
     get:
@@ -14,7 +14,7 @@ paths:
       summary: List credit currencies
       description: List credit currencies for the organization. Includes active and archived currencies by default; use the status query parameter to filter.
       tags:
-      - credits
+      - Credits
       parameters:
       - name: status
         in: query
@@ -52,7 +52,7 @@ paths:
       summary: Create credit currency
       description: Creates a credit currency for the organization.
       tags:
-      - credits
+      - Credits
       parameters:
       - name: Authorization
         in: header
@@ -97,7 +97,7 @@ paths:
       summary: Update credit currency
       description: Update a credit currency description or set its active/archive status.
       tags:
-      - credits
+      - Credits
       parameters:
       - name: id
         in: path
@@ -150,34 +150,6 @@ paths:
               $ref: '#/components/schemas/UpdateCreditCurrencyRequest'
 components:
   schemas:
-    CreditCurrencyListResponse:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/CreditCurrency'
-      required:
-      - data
-      title: CreditCurrencyListResponse
-    CreateCreditCurrencyRequest:
-      type: object
-      properties:
-        name:
-          type: string
-          description: Human-readable name shown for this credit currency.
-        key:
-          type: string
-          description: Stable machine-readable key for this credit currency. Use lowercase letters, numbers, underscores, and hyphens. Keys are unique within an organization.
-        description:
-          type:
-          - string
-          - 'null'
-          description: Optional description for this credit currency.
-      required:
-      - name
-      - key
-      title: CreateCreditCurrencyRequest
     UpdateCreditCurrencyRequestStatus:
       type: string
       enum:
@@ -185,13 +157,6 @@ components:
       - archived
       description: Set to `archived` to archive this credit currency, or `active` to restore it.
       title: UpdateCreditCurrencyRequestStatus
-    CreditCurrencyStatus:
-      type: string
-      enum:
-      - active
-      - archived
-      description: Whether this credit currency is active or archived.
-      title: CreditCurrencyStatus
     CreditCurrency:
       type: object
       properties:
@@ -244,6 +209,24 @@ components:
       - all
       default: all
       title: CreditsCurrenciesGetParametersStatus
+    CreateCreditCurrencyRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Human-readable name shown for this credit currency.
+        key:
+          type: string
+          description: Stable machine-readable key for this credit currency. Use lowercase letters, numbers, underscores, and hyphens. Keys are unique within an organization.
+        description:
+          type:
+          - string
+          - 'null'
+          description: Optional description for this credit currency.
+      required:
+      - name
+      - key
+      title: CreateCreditCurrencyRequest
     ErrorResponse:
       type: object
       properties:
@@ -268,7 +251,25 @@ components:
           $ref: '#/components/schemas/UpdateCreditCurrencyRequestStatus'
           description: Set to `archived` to archive this credit currency, or `active` to restore it.
       title: UpdateCreditCurrencyRequest
+    CreditCurrencyListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/CreditCurrency'
+      required:
+      - data
+      title: CreditCurrencyListResponse
+    CreditCurrencyStatus:
+      type: string
+      enum:
+      - active
+      - archived
+      description: Whether this credit currency is active or archived.
+      title: CreditCurrencyStatus
   securitySchemes:
     bearerAuth:
       type: http
       scheme: bearer
+      description: API Key authentication using Bearer token

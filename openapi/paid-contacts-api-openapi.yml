@@ -1,19 +1,22 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: API Reference agents contacts API
+  title: Paid Contacts API
   version: 1.0.0
+  description: 'Operations tagged contacts across 2 of this provider''s published API definitions: paid-v1.json, paid-v2.json. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://api.agentpaid.io/api/v1
   description: Production
+- url: https://api.agentpaid.io/api/v2
+  description: Production API
 tags:
-- name: contacts
+- name: Contacts
 paths:
   /contacts:
     get:
       operationId: list
       summary: Get contacts
       tags:
-      - contacts
+      - Contacts
       parameters:
       - name: Authorization
         in: header
@@ -34,7 +37,7 @@ paths:
       operationId: create
       summary: Create contact
       tags:
-      - contacts
+      - Contacts
       parameters:
       - name: Authorization
         in: header
@@ -54,12 +57,15 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/ContactCreate'
+    servers:
+    - url: https://api.agentpaid.io/api/v1
+      description: Production
   /contacts/{contactId}:
     get:
       operationId: get
       summary: Get contact by ID
       tags:
-      - contacts
+      - Contacts
       parameters:
       - name: contactId
         in: path
@@ -83,7 +89,7 @@ paths:
       operationId: delete
       summary: Delete contact
       tags:
-      - contacts
+      - Contacts
       parameters:
       - name: contactId
         in: path
@@ -103,12 +109,15 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/contacts_delete_Response_204'
+    servers:
+    - url: https://api.agentpaid.io/api/v1
+      description: Production
   /contacts/external/{externalId}:
     get:
       operationId: get-by-external-id
       summary: Get contact by external ID
       tags:
-      - contacts
+      - Contacts
       parameters:
       - name: externalId
         in: path
@@ -132,7 +141,7 @@ paths:
       operationId: delete-by-external-id
       summary: Delete contact by external ID
       tags:
-      - contacts
+      - Contacts
       parameters:
       - name: externalId
         in: path
@@ -157,7 +166,7 @@ paths:
       summary: Update contact by external ID
       description: Update a contact by its external ID
       tags:
-      - contacts
+      - Contacts
       parameters:
       - name: externalId
         in: path
@@ -207,13 +216,16 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/UpdateContactRequest'
+    servers:
+    - url: https://api.agentpaid.io/api/v1
+      description: Production
   /contacts/:
     get:
       operationId: list-contacts
       summary: List contacts
       description: Get a list of contacts for the organization
       tags:
-      - contacts
+      - Contacts
       parameters:
       - name: limit
         in: query
@@ -262,7 +274,7 @@ paths:
       summary: Create a new contact
       description: Creates a new contact for the organization
       tags:
-      - contacts
+      - Contacts
       parameters:
       - name: Authorization
         in: header
@@ -301,13 +313,16 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/CreateContactRequest'
+    servers:
+    - url: https://api.agentpaid.io/api/v2
+      description: Production API
   /contacts/{id}:
     get:
       operationId: get-contact-by-id
       summary: Get contact
       description: Get a contact by its ID
       tags:
-      - contacts
+      - Contacts
       parameters:
       - name: id
         in: path
@@ -350,7 +365,7 @@ paths:
       summary: Update contact
       description: Update a contact by its ID
       tags:
-      - contacts
+      - Contacts
       parameters:
       - name: id
         in: path
@@ -405,7 +420,7 @@ paths:
       summary: Delete contact
       description: Delete a contact by its ID
       tags:
-      - contacts
+      - Contacts
       parameters:
       - name: id
         in: path
@@ -443,56 +458,21 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
+    servers:
+    - url: https://api.agentpaid.io/api/v2
+      description: Production API
 components:
   schemas:
-    ContactRolesItems:
-      type: string
-      enum:
-      - BILLING
-      - ACCOUNTS_PAYABLE
-      title: ContactRolesItems
-    Salutation:
-      type: string
-      enum:
-      - Mr.
-      - Mrs.
-      - Miss
-      - Ms.
-      - Dr.
-      - Prof.
-      title: Salutation
-    CreateContactRequest:
+    contacts_delete_Response_204:
       type: object
-      properties:
-        customerId:
-          type: string
-        firstName:
-          type: string
-          default: ''
-        lastName:
-          type: string
-          default: ''
-        email:
-          type: string
-          format: email
-        phone:
-          type:
-          - string
-          - 'null'
-        billingAddress:
-          $ref: '#/components/schemas/ContactBillingAddress'
-        externalId:
-          type:
-          - string
-          - 'null'
-        roles:
-          type: array
-          items:
-            $ref: '#/components/schemas/CreateContactRequestRolesItems'
-      required:
-      - customerId
-      - email
-      title: CreateContactRequest
+      properties: {}
+      description: Empty response body
+      title: contacts_delete_Response_204
+    contacts_deleteByExternalId_Response_204:
+      type: object
+      properties: {}
+      description: Empty response body
+      title: contacts_deleteByExternalId_Response_204
     Contact:
       type: object
       properties:
@@ -527,34 +507,16 @@ components:
         billingPostalCode:
           type: string
       title: Contact
-    UpdateContactRequestRolesItems:
+    Salutation:
       type: string
       enum:
-      - BILLING
-      - ACCOUNTS_PAYABLE
-      title: UpdateContactRequestRolesItems
-    EmptyResponse:
-      type: object
-      properties: {}
-      title: EmptyResponse
-    ContactListResponse:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Contact_2'
-        pagination:
-          $ref: '#/components/schemas/Pagination'
-      required:
-      - data
-      - pagination
-      title: ContactListResponse
-    contacts_deleteByExternalId_Response_204:
-      type: object
-      properties: {}
-      description: Empty response body
-      title: contacts_deleteByExternalId_Response_204
+      - Mr.
+      - Mrs.
+      - Miss
+      - Ms.
+      - Dr.
+      - Prof.
+      title: Salutation
     ContactCreate:
       type: object
       properties:
@@ -590,6 +552,29 @@ components:
       - lastName
       - email
       title: ContactCreate
+    UpdateContactRequestRolesItems:
+      type: string
+      enum:
+      - BILLING
+      - ACCOUNTS_PAYABLE
+      title: UpdateContactRequestRolesItems
+    EmptyResponse:
+      type: object
+      properties: {}
+      title: EmptyResponse
+    ContactListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Contact_2'
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+      required:
+      - data
+      - pagination
+      title: ContactListResponse
     ErrorResponse:
       type: object
       properties:
@@ -602,56 +587,6 @@ components:
       required:
       - error
       title: ErrorResponse
-    CreateContactRequestRolesItems:
-      type: string
-      enum:
-      - BILLING
-      - ACCOUNTS_PAYABLE
-      title: CreateContactRequestRolesItems
-    Pagination:
-      type: object
-      properties:
-        limit:
-          type: integer
-        offset:
-          type: integer
-        total:
-          type: integer
-        hasMore:
-          type: boolean
-      required:
-      - limit
-      - offset
-      - total
-      - hasMore
-      title: Pagination
-    UpdateContactRequest:
-      type: object
-      properties:
-        customerId:
-          type: string
-        firstName:
-          type: string
-        lastName:
-          type: string
-        email:
-          type: string
-          format: email
-        phone:
-          type:
-          - string
-          - 'null'
-        billingAddress:
-          $ref: '#/components/schemas/ContactBillingAddress'
-        externalId:
-          type:
-          - string
-          - 'null'
-        roles:
-          type: array
-          items:
-            $ref: '#/components/schemas/UpdateContactRequestRolesItems'
-      title: UpdateContactRequest
     Contact_2:
       type: object
       properties:
@@ -697,6 +632,67 @@ components:
       - createdAt
       - updatedAt
       title: Contact
+    Pagination:
+      type: object
+      properties:
+        limit:
+          type: integer
+        offset:
+          type: integer
+        total:
+          type: integer
+        hasMore:
+          type: boolean
+      required:
+      - limit
+      - offset
+      - total
+      - hasMore
+      title: Pagination
+    ContactRolesItems:
+      type: string
+      enum:
+      - BILLING
+      - ACCOUNTS_PAYABLE
+      title: ContactRolesItems
+    CreateContactRequest:
+      type: object
+      properties:
+        customerId:
+          type: string
+        firstName:
+          type: string
+          default: ''
+        lastName:
+          type: string
+          default: ''
+        email:
+          type: string
+          format: email
+        phone:
+          type:
+          - string
+          - 'null'
+        billingAddress:
+          $ref: '#/components/schemas/ContactBillingAddress'
+        externalId:
+          type:
+          - string
+          - 'null'
+        roles:
+          type: array
+          items:
+            $ref: '#/components/schemas/CreateContactRequestRolesItems'
+      required:
+      - customerId
+      - email
+      title: CreateContactRequest
+    CreateContactRequestRolesItems:
+      type: string
+      enum:
+      - BILLING
+      - ACCOUNTS_PAYABLE
+      title: CreateContactRequestRolesItems
     ContactBillingAddress:
       type: object
       properties:
@@ -711,12 +707,37 @@ components:
         zipCode:
           type: string
       title: ContactBillingAddress
-    contacts_delete_Response_204:
+    UpdateContactRequest:
       type: object
-      properties: {}
-      description: Empty response body
-      title: contacts_delete_Response_204
+      properties:
+        customerId:
+          type: string
+        firstName:
+          type: string
+        lastName:
+          type: string
+        email:
+          type: string
+          format: email
+        phone:
+          type:
+          - string
+          - 'null'
+        billingAddress:
+          $ref: '#/components/schemas/ContactBillingAddress'
+        externalId:
+          type:
+          - string
+          - 'null'
+        roles:
+          type: array
+          items:
+            $ref: '#/components/schemas/UpdateContactRequestRolesItems'
+      title: UpdateContactRequest
   securitySchemes:
     bearerAuth:
       type: http
       scheme: bearer
+x-refined-from:
+- paid-v1.json
+- paid-v2.json

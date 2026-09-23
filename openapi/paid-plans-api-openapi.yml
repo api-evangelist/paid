@@ -1,12 +1,15 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: API Reference agents plans API
+  title: Paid Plans API
   version: 1.0.0
+  description: 'Operations tagged plans across 2 of this provider''s published API definitions: paid-v1.json, paid-v2.json. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://api.agentpaid.io/api/v1
   description: Production
+- url: https://api.agentpaid.io/api/v2
+  description: Production API
 tags:
-- name: plans
+- name: Plans
 paths:
   /plans/current:
     get:
@@ -14,7 +17,7 @@ paths:
       summary: Get customer's current plan
       description: Retrieves the currently active plan subscription for a customer by their external ID. Returns the plan details and subscription information.
       tags:
-      - plans
+      - Plans
       parameters:
       - name: customerExternalId
         in: query
@@ -53,12 +56,15 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+    servers:
+    - url: https://api.agentpaid.io/api/v1
+      description: Production
   /plans/{planId}:
     get:
       operationId: get-by-id
       summary: Get plan by ID
       tags:
-      - plans
+      - Plans
       parameters:
       - name: planId
         in: path
@@ -92,12 +98,15 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+    servers:
+    - url: https://api.agentpaid.io/api/v1
+      description: Production
   /plans/{planId}/usage:
     get:
       operationId: get-usage
       summary: Fetch usage summaries for a plan and customer
       tags:
-      - plans
+      - Plans
       parameters:
       - name: planId
         in: path
@@ -171,13 +180,16 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+    servers:
+    - url: https://api.agentpaid.io/api/v1
+      description: Production
   /plans/{planId}/subscribe:
     post:
       operationId: subscribe
       summary: Subscribe customer to plan
       description: Creates a new order for a customer subscribing to a plan. The order will be created with the plan's products and pricing attributes.
       tags:
-      - plans
+      - Plans
       parameters:
       - name: planId
         in: path
@@ -229,13 +241,16 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+    servers:
+    - url: https://api.agentpaid.io/api/v1
+      description: Production
   /plans/{planId}/unsubscribe:
     post:
       operationId: unsubscribe
       summary: Unsubscribe customer from plan
       description: Cancels the renewal of an active order for a customer's plan subscription. The order will remain active until the cancellation date.
       tags:
-      - plans
+      - Plans
       parameters:
       - name: planId
         in: path
@@ -281,13 +296,16 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+    servers:
+    - url: https://api.agentpaid.io/api/v1
+      description: Production
   /plans/upgrade:
     post:
       operationId: upgrade
       summary: Upgrade customer to a new plan
       description: Upgrades a customer from one plan to another with automatic proration. Credits are applied for the unused portion of the current billing period, and the order is updated with the new plan's pricing.
       tags:
-      - plans
+      - Plans
       parameters:
       - name: customerExternalId
         in: query
@@ -340,12 +358,15 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+    servers:
+    - url: https://api.agentpaid.io/api/v1
+      description: Production
   /plans/planGroup/{planGroupId}:
     get:
       operationId: get-group-by-id
       summary: Get plan group by ID
       tags:
-      - plans
+      - Plans
       parameters:
       - name: planGroupId
         in: path
@@ -379,13 +400,16 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+    servers:
+    - url: https://api.agentpaid.io/api/v1
+      description: Production
   /plans/planGroup/{planGroupId}/plans:
     get:
       operationId: get-group-plans
       summary: Get plans for a plan group
       description: Retrieves all plans in a plan group with their features (product-attribute pairs)
       tags:
-      - plans
+      - Plans
       parameters:
       - name: planGroupId
         in: path
@@ -421,13 +445,16 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+    servers:
+    - url: https://api.agentpaid.io/api/v1
+      description: Production
   /plans/:
     get:
       operationId: list-plans
       summary: List plans
       description: Returns plans for your organization, including archived plans by default, optionally filtered to a product.
       tags:
-      - plans
+      - Plans
       parameters:
       - name: limit
         in: query
@@ -499,7 +526,7 @@ paths:
       summary: Create a new plan
       description: Creates a new plan for a product.
       tags:
-      - plans
+      - Plans
       parameters:
       - name: Authorization
         in: header
@@ -544,13 +571,16 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/CreatePlanRequest'
+    servers:
+    - url: https://api.agentpaid.io/api/v2
+      description: Production API
   /plans/upgrade-path:
     put:
       operationId: update-plan-upgrade-path
       summary: Update plan upgrade path
       description: Updates upgrade path ordering for plans within a product, grouped by billing frequency.
       tags:
-      - plans
+      - Plans
       parameters:
       - name: Authorization
         in: header
@@ -595,13 +625,16 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/UpdatePlanUpgradePathRequest'
+    servers:
+    - url: https://api.agentpaid.io/api/v2
+      description: Production API
   /plans/{id}:
     get:
       operationId: get-plan-by-id
       summary: Get plan
       description: Get a plan by Paid plan ID.
       tags:
-      - plans
+      - Plans
       parameters:
       - name: id
         in: path
@@ -644,7 +677,7 @@ paths:
       summary: Update plan
       description: Update a plan by Paid plan ID. If attributes are provided, they replace the plan's existing attributes. Set status to archive or restore the plan.
       tags:
-      - plans
+      - Plans
       parameters:
       - name: id
         in: path
@@ -694,13 +727,16 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/UpdatePlanRequest'
+    servers:
+    - url: https://api.agentpaid.io/api/v2
+      description: Production API
   /plans/external/{externalId}:
     get:
       operationId: get-plan-by-external-id
       summary: Get plan by external ID
       description: Get a plan by your external plan ID.
       tags:
-      - plans
+      - Plans
       parameters:
       - name: externalId
         in: path
@@ -743,7 +779,7 @@ paths:
       summary: Update plan by external ID
       description: Update a plan by your external plan ID. If attributes are provided, they replace the plan's existing attributes. Set status to archive or restore the plan.
       tags:
-      - plans
+      - Plans
       parameters:
       - name: externalId
         in: path
@@ -793,118 +829,73 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/UpdatePlanRequest'
+    servers:
+    - url: https://api.agentpaid.io/api/v2
+      description: Production API
 components:
   schemas:
-    ProductPricingInputDiscriminatorMappingSeatBasedGraduatedBillingType:
+    CreationState:
       type: string
       enum:
-      - Advance
-      - Arrears
-      default: Advance
-      title: ProductPricingInputDiscriminatorMappingSeatBasedGraduatedBillingType
-    ProductPricingInputDiscriminatorMappingUsageVolumeSignalType:
-      type: string
-      enum:
-      - activity
-      - outcome
-      title: ProductPricingInputDiscriminatorMappingUsageVolumeSignalType
-    ProductPricingInputDiscriminatorMappingSeatBasedVolumeBillingFrequency:
-      type: string
-      enum:
-      - Monthly
-      - Quarterly
-      - Semi-Annually
-      - Annual
-      - Custom
-      title: ProductPricingInputDiscriminatorMappingSeatBasedVolumeBillingFrequency
-    PricingModelType:
-      type: string
-      enum:
-      - PerUnit
-      - VolumePricing
-      - GraduatedPricing
-      - PrepaidCredits
-      title: PricingModelType
-    Agent:
+      - active
+      - draft
+      title: CreationState
+    Product:
       type: object
       properties:
         id:
           type: string
+          format: uuid
         externalId:
+          type:
+          - string
+          - 'null'
+        displayId:
           type: string
+          description: Human-readable display ID
         organizationId:
           type: string
+          format: uuid
         name:
           type: string
         description:
-          type: string
+          type:
+          - string
+          - 'null'
+        type:
+          $ref: '#/components/schemas/ProductType'
+          description: The type of product
         active:
           type: boolean
-        agentCode:
-          type: string
-        agentAttributes:
+        productCode:
+          type:
+          - string
+          - 'null'
+        ProductAttribute:
           type: array
           items:
             $ref: '#/components/schemas/AgentAttribute'
-      required:
-      - id
-      - organizationId
-      - name
-      - active
-      title: Agent
-    Customer:
-      type: object
-      properties:
-        id:
-          type: string
-        organizationId:
-          type: string
-        name:
-          type: string
-        externalId:
-          type: string
-        phone:
-          type: string
-        employeeCount:
-          type: number
-          format: double
-        annualRevenue:
-          type: number
-          format: double
-        taxExemptStatus:
-          $ref: '#/components/schemas/TaxExemptStatus'
-        creationSource:
-          $ref: '#/components/schemas/CreationSource'
-        creationState:
-          $ref: '#/components/schemas/CreationState'
-        website:
-          type: string
-        billingAddress:
-          $ref: '#/components/schemas/Address'
+          description: Pricing attributes for this product
         metadata:
-          $ref: '#/components/schemas/CustomerMetadata'
-          description: Flexible JSON field for storing custom metadata about the customer
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            description: Any type
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
       required:
       - id
       - organizationId
       - name
-      title: Customer
-    ProductPricingInputDiscriminatorMappingUsageBracketedPrepaidCreditsBillingFrequency:
-      type: string
-      enum:
-      - Monthly
-      - Quarterly
-      - Semi-Annually
-      - Annual
-      - Custom
-      title: ProductPricingInputDiscriminatorMappingUsageBracketedPrepaidCreditsBillingFrequency
-    ProductPricingInputDiscriminatorMappingUsageVolumeBillingType:
-      type: string
-      enum:
-      - Advance
-      - Arrears
-      default: Arrears
-      title: ProductPricingInputDiscriminatorMappingUsageVolumeBillingType
+      - type
+      - active
+      description: A product in the Paid system (previously called Agent)
+      title: Product
     UsageSummaryOrder:
       type: object
       properties:
@@ -972,13 +963,270 @@ components:
       - features
       description: A plan with its features (product-attribute pairs) for display
       title: PlanWithFeatures
-    ProductPricingInputDiscriminatorMappingUsageCostPlusBillingType:
+    ProrationUpgradeResponse:
+      type: object
+      properties:
+        orderId:
+          type: string
+          format: uuid
+          description: The ID of the order
+        amendmentId:
+          type: string
+          format: uuid
+          description: The ID of the amendment record
+        version:
+          type: integer
+          description: The new version of the order after the amendment
+        effectiveDate:
+          type: string
+          format: date-time
+          description: The effective date of the plan change
+        endedLineIds:
+          type: array
+          items:
+            type: string
+            format: uuid
+          description: IDs of order lines that were ended
+        createdLineIds:
+          type: array
+          items:
+            type: string
+            format: uuid
+          description: IDs of new order lines that were created
+        creditLineIds:
+          type: array
+          items:
+            type: string
+            format: uuid
+          description: IDs of credit lines that were created
+        prorationDetails:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProrationDetail'
+          description: Detailed proration calculations for each updated attribute
+      required:
+      - orderId
+      - amendmentId
+      - version
+      - effectiveDate
+      - endedLineIds
+      - createdLineIds
+      - creditLineIds
+      - prorationDetails
+      description: Response after successfully scheduling a plan change
+      title: ProrationUpgradeResponse
+    PricePoint:
+      type: object
+      properties:
+        currency:
+          type: string
+        unitPrice:
+          type: number
+          format: double
+        minQuantity:
+          type: number
+          format: double
+        tiers:
+          type: array
+          items:
+            $ref: '#/components/schemas/Tier'
+      title: PricePoint
+    PlanGroup:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: The unique identifier of the plan group
+        organizationId:
+          type: string
+          format: uuid
+          description: The organization ID that owns this plan group
+        name:
+          type: string
+          description: The name of the plan group
+        description:
+          type:
+          - string
+          - 'null'
+          description: The description of the plan group
+        createdAt:
+          type: string
+          format: date-time
+          description: When the plan group was created
+        updatedAt:
+          type: string
+          format: date-time
+          description: When the plan group was last updated
+        plans:
+          type: array
+          items:
+            $ref: '#/components/schemas/Plan'
+          description: The plans included in this plan group
+      required:
+      - id
+      - organizationId
+      - name
+      - createdAt
+      - updatedAt
+      description: A plan group containing multiple plans
+      title: PlanGroup
+    PlansCurrentGetResponsesContentApplicationJsonSchemaPlanFeaturesItems:
+      type: object
+      properties:
+        productName:
+          type: string
+          description: The name of the product
+        attributeName:
+          type: string
+          description: The name of the product attribute
+        pricing:
+          type: object
+          additionalProperties:
+            description: Any type
+          description: The pricing configuration for this feature
+        usage:
+          $ref: '#/components/schemas/PlansCurrentGetResponsesContentApplicationJsonSchemaPlanFeaturesItemsUsage'
+          description: Current usage and limits for this feature
+      required:
+      - productName
+      - attributeName
+      - pricing
+      - usage
+      title: PlansCurrentGetResponsesContentApplicationJsonSchemaPlanFeaturesItems
+    UsageSummaryOrderLine:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        displayId:
+          type:
+          - string
+          - 'null'
+      description: Associated order line information
+      title: UsageSummaryOrderLine
+    CustomerMetadata:
+      type: object
+      properties: {}
+      description: Flexible JSON field for storing custom metadata about the customer
+      title: CustomerMetadata
+    PlanPricingBillingFrequency:
       type: string
       enum:
-      - Advance
-      - Arrears
-      default: Arrears
-      title: ProductPricingInputDiscriminatorMappingUsageCostPlusBillingType
+      - monthly
+      - quarterly
+      - semi-annually
+      - yearly
+      - custom
+      description: The billing frequency for the plan
+      title: PlanPricingBillingFrequency
+    ProrationDetail:
+      type: object
+      properties:
+        oldAttributeId:
+          type: string
+          format: uuid
+        newAttributeId:
+          type: string
+          format: uuid
+        creditLineId:
+          type: string
+          format: uuid
+        oldPrice:
+          type: number
+          format: double
+        newPrice:
+          type: number
+          format: double
+        creditAmount:
+          type: number
+          format: double
+          description: The credit amount applied for the unused portion
+        remainingDays:
+          type: integer
+          description: Number of days remaining in the current billing cycle
+        totalDaysInCycle:
+          type: integer
+          description: Total number of days in the billing cycle
+      description: Details about the proration calculation for an attribute
+      title: ProrationDetail
+    PlansCurrentGetResponsesContentApplicationJsonSchemaPlanType:
+      type: string
+      enum:
+      - flat
+      - usage
+      - credit
+      description: The type of plan
+      title: PlansCurrentGetResponsesContentApplicationJsonSchemaPlanType
+    ProductType:
+      type: string
+      enum:
+      - agent
+      - product
+      - prepaidCreditBundle
+      description: The type of product
+      title: ProductType
+    AgentAttribute:
+      type: object
+      properties:
+        name:
+          type: string
+        active:
+          type: boolean
+        pricing:
+          $ref: '#/components/schemas/Pricing'
+      required:
+      - name
+      - active
+      - pricing
+      title: AgentAttribute
+    PlanPlanProductsItemsPlanProductAttributeItems:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        organizationId:
+          type: string
+          format: uuid
+        planProductId:
+          type: string
+          format: uuid
+        productAttributeId:
+          type: string
+          format: uuid
+        pricing:
+          type: object
+          additionalProperties:
+            description: Any type
+          description: The pricing configuration for this attribute
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+      title: PlanPlanProductsItemsPlanProductAttributeItems
+    PlanWithFeaturesFeaturesItems:
+      type: object
+      properties:
+        productName:
+          type: string
+          description: The name of the product
+        attributeName:
+          type: string
+          description: The name of the product attribute
+        pricing:
+          type: object
+          additionalProperties:
+            description: Any type
+          description: The pricing configuration for this feature
+      required:
+      - productName
+      - attributeName
+      - pricing
+      title: PlanWithFeaturesFeaturesItems
     plans_getCurrent_Response_200:
       type: object
       properties:
@@ -996,12 +1244,1092 @@ components:
       - plan
       - subscription
       title: plans_getCurrent_Response_200
+    Order:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        customerId:
+          type: string
+        organizationId:
+          type: string
+        startDate:
+          type: string
+        endDate:
+          type: string
+        totalAmount:
+          type: number
+          format: double
+        estimatedTax:
+          type: number
+          format: double
+        billedAmountNoTax:
+          type: number
+          format: double
+        billedTax:
+          type: number
+          format: double
+        totalBilledAmount:
+          type: number
+          format: double
+        pendingBillingAmount:
+          type: number
+          format: double
+        creationState:
+          $ref: '#/components/schemas/CreationState'
+        orderLines:
+          type: array
+          items:
+            $ref: '#/components/schemas/OrderLine'
+        customer:
+          $ref: '#/components/schemas/Customer'
+      title: Order
+    OrderLine:
+      type: object
+      properties:
+        id:
+          type: string
+        orderId:
+          type: string
+        agentId:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        startDate:
+          type: string
+        endDate:
+          type: string
+        totalAmount:
+          type: number
+          format: double
+        billedAmountWithoutTax:
+          type: number
+          format: double
+        billedTax:
+          type: number
+          format: double
+        totalBilledAmount:
+          type: number
+          format: double
+        creationState:
+          $ref: '#/components/schemas/CreationState'
+        agent:
+          $ref: '#/components/schemas/Agent'
+        orderLineAttributes:
+          type: array
+          items:
+            $ref: '#/components/schemas/OrderLineAttribute'
+      title: OrderLine
+    Pricing:
+      type: object
+      properties:
+        eventName:
+          type: string
+        taxable:
+          type: boolean
+        creditCost:
+          type: number
+          format: double
+        chargeType:
+          $ref: '#/components/schemas/ChargeType'
+        pricingModel:
+          $ref: '#/components/schemas/PricingModelType'
+        billingFrequency:
+          $ref: '#/components/schemas/BillingFrequency'
+        pricePoints:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/AgentPricePoint'
+      required:
+      - taxable
+      - chargeType
+      - pricingModel
+      - billingFrequency
+      - pricePoints
+      title: Pricing
+    AgentPricePoint:
+      type: object
+      properties:
+        unitPrice:
+          type: number
+          format: double
+        minQuantity:
+          type: number
+          format: double
+        includedQuantity:
+          type: number
+          format: double
+        tiers:
+          type: array
+          items:
+            $ref: '#/components/schemas/AgentPricePointTiers'
+      title: AgentPricePoint
+    OrderLineAttribute:
+      type: object
+      properties:
+        agentAttributeId:
+          type: string
+        quantity:
+          type: number
+          format: double
+        currency:
+          type: string
+        pricing:
+          $ref: '#/components/schemas/OrderLineAttributePricing'
+      title: OrderLineAttribute
+    Plan:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: The unique identifier of the plan
+        organizationId:
+          type: string
+          format: uuid
+          description: The organization ID that owns this plan
+        planGroupId:
+          type: string
+          format: uuid
+          description: The plan group ID this plan belongs to
+        name:
+          type: string
+          description: The name of the plan
+        description:
+          type:
+          - string
+          - 'null'
+          description: The description of the plan
+        type:
+          $ref: '#/components/schemas/PlanType'
+          description: The type of plan (flat for fixed pricing, usage for usage-based, credit for prepaid credits)
+        pricing:
+          $ref: '#/components/schemas/PlanPricing'
+        nextPlanId:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          description: The ID of the next plan in the sequence
+        prevPlanId:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          description: The ID of the previous plan in the sequence
+        createdAt:
+          type: string
+          format: date-time
+          description: When the plan was created
+        updatedAt:
+          type: string
+          format: date-time
+          description: When the plan was last updated
+        planProducts:
+          type: array
+          items:
+            $ref: '#/components/schemas/PlanPlanProductsItems'
+          description: The products included in this plan
+      required:
+      - id
+      - organizationId
+      - planGroupId
+      - name
+      - type
+      - pricing
+      - createdAt
+      - updatedAt
+      description: A plan containing products and their attributes
+      title: Plan
+    AgentPricePointTiers:
+      type: object
+      properties:
+        minQuantity:
+          type: number
+          format: double
+        maxQuantity:
+          type: number
+          format: double
+        unitPrice:
+          type: number
+          format: double
+      required:
+      - unitPrice
+      title: AgentPricePointTiers
+    UsageSummariesResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/UsageSummary'
+        pagination:
+          $ref: '#/components/schemas/UsagePaginationMeta'
+      required:
+      - data
+      - pagination
+      description: Response containing usage summaries and pagination metadata
+      title: UsageSummariesResponse
+    PlanType:
+      type: string
+      enum:
+      - flat
+      - usage
+      - credit
+      description: The type of plan (flat for fixed pricing, usage for usage-based, credit for prepaid credits)
+      title: PlanType
+    PricingModelType:
+      type: string
+      enum:
+      - PerUnit
+      - VolumePricing
+      - GraduatedPricing
+      - PrepaidCredits
+      title: PricingModelType
+    CancelRenewalResponse:
+      type: object
+      properties:
+        orderId:
+          type: string
+          format: uuid
+          description: The ID of the order
+        amendmentId:
+          type: string
+          format: uuid
+          description: The ID of the amendment record
+        version:
+          type: integer
+          description: The new version of the order after the amendment
+        endDate:
+          type: string
+          format: date-time
+          description: The new end date of the order
+        effectiveDate:
+          type: string
+          format: date-time
+          description: The effective date of the cancellation
+      required:
+      - orderId
+      - amendmentId
+      - version
+      - endDate
+      - effectiveDate
+      description: Response after successfully cancelling an order's renewal
+      title: CancelRenewalResponse
+    Error:
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/ApiError'
+      required:
+      - error
+      description: An error response from the Paid API
+      title: Error
+    Customer:
+      type: object
+      properties:
+        id:
+          type: string
+        organizationId:
+          type: string
+        name:
+          type: string
+        externalId:
+          type: string
+        phone:
+          type: string
+        employeeCount:
+          type: number
+          format: double
+        annualRevenue:
+          type: number
+          format: double
+        taxExemptStatus:
+          $ref: '#/components/schemas/TaxExemptStatus'
+        creationSource:
+          $ref: '#/components/schemas/CreationSource'
+        creationState:
+          $ref: '#/components/schemas/CreationState'
+        website:
+          type: string
+        billingAddress:
+          $ref: '#/components/schemas/Address'
+        metadata:
+          $ref: '#/components/schemas/CustomerMetadata'
+          description: Flexible JSON field for storing custom metadata about the customer
+      required:
+      - id
+      - organizationId
+      - name
+      title: Customer
+    PlanPlanProductsItems:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        organizationId:
+          type: string
+          format: uuid
+        planId:
+          type: string
+          format: uuid
+        productId:
+          type: string
+          format: uuid
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+        product:
+          $ref: '#/components/schemas/Product'
+          description: The product associated with this plan product
+        planProductAttribute:
+          type: array
+          items:
+            $ref: '#/components/schemas/PlanPlanProductsItemsPlanProductAttributeItems'
+          description: The product attributes with pricing for this plan
+      title: PlanPlanProductsItems
+    BillingFrequency:
+      type: string
+      enum:
+      - monthly
+      - quarterly
+      - annual
+      title: BillingFrequency
+    ChargeType:
+      type: string
+      enum:
+      - oneTime
+      - recurring
+      - usage
+      - seatBased
+      title: ChargeType
+    CreationSource:
+      type: string
+      enum:
+      - manual
+      - api
+      - crm
+      - other
+      title: CreationSource
+    Tier:
+      type: object
+      properties:
+        lowerBound:
+          type: number
+          format: double
+        upperBound:
+          type: number
+          format: double
+        price:
+          type: number
+          format: double
+      title: Tier
+    PlanWithFeaturesType:
+      type: string
+      enum:
+      - flat
+      - usage
+      - credit
+      description: The type of plan (flat for fixed pricing, usage for usage-based, credit for prepaid credits)
+      title: PlanWithFeaturesType
+    PlansCurrentGetResponsesContentApplicationJsonSchemaPlan:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: The unique identifier of the plan
+        name:
+          type: string
+          description: The name of the plan
+        description:
+          type:
+          - string
+          - 'null'
+          description: The description of the plan
+        type:
+          $ref: '#/components/schemas/PlansCurrentGetResponsesContentApplicationJsonSchemaPlanType'
+          description: The type of plan
+        pricing:
+          $ref: '#/components/schemas/PlanPricing'
+        planGroupId:
+          type: string
+          format: uuid
+          description: The plan group ID this plan belongs to
+        nextPlanId:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          description: The ID of the next plan in the sequence
+        prevPlanId:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          description: The ID of the previous plan in the sequence
+        features:
+          type: array
+          items:
+            $ref: '#/components/schemas/PlansCurrentGetResponsesContentApplicationJsonSchemaPlanFeaturesItems'
+          description: The features (product-attribute pairs) included in this plan with usage and limits
+      required:
+      - id
+      - name
+      - type
+      - pricing
+      - planGroupId
+      - features
+      description: The plan details, or null if the customer has no active plan
+      title: PlansCurrentGetResponsesContentApplicationJsonSchemaPlan
+    Agent:
+      type: object
+      properties:
+        id:
+          type: string
+        externalId:
+          type: string
+        organizationId:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        active:
+          type: boolean
+        agentCode:
+          type: string
+        agentAttributes:
+          type: array
+          items:
+            $ref: '#/components/schemas/AgentAttribute'
+      required:
+      - id
+      - organizationId
+      - name
+      - active
+      title: Agent
+    PlansCurrentGetResponsesContentApplicationJsonSchemaSubscription:
+      type: object
+      properties:
+        orderId:
+          type: string
+          format: uuid
+          description: The ID of the order
+        orderDisplayId:
+          type:
+          - string
+          - 'null'
+          description: The display ID of the order
+        startDate:
+          type: string
+          format: date-time
+          description: The start date of the subscription
+        endDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: The end date of the subscription (null if ongoing)
+        totalUsage:
+          type: integer
+          description: The total usage quantity across all features on this order
+      required:
+      - orderId
+      - startDate
+      - endDate
+      - totalUsage
+      description: The subscription details, or null if the customer has no active plan
+      title: PlansCurrentGetResponsesContentApplicationJsonSchemaSubscription
+    PlanPricing:
+      type: object
+      properties:
+        PricePoints:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/PricePoint'
+          description: Price points keyed by currency code (e.g., "USD", "EUR")
+        billingFrequency:
+          $ref: '#/components/schemas/PlanPricingBillingFrequency'
+          description: The billing frequency for the plan
+        billingFrequencyCustomMonths:
+          type: number
+          format: double
+          description: Custom billing frequency in months (when billingFrequency is "custom")
+      required:
+      - PricePoints
+      - billingFrequency
+      description: The pricing configuration for a plan. Uses the same PricePoints structure as product pricing.
+      title: PlanPricing
+    UsagePaginationMeta:
+      type: object
+      properties:
+        limit:
+          type: integer
+          description: The requested limit
+        offset:
+          type: integer
+          description: The requested offset
+        total:
+          type: integer
+          description: Total number of usage summaries available
+        hasMore:
+          type: boolean
+          description: Whether there are more results available
+      required:
+      - limit
+      - offset
+      - total
+      - hasMore
+      description: Pagination metadata for usage summaries
+      title: UsagePaginationMeta
+    PlansCurrentGetResponsesContentApplicationJsonSchemaPlanFeaturesItemsUsage:
+      type: object
+      properties:
+        eventName:
+          type:
+          - string
+          - 'null'
+          description: The event name used to track usage for this feature
+        currentUsage:
+          type: integer
+          description: The current usage quantity for this feature on the order
+        limit:
+          type:
+          - integer
+          - 'null'
+          description: The usage limit for this feature (null if unlimited)
+        isUnlimited:
+          type: boolean
+          description: Whether this feature has unlimited usage
+      required:
+      - eventName
+      - currentUsage
+      - limit
+      - isUnlimited
+      description: Current usage and limits for this feature
+      title: PlansCurrentGetResponsesContentApplicationJsonSchemaPlanFeaturesItemsUsage
+    ApiError:
+      type: object
+      properties:
+        message:
+          type: string
+          description: A human-readable message providing more details about the error.
+        code:
+          type: string
+        details:
+          type: string
+      description: An API error response from the Paid API
+      title: ApiError
+    UsageSummary:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: The unique identifier of the usage summary
+        eventName:
+          type: string
+          description: The name of the event being tracked
+        eventsQuantity:
+          type: integer
+          format: int64
+          description: The quantity of events in this usage period
+        startDate:
+          type: string
+          format: date-time
+          description: The start date of the usage period
+        endDate:
+          type: string
+          format: date-time
+          description: The end date of the usage period
+        subtotal:
+          type: integer
+          format: int64
+          description: The subtotal amount in the smallest currency unit (e.g., cents)
+        nextBillingDate:
+          type: string
+          format: date-time
+          description: The next billing date for this usage
+        customerId:
+          type: string
+          format: uuid
+          description: The internal customer ID
+        orderId:
+          type: string
+          format: uuid
+          description: The order ID associated with this usage
+        orderLineId:
+          type: string
+          format: uuid
+          description: The order line ID associated with this usage
+        orderLineAttributeId:
+          type: string
+          format: uuid
+          description: The order line attribute ID associated with this usage
+        invoiceId:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          description: The invoice ID if this usage has been invoiced
+        invoiceLineId:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          description: The invoice line ID if this usage has been invoiced
+        createdAt:
+          type: string
+          format: date-time
+          description: When the usage summary was created
+        updatedAt:
+          type: string
+          format: date-time
+          description: When the usage summary was last updated
+        order:
+          $ref: '#/components/schemas/UsageSummaryOrder'
+          description: Associated order information
+        orderLine:
+          $ref: '#/components/schemas/UsageSummaryOrderLine'
+          description: Associated order line information
+      required:
+      - id
+      - eventName
+      - eventsQuantity
+      - startDate
+      - endDate
+      - subtotal
+      - nextBillingDate
+      - customerId
+      - orderId
+      - orderLineId
+      - orderLineAttributeId
+      - createdAt
+      - updatedAt
+      description: A single usage summary record
+      title: UsageSummary
+    Address:
+      type: object
+      properties:
+        line1:
+          type: string
+        line2:
+          type: string
+        city:
+          type: string
+        state:
+          type: string
+        zipCode:
+          type: string
+        country:
+          type: string
+      required:
+      - line1
+      - city
+      - state
+      - zipCode
+      - country
+      title: Address
+    OrderLineAttributePricing:
+      type: object
+      properties:
+        eventName:
+          type: string
+        chargeType:
+          $ref: '#/components/schemas/ChargeType'
+        pricePoint:
+          $ref: '#/components/schemas/PricePoint'
+        pricingModel:
+          $ref: '#/components/schemas/PricingModelType'
+        billingFrequency:
+          $ref: '#/components/schemas/BillingFrequency'
+      title: OrderLineAttributePricing
+    TaxExemptStatus:
+      type: string
+      enum:
+      - none
+      - exempt
+      - reverse
+      title: TaxExemptStatus
+    PlanAttribute:
+      type: object
+      properties:
+        productAttributeId:
+          type: string
+        name:
+          type: string
+        active:
+          type: boolean
+        pricing:
+          $ref: '#/components/schemas/PlanPricing_2'
+        creditBenefits:
+          type: array
+          items:
+            $ref: '#/components/schemas/PlanCreditBenefit'
+      required:
+      - productAttributeId
+      - name
+      - active
+      - pricing
+      - creditBenefits
+      title: PlanAttribute
+    ProductPricingInputDiscriminatorMappingSeatBasedPrepaidCreditsBillingType:
+      type: string
+      enum:
+      - Advance
+      - Arrears
+      default: Advance
+      title: ProductPricingInputDiscriminatorMappingSeatBasedPrepaidCreditsBillingType
+    PlanPricingPricingType:
+      type: string
+      enum:
+      - RecurringPerUnit
+      - RecurringGraduated
+      - RecurringVolume
+      - RecurringPercentOfTotal
+      - UsagePerUnit
+      - UsageGraduated
+      - UsageVolume
+      - UsagePrepaidCredits
+      - UsageBracketedPrepaidCredits
+      - UsageCostPlus
+      - OneTimePerUnit
+      - SeatBasedPerUnit
+      - SeatBasedGraduated
+      - SeatBasedVolume
+      - SeatBasedPrepaidCredits
+      title: PlanPricingPricingType
+    ProductTieredPricePoint:
+      type: object
+      properties:
+        currency:
+          type: string
+        unitPrice:
+          type: number
+          format: double
+        tiers:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProductTieredPricePointTiersItems'
+        minQuantity:
+          type: number
+          format: double
+        maxQuantity:
+          type: number
+          format: double
+        includedQuantity:
+          type: number
+          format: double
+      required:
+      - currency
+      - unitPrice
+      - tiers
+      title: ProductTieredPricePoint
+    ProductPricingInputDiscriminatorMappingUsagePerUnitBillingFrequency:
+      type: string
+      enum:
+      - Monthly
+      - Quarterly
+      - Semi-Annually
+      - Annual
+      - Custom
+      title: ProductPricingInputDiscriminatorMappingUsagePerUnitBillingFrequency
+    ProductPricingInputDiscriminatorMappingUsageCostPlusBillingType:
+      type: string
+      enum:
+      - Advance
+      - Arrears
+      default: Arrears
+      title: ProductPricingInputDiscriminatorMappingUsageCostPlusBillingType
+    ProductPricingInputDiscriminatorMappingSeatBasedPerUnitBillingType:
+      type: string
+      enum:
+      - Advance
+      - Arrears
+      default: Advance
+      title: ProductPricingInputDiscriminatorMappingSeatBasedPerUnitBillingType
     ProductPricingInputDiscriminatorMappingUsagePerUnitSignalType:
       type: string
       enum:
       - activity
       - outcome
       title: ProductPricingInputDiscriminatorMappingUsagePerUnitSignalType
+    PlanAttributeInput:
+      type: object
+      properties:
+        productAttributeId:
+          type: string
+          description: Product attribute ID to override in this plan
+        pricing:
+          $ref: '#/components/schemas/ProductPricingInput'
+        creditBenefits:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProductCreditBenefitInput'
+      required:
+      - productAttributeId
+      - pricing
+      title: PlanAttributeInput
+    PlanCreditBenefitRolloverDurationUnit:
+      type: string
+      enum:
+      - days
+      - months
+      title: PlanCreditBenefitRolloverDurationUnit
+    PlanCreditBenefitAllocationCadence:
+      type: string
+      enum:
+      - upfront
+      - monthly
+      title: PlanCreditBenefitAllocationCadence
+    ProductPricingInputDiscriminatorMappingUsageVolumeBillingType:
+      type: string
+      enum:
+      - Advance
+      - Arrears
+      default: Arrears
+      title: ProductPricingInputDiscriminatorMappingUsageVolumeBillingType
+    UpdatePlanUpgradePathRequest:
+      type: object
+      properties:
+        productId:
+          type: string
+          description: Paid product ID, for example `prod_abc123`
+        groups:
+          type: array
+          items:
+            $ref: '#/components/schemas/PlanUpgradePathGroup'
+      required:
+      - productId
+      - groups
+      title: UpdatePlanUpgradePathRequest
+    ProductPricingInputDiscriminatorMappingSeatBasedGraduatedBillingFrequency:
+      type: string
+      enum:
+      - Monthly
+      - Quarterly
+      - Semi-Annually
+      - Annual
+      - Custom
+      title: ProductPricingInputDiscriminatorMappingSeatBasedGraduatedBillingFrequency
+    UpdatePlanRequest:
+      type: object
+      properties:
+        name:
+          type:
+          - string
+          - 'null'
+        externalId:
+          type:
+          - string
+          - 'null'
+        supportedCurrencies:
+          type: array
+          items:
+            type: string
+        isDefault:
+          type: boolean
+        status:
+          $ref: '#/components/schemas/UpdatePlanRequestStatus'
+          description: Set to `archived` to archive this plan, or `active` to restore it.
+        attributes:
+          type: array
+          items:
+            $ref: '#/components/schemas/PlanAttributeInput'
+      title: UpdatePlanRequest
+    ProductSimplePricePoint:
+      type: object
+      properties:
+        currency:
+          type: string
+        unitPrice:
+          type: number
+          format: double
+        tiers:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProductSimplePricePointTiersItems'
+        minQuantity:
+          type: number
+          format: double
+        maxQuantity:
+          type: number
+          format: double
+        includedQuantity:
+          type: number
+          format: double
+      required:
+      - currency
+      - unitPrice
+      title: ProductSimplePricePoint
+    PlanCreditBenefitRecipient:
+      type: string
+      enum:
+      - organization
+      - seat
+      title: PlanCreditBenefitRecipient
+    ProductPricingInputDiscriminatorMappingRecurringPercentOfTotalBillingType:
+      type: string
+      enum:
+      - Advance
+      - Arrears
+      default: Advance
+      title: ProductPricingInputDiscriminatorMappingRecurringPercentOfTotalBillingType
+    ProductCreditBenefitInputRecipient:
+      type: string
+      enum:
+      - organization
+      - seat
+      default: organization
+      title: ProductCreditBenefitInputRecipient
+    ProductTieredPricePointTiersItemsTierBillingType:
+      type: string
+      enum:
+      - flat
+      - perUnit
+      title: ProductTieredPricePointTiersItemsTierBillingType
+    ProductPricingInputDiscriminatorMappingUsagePrepaidCreditsBillingType:
+      type: string
+      enum:
+      - Advance
+      - Arrears
+      default: Arrears
+      title: ProductPricingInputDiscriminatorMappingUsagePrepaidCreditsBillingType
+    ProductPricingInputDiscriminatorMappingUsageCostPlusBillingFrequency:
+      type: string
+      enum:
+      - Monthly
+      - Quarterly
+      - Semi-Annually
+      - Annual
+      - Custom
+      title: ProductPricingInputDiscriminatorMappingUsageCostPlusBillingFrequency
+    ProductPricingInputDiscriminatorMappingOneTimePerUnitBillingType:
+      type: string
+      enum:
+      - Advance
+      - Arrears
+      default: Advance
+      title: ProductPricingInputDiscriminatorMappingOneTimePerUnitBillingType
+    ProductPricingInputDiscriminatorMappingUsagePrepaidCreditsSignalType:
+      type: string
+      enum:
+      - activity
+      - outcome
+      title: ProductPricingInputDiscriminatorMappingUsagePrepaidCreditsSignalType
+    ProductPricingInputDiscriminatorMappingRecurringGraduatedBillingType:
+      type: string
+      enum:
+      - Advance
+      - Arrears
+      default: Advance
+      title: ProductPricingInputDiscriminatorMappingRecurringGraduatedBillingType
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+        code:
+          type: string
+        details:
+          type: string
+      required:
+      - error
+      title: ErrorResponse
+    ProductPricingInputDiscriminatorMappingSeatBasedGraduatedBillingType:
+      type: string
+      enum:
+      - Advance
+      - Arrears
+      default: Advance
+      title: ProductPricingInputDiscriminatorMappingSeatBasedGraduatedBillingType
+    ProductCreditBenefitInputAllocationCadence:
+      type: string
+      enum:
+      - upfront
+      - monthly
+      default: upfront
+      title: ProductCreditBenefitInputAllocationCadence
+    PlanCreditBenefitCreditGrantTiming:
+      type: string
+      enum:
+      - on_payment
+      - on_invoice_posted
+      - on_order_activation
+      title: PlanCreditBenefitCreditGrantTiming
+    ProductPricingInputDiscriminatorMappingSeatBasedVolumeBillingFrequency:
+      type: string
+      enum:
+      - Monthly
+      - Quarterly
+      - Semi-Annually
+      - Annual
+      - Custom
+      title: ProductPricingInputDiscriminatorMappingSeatBasedVolumeBillingFrequency
+    ProductTieredPricePointTiersItems:
+      type: object
+      properties:
+        flatAmount:
+          type: number
+          format: double
+        index:
+          type: number
+          format: double
+        lowerBound:
+          type: number
+          format: double
+        number:
+          type: number
+          format: double
+        tierBillingType:
+          $ref: '#/components/schemas/ProductTieredPricePointTiersItemsTierBillingType'
+        unitAmount:
+          type: number
+          format: double
+        upperBound:
+          type: number
+          format: double
+      required:
+      - lowerBound
+      title: ProductTieredPricePointTiersItems
+    ProductPricingInputDiscriminatorMappingUsageGraduatedBillingFrequency:
+      type: string
+      enum:
+      - Monthly
+      - Quarterly
+      - Semi-Annually
+      - Annual
+      - Custom
+      title: ProductPricingInputDiscriminatorMappingUsageGraduatedBillingFrequency
+    ProductPricingInputDiscriminatorMappingRecurringPercentOfTotalBillingFrequency:
+      type: string
+      enum:
+      - Monthly
+      - Quarterly
+      - Semi-Annually
+      - Annual
+      - Custom
+      title: ProductPricingInputDiscriminatorMappingRecurringPercentOfTotalBillingFrequency
+    ProductPricingInputDiscriminatorMappingRecurringPerUnitBillingFrequency:
+      type: string
+      enum:
+      - Monthly
+      - Quarterly
+      - Semi-Annually
+      - Annual
+      - Custom
+      title: ProductPricingInputDiscriminatorMappingRecurringPerUnitBillingFrequency
     Plan_2:
       type: object
       properties:
@@ -1059,20 +2387,245 @@ components:
       - updatedAt
       - attributes
       title: Plan
-    PlanCreditBenefitRecipient:
+    PlanCreditBenefit:
+      type: object
+      properties:
+        id:
+          type: string
+        creditsCurrencyId:
+          type: string
+        recipient:
+          $ref: '#/components/schemas/PlanCreditBenefitRecipient'
+        amount:
+          type: number
+          format: double
+        rolloverAmount:
+          type:
+          - number
+          - 'null'
+          format: double
+        rolloverDuration:
+          type:
+          - number
+          - 'null'
+          format: double
+        rolloverDurationUnit:
+          $ref: '#/components/schemas/PlanCreditBenefitRolloverDurationUnit'
+        allocationCadence:
+          $ref: '#/components/schemas/PlanCreditBenefitAllocationCadence'
+        creditGrantTiming:
+          $ref: '#/components/schemas/PlanCreditBenefitCreditGrantTiming'
+        isInfiniteTotal:
+          type: boolean
+      required:
+      - id
+      - amount
+      title: PlanCreditBenefit
+    ProductPricingInputDiscriminatorMappingUsageBracketedPrepaidCreditsCreditUnitBracketsItems:
+      type: object
+      properties:
+        upTo:
+          type:
+          - integer
+          - 'null'
+        creditUnits:
+          type: integer
+      required:
+      - upTo
+      - creditUnits
+      title: ProductPricingInputDiscriminatorMappingUsageBracketedPrepaidCreditsCreditUnitBracketsItems
+    ProductCreditBenefitInputCreditGrantTiming:
       type: string
       enum:
-      - organization
-      - seat
-      title: PlanCreditBenefitRecipient
-    ProductType:
+      - on_order_activation
+      - on_payment
+      - on_invoice_posted
+      title: ProductCreditBenefitInputCreditGrantTiming
+    ProductSimplePricePointTiersItems:
+      type: object
+      properties:
+        flatAmount:
+          type: number
+          format: double
+        index:
+          type: number
+          format: double
+        lowerBound:
+          type: number
+          format: double
+        number:
+          type: number
+          format: double
+        tierBillingType:
+          $ref: '#/components/schemas/ProductSimplePricePointTiersItemsTierBillingType'
+        unitAmount:
+          type: number
+          format: double
+        upperBound:
+          type: number
+          format: double
+      required:
+      - lowerBound
+      title: ProductSimplePricePointTiersItems
+    ProductPricingInputDiscriminatorMappingUsageBracketedPrepaidCreditsBillingType:
       type: string
       enum:
-      - agent
-      - product
-      - prepaidCreditBundle
-      description: The type of product
-      title: ProductType
+      - Advance
+      - Arrears
+      default: Arrears
+      title: ProductPricingInputDiscriminatorMappingUsageBracketedPrepaidCreditsBillingType
+    ProductPricingInputDiscriminatorMappingUsagePerUnitBillingType:
+      type: string
+      enum:
+      - Advance
+      - Arrears
+      default: Arrears
+      title: ProductPricingInputDiscriminatorMappingUsagePerUnitBillingType
+    ProductPricingInputDiscriminatorMappingUsagePrepaidCreditsBillingFrequency:
+      type: string
+      enum:
+      - Monthly
+      - Quarterly
+      - Semi-Annually
+      - Annual
+      - Custom
+      title: ProductPricingInputDiscriminatorMappingUsagePrepaidCreditsBillingFrequency
+    ProductPricingInputDiscriminatorMappingSeatBasedPerUnitBillingFrequency:
+      type: string
+      enum:
+      - Monthly
+      - Quarterly
+      - Semi-Annually
+      - Annual
+      - Custom
+      title: ProductPricingInputDiscriminatorMappingSeatBasedPerUnitBillingFrequency
+    PlanUpgradePathResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Plan_2'
+      required:
+      - data
+      title: PlanUpgradePathResponse
+    CreatePlanRequest:
+      type: object
+      properties:
+        productId:
+          type: string
+          description: Paid product ID, for example `prod_abc123`
+        name:
+          type:
+          - string
+          - 'null'
+        externalId:
+          type:
+          - string
+          - 'null'
+          description: Your stable identifier for this plan
+        supportedCurrencies:
+          type: array
+          items:
+            type: string
+        isDefault:
+          type: boolean
+        attributes:
+          type: array
+          items:
+            $ref: '#/components/schemas/PlanAttributeInput'
+      required:
+      - productId
+      - attributes
+      title: CreatePlanRequest
+    ProductPricingInputDiscriminatorMappingUsageCostPlusSignalType:
+      type: string
+      enum:
+      - activity
+      - outcome
+      title: ProductPricingInputDiscriminatorMappingUsageCostPlusSignalType
+    ProductPricingInputDiscriminatorMappingUsageVolumeBillingFrequency:
+      type: string
+      enum:
+      - Monthly
+      - Quarterly
+      - Semi-Annually
+      - Annual
+      - Custom
+      title: ProductPricingInputDiscriminatorMappingUsageVolumeBillingFrequency
+    Pagination:
+      type: object
+      properties:
+        limit:
+          type: integer
+        offset:
+          type: integer
+        total:
+          type: integer
+        hasMore:
+          type: boolean
+      required:
+      - limit
+      - offset
+      - total
+      - hasMore
+      title: Pagination
+    ProductPricingInputDiscriminatorMappingRecurringPerUnitBillingType:
+      type: string
+      enum:
+      - Advance
+      - Arrears
+      default: Advance
+      title: ProductPricingInputDiscriminatorMappingRecurringPerUnitBillingType
+    PlanUpgradePathGroup:
+      type: object
+      properties:
+        frequency:
+          type:
+          - string
+          - 'null'
+        planIds:
+          type: array
+          items:
+            type: string
+      required:
+      - frequency
+      - planIds
+      title: PlanUpgradePathGroup
+    ProductPricingInputDiscriminatorMappingRecurringVolumeBillingType:
+      type: string
+      enum:
+      - Advance
+      - Arrears
+      default: Advance
+      title: ProductPricingInputDiscriminatorMappingRecurringVolumeBillingType
+    ProductPricingInputDiscriminatorMappingSeatBasedPrepaidCreditsBillingFrequency:
+      type: string
+      enum:
+      - Monthly
+      - Quarterly
+      - Semi-Annually
+      - Annual
+      - Custom
+      title: ProductPricingInputDiscriminatorMappingSeatBasedPrepaidCreditsBillingFrequency
+    ProductPricingInputDiscriminatorMappingRecurringVolumeBillingFrequency:
+      type: string
+      enum:
+      - Monthly
+      - Quarterly
+      - Semi-Annually
+      - Annual
+      - Custom
+      title: ProductPricingInputDiscriminatorMappingRecurringVolumeBillingFrequency
+    ProductPricingInputDiscriminatorMappingRecurringGraduatedBillingFrequency:
+      type: string
+      enum:
+      - Monthly
+      - Quarterly
+      - Semi-Annually
+      - Annual
+      - Custom
+      title: ProductPricingInputDiscriminatorMappingRecurringGraduatedBillingFrequency
     PlanListResponse:
       type: object
       properties:
@@ -1086,20 +2639,144 @@ components:
       - data
       - pagination
       title: PlanListResponse
-    OrderLineAttributePricing:
+    UpdatePlanRequestStatus:
+      type: string
+      enum:
+      - active
+      - archived
+      description: Set to `archived` to archive this plan, or `active` to restore it.
+      title: UpdatePlanRequestStatus
+    ProductPricingInputDiscriminatorMappingSeatBasedVolumeBillingType:
+      type: string
+      enum:
+      - Advance
+      - Arrears
+      default: Advance
+      title: ProductPricingInputDiscriminatorMappingSeatBasedVolumeBillingType
+    ProductPricingInputDiscriminatorMappingUsageBracketedPrepaidCreditsPricingInput:
       type: object
       properties:
-        eventName:
+        kind:
+          $ref: '#/components/schemas/ProductPricingInputDiscriminatorMappingUsageBracketedPrepaidCreditsPricingInputKind'
+      required:
+      - kind
+      title: ProductPricingInputDiscriminatorMappingUsageBracketedPrepaidCreditsPricingInput
+    ProductCreditBenefitInput:
+      type: object
+      properties:
+        creditsCurrencyId:
           type: string
+        amount:
+          type: number
+          format: double
+        recipient:
+          $ref: '#/components/schemas/ProductCreditBenefitInputRecipient'
+        isInfiniteTotal:
+          type: boolean
+          default: false
+        allocationCadence:
+          $ref: '#/components/schemas/ProductCreditBenefitInputAllocationCadence'
+        creditGrantTiming:
+          $ref: '#/components/schemas/ProductCreditBenefitInputCreditGrantTiming'
+        overageUnitPrice:
+          type:
+          - number
+          - 'null'
+          format: double
+        rolloverAmount:
+          type:
+          - number
+          - 'null'
+          format: double
+        rolloverDuration:
+          type:
+          - number
+          - 'null'
+          format: double
+        rolloverDurationUnit:
+          type:
+          - string
+          - 'null'
+      required:
+      - creditsCurrencyId
+      - amount
+      title: ProductCreditBenefitInput
+    ProductPricingInputDiscriminatorMappingOneTimePerUnitFeeType:
+      type: string
+      enum:
+      - setup
+      - onboarding
+      - implementation
+      - migration
+      - custom
+      title: ProductPricingInputDiscriminatorMappingOneTimePerUnitFeeType
+    ProductPricingInputDiscriminatorMappingUsageBracketedPrepaidCreditsBillingFrequency:
+      type: string
+      enum:
+      - Monthly
+      - Quarterly
+      - Semi-Annually
+      - Annual
+      - Custom
+      title: ProductPricingInputDiscriminatorMappingUsageBracketedPrepaidCreditsBillingFrequency
+    ProductPricingInputDiscriminatorMappingUsageGraduatedSignalType:
+      type: string
+      enum:
+      - activity
+      - outcome
+      title: ProductPricingInputDiscriminatorMappingUsageGraduatedSignalType
+    ProductPricingInputDiscriminatorMappingUsageVolumeSignalType:
+      type: string
+      enum:
+      - activity
+      - outcome
+      title: ProductPricingInputDiscriminatorMappingUsageVolumeSignalType
+    ProductPricingInputDiscriminatorMappingUsageBracketedPrepaidCreditsPricingInputKind:
+      type: string
+      enum:
+      - signalQuantity
+      title: ProductPricingInputDiscriminatorMappingUsageBracketedPrepaidCreditsPricingInputKind
+    ProductPricingInputDiscriminatorMappingUsageGraduatedBillingType:
+      type: string
+      enum:
+      - Advance
+      - Arrears
+      default: Arrears
+      title: ProductPricingInputDiscriminatorMappingUsageGraduatedBillingType
+    PlanPricing_2:
+      type: object
+      properties:
+        pricingType:
+          $ref: '#/components/schemas/PlanPricingPricingType'
         chargeType:
-          $ref: '#/components/schemas/ChargeType'
-        pricePoint:
-          $ref: '#/components/schemas/PricePoint'
+          type: string
         pricingModel:
-          $ref: '#/components/schemas/PricingModelType'
-        billingFrequency:
-          $ref: '#/components/schemas/BillingFrequency'
-      title: OrderLineAttributePricing
+          type: string
+        pricePoints:
+          type: array
+          items:
+            type: object
+            additionalProperties:
+              description: Any type
+      required:
+      - pricingType
+      - chargeType
+      - pricingModel
+      - pricePoints
+      description: Pricing configuration for a plan attribute. Money amounts are expressed in cents.
+      title: PlanPricing
+    ProductPricingInputDiscriminatorMappingUsageBracketedPrepaidCreditsSignalType:
+      type: string
+      enum:
+      - activity
+      - outcome
+      title: ProductPricingInputDiscriminatorMappingUsageBracketedPrepaidCreditsSignalType
+    PlanStatus:
+      type: string
+      enum:
+      - active
+      - archived
+      title: PlanStatus
     ProductPricingInput:
       oneOf:
       - type: object
@@ -1495,1651 +3172,16 @@ components:
       discriminator:
         propertyName: pricingType
       title: ProductPricingInput
-    PlanPricing:
-      type: object
-      properties:
-        PricePoints:
-          type: object
-          additionalProperties:
-            $ref: '#/components/schemas/PricePoint'
-          description: Price points keyed by currency code (e.g., "USD", "EUR")
-        billingFrequency:
-          $ref: '#/components/schemas/PlanPricingBillingFrequency'
-          description: The billing frequency for the plan
-        billingFrequencyCustomMonths:
-          type: number
-          format: double
-          description: Custom billing frequency in months (when billingFrequency is "custom")
-      required:
-      - PricePoints
-      - billingFrequency
-      description: The pricing configuration for a plan. Uses the same PricePoints structure as product pricing.
-      title: PlanPricing
-    Pagination:
-      type: object
-      properties:
-        limit:
-          type: integer
-        offset:
-          type: integer
-        total:
-          type: integer
-        hasMore:
-          type: boolean
-      required:
-      - limit
-      - offset
-      - total
-      - hasMore
-      title: Pagination
-    PlansCurrentGetResponsesContentApplicationJsonSchemaPlanFeaturesItems:
-      type: object
-      properties:
-        productName:
-          type: string
-          description: The name of the product
-        attributeName:
-          type: string
-          description: The name of the product attribute
-        pricing:
-          type: object
-          additionalProperties:
-            description: Any type
-          description: The pricing configuration for this feature
-        usage:
-          $ref: '#/components/schemas/PlansCurrentGetResponsesContentApplicationJsonSchemaPlanFeaturesItemsUsage'
-          description: Current usage and limits for this feature
-      required:
-      - productName
-      - attributeName
-      - pricing
-      - usage
-      title: PlansCurrentGetResponsesContentApplicationJsonSchemaPlanFeaturesItems
-    ProductPricingInputDiscriminatorMappingRecurringVolumeBillingType:
-      type: string
-      enum:
-      - Advance
-      - Arrears
-      default: Advance
-      title: ProductPricingInputDiscriminatorMappingRecurringVolumeBillingType
-    ProductPricingInputDiscriminatorMappingUsagePrepaidCreditsSignalType:
-      type: string
-      enum:
-      - activity
-      - outcome
-      title: ProductPricingInputDiscriminatorMappingUsagePrepaidCreditsSignalType
-    ProductCreditBenefitInput:
-      type: object
-      properties:
-        creditsCurrencyId:
-          type: string
-        amount:
-          type: number
-          format: double
-        recipient:
-          $ref: '#/components/schemas/ProductCreditBenefitInputRecipient'
-        isInfiniteTotal:
-          type: boolean
-          default: false
-        allocationCadence:
-          $ref: '#/components/schemas/ProductCreditBenefitInputAllocationCadence'
-        creditGrantTiming:
-          $ref: '#/components/schemas/ProductCreditBenefitInputCreditGrantTiming'
-        overageUnitPrice:
-          type:
-          - number
-          - 'null'
-          format: double
-        rolloverAmount:
-          type:
-          - number
-          - 'null'
-          format: double
-        rolloverDuration:
-          type:
-          - number
-          - 'null'
-          format: double
-        rolloverDurationUnit:
-          type:
-          - string
-          - 'null'
-      required:
-      - creditsCurrencyId
-      - amount
-      title: ProductCreditBenefitInput
-    CancelRenewalResponse:
-      type: object
-      properties:
-        orderId:
-          type: string
-          format: uuid
-          description: The ID of the order
-        amendmentId:
-          type: string
-          format: uuid
-          description: The ID of the amendment record
-        version:
-          type: integer
-          description: The new version of the order after the amendment
-        endDate:
-          type: string
-          format: date-time
-          description: The new end date of the order
-        effectiveDate:
-          type: string
-          format: date-time
-          description: The effective date of the cancellation
-      required:
-      - orderId
-      - amendmentId
-      - version
-      - endDate
-      - effectiveDate
-      description: Response after successfully cancelling an order's renewal
-      title: CancelRenewalResponse
-    ErrorResponse:
-      type: object
-      properties:
-        error:
-          type: string
-        code:
-          type: string
-        details:
-          type: string
-      required:
-      - error
-      title: ErrorResponse
-    Tier:
-      type: object
-      properties:
-        lowerBound:
-          type: number
-          format: double
-        upperBound:
-          type: number
-          format: double
-        price:
-          type: number
-          format: double
-      title: Tier
-    ProrationDetail:
-      type: object
-      properties:
-        oldAttributeId:
-          type: string
-          format: uuid
-        newAttributeId:
-          type: string
-          format: uuid
-        creditLineId:
-          type: string
-          format: uuid
-        oldPrice:
-          type: number
-          format: double
-        newPrice:
-          type: number
-          format: double
-        creditAmount:
-          type: number
-          format: double
-          description: The credit amount applied for the unused portion
-        remainingDays:
-          type: integer
-          description: Number of days remaining in the current billing cycle
-        totalDaysInCycle:
-          type: integer
-          description: Total number of days in the billing cycle
-      description: Details about the proration calculation for an attribute
-      title: ProrationDetail
-    PlanCreditBenefit:
-      type: object
-      properties:
-        id:
-          type: string
-        creditsCurrencyId:
-          type: string
-        recipient:
-          $ref: '#/components/schemas/PlanCreditBenefitRecipient'
-        amount:
-          type: number
-          format: double
-        rolloverAmount:
-          type:
-          - number
-          - 'null'
-          format: double
-        rolloverDuration:
-          type:
-          - number
-          - 'null'
-          format: double
-        rolloverDurationUnit:
-          $ref: '#/components/schemas/PlanCreditBenefitRolloverDurationUnit'
-        allocationCadence:
-          $ref: '#/components/schemas/PlanCreditBenefitAllocationCadence'
-        creditGrantTiming:
-          $ref: '#/components/schemas/PlanCreditBenefitCreditGrantTiming'
-        isInfiniteTotal:
-          type: boolean
-      required:
-      - id
-      - amount
-      title: PlanCreditBenefit
-    PlanWithFeaturesType:
-      type: string
-      enum:
-      - flat
-      - usage
-      - credit
-      description: The type of plan (flat for fixed pricing, usage for usage-based, credit for prepaid credits)
-      title: PlanWithFeaturesType
-    ProductPricingInputDiscriminatorMappingUsagePerUnitBillingType:
-      type: string
-      enum:
-      - Advance
-      - Arrears
-      default: Arrears
-      title: ProductPricingInputDiscriminatorMappingUsagePerUnitBillingType
-    Order:
-      type: object
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-        description:
-          type: string
-        customerId:
-          type: string
-        organizationId:
-          type: string
-        startDate:
-          type: string
-        endDate:
-          type: string
-        totalAmount:
-          type: number
-          format: double
-        estimatedTax:
-          type: number
-          format: double
-        billedAmountNoTax:
-          type: number
-          format: double
-        billedTax:
-          type: number
-          format: double
-        totalBilledAmount:
-          type: number
-          format: double
-        pendingBillingAmount:
-          type: number
-          format: double
-        creationState:
-          $ref: '#/components/schemas/CreationState'
-        orderLines:
-          type: array
-          items:
-            $ref: '#/components/schemas/OrderLine'
-        customer:
-          $ref: '#/components/schemas/Customer'
-      title: Order
-    PlansCurrentGetResponsesContentApplicationJsonSchemaPlan:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-          description: The unique identifier of the plan
-        name:
-          type: string
-          description: The name of the plan
-        description:
-          type:
-          - string
-          - 'null'
-          description: The description of the plan
-        type:
-          $ref: '#/components/schemas/PlansCurrentGetResponsesContentApplicationJsonSchemaPlanType'
-          description: The type of plan
-        pricing:
-          $ref: '#/components/schemas/PlanPricing'
-        planGroupId:
-          type: string
-          format: uuid
-          description: The plan group ID this plan belongs to
-        nextPlanId:
-          type:
-          - string
-          - 'null'
-          format: uuid
-          description: The ID of the next plan in the sequence
-        prevPlanId:
-          type:
-          - string
-          - 'null'
-          format: uuid
-          description: The ID of the previous plan in the sequence
-        features:
-          type: array
-          items:
-            $ref: '#/components/schemas/PlansCurrentGetResponsesContentApplicationJsonSchemaPlanFeaturesItems'
-          description: The features (product-attribute pairs) included in this plan with usage and limits
-      required:
-      - id
-      - name
-      - type
-      - pricing
-      - planGroupId
-      - features
-      description: The plan details, or null if the customer has no active plan
-      title: PlansCurrentGetResponsesContentApplicationJsonSchemaPlan
-    PlanGroup:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-          description: The unique identifier of the plan group
-        organizationId:
-          type: string
-          format: uuid
-          description: The organization ID that owns this plan group
-        name:
-          type: string
-          description: The name of the plan group
-        description:
-          type:
-          - string
-          - 'null'
-          description: The description of the plan group
-        createdAt:
-          type: string
-          format: date-time
-          description: When the plan group was created
-        updatedAt:
-          type: string
-          format: date-time
-          description: When the plan group was last updated
-        plans:
-          type: array
-          items:
-            $ref: '#/components/schemas/Plan'
-          description: The plans included in this plan group
-      required:
-      - id
-      - organizationId
-      - name
-      - createdAt
-      - updatedAt
-      description: A plan group containing multiple plans
-      title: PlanGroup
-    ProductPricingInputDiscriminatorMappingUsageBracketedPrepaidCreditsCreditUnitBracketsItems:
-      type: object
-      properties:
-        upTo:
-          type:
-          - integer
-          - 'null'
-        creditUnits:
-          type: integer
-      required:
-      - upTo
-      - creditUnits
-      title: ProductPricingInputDiscriminatorMappingUsageBracketedPrepaidCreditsCreditUnitBracketsItems
-    AgentPricePoint:
-      type: object
-      properties:
-        unitPrice:
-          type: number
-          format: double
-        minQuantity:
-          type: number
-          format: double
-        includedQuantity:
-          type: number
-          format: double
-        tiers:
-          type: array
-          items:
-            $ref: '#/components/schemas/AgentPricePointTiers'
-      title: AgentPricePoint
-    PlanPricing_2:
-      type: object
-      properties:
-        pricingType:
-          $ref: '#/components/schemas/PlanPricingPricingType'
-        chargeType:
-          type: string
-        pricingModel:
-          type: string
-        pricePoints:
-          type: array
-          items:
-            type: object
-            additionalProperties:
-              description: Any type
-      required:
-      - pricingType
-      - chargeType
-      - pricingModel
-      - pricePoints
-      description: Pricing configuration for a plan attribute. Money amounts are expressed in cents.
-      title: PlanPricing
-    ProductPricingInputDiscriminatorMappingUsageGraduatedSignalType:
-      type: string
-      enum:
-      - activity
-      - outcome
-      title: ProductPricingInputDiscriminatorMappingUsageGraduatedSignalType
-    UsageSummary:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-          description: The unique identifier of the usage summary
-        eventName:
-          type: string
-          description: The name of the event being tracked
-        eventsQuantity:
-          type: integer
-          format: int64
-          description: The quantity of events in this usage period
-        startDate:
-          type: string
-          format: date-time
-          description: The start date of the usage period
-        endDate:
-          type: string
-          format: date-time
-          description: The end date of the usage period
-        subtotal:
-          type: integer
-          format: int64
-          description: The subtotal amount in the smallest currency unit (e.g., cents)
-        nextBillingDate:
-          type: string
-          format: date-time
-          description: The next billing date for this usage
-        customerId:
-          type: string
-          format: uuid
-          description: The internal customer ID
-        orderId:
-          type: string
-          format: uuid
-          description: The order ID associated with this usage
-        orderLineId:
-          type: string
-          format: uuid
-          description: The order line ID associated with this usage
-        orderLineAttributeId:
-          type: string
-          format: uuid
-          description: The order line attribute ID associated with this usage
-        invoiceId:
-          type:
-          - string
-          - 'null'
-          format: uuid
-          description: The invoice ID if this usage has been invoiced
-        invoiceLineId:
-          type:
-          - string
-          - 'null'
-          format: uuid
-          description: The invoice line ID if this usage has been invoiced
-        createdAt:
-          type: string
-          format: date-time
-          description: When the usage summary was created
-        updatedAt:
-          type: string
-          format: date-time
-          description: When the usage summary was last updated
-        order:
-          $ref: '#/components/schemas/UsageSummaryOrder'
-          description: Associated order information
-        orderLine:
-          $ref: '#/components/schemas/UsageSummaryOrderLine'
-          description: Associated order line information
-      required:
-      - id
-      - eventName
-      - eventsQuantity
-      - startDate
-      - endDate
-      - subtotal
-      - nextBillingDate
-      - customerId
-      - orderId
-      - orderLineId
-      - orderLineAttributeId
-      - createdAt
-      - updatedAt
-      description: A single usage summary record
-      title: UsageSummary
     ProductSimplePricePointTiersItemsTierBillingType:
       type: string
       enum:
       - flat
       - perUnit
       title: ProductSimplePricePointTiersItemsTierBillingType
-    PlanAttributeInput:
-      type: object
-      properties:
-        productAttributeId:
-          type: string
-          description: Product attribute ID to override in this plan
-        pricing:
-          $ref: '#/components/schemas/ProductPricingInput'
-        creditBenefits:
-          type: array
-          items:
-            $ref: '#/components/schemas/ProductCreditBenefitInput'
-      required:
-      - productAttributeId
-      - pricing
-      title: PlanAttributeInput
-    ChargeType:
-      type: string
-      enum:
-      - oneTime
-      - recurring
-      - usage
-      - seatBased
-      title: ChargeType
-    ProductPricingInputDiscriminatorMappingRecurringGraduatedBillingType:
-      type: string
-      enum:
-      - Advance
-      - Arrears
-      default: Advance
-      title: ProductPricingInputDiscriminatorMappingRecurringGraduatedBillingType
-    PlansCurrentGetResponsesContentApplicationJsonSchemaSubscription:
-      type: object
-      properties:
-        orderId:
-          type: string
-          format: uuid
-          description: The ID of the order
-        orderDisplayId:
-          type:
-          - string
-          - 'null'
-          description: The display ID of the order
-        startDate:
-          type: string
-          format: date-time
-          description: The start date of the subscription
-        endDate:
-          type:
-          - string
-          - 'null'
-          format: date-time
-          description: The end date of the subscription (null if ongoing)
-        totalUsage:
-          type: integer
-          description: The total usage quantity across all features on this order
-      required:
-      - orderId
-      - startDate
-      - endDate
-      - totalUsage
-      description: The subscription details, or null if the customer has no active plan
-      title: PlansCurrentGetResponsesContentApplicationJsonSchemaSubscription
-    ProductPricingInputDiscriminatorMappingSeatBasedPerUnitBillingType:
-      type: string
-      enum:
-      - Advance
-      - Arrears
-      default: Advance
-      title: ProductPricingInputDiscriminatorMappingSeatBasedPerUnitBillingType
-    ProductTieredPricePointTiersItems:
-      type: object
-      properties:
-        flatAmount:
-          type: number
-          format: double
-        index:
-          type: number
-          format: double
-        lowerBound:
-          type: number
-          format: double
-        number:
-          type: number
-          format: double
-        tierBillingType:
-          $ref: '#/components/schemas/ProductTieredPricePointTiersItemsTierBillingType'
-        unitAmount:
-          type: number
-          format: double
-        upperBound:
-          type: number
-          format: double
-      required:
-      - lowerBound
-      title: ProductTieredPricePointTiersItems
-    PlanPlanProductsItems:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        organizationId:
-          type: string
-          format: uuid
-        planId:
-          type: string
-          format: uuid
-        productId:
-          type: string
-          format: uuid
-        createdAt:
-          type: string
-          format: date-time
-        updatedAt:
-          type: string
-          format: date-time
-        product:
-          $ref: '#/components/schemas/Product'
-          description: The product associated with this plan product
-        planProductAttribute:
-          type: array
-          items:
-            $ref: '#/components/schemas/PlanPlanProductsItemsPlanProductAttributeItems'
-          description: The product attributes with pricing for this plan
-      title: PlanPlanProductsItems
-    ProductPricingInputDiscriminatorMappingUsageGraduatedBillingType:
-      type: string
-      enum:
-      - Advance
-      - Arrears
-      default: Arrears
-      title: ProductPricingInputDiscriminatorMappingUsageGraduatedBillingType
-    ProductPricingInputDiscriminatorMappingUsagePerUnitBillingFrequency:
-      type: string
-      enum:
-      - Monthly
-      - Quarterly
-      - Semi-Annually
-      - Annual
-      - Custom
-      title: ProductPricingInputDiscriminatorMappingUsagePerUnitBillingFrequency
-    PlanStatus:
-      type: string
-      enum:
-      - active
-      - archived
-      title: PlanStatus
-    ProductPricingInputDiscriminatorMappingUsageVolumeBillingFrequency:
-      type: string
-      enum:
-      - Monthly
-      - Quarterly
-      - Semi-Annually
-      - Annual
-      - Custom
-      title: ProductPricingInputDiscriminatorMappingUsageVolumeBillingFrequency
-    ProductPricingInputDiscriminatorMappingSeatBasedVolumeBillingType:
-      type: string
-      enum:
-      - Advance
-      - Arrears
-      default: Advance
-      title: ProductPricingInputDiscriminatorMappingSeatBasedVolumeBillingType
-    ProductPricingInputDiscriminatorMappingRecurringPerUnitBillingFrequency:
-      type: string
-      enum:
-      - Monthly
-      - Quarterly
-      - Semi-Annually
-      - Annual
-      - Custom
-      title: ProductPricingInputDiscriminatorMappingRecurringPerUnitBillingFrequency
-    Error:
-      type: object
-      properties:
-        error:
-          $ref: '#/components/schemas/ApiError'
-      required:
-      - error
-      description: An error response from the Paid API
-      title: Error
-    PlanCreditBenefitCreditGrantTiming:
-      type: string
-      enum:
-      - on_payment
-      - on_invoice_posted
-      - on_order_activation
-      title: PlanCreditBenefitCreditGrantTiming
-    ProductTieredPricePoint:
-      type: object
-      properties:
-        currency:
-          type: string
-        unitPrice:
-          type: number
-          format: double
-        tiers:
-          type: array
-          items:
-            $ref: '#/components/schemas/ProductTieredPricePointTiersItems'
-        minQuantity:
-          type: number
-          format: double
-        maxQuantity:
-          type: number
-          format: double
-        includedQuantity:
-          type: number
-          format: double
-      required:
-      - currency
-      - unitPrice
-      - tiers
-      title: ProductTieredPricePoint
-    ProductPricingInputDiscriminatorMappingRecurringGraduatedBillingFrequency:
-      type: string
-      enum:
-      - Monthly
-      - Quarterly
-      - Semi-Annually
-      - Annual
-      - Custom
-      title: ProductPricingInputDiscriminatorMappingRecurringGraduatedBillingFrequency
-    ProductPricingInputDiscriminatorMappingUsagePrepaidCreditsBillingFrequency:
-      type: string
-      enum:
-      - Monthly
-      - Quarterly
-      - Semi-Annually
-      - Annual
-      - Custom
-      title: ProductPricingInputDiscriminatorMappingUsagePrepaidCreditsBillingFrequency
-    PlanAttribute:
-      type: object
-      properties:
-        productAttributeId:
-          type: string
-        name:
-          type: string
-        active:
-          type: boolean
-        pricing:
-          $ref: '#/components/schemas/PlanPricing_2'
-        creditBenefits:
-          type: array
-          items:
-            $ref: '#/components/schemas/PlanCreditBenefit'
-      required:
-      - productAttributeId
-      - name
-      - active
-      - pricing
-      - creditBenefits
-      title: PlanAttribute
-    ProductCreditBenefitInputAllocationCadence:
-      type: string
-      enum:
-      - upfront
-      - monthly
-      default: upfront
-      title: ProductCreditBenefitInputAllocationCadence
-    ProductPricingInputDiscriminatorMappingSeatBasedPerUnitBillingFrequency:
-      type: string
-      enum:
-      - Monthly
-      - Quarterly
-      - Semi-Annually
-      - Annual
-      - Custom
-      title: ProductPricingInputDiscriminatorMappingSeatBasedPerUnitBillingFrequency
-    ProductSimplePricePointTiersItems:
-      type: object
-      properties:
-        flatAmount:
-          type: number
-          format: double
-        index:
-          type: number
-          format: double
-        lowerBound:
-          type: number
-          format: double
-        number:
-          type: number
-          format: double
-        tierBillingType:
-          $ref: '#/components/schemas/ProductSimplePricePointTiersItemsTierBillingType'
-        unitAmount:
-          type: number
-          format: double
-        upperBound:
-          type: number
-          format: double
-      required:
-      - lowerBound
-      title: ProductSimplePricePointTiersItems
-    CreationState:
-      type: string
-      enum:
-      - active
-      - draft
-      title: CreationState
-    AgentAttribute:
-      type: object
-      properties:
-        name:
-          type: string
-        active:
-          type: boolean
-        pricing:
-          $ref: '#/components/schemas/Pricing'
-      required:
-      - name
-      - active
-      - pricing
-      title: AgentAttribute
-    ApiError:
-      type: object
-      properties:
-        message:
-          type: string
-          description: A human-readable message providing more details about the error.
-        code:
-          type: string
-        details:
-          type: string
-      description: An API error response from the Paid API
-      title: ApiError
-    ProductPricingInputDiscriminatorMappingUsageGraduatedBillingFrequency:
-      type: string
-      enum:
-      - Monthly
-      - Quarterly
-      - Semi-Annually
-      - Annual
-      - Custom
-      title: ProductPricingInputDiscriminatorMappingUsageGraduatedBillingFrequency
-    PlanUpgradePathGroup:
-      type: object
-      properties:
-        frequency:
-          type:
-          - string
-          - 'null'
-        planIds:
-          type: array
-          items:
-            type: string
-      required:
-      - frequency
-      - planIds
-      title: PlanUpgradePathGroup
-    ProductPricingInputDiscriminatorMappingOneTimePerUnitFeeType:
-      type: string
-      enum:
-      - setup
-      - onboarding
-      - implementation
-      - migration
-      - custom
-      title: ProductPricingInputDiscriminatorMappingOneTimePerUnitFeeType
-    ProductTieredPricePointTiersItemsTierBillingType:
-      type: string
-      enum:
-      - flat
-      - perUnit
-      title: ProductTieredPricePointTiersItemsTierBillingType
-    PlanPricingPricingType:
-      type: string
-      enum:
-      - RecurringPerUnit
-      - RecurringGraduated
-      - RecurringVolume
-      - RecurringPercentOfTotal
-      - UsagePerUnit
-      - UsageGraduated
-      - UsageVolume
-      - UsagePrepaidCredits
-      - UsageBracketedPrepaidCredits
-      - UsageCostPlus
-      - OneTimePerUnit
-      - SeatBasedPerUnit
-      - SeatBasedGraduated
-      - SeatBasedVolume
-      - SeatBasedPrepaidCredits
-      title: PlanPricingPricingType
-    ProductPricingInputDiscriminatorMappingRecurringPercentOfTotalBillingFrequency:
-      type: string
-      enum:
-      - Monthly
-      - Quarterly
-      - Semi-Annually
-      - Annual
-      - Custom
-      title: ProductPricingInputDiscriminatorMappingRecurringPercentOfTotalBillingFrequency
-    CreatePlanRequest:
-      type: object
-      properties:
-        productId:
-          type: string
-          description: Paid product ID, for example `prod_abc123`
-        name:
-          type:
-          - string
-          - 'null'
-        externalId:
-          type:
-          - string
-          - 'null'
-          description: Your stable identifier for this plan
-        supportedCurrencies:
-          type: array
-          items:
-            type: string
-        isDefault:
-          type: boolean
-        attributes:
-          type: array
-          items:
-            $ref: '#/components/schemas/PlanAttributeInput'
-      required:
-      - productId
-      - attributes
-      title: CreatePlanRequest
-    UpdatePlanUpgradePathRequest:
-      type: object
-      properties:
-        productId:
-          type: string
-          description: Paid product ID, for example `prod_abc123`
-        groups:
-          type: array
-          items:
-            $ref: '#/components/schemas/PlanUpgradePathGroup'
-      required:
-      - productId
-      - groups
-      title: UpdatePlanUpgradePathRequest
-    ProductPricingInputDiscriminatorMappingOneTimePerUnitBillingType:
-      type: string
-      enum:
-      - Advance
-      - Arrears
-      default: Advance
-      title: ProductPricingInputDiscriminatorMappingOneTimePerUnitBillingType
-    ProductPricingInputDiscriminatorMappingUsagePrepaidCreditsBillingType:
-      type: string
-      enum:
-      - Advance
-      - Arrears
-      default: Arrears
-      title: ProductPricingInputDiscriminatorMappingUsagePrepaidCreditsBillingType
-    ProductPricingInputDiscriminatorMappingRecurringPerUnitBillingType:
-      type: string
-      enum:
-      - Advance
-      - Arrears
-      default: Advance
-      title: ProductPricingInputDiscriminatorMappingRecurringPerUnitBillingType
-    ProductPricingInputDiscriminatorMappingSeatBasedPrepaidCreditsBillingFrequency:
-      type: string
-      enum:
-      - Monthly
-      - Quarterly
-      - Semi-Annually
-      - Annual
-      - Custom
-      title: ProductPricingInputDiscriminatorMappingSeatBasedPrepaidCreditsBillingFrequency
-    ProrationUpgradeResponse:
-      type: object
-      properties:
-        orderId:
-          type: string
-          format: uuid
-          description: The ID of the order
-        amendmentId:
-          type: string
-          format: uuid
-          description: The ID of the amendment record
-        version:
-          type: integer
-          description: The new version of the order after the amendment
-        effectiveDate:
-          type: string
-          format: date-time
-          description: The effective date of the plan change
-        endedLineIds:
-          type: array
-          items:
-            type: string
-            format: uuid
-          description: IDs of order lines that were ended
-        createdLineIds:
-          type: array
-          items:
-            type: string
-            format: uuid
-          description: IDs of new order lines that were created
-        creditLineIds:
-          type: array
-          items:
-            type: string
-            format: uuid
-          description: IDs of credit lines that were created
-        prorationDetails:
-          type: array
-          items:
-            $ref: '#/components/schemas/ProrationDetail'
-          description: Detailed proration calculations for each updated attribute
-      required:
-      - orderId
-      - amendmentId
-      - version
-      - effectiveDate
-      - endedLineIds
-      - createdLineIds
-      - creditLineIds
-      - prorationDetails
-      description: Response after successfully scheduling a plan change
-      title: ProrationUpgradeResponse
-    ProductPricingInputDiscriminatorMappingUsageCostPlusSignalType:
-      type: string
-      enum:
-      - activity
-      - outcome
-      title: ProductPricingInputDiscriminatorMappingUsageCostPlusSignalType
-    PricePoint:
-      type: object
-      properties:
-        currency:
-          type: string
-        unitPrice:
-          type: number
-          format: double
-        minQuantity:
-          type: number
-          format: double
-        tiers:
-          type: array
-          items:
-            $ref: '#/components/schemas/Tier'
-      title: PricePoint
-    UpdatePlanRequest:
-      type: object
-      properties:
-        name:
-          type:
-          - string
-          - 'null'
-        externalId:
-          type:
-          - string
-          - 'null'
-        supportedCurrencies:
-          type: array
-          items:
-            type: string
-        isDefault:
-          type: boolean
-        status:
-          $ref: '#/components/schemas/UpdatePlanRequestStatus'
-          description: Set to `archived` to archive this plan, or `active` to restore it.
-        attributes:
-          type: array
-          items:
-            $ref: '#/components/schemas/PlanAttributeInput'
-      title: UpdatePlanRequest
-    PlanUpgradePathResponse:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Plan_2'
-      required:
-      - data
-      title: PlanUpgradePathResponse
-    PlansCurrentGetResponsesContentApplicationJsonSchemaPlanType:
-      type: string
-      enum:
-      - flat
-      - usage
-      - credit
-      description: The type of plan
-      title: PlansCurrentGetResponsesContentApplicationJsonSchemaPlanType
-    OrderLineAttribute:
-      type: object
-      properties:
-        agentAttributeId:
-          type: string
-        quantity:
-          type: number
-          format: double
-        currency:
-          type: string
-        pricing:
-          $ref: '#/components/schemas/OrderLineAttributePricing'
-      title: OrderLineAttribute
-    ProductPricingInputDiscriminatorMappingUsageBracketedPrepaidCreditsPricingInput:
-      type: object
-      properties:
-        kind:
-          $ref: '#/components/schemas/ProductPricingInputDiscriminatorMappingUsageBracketedPrepaidCreditsPricingInputKind'
-      required:
-      - kind
-      title: ProductPricingInputDiscriminatorMappingUsageBracketedPrepaidCreditsPricingInput
-    ProductPricingInputDiscriminatorMappingSeatBasedGraduatedBillingFrequency:
-      type: string
-      enum:
-      - Monthly
-      - Quarterly
-      - Semi-Annually
-      - Annual
-      - Custom
-      title: ProductPricingInputDiscriminatorMappingSeatBasedGraduatedBillingFrequency
-    ProductSimplePricePoint:
-      type: object
-      properties:
-        currency:
-          type: string
-        unitPrice:
-          type: number
-          format: double
-        tiers:
-          type: array
-          items:
-            $ref: '#/components/schemas/ProductSimplePricePointTiersItems'
-        minQuantity:
-          type: number
-          format: double
-        maxQuantity:
-          type: number
-          format: double
-        includedQuantity:
-          type: number
-          format: double
-      required:
-      - currency
-      - unitPrice
-      title: ProductSimplePricePoint
-    UsageSummariesResponse:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/UsageSummary'
-        pagination:
-          $ref: '#/components/schemas/UsagePaginationMeta'
-      required:
-      - data
-      - pagination
-      description: Response containing usage summaries and pagination metadata
-      title: UsageSummariesResponse
-    CustomerMetadata:
-      type: object
-      properties: {}
-      description: Flexible JSON field for storing custom metadata about the customer
-      title: CustomerMetadata
-    PlanType:
-      type: string
-      enum:
-      - flat
-      - usage
-      - credit
-      description: The type of plan (flat for fixed pricing, usage for usage-based, credit for prepaid credits)
-      title: PlanType
-    ProductCreditBenefitInputCreditGrantTiming:
-      type: string
-      enum:
-      - on_order_activation
-      - on_payment
-      - on_invoice_posted
-      title: ProductCreditBenefitInputCreditGrantTiming
-    UpdatePlanRequestStatus:
-      type: string
-      enum:
-      - active
-      - archived
-      description: Set to `archived` to archive this plan, or `active` to restore it.
-      title: UpdatePlanRequestStatus
-    Address:
-      type: object
-      properties:
-        line1:
-          type: string
-        line2:
-          type: string
-        city:
-          type: string
-        state:
-          type: string
-        zipCode:
-          type: string
-        country:
-          type: string
-      required:
-      - line1
-      - city
-      - state
-      - zipCode
-      - country
-      title: Address
-    Pricing:
-      type: object
-      properties:
-        eventName:
-          type: string
-        taxable:
-          type: boolean
-        creditCost:
-          type: number
-          format: double
-        chargeType:
-          $ref: '#/components/schemas/ChargeType'
-        pricingModel:
-          $ref: '#/components/schemas/PricingModelType'
-        billingFrequency:
-          $ref: '#/components/schemas/BillingFrequency'
-        pricePoints:
-          type: object
-          additionalProperties:
-            $ref: '#/components/schemas/AgentPricePoint'
-      required:
-      - taxable
-      - chargeType
-      - pricingModel
-      - billingFrequency
-      - pricePoints
-      title: Pricing
-    UsageSummaryOrderLine:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        displayId:
-          type:
-          - string
-          - 'null'
-      description: Associated order line information
-      title: UsageSummaryOrderLine
-    BillingFrequency:
-      type: string
-      enum:
-      - monthly
-      - quarterly
-      - annual
-      title: BillingFrequency
-    ProductPricingInputDiscriminatorMappingUsageCostPlusBillingFrequency:
-      type: string
-      enum:
-      - Monthly
-      - Quarterly
-      - Semi-Annually
-      - Annual
-      - Custom
-      title: ProductPricingInputDiscriminatorMappingUsageCostPlusBillingFrequency
-    PlanPricingBillingFrequency:
-      type: string
-      enum:
-      - monthly
-      - quarterly
-      - semi-annually
-      - yearly
-      - custom
-      description: The billing frequency for the plan
-      title: PlanPricingBillingFrequency
-    ProductPricingInputDiscriminatorMappingUsageBracketedPrepaidCreditsSignalType:
-      type: string
-      enum:
-      - activity
-      - outcome
-      title: ProductPricingInputDiscriminatorMappingUsageBracketedPrepaidCreditsSignalType
-    OrderLine:
-      type: object
-      properties:
-        id:
-          type: string
-        orderId:
-          type: string
-        agentId:
-          type: string
-        name:
-          type: string
-        description:
-          type: string
-        startDate:
-          type: string
-        endDate:
-          type: string
-        totalAmount:
-          type: number
-          format: double
-        billedAmountWithoutTax:
-          type: number
-          format: double
-        billedTax:
-          type: number
-          format: double
-        totalBilledAmount:
-          type: number
-          format: double
-        creationState:
-          $ref: '#/components/schemas/CreationState'
-        agent:
-          $ref: '#/components/schemas/Agent'
-        orderLineAttributes:
-          type: array
-          items:
-            $ref: '#/components/schemas/OrderLineAttribute'
-      title: OrderLine
-    Plan:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-          description: The unique identifier of the plan
-        organizationId:
-          type: string
-          format: uuid
-          description: The organization ID that owns this plan
-        planGroupId:
-          type: string
-          format: uuid
-          description: The plan group ID this plan belongs to
-        name:
-          type: string
-          description: The name of the plan
-        description:
-          type:
-          - string
-          - 'null'
-          description: The description of the plan
-        type:
-          $ref: '#/components/schemas/PlanType'
-          description: The type of plan (flat for fixed pricing, usage for usage-based, credit for prepaid credits)
-        pricing:
-          $ref: '#/components/schemas/PlanPricing'
-        nextPlanId:
-          type:
-          - string
-          - 'null'
-          format: uuid
-          description: The ID of the next plan in the sequence
-        prevPlanId:
-          type:
-          - string
-          - 'null'
-          format: uuid
-          description: The ID of the previous plan in the sequence
-        createdAt:
-          type: string
-          format: date-time
-          description: When the plan was created
-        updatedAt:
-          type: string
-          format: date-time
-          description: When the plan was last updated
-        planProducts:
-          type: array
-          items:
-            $ref: '#/components/schemas/PlanPlanProductsItems'
-          description: The products included in this plan
-      required:
-      - id
-      - organizationId
-      - planGroupId
-      - name
-      - type
-      - pricing
-      - createdAt
-      - updatedAt
-      description: A plan containing products and their attributes
-      title: Plan
-    PlanPlanProductsItemsPlanProductAttributeItems:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        organizationId:
-          type: string
-          format: uuid
-        planProductId:
-          type: string
-          format: uuid
-        productAttributeId:
-          type: string
-          format: uuid
-        pricing:
-          type: object
-          additionalProperties:
-            description: Any type
-          description: The pricing configuration for this attribute
-        createdAt:
-          type: string
-          format: date-time
-        updatedAt:
-          type: string
-          format: date-time
-      title: PlanPlanProductsItemsPlanProductAttributeItems
-    PlanCreditBenefitAllocationCadence:
-      type: string
-      enum:
-      - upfront
-      - monthly
-      title: PlanCreditBenefitAllocationCadence
-    ProductPricingInputDiscriminatorMappingSeatBasedPrepaidCreditsBillingType:
-      type: string
-      enum:
-      - Advance
-      - Arrears
-      default: Advance
-      title: ProductPricingInputDiscriminatorMappingSeatBasedPrepaidCreditsBillingType
-    Product:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        externalId:
-          type:
-          - string
-          - 'null'
-        displayId:
-          type: string
-          description: Human-readable display ID
-        organizationId:
-          type: string
-          format: uuid
-        name:
-          type: string
-        description:
-          type:
-          - string
-          - 'null'
-        type:
-          $ref: '#/components/schemas/ProductType'
-          description: The type of product
-        active:
-          type: boolean
-        productCode:
-          type:
-          - string
-          - 'null'
-        ProductAttribute:
-          type: array
-          items:
-            $ref: '#/components/schemas/AgentAttribute'
-          description: Pricing attributes for this product
-        metadata:
-          type:
-          - object
-          - 'null'
-          additionalProperties:
-            description: Any type
-        createdAt:
-          type: string
-          format: date-time
-        updatedAt:
-          type: string
-          format: date-time
-      required:
-      - id
-      - organizationId
-      - name
-      - type
-      - active
-      description: A product in the Paid system (previously called Agent)
-      title: Product
-    UsagePaginationMeta:
-      type: object
-      properties:
-        limit:
-          type: integer
-          description: The requested limit
-        offset:
-          type: integer
-          description: The requested offset
-        total:
-          type: integer
-          description: Total number of usage summaries available
-        hasMore:
-          type: boolean
-          description: Whether there are more results available
-      required:
-      - limit
-      - offset
-      - total
-      - hasMore
-      description: Pagination metadata for usage summaries
-      title: UsagePaginationMeta
-    TaxExemptStatus:
-      type: string
-      enum:
-      - none
-      - exempt
-      - reverse
-      title: TaxExemptStatus
-    CreationSource:
-      type: string
-      enum:
-      - manual
-      - api
-      - crm
-      - other
-      title: CreationSource
-    PlansCurrentGetResponsesContentApplicationJsonSchemaPlanFeaturesItemsUsage:
-      type: object
-      properties:
-        eventName:
-          type:
-          - string
-          - 'null'
-          description: The event name used to track usage for this feature
-        currentUsage:
-          type: integer
-          description: The current usage quantity for this feature on the order
-        limit:
-          type:
-          - integer
-          - 'null'
-          description: The usage limit for this feature (null if unlimited)
-        isUnlimited:
-          type: boolean
-          description: Whether this feature has unlimited usage
-      required:
-      - eventName
-      - currentUsage
-      - limit
-      - isUnlimited
-      description: Current usage and limits for this feature
-      title: PlansCurrentGetResponsesContentApplicationJsonSchemaPlanFeaturesItemsUsage
-    PlanWithFeaturesFeaturesItems:
-      type: object
-      properties:
-        productName:
-          type: string
-          description: The name of the product
-        attributeName:
-          type: string
-          description: The name of the product attribute
-        pricing:
-          type: object
-          additionalProperties:
-            description: Any type
-          description: The pricing configuration for this feature
-      required:
-      - productName
-      - attributeName
-      - pricing
-      title: PlanWithFeaturesFeaturesItems
-    ProductCreditBenefitInputRecipient:
-      type: string
-      enum:
-      - organization
-      - seat
-      default: organization
-      title: ProductCreditBenefitInputRecipient
-    ProductPricingInputDiscriminatorMappingRecurringVolumeBillingFrequency:
-      type: string
-      enum:
-      - Monthly
-      - Quarterly
-      - Semi-Annually
-      - Annual
-      - Custom
-      title: ProductPricingInputDiscriminatorMappingRecurringVolumeBillingFrequency
-    PlanCreditBenefitRolloverDurationUnit:
-      type: string
-      enum:
-      - days
-      - months
-      title: PlanCreditBenefitRolloverDurationUnit
-    ProductPricingInputDiscriminatorMappingUsageBracketedPrepaidCreditsBillingType:
-      type: string
-      enum:
-      - Advance
-      - Arrears
-      default: Arrears
-      title: ProductPricingInputDiscriminatorMappingUsageBracketedPrepaidCreditsBillingType
-    AgentPricePointTiers:
-      type: object
-      properties:
-        minQuantity:
-          type: number
-          format: double
-        maxQuantity:
-          type: number
-          format: double
-        unitPrice:
-          type: number
-          format: double
-      required:
-      - unitPrice
-      title: AgentPricePointTiers
-    ProductPricingInputDiscriminatorMappingRecurringPercentOfTotalBillingType:
-      type: string
-      enum:
-      - Advance
-      - Arrears
-      default: Advance
-      title: ProductPricingInputDiscriminatorMappingRecurringPercentOfTotalBillingType
-    ProductPricingInputDiscriminatorMappingUsageBracketedPrepaidCreditsPricingInputKind:
-      type: string
-      enum:
-      - signalQuantity
-      title: ProductPricingInputDiscriminatorMappingUsageBracketedPrepaidCreditsPricingInputKind
   securitySchemes:
     bearerAuth:
       type: http
       scheme: bearer
+x-refined-from:
+- paid-v1.json
+- paid-v2.json

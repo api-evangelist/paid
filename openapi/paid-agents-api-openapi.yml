@@ -1,12 +1,12 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: API Reference agents API
+  title: Reference Agents API
   version: 1.0.0
 servers:
 - url: https://api.agentpaid.io/api/v1
   description: Production
 tags:
-- name: agents
+- name: Agents
 paths:
   /agents:
     get:
@@ -14,7 +14,7 @@ paths:
       summary: List agents
       description: 'DEPRECATED: Use /products instead. Agents are now products with type=''agent''.'
       tags:
-      - agents
+      - Agents
       parameters:
       - name: Authorization
         in: header
@@ -36,7 +36,7 @@ paths:
       summary: Create Agent
       description: 'DEPRECATED: Use POST /products instead.'
       tags:
-      - agents
+      - Agents
       parameters:
       - name: Authorization
         in: header
@@ -62,7 +62,7 @@ paths:
       summary: Get agent by ID
       description: 'DEPRECATED: Use GET /products/{productId} instead.'
       tags:
-      - agents
+      - Agents
       parameters:
       - name: agentId
         in: path
@@ -87,7 +87,7 @@ paths:
       summary: Update Agent
       description: 'DEPRECATED: Use PUT /products/{productId} instead.'
       tags:
-      - agents
+      - Agents
       parameters:
       - name: agentId
         in: path
@@ -117,7 +117,7 @@ paths:
       summary: Delete agent
       description: 'DEPRECATED: Use DELETE /products/{productId} instead.'
       tags:
-      - agents
+      - Agents
       parameters:
       - name: agentId
         in: path
@@ -143,7 +143,7 @@ paths:
       summary: Get agent by external ID
       description: 'DEPRECATED: Use GET /products/external/{externalId} instead.'
       tags:
-      - agents
+      - Agents
       parameters:
       - name: externalId
         in: path
@@ -168,7 +168,7 @@ paths:
       summary: Update agent by external ID
       description: 'DEPRECATED: Use PUT /products/external/{externalId} instead.'
       tags:
-      - agents
+      - Agents
       parameters:
       - name: externalId
         in: path
@@ -198,7 +198,7 @@ paths:
       summary: Delete agent by external ID
       description: 'DEPRECATED: Use DELETE /products/external/{externalId} instead.'
       tags:
-      - agents
+      - Agents
       parameters:
       - name: externalId
         in: path
@@ -220,24 +220,55 @@ paths:
                 $ref: '#/components/schemas/agents_deleteByExternalId_Response_204'
 components:
   schemas:
-    AgentUpdate:
+    AgentPricePointTiers:
+      type: object
+      properties:
+        minQuantity:
+          type: number
+          format: double
+        maxQuantity:
+          type: number
+          format: double
+        unitPrice:
+          type: number
+          format: double
+      required:
+      - unitPrice
+      title: AgentPricePointTiers
+    ChargeType:
+      type: string
+      enum:
+      - oneTime
+      - recurring
+      - usage
+      - seatBased
+      title: ChargeType
+    BillingFrequency:
+      type: string
+      enum:
+      - monthly
+      - quarterly
+      - annual
+      title: BillingFrequency
+    agents_deleteByExternalId_Response_204:
+      type: object
+      properties: {}
+      description: Empty response body
+      title: agents_deleteByExternalId_Response_204
+    AgentAttribute:
       type: object
       properties:
         name:
           type: string
-        description:
-          type: string
-        externalId:
-          type: string
         active:
           type: boolean
-        agentCode:
-          type: string
-        agentAttributes:
-          type: array
-          items:
-            $ref: '#/components/schemas/AgentAttribute'
-      title: AgentUpdate
+        pricing:
+          $ref: '#/components/schemas/Pricing'
+      required:
+      - name
+      - active
+      - pricing
+      title: AgentAttribute
     Agent:
       type: object
       properties:
@@ -265,19 +296,32 @@ components:
       - name
       - active
       title: Agent
-    ChargeType:
+    AgentUpdate:
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        externalId:
+          type: string
+        active:
+          type: boolean
+        agentCode:
+          type: string
+        agentAttributes:
+          type: array
+          items:
+            $ref: '#/components/schemas/AgentAttribute'
+      title: AgentUpdate
+    PricingModelType:
       type: string
       enum:
-      - oneTime
-      - recurring
-      - usage
-      - seatBased
-      title: ChargeType
-    agents_deleteByExternalId_Response_204:
-      type: object
-      properties: {}
-      description: Empty response body
-      title: agents_deleteByExternalId_Response_204
+      - PerUnit
+      - VolumePricing
+      - GraduatedPricing
+      - PrepaidCredits
+      title: PricingModelType
     AgentCreate:
       type: object
       properties:
@@ -295,6 +339,28 @@ components:
       - name
       - description
       title: AgentCreate
+    agents_delete_Response_204:
+      type: object
+      properties: {}
+      description: Empty response body
+      title: agents_delete_Response_204
+    AgentPricePoint:
+      type: object
+      properties:
+        unitPrice:
+          type: number
+          format: double
+        minQuantity:
+          type: number
+          format: double
+        includedQuantity:
+          type: number
+          format: double
+        tiers:
+          type: array
+          items:
+            $ref: '#/components/schemas/AgentPricePointTiers'
+      title: AgentPricePoint
     Pricing:
       type: object
       properties:
@@ -322,72 +388,6 @@ components:
       - billingFrequency
       - pricePoints
       title: Pricing
-    PricingModelType:
-      type: string
-      enum:
-      - PerUnit
-      - VolumePricing
-      - GraduatedPricing
-      - PrepaidCredits
-      title: PricingModelType
-    BillingFrequency:
-      type: string
-      enum:
-      - monthly
-      - quarterly
-      - annual
-      title: BillingFrequency
-    AgentPricePointTiers:
-      type: object
-      properties:
-        minQuantity:
-          type: number
-          format: double
-        maxQuantity:
-          type: number
-          format: double
-        unitPrice:
-          type: number
-          format: double
-      required:
-      - unitPrice
-      title: AgentPricePointTiers
-    agents_delete_Response_204:
-      type: object
-      properties: {}
-      description: Empty response body
-      title: agents_delete_Response_204
-    AgentAttribute:
-      type: object
-      properties:
-        name:
-          type: string
-        active:
-          type: boolean
-        pricing:
-          $ref: '#/components/schemas/Pricing'
-      required:
-      - name
-      - active
-      - pricing
-      title: AgentAttribute
-    AgentPricePoint:
-      type: object
-      properties:
-        unitPrice:
-          type: number
-          format: double
-        minQuantity:
-          type: number
-          format: double
-        includedQuantity:
-          type: number
-          format: double
-        tiers:
-          type: array
-          items:
-            $ref: '#/components/schemas/AgentPricePointTiers'
-      title: AgentPricePoint
   securitySchemes:
     bearerAuth:
       type: http

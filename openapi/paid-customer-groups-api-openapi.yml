@@ -1,12 +1,12 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: API Reference agents customer-groups API
+  title: Reference Customer Groups API
   version: 1.0.0
 servers:
-- url: https://api.agentpaid.io/api/v1
-  description: Production
+- url: https://api.agentpaid.io/api/v2
+  description: Production API
 tags:
-- name: customer-groups
+- name: Customer Groups
 paths:
   /customer-groups/:
     get:
@@ -14,7 +14,7 @@ paths:
       summary: List customer groups
       description: List all customer groups for the organization.
       tags:
-      - customer-groups
+      - Customer Groups
       parameters:
       - name: limit
         in: query
@@ -51,7 +51,7 @@ paths:
       summary: Create customer group
       description: Create a new customer group. Names must be unique per org.
       tags:
-      - customer-groups
+      - Customer Groups
       parameters:
       - name: Authorization
         in: header
@@ -96,7 +96,7 @@ paths:
       summary: Get customer group
       description: Returns group details including member list (capped at 500).
       tags:
-      - customer-groups
+      - Customer Groups
       parameters:
       - name: id
         in: path
@@ -134,7 +134,7 @@ paths:
       summary: Delete customer group
       description: Deletes the group and unbinds all members. Unbound customers fall back to the base value model config.
       tags:
-      - customer-groups
+      - Customer Groups
       parameters:
       - name: id
         in: path
@@ -179,7 +179,7 @@ paths:
       summary: Update customer group
       description: Update a customer group's name or description.
       tags:
-      - customer-groups
+      - Customer Groups
       parameters:
       - name: id
         in: path
@@ -230,7 +230,7 @@ paths:
       summary: Add members to group
       description: Additive. Adds customers to the group without removing existing members.
       tags:
-      - customer-groups
+      - Customer Groups
       parameters:
       - name: id
         in: path
@@ -280,7 +280,7 @@ paths:
       summary: Set group members
       description: Reconcile membership. The provided list is the complete desired membership. Customers not in the list are removed. Customers in the list but not currently in the group are added.
       tags:
-      - customer-groups
+      - Customer Groups
       parameters:
       - name: id
         in: path
@@ -330,7 +330,7 @@ paths:
       summary: Remove members from group
       description: Removes specific customers from the group.
       tags:
-      - customer-groups
+      - Customer Groups
       parameters:
       - name: id
         in: path
@@ -377,77 +377,6 @@ paths:
               $ref: '#/components/schemas/MemberRequest'
 components:
   schemas:
-    CustomerGroupListResponse:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/CustomerGroupSummary'
-        pagination:
-          $ref: '#/components/schemas/Pagination'
-      required:
-      - data
-      - pagination
-      title: CustomerGroupListResponse
-    RemoveMembersResponse:
-      type: object
-      properties:
-        removed:
-          type: integer
-        skipped:
-          type: integer
-        skippedIds:
-          type: array
-          items:
-            type: string
-      required:
-      - removed
-      - skipped
-      - skippedIds
-      title: RemoveMembersResponse
-    CustomerGroupDeleteResponse:
-      type: object
-      properties:
-        deletedGroupId:
-          type: string
-          format: uuid
-        unboundCustomerCount:
-          type: integer
-      required:
-      - deletedGroupId
-      - unboundCustomerCount
-      title: CustomerGroupDeleteResponse
-    SetMembersResponse:
-      type: object
-      properties:
-        added:
-          type: integer
-        removed:
-          type: integer
-        skipped:
-          type: integer
-        skippedIds:
-          type: array
-          items:
-            type: string
-      required:
-      - added
-      - removed
-      - skipped
-      - skippedIds
-      title: SetMembersResponse
-    MemberRequest:
-      type: object
-      properties:
-        customerIds:
-          type: array
-          items:
-            type: string
-          description: External customer IDs.
-      required:
-      - customerIds
-      title: MemberRequest
     CustomerGroupSummary:
       type: object
       properties:
@@ -476,6 +405,41 @@ components:
       - createdAt
       - updatedAt
       title: CustomerGroupSummary
+    RemoveMembersResponse:
+      type: object
+      properties:
+        removed:
+          type: integer
+        skipped:
+          type: integer
+        skippedIds:
+          type: array
+          items:
+            type: string
+      required:
+      - removed
+      - skipped
+      - skippedIds
+      title: RemoveMembersResponse
+    SetMembersResponse:
+      type: object
+      properties:
+        added:
+          type: integer
+        removed:
+          type: integer
+        skipped:
+          type: integer
+        skippedIds:
+          type: array
+          items:
+            type: string
+      required:
+      - added
+      - removed
+      - skipped
+      - skippedIds
+      title: SetMembersResponse
     CreateCustomerGroupRequest:
       type: object
       properties:
@@ -488,22 +452,18 @@ components:
       required:
       - name
       title: CreateCustomerGroupRequest
-    AddMembersResponse:
+    CustomerGroupDeleteResponse:
       type: object
       properties:
-        added:
+        deletedGroupId:
+          type: string
+          format: uuid
+        unboundCustomerCount:
           type: integer
-        skipped:
-          type: integer
-        skippedIds:
-          type: array
-          items:
-            type: string
       required:
-      - added
-      - skipped
-      - skippedIds
-      title: AddMembersResponse
+      - deletedGroupId
+      - unboundCustomerCount
+      title: CustomerGroupDeleteResponse
     CustomerGroupDetail:
       type: object
       properties:
@@ -537,6 +497,22 @@ components:
       - updatedAt
       - customers
       title: CustomerGroupDetail
+    CustomerGroupMember:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        externalId:
+          type:
+          - string
+          - 'null'
+      required:
+      - id
+      - name
+      - externalId
+      title: CustomerGroupMember
     ErrorResponse:
       type: object
       properties:
@@ -549,6 +525,27 @@ components:
       required:
       - error
       title: ErrorResponse
+    MemberRequest:
+      type: object
+      properties:
+        customerIds:
+          type: array
+          items:
+            type: string
+          description: External customer IDs.
+      required:
+      - customerIds
+      title: MemberRequest
+    UpdateCustomerGroupRequest:
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type:
+          - string
+          - 'null'
+      title: UpdateCustomerGroupRequest
     Pagination:
       type: object
       properties:
@@ -566,33 +563,37 @@ components:
       - total
       - hasMore
       title: Pagination
-    CustomerGroupMember:
+    AddMembersResponse:
       type: object
       properties:
-        id:
-          type: string
-        name:
-          type: string
-        externalId:
-          type:
-          - string
-          - 'null'
+        added:
+          type: integer
+        skipped:
+          type: integer
+        skippedIds:
+          type: array
+          items:
+            type: string
       required:
-      - id
-      - name
-      - externalId
-      title: CustomerGroupMember
-    UpdateCustomerGroupRequest:
+      - added
+      - skipped
+      - skippedIds
+      title: AddMembersResponse
+    CustomerGroupListResponse:
       type: object
       properties:
-        name:
-          type: string
-        description:
-          type:
-          - string
-          - 'null'
-      title: UpdateCustomerGroupRequest
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/CustomerGroupSummary'
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+      required:
+      - data
+      - pagination
+      title: CustomerGroupListResponse
   securitySchemes:
     bearerAuth:
       type: http
       scheme: bearer
+      description: API Key authentication using Bearer token

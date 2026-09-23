@@ -1,10 +1,10 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: API Reference agents value-models API
+  title: Reference Value Models API
   version: 1.0.0
 servers:
-- url: https://api.agentpaid.io/api/v1
-  description: Production
+- url: https://api.agentpaid.io/api/v2
+  description: Production API
 tags:
 - name: value-models
 paths:
@@ -197,88 +197,6 @@ paths:
               properties: {}
 components:
   schemas:
-    ValueModelContentOverridesItemsSignalOverridesDefaults:
-      oneOf:
-      - type: number
-        format: double
-      - type: string
-      title: ValueModelContentOverridesItemsSignalOverridesDefaults
-    ValueModelContentOverridesItemsAdditionalSignalsItemsDefaults:
-      oneOf:
-      - type: number
-        format: double
-      - type: string
-      title: ValueModelContentOverridesItemsAdditionalSignalsItemsDefaults
-    ValueModelContentFormulasItemsConditionsItemsResultType:
-      type: string
-      enum:
-      - constant
-      - expression
-      title: ValueModelContentFormulasItemsConditionsItemsResultType
-    ValueModelContentOverridesItems:
-      type: object
-      properties:
-        id:
-          type: string
-        label:
-          type: string
-        scope:
-          $ref: '#/components/schemas/ValueModelContentOverridesItemsScope'
-        currency:
-          type: string
-        signalOverrides:
-          type: object
-          additionalProperties:
-            $ref: '#/components/schemas/ValueModelContentOverridesItemsSignalOverrides'
-        additionalSignals:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValueModelContentOverridesItemsAdditionalSignalsItems'
-        monetaryConversionOverrides:
-          type: object
-          additionalProperties:
-            $ref: '#/components/schemas/ValueModelContentOverridesItemsMonetaryConversionOverrides'
-      required:
-      - id
-      - label
-      - scope
-      title: ValueModelContentOverridesItems
-    ValueModelContentFormulasItemsVariablesItemsDerivedFromTargetUnit:
-      type: string
-      enum:
-      - seconds
-      - minutes
-      - hours
-      - days
-      title: ValueModelContentFormulasItemsVariablesItemsDerivedFromTargetUnit
-    ValueModelUploadRequest:
-      type: object
-      properties:
-        content:
-          $ref: '#/components/schemas/ValueModelContent'
-        effectiveFrom:
-          type: string
-          format: date-time
-        effectiveTo:
-          type: string
-          format: date-time
-      required:
-      - content
-      title: ValueModelUploadRequest
-    ValueModelContentSegmentTablesItemsColumnsItems:
-      type: object
-      properties:
-        variableId:
-          type: string
-        label:
-          type: string
-        type:
-          $ref: '#/components/schemas/ValueModelContentSegmentTablesItemsColumnsItemsType'
-      required:
-      - variableId
-      - label
-      - type
-      title: ValueModelContentSegmentTablesItemsColumnsItems
     ValueModelContentFormulasItemsConditionsItemsResult:
       type: object
       properties:
@@ -292,112 +210,6 @@ components:
       required:
       - type
       title: ValueModelContentFormulasItemsConditionsItemsResult
-    ValueModelContentValueTypesItemsMonetaryConversionConditionsItemsResultType:
-      type: string
-      enum:
-      - constant
-      - expression
-      title: ValueModelContentValueTypesItemsMonetaryConversionConditionsItemsResultType
-    ValueModelContentValueTypesItemsMonetaryConversionConditionsItemsOperator:
-      type: string
-      enum:
-      - gte
-      - gt
-      - lt
-      - lte
-      - eq
-      - neq
-      - contains
-      - eq_string
-      - eq_bool
-      title: ValueModelContentValueTypesItemsMonetaryConversionConditionsItemsOperator
-    ValueModelContentOverridesItemsMonetaryConversionOverrides:
-      type: object
-      properties:
-        variables:
-          type: object
-          additionalProperties:
-            type: number
-            format: double
-      title: ValueModelContentOverridesItemsMonetaryConversionOverrides
-    ValueModelContentFormulasItemsDefaultResult:
-      type: object
-      properties:
-        type:
-          $ref: '#/components/schemas/ValueModelContentFormulasItemsDefaultResultType'
-        value:
-          type: number
-          format: double
-        expression:
-          type: string
-      required:
-      - type
-      title: ValueModelContentFormulasItemsDefaultResult
-    ValueModelVersionListResponse:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValueModelSummary'
-        pagination:
-          $ref: '#/components/schemas/Pagination'
-      required:
-      - data
-      - pagination
-      title: ValueModelVersionListResponse
-    ValueModelContentValueTypesItemsMonetaryConversion:
-      type: object
-      properties:
-        expression:
-          type: string
-        variables:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValueModelContentValueTypesItemsMonetaryConversionVariablesItems'
-        conditions:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValueModelContentValueTypesItemsMonetaryConversionConditionsItems'
-      required:
-      - expression
-      title: ValueModelContentValueTypesItemsMonetaryConversion
-    ValueModelContentSegmentTablesItems:
-      type: object
-      properties:
-        id:
-          type: string
-        label:
-          type: string
-        segmentKeys:
-          type: array
-          items:
-            type: string
-        columns:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValueModelContentSegmentTablesItemsColumnsItems'
-        rows:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValueModelContentSegmentTablesItemsRowsItems'
-        defaultRow:
-          type: object
-          additionalProperties:
-            type: number
-            format: double
-      required:
-      - id
-      - label
-      - segmentKeys
-      - columns
-      - rows
-      title: ValueModelContentSegmentTablesItems
-    ValueModelContentSegmentTablesItemsColumnsItemsType:
-      type: string
-      enum:
-      - number
-      title: ValueModelContentSegmentTablesItemsColumnsItemsType
     ValueModelContentSignalsItems:
       type: object
       properties:
@@ -433,6 +245,189 @@ components:
       - eventName
       - label
       title: ValueModelContentSignalsItems
+    ValueModelContentSegmentTablesItemsRowsItems:
+      type: object
+      properties:
+        segmentValues:
+          type: object
+          additionalProperties:
+            type: string
+        variables:
+          type: object
+          additionalProperties:
+            type: number
+            format: double
+      required:
+      - segmentValues
+      - variables
+      title: ValueModelContentSegmentTablesItemsRowsItems
+    ValueModelContentValueTypesItemsMonetaryConversionConditionsItemsResultType:
+      type: string
+      enum:
+      - constant
+      - expression
+      title: ValueModelContentValueTypesItemsMonetaryConversionConditionsItemsResultType
+    ValueModelContentSegmentTablesItemsColumnsItems:
+      type: object
+      properties:
+        variableId:
+          type: string
+        label:
+          type: string
+        type:
+          $ref: '#/components/schemas/ValueModelContentSegmentTablesItemsColumnsItemsType'
+      required:
+      - variableId
+      - label
+      - type
+      title: ValueModelContentSegmentTablesItemsColumnsItems
+    ValueModelVersionListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValueModelSummary'
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+      required:
+      - data
+      - pagination
+      title: ValueModelVersionListResponse
+    ValueModelContentOverridesItemsSignalOverrides:
+      type: object
+      properties:
+        defaults:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/ValueModelContentOverridesItemsSignalOverridesDefaults'
+      title: ValueModelContentOverridesItemsSignalOverrides
+    ValueModelUploadRequest:
+      type: object
+      properties:
+        content:
+          $ref: '#/components/schemas/ValueModelContent'
+        effectiveFrom:
+          type: string
+          format: date-time
+        effectiveTo:
+          type: string
+          format: date-time
+      required:
+      - content
+      title: ValueModelUploadRequest
+    ValueModelContentValueTypesItems:
+      type: object
+      properties:
+        slug:
+          type: string
+        name:
+          type: string
+        unit:
+          $ref: '#/components/schemas/ValueModelContentValueTypesItemsUnit'
+        monetaryConversion:
+          $ref: '#/components/schemas/ValueModelContentValueTypesItemsMonetaryConversion'
+        description:
+          type:
+          - string
+          - 'null'
+        displayOrder:
+          type:
+          - integer
+          - 'null'
+        color:
+          type:
+          - string
+          - 'null'
+        icon:
+          type:
+          - string
+          - 'null'
+      required:
+      - slug
+      - name
+      - unit
+      title: ValueModelContentValueTypesItems
+    ValueModelContentFormulasItemsConditionsItems:
+      type: object
+      properties:
+        field:
+          type: string
+        operator:
+          $ref: '#/components/schemas/ValueModelContentFormulasItemsConditionsItemsOperator'
+        value:
+          $ref: '#/components/schemas/ValueModelContentFormulasItemsConditionsItemsValue'
+        result:
+          $ref: '#/components/schemas/ValueModelContentFormulasItemsConditionsItemsResult'
+      required:
+      - field
+      - operator
+      - value
+      - result
+      title: ValueModelContentFormulasItemsConditionsItems
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+        code:
+          type: string
+        details:
+          type: string
+      required:
+      - error
+      title: ErrorResponse
+    ValueModelContentValueTypesItemsMonetaryConversion:
+      type: object
+      properties:
+        expression:
+          type: string
+        variables:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValueModelContentValueTypesItemsMonetaryConversionVariablesItems'
+        conditions:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValueModelContentValueTypesItemsMonetaryConversionConditionsItems'
+      required:
+      - expression
+      title: ValueModelContentValueTypesItemsMonetaryConversion
+    ValueModelContentFormulasItemsDefaultResultType:
+      type: string
+      enum:
+      - constant
+      - expression
+      title: ValueModelContentFormulasItemsDefaultResultType
+    ValueModelContentValueTypesItemsMonetaryConversionConditionsItemsValue:
+      oneOf:
+      - type: number
+        format: double
+      - type: string
+      - type: boolean
+      title: ValueModelContentValueTypesItemsMonetaryConversionConditionsItemsValue
+    ValueModelContentValueTypesItemsMonetaryConversionConditionsItems:
+      type: object
+      properties:
+        field:
+          type: string
+        operator:
+          $ref: '#/components/schemas/ValueModelContentValueTypesItemsMonetaryConversionConditionsItemsOperator'
+        value:
+          $ref: '#/components/schemas/ValueModelContentValueTypesItemsMonetaryConversionConditionsItemsValue'
+        result:
+          $ref: '#/components/schemas/ValueModelContentValueTypesItemsMonetaryConversionConditionsItemsResult'
+      required:
+      - field
+      - operator
+      - value
+      - result
+      title: ValueModelContentValueTypesItemsMonetaryConversionConditionsItems
+    ValueModelContentSegmentTablesItemsColumnsItemsType:
+      type: string
+      enum:
+      - number
+      title: ValueModelContentSegmentTablesItemsColumnsItemsType
     ValueModelContentOverridesItemsAdditionalSignalsItems:
       type: object
       properties:
@@ -468,6 +463,114 @@ components:
       - eventName
       - label
       title: ValueModelContentOverridesItemsAdditionalSignalsItems
+    ValueModelDetail:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Value model version ID.
+        version:
+          type: integer
+          description: Monotonically increasing version number.
+        content:
+          $ref: '#/components/schemas/ValueModelContent'
+        createdAt:
+          type: string
+          format: date-time
+        activatedAt:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        effectiveFrom:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        effectiveTo:
+          type:
+          - string
+          - 'null'
+          format: date-time
+      required:
+      - id
+      - version
+      - content
+      - createdAt
+      - activatedAt
+      - effectiveFrom
+      - effectiveTo
+      title: ValueModelDetail
+    ValueModelContentSegmentTablesItems:
+      type: object
+      properties:
+        id:
+          type: string
+        label:
+          type: string
+        segmentKeys:
+          type: array
+          items:
+            type: string
+        columns:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValueModelContentSegmentTablesItemsColumnsItems'
+        rows:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValueModelContentSegmentTablesItemsRowsItems'
+        defaultRow:
+          type: object
+          additionalProperties:
+            type: number
+            format: double
+      required:
+      - id
+      - label
+      - segmentKeys
+      - columns
+      - rows
+      title: ValueModelContentSegmentTablesItems
+    ValueModelContentValueTypesItemsMonetaryConversionConditionsItemsOperator:
+      type: string
+      enum:
+      - gte
+      - gt
+      - lt
+      - lte
+      - eq
+      - neq
+      - contains
+      - eq_string
+      - eq_bool
+      title: ValueModelContentValueTypesItemsMonetaryConversionConditionsItemsOperator
+    ValueModelContentFormulasItemsConditionsItemsResultType:
+      type: string
+      enum:
+      - constant
+      - expression
+      title: ValueModelContentFormulasItemsConditionsItemsResultType
+    ValueModelContentSignalsItemsDefaults:
+      oneOf:
+      - type: number
+        format: double
+      - type: string
+      title: ValueModelContentSignalsItemsDefaults
+    ValueModelContentFormulasItemsConditionsItemsOperator:
+      type: string
+      enum:
+      - gte
+      - gt
+      - lt
+      - lte
+      - eq
+      - neq
+      - contains
+      - eq_string
+      - eq_bool
+      title: ValueModelContentFormulasItemsConditionsItemsOperator
     Pagination:
       type: object
       properties:
@@ -485,6 +588,192 @@ components:
       - total
       - hasMore
       title: Pagination
+    ValueModelContentOverridesItemsSignalOverridesDefaults:
+      oneOf:
+      - type: number
+        format: double
+      - type: string
+      title: ValueModelContentOverridesItemsSignalOverridesDefaults
+    ValueModelContentFormulasItemsVariablesItems:
+      type: object
+      properties:
+        id:
+          type: string
+        label:
+          type: string
+        type:
+          $ref: '#/components/schemas/ValueModelContentFormulasItemsVariablesItemsType'
+        description:
+          type: string
+        derivedFrom:
+          $ref: '#/components/schemas/ValueModelContentFormulasItemsVariablesItemsDerivedFrom'
+      required:
+      - id
+      - label
+      title: ValueModelContentFormulasItemsVariablesItems
+    ValueModelContentFormulasItemsVariablesItemsType:
+      type: string
+      enum:
+      - number
+      - string
+      - boolean
+      - duration
+      default: number
+      title: ValueModelContentFormulasItemsVariablesItemsType
+    ValueModelContent:
+      type: object
+      properties:
+        currency:
+          type: string
+        valueTypes:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValueModelContentValueTypesItems'
+        formulas:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValueModelContentFormulasItems'
+        signals:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValueModelContentSignalsItems'
+        segmentTables:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValueModelContentSegmentTablesItems'
+        overrides:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValueModelContentOverridesItems'
+      required:
+      - currency
+      - valueTypes
+      - formulas
+      - signals
+      description: 'Full value model configuration: value types, formulas, signals, and overrides.'
+      title: ValueModelContent
+    ValueModelContentValueTypesItemsUnit:
+      type: object
+      title: ValueModelContentValueTypesItemsUnit
+    ValueModelSummaryStatus:
+      type: string
+      enum:
+      - draft
+      - active
+      - archived
+      title: ValueModelSummaryStatus
+    BackfillResponse:
+      type: object
+      properties:
+        valueModelId:
+          type: string
+          format: uuid
+        version:
+          type: integer
+      required:
+      - valueModelId
+      - version
+      title: BackfillResponse
+    ValueModelContentValueTypesItemsMonetaryConversionConditionsItemsResult:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/ValueModelContentValueTypesItemsMonetaryConversionConditionsItemsResultType'
+        value:
+          type: number
+          format: double
+        expression:
+          type: string
+      required:
+      - type
+      title: ValueModelContentValueTypesItemsMonetaryConversionConditionsItemsResult
+    ValueModelContentOverridesItemsScope:
+      type: object
+      properties:
+        customerIds:
+          type: array
+          items:
+            type: string
+        customerGroupIds:
+          type: array
+          items:
+            type: string
+      title: ValueModelContentOverridesItemsScope
+    ValueModelContentFormulasItemsConditionsItemsValue:
+      oneOf:
+      - type: number
+        format: double
+      - type: string
+      - type: boolean
+      title: ValueModelContentFormulasItemsConditionsItemsValue
+    ValueModelContentFormulasItemsVariablesItemsDerivedFromTargetUnit:
+      type: string
+      enum:
+      - seconds
+      - minutes
+      - hours
+      - days
+      title: ValueModelContentFormulasItemsVariablesItemsDerivedFromTargetUnit
+    ValueModelContentFormulasItemsDefaultResult:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/ValueModelContentFormulasItemsDefaultResultType'
+        value:
+          type: number
+          format: double
+        expression:
+          type: string
+      required:
+      - type
+      title: ValueModelContentFormulasItemsDefaultResult
+    ValueModelContentOverridesItemsAdditionalSignalsItemsDefaults:
+      oneOf:
+      - type: number
+        format: double
+      - type: string
+      title: ValueModelContentOverridesItemsAdditionalSignalsItemsDefaults
+    ValueModelContentFormulasItems:
+      type: object
+      properties:
+        id:
+          type: string
+        valueTypeSlug:
+          type: string
+        label:
+          type: string
+        description:
+          type: string
+        variables:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValueModelContentFormulasItemsVariablesItems'
+        expression:
+          type: string
+        conditions:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValueModelContentFormulasItemsConditionsItems'
+        defaultResult:
+          $ref: '#/components/schemas/ValueModelContentFormulasItemsDefaultResult'
+      required:
+      - id
+      - valueTypeSlug
+      - label
+      - variables
+      - expression
+      title: ValueModelContentFormulasItems
+    ValueModelContentFormulasItemsVariablesItemsDerivedFrom:
+      type: object
+      properties:
+        sourceField:
+          type: string
+        targetUnit:
+          $ref: '#/components/schemas/ValueModelContentFormulasItemsVariablesItemsDerivedFromTargetUnit'
+      required:
+      - sourceField
+      - targetUnit
+      title: ValueModelContentFormulasItemsVariablesItemsDerivedFrom
     ValueModelSummary:
       type: object
       properties:
@@ -528,266 +817,6 @@ components:
       - effectiveFrom
       - effectiveTo
       title: ValueModelSummary
-    ValueModelContentSignalsItemsDefaults:
-      oneOf:
-      - type: number
-        format: double
-      - type: string
-      title: ValueModelContentSignalsItemsDefaults
-    ValueModelContent:
-      type: object
-      properties:
-        currency:
-          type: string
-        valueTypes:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValueModelContentValueTypesItems'
-        formulas:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValueModelContentFormulasItems'
-        signals:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValueModelContentSignalsItems'
-        segmentTables:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValueModelContentSegmentTablesItems'
-        overrides:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValueModelContentOverridesItems'
-      required:
-      - currency
-      - valueTypes
-      - formulas
-      - signals
-      description: 'Full value model configuration: value types, formulas, signals, and overrides.'
-      title: ValueModelContent
-    ValueModelContentValueTypesItems:
-      type: object
-      properties:
-        slug:
-          type: string
-        name:
-          type: string
-        unit:
-          $ref: '#/components/schemas/ValueModelContentValueTypesItemsUnit'
-        monetaryConversion:
-          $ref: '#/components/schemas/ValueModelContentValueTypesItemsMonetaryConversion'
-        description:
-          type:
-          - string
-          - 'null'
-        displayOrder:
-          type:
-          - integer
-          - 'null'
-        color:
-          type:
-          - string
-          - 'null'
-        icon:
-          type:
-          - string
-          - 'null'
-      required:
-      - slug
-      - name
-      - unit
-      title: ValueModelContentValueTypesItems
-    ValueModelContentOverridesItemsScope:
-      type: object
-      properties:
-        customerIds:
-          type: array
-          items:
-            type: string
-        customerGroupIds:
-          type: array
-          items:
-            type: string
-      title: ValueModelContentOverridesItemsScope
-    ValueModelContentValueTypesItemsMonetaryConversionConditionsItemsValue:
-      oneOf:
-      - type: number
-        format: double
-      - type: string
-      - type: boolean
-      title: ValueModelContentValueTypesItemsMonetaryConversionConditionsItemsValue
-    ValueModelContentFormulasItemsVariablesItemsType:
-      type: string
-      enum:
-      - number
-      - string
-      - boolean
-      - duration
-      default: number
-      title: ValueModelContentFormulasItemsVariablesItemsType
-    ValueModelContentFormulasItems:
-      type: object
-      properties:
-        id:
-          type: string
-        valueTypeSlug:
-          type: string
-        label:
-          type: string
-        description:
-          type: string
-        variables:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValueModelContentFormulasItemsVariablesItems'
-        expression:
-          type: string
-        conditions:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValueModelContentFormulasItemsConditionsItems'
-        defaultResult:
-          $ref: '#/components/schemas/ValueModelContentFormulasItemsDefaultResult'
-      required:
-      - id
-      - valueTypeSlug
-      - label
-      - variables
-      - expression
-      title: ValueModelContentFormulasItems
-    ValueModelSummaryStatus:
-      type: string
-      enum:
-      - draft
-      - active
-      - archived
-      title: ValueModelSummaryStatus
-    ValueModelContentOverridesItemsSignalOverrides:
-      type: object
-      properties:
-        defaults:
-          type: object
-          additionalProperties:
-            $ref: '#/components/schemas/ValueModelContentOverridesItemsSignalOverridesDefaults'
-      title: ValueModelContentOverridesItemsSignalOverrides
-    ValueModelContentValueTypesItemsMonetaryConversionConditionsItemsResult:
-      type: object
-      properties:
-        type:
-          $ref: '#/components/schemas/ValueModelContentValueTypesItemsMonetaryConversionConditionsItemsResultType'
-        value:
-          type: number
-          format: double
-        expression:
-          type: string
-      required:
-      - type
-      title: ValueModelContentValueTypesItemsMonetaryConversionConditionsItemsResult
-    ValueModelContentValueTypesItemsUnit:
-      type: object
-      title: ValueModelContentValueTypesItemsUnit
-    ValueModelDetail:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-          description: Value model version ID.
-        version:
-          type: integer
-          description: Monotonically increasing version number.
-        content:
-          $ref: '#/components/schemas/ValueModelContent'
-        createdAt:
-          type: string
-          format: date-time
-        activatedAt:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        effectiveFrom:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        effectiveTo:
-          type:
-          - string
-          - 'null'
-          format: date-time
-      required:
-      - id
-      - version
-      - content
-      - createdAt
-      - activatedAt
-      - effectiveFrom
-      - effectiveTo
-      title: ValueModelDetail
-    ErrorResponse:
-      type: object
-      properties:
-        error:
-          type: string
-        code:
-          type: string
-        details:
-          type: string
-      required:
-      - error
-      title: ErrorResponse
-    ValueModelContentSegmentTablesItemsRowsItems:
-      type: object
-      properties:
-        segmentValues:
-          type: object
-          additionalProperties:
-            type: string
-        variables:
-          type: object
-          additionalProperties:
-            type: number
-            format: double
-      required:
-      - segmentValues
-      - variables
-      title: ValueModelContentSegmentTablesItemsRowsItems
-    ValueModelContentFormulasItemsVariablesItemsDerivedFrom:
-      type: object
-      properties:
-        sourceField:
-          type: string
-        targetUnit:
-          $ref: '#/components/schemas/ValueModelContentFormulasItemsVariablesItemsDerivedFromTargetUnit'
-      required:
-      - sourceField
-      - targetUnit
-      title: ValueModelContentFormulasItemsVariablesItemsDerivedFrom
-    ValueModelContentFormulasItemsConditionsItems:
-      type: object
-      properties:
-        field:
-          type: string
-        operator:
-          $ref: '#/components/schemas/ValueModelContentFormulasItemsConditionsItemsOperator'
-        value:
-          $ref: '#/components/schemas/ValueModelContentFormulasItemsConditionsItemsValue'
-        result:
-          $ref: '#/components/schemas/ValueModelContentFormulasItemsConditionsItemsResult'
-      required:
-      - field
-      - operator
-      - value
-      - result
-      title: ValueModelContentFormulasItemsConditionsItems
-    ValueModelContentFormulasItemsDefaultResultType:
-      type: string
-      enum:
-      - constant
-      - expression
-      title: ValueModelContentFormulasItemsDefaultResultType
     ValueModelContentValueTypesItemsMonetaryConversionVariablesItems:
       type: object
       properties:
@@ -803,73 +832,45 @@ components:
       - label
       - default
       title: ValueModelContentValueTypesItemsMonetaryConversionVariablesItems
-    ValueModelContentFormulasItemsVariablesItems:
+    ValueModelContentOverridesItemsMonetaryConversionOverrides:
+      type: object
+      properties:
+        variables:
+          type: object
+          additionalProperties:
+            type: number
+            format: double
+      title: ValueModelContentOverridesItemsMonetaryConversionOverrides
+    ValueModelContentOverridesItems:
       type: object
       properties:
         id:
           type: string
         label:
           type: string
-        type:
-          $ref: '#/components/schemas/ValueModelContentFormulasItemsVariablesItemsType'
-        description:
+        scope:
+          $ref: '#/components/schemas/ValueModelContentOverridesItemsScope'
+        currency:
           type: string
-        derivedFrom:
-          $ref: '#/components/schemas/ValueModelContentFormulasItemsVariablesItemsDerivedFrom'
+        signalOverrides:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/ValueModelContentOverridesItemsSignalOverrides'
+        additionalSignals:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValueModelContentOverridesItemsAdditionalSignalsItems'
+        monetaryConversionOverrides:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/ValueModelContentOverridesItemsMonetaryConversionOverrides'
       required:
       - id
       - label
-      title: ValueModelContentFormulasItemsVariablesItems
-    ValueModelContentFormulasItemsConditionsItemsValue:
-      oneOf:
-      - type: number
-        format: double
-      - type: string
-      - type: boolean
-      title: ValueModelContentFormulasItemsConditionsItemsValue
-    ValueModelContentFormulasItemsConditionsItemsOperator:
-      type: string
-      enum:
-      - gte
-      - gt
-      - lt
-      - lte
-      - eq
-      - neq
-      - contains
-      - eq_string
-      - eq_bool
-      title: ValueModelContentFormulasItemsConditionsItemsOperator
-    ValueModelContentValueTypesItemsMonetaryConversionConditionsItems:
-      type: object
-      properties:
-        field:
-          type: string
-        operator:
-          $ref: '#/components/schemas/ValueModelContentValueTypesItemsMonetaryConversionConditionsItemsOperator'
-        value:
-          $ref: '#/components/schemas/ValueModelContentValueTypesItemsMonetaryConversionConditionsItemsValue'
-        result:
-          $ref: '#/components/schemas/ValueModelContentValueTypesItemsMonetaryConversionConditionsItemsResult'
-      required:
-      - field
-      - operator
-      - value
-      - result
-      title: ValueModelContentValueTypesItemsMonetaryConversionConditionsItems
-    BackfillResponse:
-      type: object
-      properties:
-        valueModelId:
-          type: string
-          format: uuid
-        version:
-          type: integer
-      required:
-      - valueModelId
-      - version
-      title: BackfillResponse
+      - scope
+      title: ValueModelContentOverridesItems
   securitySchemes:
     bearerAuth:
       type: http
       scheme: bearer
+      description: API Key authentication using Bearer token

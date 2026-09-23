@@ -1,19 +1,19 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: API Reference agents traces API
+  title: Reference Traces API
   version: 1.0.0
 servers:
 - url: https://api.agentpaid.io/api/v1
   description: Production
 tags:
-- name: traces
+- name: Traces
 paths:
   /traces:
     get:
       operationId: get-traces
       summary: Fetch cost traces for an organization
       tags:
-      - traces
+      - Traces
       parameters:
       - name: limit
         in: query
@@ -94,48 +94,6 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
-    PaginationMeta:
-      type: object
-      properties:
-        limit:
-          type: integer
-          description: The requested limit
-        offset:
-          type: integer
-          description: The requested offset
-        count:
-          type: integer
-          description: Number of items returned in this response
-        hasMore:
-          type: boolean
-          description: Whether there are more results available
-        startTime:
-          type: string
-          format: date-time
-          description: The startTime filter that was applied (if any)
-        endTime:
-          type: string
-          format: date-time
-          description: The endTime filter that was applied (if any)
-        externalCustomerId:
-          type: string
-          description: The externalCustomerId filter that was applied (if any)
-        externalProductId:
-          type: string
-          description: The externalProductId filter that was applied (if any)
-        externalAgentId:
-          type: string
-          description: 'DEPRECATED: Use externalProductId instead. The externalAgentId filter that was applied (if any)'
-        metadata:
-          type: string
-          description: The metadata filter that was applied (if any)
-      required:
-      - limit
-      - offset
-      - count
-      - hasMore
-      description: Pagination metadata for cost traces
-      title: PaginationMeta
     Trace:
       type: object
       properties:
@@ -199,21 +157,6 @@ components:
       - attributes
       description: A single cost trace record with customer and product info
       title: Trace
-    CostAmount:
-      type: object
-      properties:
-        amount:
-          type: number
-          format: double
-          description: The cost amount
-        currency:
-          type: string
-          description: The currency code (e.g., "USD")
-      required:
-      - amount
-      - currency
-      description: Cost amount with currency
-      title: CostAmount
     TracesResponse:
       type: object
       properties:
@@ -249,6 +192,63 @@ components:
       - error
       description: An error response from the Paid API
       title: Error
+    CostAmount:
+      type: object
+      properties:
+        amount:
+          type: number
+          format: double
+          description: The cost amount
+        currency:
+          type: string
+          description: The currency code (e.g., "USD")
+      required:
+      - amount
+      - currency
+      description: Cost amount with currency
+      title: CostAmount
+    PaginationMeta:
+      type: object
+      properties:
+        limit:
+          type: integer
+          description: The requested limit
+        offset:
+          type: integer
+          description: The requested offset
+        count:
+          type: integer
+          description: Number of items returned in this response
+        hasMore:
+          type: boolean
+          description: Whether there are more results available
+        startTime:
+          type: string
+          format: date-time
+          description: The startTime filter that was applied (if any)
+        endTime:
+          type: string
+          format: date-time
+          description: The endTime filter that was applied (if any)
+        externalCustomerId:
+          type: string
+          description: The externalCustomerId filter that was applied (if any)
+        externalProductId:
+          type: string
+          description: The externalProductId filter that was applied (if any)
+        externalAgentId:
+          type: string
+          description: 'DEPRECATED: Use externalProductId instead. The externalAgentId filter that was applied (if any)'
+        metadata:
+          type: string
+          description: The metadata filter that was applied (if any)
+      required:
+      - limit
+      - offset
+      - count
+      - hasMore
+      description: Pagination metadata for cost traces
+      title: PaginationMeta
   securitySchemes:
     bearerAuth:
       type: http
