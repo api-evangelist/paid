@@ -162,6 +162,94 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
 components:
   schemas:
+    AnalyticsSchemaColumn:
+      type: object
+      properties:
+        name:
+          type: string
+        type:
+          type: string
+          description: ClickHouse column type
+        comment:
+          type: string
+      required:
+      - name
+      - type
+      - comment
+      title: AnalyticsSchemaColumn
+    AnalyticsSchemaResponse:
+      type: object
+      properties:
+        views:
+          type: array
+          items:
+            $ref: '#/components/schemas/AnalyticsSchemaView'
+      required:
+      - views
+      title: AnalyticsSchemaResponse
+    SignalsMetadataResponseMeta:
+      type: object
+      properties:
+        fromDate:
+          type: string
+        toDate:
+          type: string
+      required:
+      - fromDate
+      - toDate
+      title: SignalsMetadataResponseMeta
+    AnalyticsQueryRequest:
+      type: object
+      properties:
+        query:
+          type: string
+          description: A single ClickHouse SELECT (or WITH ... SELECT) statement against the analytics views. Results are automatically scoped to your organization. See GET /schema for the available views and columns.
+      required:
+      - query
+      title: AnalyticsQueryRequest
+    SignalsMetadataResponseSignalsItemsPathsItems:
+      type: object
+      properties:
+        path:
+          type: string
+          description: JSON path inside the signal `data` payload, usable in queries as e.g. `data.<path>::String`.
+        types:
+          type: array
+          items:
+            type: string
+          description: ClickHouse dynamic types observed for this path.
+      required:
+      - path
+      - types
+      title: SignalsMetadataResponseSignalsItemsPathsItems
+    AnalyticsColumn:
+      type: object
+      properties:
+        name:
+          type: string
+        type:
+          type: string
+          description: ClickHouse column type
+      required:
+      - name
+      - type
+      title: AnalyticsColumn
+    AnalyticsQueryResponseMeta:
+      type: object
+      properties:
+        rowCount:
+          type: integer
+        elapsedMs:
+          type: number
+          format: double
+        truncated:
+          type: boolean
+          description: True when the result hit the row cap and was truncated. Narrow the query (shorter date range, LIMIT, coarser grouping) to see the rest.
+      required:
+      - rowCount
+      - elapsedMs
+      - truncated
+      title: AnalyticsQueryResponseMeta
     AnalyticsQueryResponse:
       type: object
       properties:
@@ -183,26 +271,6 @@ components:
       - rows
       - meta
       title: AnalyticsQueryResponse
-    SignalsMetadataResponseMeta:
-      type: object
-      properties:
-        fromDate:
-          type: string
-        toDate:
-          type: string
-      required:
-      - fromDate
-      - toDate
-      title: SignalsMetadataResponseMeta
-    AnalyticsQueryRequest:
-      type: object
-      properties:
-        query:
-          type: string
-          description: A single ClickHouse SELECT (or WITH ... SELECT) statement against the analytics views. Results are automatically scoped to your organization. See GET /schema for the available views and columns.
-      required:
-      - query
-      title: AnalyticsQueryRequest
     ErrorResponse:
       type: object
       properties:
@@ -215,6 +283,19 @@ components:
       required:
       - error
       title: ErrorResponse
+    SignalsMetadataResponse:
+      type: object
+      properties:
+        signals:
+          type: array
+          items:
+            $ref: '#/components/schemas/SignalsMetadataResponseSignalsItems'
+        meta:
+          $ref: '#/components/schemas/SignalsMetadataResponseMeta'
+      required:
+      - signals
+      - meta
+      title: SignalsMetadataResponse
     SignalsMetadataResponseSignalsItems:
       type: object
       properties:
@@ -244,87 +325,6 @@ components:
       - comment
       - columns
       title: AnalyticsSchemaView
-    AnalyticsSchemaResponse:
-      type: object
-      properties:
-        views:
-          type: array
-          items:
-            $ref: '#/components/schemas/AnalyticsSchemaView'
-      required:
-      - views
-      title: AnalyticsSchemaResponse
-    AnalyticsQueryResponseMeta:
-      type: object
-      properties:
-        rowCount:
-          type: integer
-        elapsedMs:
-          type: number
-          format: double
-        truncated:
-          type: boolean
-          description: True when the result hit the row cap and was truncated. Narrow the query (shorter date range, LIMIT, coarser grouping) to see the rest.
-      required:
-      - rowCount
-      - elapsedMs
-      - truncated
-      title: AnalyticsQueryResponseMeta
-    AnalyticsColumn:
-      type: object
-      properties:
-        name:
-          type: string
-        type:
-          type: string
-          description: ClickHouse column type
-      required:
-      - name
-      - type
-      title: AnalyticsColumn
-    SignalsMetadataResponse:
-      type: object
-      properties:
-        signals:
-          type: array
-          items:
-            $ref: '#/components/schemas/SignalsMetadataResponseSignalsItems'
-        meta:
-          $ref: '#/components/schemas/SignalsMetadataResponseMeta'
-      required:
-      - signals
-      - meta
-      title: SignalsMetadataResponse
-    SignalsMetadataResponseSignalsItemsPathsItems:
-      type: object
-      properties:
-        path:
-          type: string
-          description: JSON path inside the signal `data` payload, usable in queries as e.g. `data.<path>::String`.
-        types:
-          type: array
-          items:
-            type: string
-          description: ClickHouse dynamic types observed for this path.
-      required:
-      - path
-      - types
-      title: SignalsMetadataResponseSignalsItemsPathsItems
-    AnalyticsSchemaColumn:
-      type: object
-      properties:
-        name:
-          type: string
-        type:
-          type: string
-          description: ClickHouse column type
-        comment:
-          type: string
-      required:
-      - name
-      - type
-      - comment
-      title: AnalyticsSchemaColumn
   securitySchemes:
     bearerAuth:
       type: http

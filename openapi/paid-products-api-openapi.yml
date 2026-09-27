@@ -441,36 +441,20 @@ paths:
       description: Production API
 components:
   schemas:
-    AgentPricePointTiers:
+    AgentAttribute:
       type: object
       properties:
-        minQuantity:
-          type: number
-          format: double
-        maxQuantity:
-          type: number
-          format: double
-        unitPrice:
-          type: number
-          format: double
+        name:
+          type: string
+        active:
+          type: boolean
+        pricing:
+          $ref: '#/components/schemas/Pricing'
       required:
-      - unitPrice
-      title: AgentPricePointTiers
-    ChargeType:
-      type: string
-      enum:
-      - oneTime
-      - recurring
-      - usage
-      - seatBased
-      title: ChargeType
-    BillingFrequency:
-      type: string
-      enum:
-      - monthly
-      - quarterly
-      - annual
-      title: BillingFrequency
+      - name
+      - active
+      - pricing
+      title: AgentAttribute
     Product:
       type: object
       properties:
@@ -527,35 +511,71 @@ components:
       - active
       description: A product in the Paid system (previously called Agent)
       title: Product
-    ProductUpdateType:
-      type: string
-      enum:
-      - agent
-      - product
-      - prepaidCreditBundle
-      title: ProductUpdateType
-    AgentAttribute:
+    products_deleteByExternalId_Response_204:
+      type: object
+      properties: {}
+      description: Empty response body
+      title: products_deleteByExternalId_Response_204
+    AgentPricePointTiers:
       type: object
       properties:
-        name:
-          type: string
-        active:
-          type: boolean
-        pricing:
-          $ref: '#/components/schemas/Pricing'
+        minQuantity:
+          type: number
+          format: double
+        maxQuantity:
+          type: number
+          format: double
+        unitPrice:
+          type: number
+          format: double
       required:
-      - name
-      - active
-      - pricing
-      title: AgentAttribute
-    ProductCreateType:
+      - unitPrice
+      title: AgentPricePointTiers
+    ProductType:
       type: string
       enum:
       - agent
       - product
       - prepaidCreditBundle
-      default: product
-      title: ProductCreateType
+      description: The type of product
+      title: ProductType
+    products_delete_Response_204:
+      type: object
+      properties: {}
+      description: Empty response body
+      title: products_delete_Response_204
+    AgentPricePoint:
+      type: object
+      properties:
+        unitPrice:
+          type: number
+          format: double
+        minQuantity:
+          type: number
+          format: double
+        includedQuantity:
+          type: number
+          format: double
+        tiers:
+          type: array
+          items:
+            $ref: '#/components/schemas/AgentPricePointTiers'
+      title: AgentPricePoint
+    PricingModelType:
+      type: string
+      enum:
+      - PerUnit
+      - VolumePricing
+      - GraduatedPricing
+      - PrepaidCredits
+      title: PricingModelType
+    BillingFrequency:
+      type: string
+      enum:
+      - monthly
+      - quarterly
+      - annual
+      title: BillingFrequency
     ProductCreate:
       type: object
       properties:
@@ -579,44 +599,14 @@ components:
       required:
       - name
       title: ProductCreate
-    PricingModelType:
-      type: string
-      enum:
-      - PerUnit
-      - VolumePricing
-      - GraduatedPricing
-      - PrepaidCredits
-      title: PricingModelType
-    ProductType:
+    ProductCreateType:
       type: string
       enum:
       - agent
       - product
       - prepaidCreditBundle
-      description: The type of product
-      title: ProductType
-    products_deleteByExternalId_Response_204:
-      type: object
-      properties: {}
-      description: Empty response body
-      title: products_deleteByExternalId_Response_204
-    AgentPricePoint:
-      type: object
-      properties:
-        unitPrice:
-          type: number
-          format: double
-        minQuantity:
-          type: number
-          format: double
-        includedQuantity:
-          type: number
-          format: double
-        tiers:
-          type: array
-          items:
-            $ref: '#/components/schemas/AgentPricePointTiers'
-      title: AgentPricePoint
+      default: product
+      title: ProductCreateType
     Pricing:
       type: object
       properties:
@@ -644,6 +634,14 @@ components:
       - billingFrequency
       - pricePoints
       title: Pricing
+    ChargeType:
+      type: string
+      enum:
+      - oneTime
+      - recurring
+      - usage
+      - seatBased
+      title: ChargeType
     ProductUpdate:
       type: object
       properties:
@@ -669,11 +667,71 @@ components:
           additionalProperties:
             description: Any type
       title: ProductUpdate
-    products_delete_Response_204:
+    ProductUpdateType:
+      type: string
+      enum:
+      - agent
+      - product
+      - prepaidCreditBundle
+      title: ProductUpdateType
+    UpdateProductRequest:
       type: object
-      properties: {}
-      description: Empty response body
-      title: products_delete_Response_204
+      properties:
+        name:
+          type: string
+        description:
+          type:
+          - string
+          - 'null'
+        active:
+          type: boolean
+        productCode:
+          type:
+          - string
+          - 'null'
+        externalId:
+          type:
+          - string
+          - 'null'
+        metadata:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            description: Any type
+        productAttributes:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProductAttributeUpsert'
+      title: UpdateProductRequest
+    ProductPricingOutputPricingType:
+      type: string
+      enum:
+      - RecurringPerUnit
+      - RecurringGraduated
+      - RecurringVolume
+      - RecurringPercentOfTotal
+      - UsagePerUnit
+      - UsageGraduated
+      - UsageVolume
+      - UsagePrepaidCredits
+      - UsageBracketedPrepaidCredits
+      - UsageCostPlus
+      - OneTimePerUnit
+      - SeatBasedPerUnit
+      - SeatBasedGraduated
+      - SeatBasedVolume
+      - SeatBasedPrepaidCredits
+      title: ProductPricingOutputPricingType
+    ProductPricingInputDiscriminatorMappingSeatBasedPerUnitBillingFrequency:
+      type: string
+      enum:
+      - Monthly
+      - Quarterly
+      - Semi-Annually
+      - Annual
+      - Custom
+      title: ProductPricingInputDiscriminatorMappingSeatBasedPerUnitBillingFrequency
     ProductPricingInputDiscriminatorMappingSeatBasedPrepaidCreditsBillingType:
       type: string
       enum:
@@ -681,7 +739,73 @@ components:
       - Arrears
       default: Advance
       title: ProductPricingInputDiscriminatorMappingSeatBasedPrepaidCreditsBillingType
-    ProductTieredPricePoint:
+    ProductPricingInputDiscriminatorMappingUsagePrepaidCreditsBillingType:
+      type: string
+      enum:
+      - Advance
+      - Arrears
+      default: Arrears
+      title: ProductPricingInputDiscriminatorMappingUsagePrepaidCreditsBillingType
+    ProductPricePointOutputTiersItems:
+      type: object
+      properties:
+        flatAmount:
+          type: number
+          format: double
+        index:
+          type: number
+          format: double
+        lowerBound:
+          type: number
+          format: double
+        number:
+          type: number
+          format: double
+        tierBillingType:
+          $ref: '#/components/schemas/ProductPricePointOutputTiersItemsTierBillingType'
+        unitAmount:
+          type: number
+          format: double
+        upperBound:
+          type: number
+          format: double
+      required:
+      - lowerBound
+      title: ProductPricePointOutputTiersItems
+    ProductPricingInputDiscriminatorMappingUsagePrepaidCreditsSignalType:
+      type: string
+      enum:
+      - activity
+      - outcome
+      title: ProductPricingInputDiscriminatorMappingUsagePrepaidCreditsSignalType
+    ProductCreditBenefitInputAllocationCadence:
+      type: string
+      enum:
+      - upfront
+      - monthly
+      default: upfront
+      title: ProductCreditBenefitInputAllocationCadence
+    ProductPricingInputDiscriminatorMappingSeatBasedPerUnitBillingType:
+      type: string
+      enum:
+      - Advance
+      - Arrears
+      default: Advance
+      title: ProductPricingInputDiscriminatorMappingSeatBasedPerUnitBillingType
+    ProductPricingInputDiscriminatorMappingUsageGraduatedSignalType:
+      type: string
+      enum:
+      - activity
+      - outcome
+      title: ProductPricingInputDiscriminatorMappingUsageGraduatedSignalType
+    ProductPricingInputDiscriminatorMappingUsageVolumeBillingType:
+      type: string
+      enum:
+      - Advance
+      - Arrears
+      default: Arrears
+      title: ProductPricingInputDiscriminatorMappingUsageVolumeBillingType
+    ProductSimplePricePoint:
       type: object
       properties:
         currency:
@@ -692,7 +816,7 @@ components:
         tiers:
           type: array
           items:
-            $ref: '#/components/schemas/ProductTieredPricePointTiersItems'
+            $ref: '#/components/schemas/ProductSimplePricePointTiersItems'
         minQuantity:
           type: number
           format: double
@@ -705,8 +829,281 @@ components:
       required:
       - currency
       - unitPrice
-      - tiers
-      title: ProductTieredPricePoint
+      title: ProductSimplePricePoint
+    ProductAttributeUpsert:
+      type: object
+      properties:
+        productAttributeId:
+          type: string
+          format: uuid
+        name:
+          type: string
+        active:
+          type: boolean
+        pricing:
+          $ref: '#/components/schemas/ProductPricingInput'
+        creditBenefits:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProductCreditBenefitInput'
+      required:
+      - name
+      - pricing
+      title: ProductAttributeUpsert
+    ProductPricingInputDiscriminatorMappingSeatBasedGraduatedBillingType:
+      type: string
+      enum:
+      - Advance
+      - Arrears
+      default: Advance
+      title: ProductPricingInputDiscriminatorMappingSeatBasedGraduatedBillingType
+    ProductPricingInputDiscriminatorMappingUsageBracketedPrepaidCreditsCreditUnitBracketsItems:
+      type: object
+      properties:
+        upTo:
+          type:
+          - integer
+          - 'null'
+        creditUnits:
+          type: integer
+      required:
+      - upTo
+      - creditUnits
+      title: ProductPricingInputDiscriminatorMappingUsageBracketedPrepaidCreditsCreditUnitBracketsItems
+    ProductTieredPricePointTiersItemsTierBillingType:
+      type: string
+      enum:
+      - flat
+      - perUnit
+      title: ProductTieredPricePointTiersItemsTierBillingType
+    ProductPricingInputDiscriminatorMappingSeatBasedPrepaidCreditsBillingFrequency:
+      type: string
+      enum:
+      - Monthly
+      - Quarterly
+      - Semi-Annually
+      - Annual
+      - Custom
+      title: ProductPricingInputDiscriminatorMappingSeatBasedPrepaidCreditsBillingFrequency
+    ProductPricingInputDiscriminatorMappingUsageBracketedPrepaidCreditsBillingFrequency:
+      type: string
+      enum:
+      - Monthly
+      - Quarterly
+      - Semi-Annually
+      - Annual
+      - Custom
+      title: ProductPricingInputDiscriminatorMappingUsageBracketedPrepaidCreditsBillingFrequency
+    ProductPricingInputDiscriminatorMappingRecurringPercentOfTotalBillingType:
+      type: string
+      enum:
+      - Advance
+      - Arrears
+      default: Advance
+      title: ProductPricingInputDiscriminatorMappingRecurringPercentOfTotalBillingType
+    ProductPricingInputDiscriminatorMappingSeatBasedVolumeBillingType:
+      type: string
+      enum:
+      - Advance
+      - Arrears
+      default: Advance
+      title: ProductPricingInputDiscriminatorMappingSeatBasedVolumeBillingType
+    ProductPricingInputDiscriminatorMappingSeatBasedVolumeBillingFrequency:
+      type: string
+      enum:
+      - Monthly
+      - Quarterly
+      - Semi-Annually
+      - Annual
+      - Custom
+      title: ProductPricingInputDiscriminatorMappingSeatBasedVolumeBillingFrequency
+    ProductCreditBenefitOutput:
+      type: object
+      properties:
+        id:
+          type: string
+        creditsCurrencyId:
+          type:
+          - string
+          - 'null'
+        amount:
+          type: number
+          format: double
+        recipient:
+          type: string
+        isInfiniteTotal:
+          type: boolean
+        allocationCadence:
+          type: string
+        creditGrantTiming:
+          type:
+          - string
+          - 'null'
+        overageUnitPrice:
+          type:
+          - number
+          - 'null'
+          format: double
+        rolloverAmount:
+          type:
+          - number
+          - 'null'
+          format: double
+        rolloverDuration:
+          type:
+          - number
+          - 'null'
+          format: double
+        rolloverDurationUnit:
+          type:
+          - string
+          - 'null'
+      required:
+      - id
+      - creditsCurrencyId
+      - amount
+      - recipient
+      - isInfiniteTotal
+      - allocationCadence
+      title: ProductCreditBenefitOutput
+    ProductPricingInputDiscriminatorMappingUsageVolumeSignalType:
+      type: string
+      enum:
+      - activity
+      - outcome
+      title: ProductPricingInputDiscriminatorMappingUsageVolumeSignalType
+    CreateProductRequest:
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type:
+          - string
+          - 'null'
+        active:
+          type: boolean
+          default: false
+        productCode:
+          type:
+          - string
+          - 'null'
+        externalId:
+          type:
+          - string
+          - 'null'
+        metadata:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            description: Any type
+      required:
+      - name
+      title: CreateProductRequest
+    ProductPricingInputDiscriminatorMappingUsagePerUnitBillingFrequency:
+      type: string
+      enum:
+      - Monthly
+      - Quarterly
+      - Semi-Annually
+      - Annual
+      - Custom
+      title: ProductPricingInputDiscriminatorMappingUsagePerUnitBillingFrequency
+    ProductPricingInputDiscriminatorMappingUsageCostPlusBillingType:
+      type: string
+      enum:
+      - Advance
+      - Arrears
+      default: Arrears
+      title: ProductPricingInputDiscriminatorMappingUsageCostPlusBillingType
+    ProductCreditBenefitInput:
+      type: object
+      properties:
+        creditsCurrencyId:
+          type: string
+        amount:
+          type: number
+          format: double
+        recipient:
+          $ref: '#/components/schemas/ProductCreditBenefitInputRecipient'
+        isInfiniteTotal:
+          type: boolean
+          default: false
+        allocationCadence:
+          $ref: '#/components/schemas/ProductCreditBenefitInputAllocationCadence'
+        creditGrantTiming:
+          $ref: '#/components/schemas/ProductCreditBenefitInputCreditGrantTiming'
+        overageUnitPrice:
+          type:
+          - number
+          - 'null'
+          format: double
+        rolloverAmount:
+          type:
+          - number
+          - 'null'
+          format: double
+        rolloverDuration:
+          type:
+          - number
+          - 'null'
+          format: double
+        rolloverDurationUnit:
+          type:
+          - string
+          - 'null'
+      required:
+      - creditsCurrencyId
+      - amount
+      title: ProductCreditBenefitInput
+    ProductPricingInputDiscriminatorMappingRecurringPercentOfTotalBillingFrequency:
+      type: string
+      enum:
+      - Monthly
+      - Quarterly
+      - Semi-Annually
+      - Annual
+      - Custom
+      title: ProductPricingInputDiscriminatorMappingRecurringPercentOfTotalBillingFrequency
+    ProductPricingInputDiscriminatorMappingUsageGraduatedBillingFrequency:
+      type: string
+      enum:
+      - Monthly
+      - Quarterly
+      - Semi-Annually
+      - Annual
+      - Custom
+      title: ProductPricingInputDiscriminatorMappingUsageGraduatedBillingFrequency
+    ProductPricingInputDiscriminatorMappingOneTimePerUnitFeeType:
+      type: string
+      enum:
+      - setup
+      - onboarding
+      - implementation
+      - migration
+      - custom
+      title: ProductPricingInputDiscriminatorMappingOneTimePerUnitFeeType
+    ProductCreditBenefitInputRecipient:
+      type: string
+      enum:
+      - organization
+      - seat
+      default: organization
+      title: ProductCreditBenefitInputRecipient
+    ProductListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Product_2'
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+      required:
+      - data
+      - pagination
+      title: ProductListResponse
     Product_2:
       type: object
       properties:
@@ -757,7 +1154,34 @@ components:
       - archivedAt
       - metadata
       title: Product
-    ProductPricingInputDiscriminatorMappingUsagePerUnitBillingFrequency:
+    ProductPricingInputDiscriminatorMappingUsageBracketedPrepaidCreditsSignalType:
+      type: string
+      enum:
+      - activity
+      - outcome
+      title: ProductPricingInputDiscriminatorMappingUsageBracketedPrepaidCreditsSignalType
+    ProductPricingInputDiscriminatorMappingRecurringPerUnitBillingType:
+      type: string
+      enum:
+      - Advance
+      - Arrears
+      default: Advance
+      title: ProductPricingInputDiscriminatorMappingRecurringPerUnitBillingType
+    ProductPricingInputDiscriminatorMappingOneTimePerUnitBillingType:
+      type: string
+      enum:
+      - Advance
+      - Arrears
+      default: Advance
+      title: ProductPricingInputDiscriminatorMappingOneTimePerUnitBillingType
+    ProductPricingInputDiscriminatorMappingRecurringVolumeBillingType:
+      type: string
+      enum:
+      - Advance
+      - Arrears
+      default: Advance
+      title: ProductPricingInputDiscriminatorMappingRecurringVolumeBillingType
+    ProductPricingInputDiscriminatorMappingRecurringVolumeBillingFrequency:
       type: string
       enum:
       - Monthly
@@ -765,90 +1189,7 @@ components:
       - Semi-Annually
       - Annual
       - Custom
-      title: ProductPricingInputDiscriminatorMappingUsagePerUnitBillingFrequency
-    ProductPricingInputDiscriminatorMappingUsageCostPlusBillingType:
-      type: string
-      enum:
-      - Advance
-      - Arrears
-      default: Arrears
-      title: ProductPricingInputDiscriminatorMappingUsageCostPlusBillingType
-    ProductPricePointOutputTiersItems:
-      type: object
-      properties:
-        flatAmount:
-          type: number
-          format: double
-        index:
-          type: number
-          format: double
-        lowerBound:
-          type: number
-          format: double
-        number:
-          type: number
-          format: double
-        tierBillingType:
-          $ref: '#/components/schemas/ProductPricePointOutputTiersItemsTierBillingType'
-        unitAmount:
-          type: number
-          format: double
-        upperBound:
-          type: number
-          format: double
-      required:
-      - lowerBound
-      title: ProductPricePointOutputTiersItems
-    UpdateProductRequest:
-      type: object
-      properties:
-        name:
-          type: string
-        description:
-          type:
-          - string
-          - 'null'
-        active:
-          type: boolean
-        productCode:
-          type:
-          - string
-          - 'null'
-        externalId:
-          type:
-          - string
-          - 'null'
-        metadata:
-          type:
-          - object
-          - 'null'
-          additionalProperties:
-            description: Any type
-        productAttributes:
-          type: array
-          items:
-            $ref: '#/components/schemas/ProductAttributeUpsert'
-      title: UpdateProductRequest
-    ProductPricingInputDiscriminatorMappingSeatBasedPerUnitBillingType:
-      type: string
-      enum:
-      - Advance
-      - Arrears
-      default: Advance
-      title: ProductPricingInputDiscriminatorMappingSeatBasedPerUnitBillingType
-    ProductPricingInputDiscriminatorMappingUsagePerUnitSignalType:
-      type: string
-      enum:
-      - activity
-      - outcome
-      title: ProductPricingInputDiscriminatorMappingUsagePerUnitSignalType
-    ProductPricingInputDiscriminatorMappingUsageVolumeBillingType:
-      type: string
-      enum:
-      - Advance
-      - Arrears
-      default: Arrears
-      title: ProductPricingInputDiscriminatorMappingUsageVolumeBillingType
+      title: ProductPricingInputDiscriminatorMappingRecurringVolumeBillingFrequency
     ProductPricingInputDiscriminatorMappingSeatBasedGraduatedBillingFrequency:
       type: string
       enum:
@@ -858,148 +1199,6 @@ components:
       - Annual
       - Custom
       title: ProductPricingInputDiscriminatorMappingSeatBasedGraduatedBillingFrequency
-    ProductSimplePricePoint:
-      type: object
-      properties:
-        currency:
-          type: string
-        unitPrice:
-          type: number
-          format: double
-        tiers:
-          type: array
-          items:
-            $ref: '#/components/schemas/ProductSimplePricePointTiersItems'
-        minQuantity:
-          type: number
-          format: double
-        maxQuantity:
-          type: number
-          format: double
-        includedQuantity:
-          type: number
-          format: double
-      required:
-      - currency
-      - unitPrice
-      title: ProductSimplePricePoint
-    ProductCreditBenefitOutput:
-      type: object
-      properties:
-        id:
-          type: string
-        creditsCurrencyId:
-          type:
-          - string
-          - 'null'
-        amount:
-          type: number
-          format: double
-        recipient:
-          type: string
-        isInfiniteTotal:
-          type: boolean
-        allocationCadence:
-          type: string
-        creditGrantTiming:
-          type:
-          - string
-          - 'null'
-        overageUnitPrice:
-          type:
-          - number
-          - 'null'
-          format: double
-        rolloverAmount:
-          type:
-          - number
-          - 'null'
-          format: double
-        rolloverDuration:
-          type:
-          - number
-          - 'null'
-          format: double
-        rolloverDurationUnit:
-          type:
-          - string
-          - 'null'
-      required:
-      - id
-      - creditsCurrencyId
-      - amount
-      - recipient
-      - isInfiniteTotal
-      - allocationCadence
-      title: ProductCreditBenefitOutput
-    ProductPricePointOutputTiersItemsTierBillingType:
-      type: string
-      enum:
-      - flat
-      - perUnit
-      title: ProductPricePointOutputTiersItemsTierBillingType
-    ProductPricingInputDiscriminatorMappingRecurringPercentOfTotalBillingType:
-      type: string
-      enum:
-      - Advance
-      - Arrears
-      default: Advance
-      title: ProductPricingInputDiscriminatorMappingRecurringPercentOfTotalBillingType
-    ProductCreditBenefitInputRecipient:
-      type: string
-      enum:
-      - organization
-      - seat
-      default: organization
-      title: ProductCreditBenefitInputRecipient
-    ProductPricingOutputSignalType:
-      type: string
-      enum:
-      - activity
-      - outcome
-      title: ProductPricingOutputSignalType
-    ProductPricingInputDiscriminatorMappingUsagePrepaidCreditsBillingType:
-      type: string
-      enum:
-      - Advance
-      - Arrears
-      default: Arrears
-      title: ProductPricingInputDiscriminatorMappingUsagePrepaidCreditsBillingType
-    ProductTieredPricePointTiersItemsTierBillingType:
-      type: string
-      enum:
-      - flat
-      - perUnit
-      title: ProductTieredPricePointTiersItemsTierBillingType
-    ProductPricingInputDiscriminatorMappingUsageCostPlusBillingFrequency:
-      type: string
-      enum:
-      - Monthly
-      - Quarterly
-      - Semi-Annually
-      - Annual
-      - Custom
-      title: ProductPricingInputDiscriminatorMappingUsageCostPlusBillingFrequency
-    ProductPricingInputDiscriminatorMappingOneTimePerUnitBillingType:
-      type: string
-      enum:
-      - Advance
-      - Arrears
-      default: Advance
-      title: ProductPricingInputDiscriminatorMappingOneTimePerUnitBillingType
-    ProductPricingInputDiscriminatorMappingUsagePrepaidCreditsSignalType:
-      type: string
-      enum:
-      - activity
-      - outcome
-      title: ProductPricingInputDiscriminatorMappingUsagePrepaidCreditsSignalType
-    ProductPricingInputDiscriminatorMappingRecurringGraduatedBillingType:
-      type: string
-      enum:
-      - Advance
-      - Arrears
-      default: Advance
-      title: ProductPricingInputDiscriminatorMappingRecurringGraduatedBillingType
     ErrorResponse:
       type: object
       properties:
@@ -1012,253 +1211,6 @@ components:
       required:
       - error
       title: ErrorResponse
-    ProductPricingInputDiscriminatorMappingSeatBasedGraduatedBillingType:
-      type: string
-      enum:
-      - Advance
-      - Arrears
-      default: Advance
-      title: ProductPricingInputDiscriminatorMappingSeatBasedGraduatedBillingType
-    ProductCreditBenefitInputAllocationCadence:
-      type: string
-      enum:
-      - upfront
-      - monthly
-      default: upfront
-      title: ProductCreditBenefitInputAllocationCadence
-    ProductListResponse:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Product_2'
-        pagination:
-          $ref: '#/components/schemas/Pagination'
-      required:
-      - data
-      - pagination
-      title: ProductListResponse
-    ProductPricingOutput:
-      type: object
-      properties:
-        pricingType:
-          $ref: '#/components/schemas/ProductPricingOutputPricingType'
-        chargeType:
-          type: string
-        pricingModel:
-          type: string
-        eventName:
-          type: string
-        signalType:
-          $ref: '#/components/schemas/ProductPricingOutputSignalType'
-        billingFrequency:
-          type: string
-        billingType:
-          type: string
-        creditsCurrencyId:
-          type: string
-        creditCost:
-          type: number
-          format: double
-        unitValue:
-          type: number
-          format: double
-        percentageValue:
-          type: number
-          format: double
-        costPlusMultiplier:
-          type: number
-          format: double
-        pricePoints:
-          type: array
-          items:
-            $ref: '#/components/schemas/ProductPricePointOutput'
-      required:
-      - pricingType
-      - chargeType
-      - pricePoints
-      title: ProductPricingOutput
-    ProductPricingInputDiscriminatorMappingSeatBasedVolumeBillingFrequency:
-      type: string
-      enum:
-      - Monthly
-      - Quarterly
-      - Semi-Annually
-      - Annual
-      - Custom
-      title: ProductPricingInputDiscriminatorMappingSeatBasedVolumeBillingFrequency
-    ProductPricePointOutput:
-      type: object
-      properties:
-        currency:
-          type: string
-        unitPrice:
-          type: number
-          format: double
-        tiers:
-          type: array
-          items:
-            $ref: '#/components/schemas/ProductPricePointOutputTiersItems'
-        minQuantity:
-          type: number
-          format: double
-        maxQuantity:
-          type: number
-          format: double
-        includedQuantity:
-          type: number
-          format: double
-      required:
-      - currency
-      - unitPrice
-      title: ProductPricePointOutput
-    ProductTieredPricePointTiersItems:
-      type: object
-      properties:
-        flatAmount:
-          type: number
-          format: double
-        index:
-          type: number
-          format: double
-        lowerBound:
-          type: number
-          format: double
-        number:
-          type: number
-          format: double
-        tierBillingType:
-          $ref: '#/components/schemas/ProductTieredPricePointTiersItemsTierBillingType'
-        unitAmount:
-          type: number
-          format: double
-        upperBound:
-          type: number
-          format: double
-      required:
-      - lowerBound
-      title: ProductTieredPricePointTiersItems
-    ProductPricingInputDiscriminatorMappingUsageGraduatedBillingFrequency:
-      type: string
-      enum:
-      - Monthly
-      - Quarterly
-      - Semi-Annually
-      - Annual
-      - Custom
-      title: ProductPricingInputDiscriminatorMappingUsageGraduatedBillingFrequency
-    ProductPricingInputDiscriminatorMappingRecurringPercentOfTotalBillingFrequency:
-      type: string
-      enum:
-      - Monthly
-      - Quarterly
-      - Semi-Annually
-      - Annual
-      - Custom
-      title: ProductPricingInputDiscriminatorMappingRecurringPercentOfTotalBillingFrequency
-    ProductPricingInputDiscriminatorMappingRecurringPerUnitBillingFrequency:
-      type: string
-      enum:
-      - Monthly
-      - Quarterly
-      - Semi-Annually
-      - Annual
-      - Custom
-      title: ProductPricingInputDiscriminatorMappingRecurringPerUnitBillingFrequency
-    ProductPricingInputDiscriminatorMappingUsageBracketedPrepaidCreditsCreditUnitBracketsItems:
-      type: object
-      properties:
-        upTo:
-          type:
-          - integer
-          - 'null'
-        creditUnits:
-          type: integer
-      required:
-      - upTo
-      - creditUnits
-      title: ProductPricingInputDiscriminatorMappingUsageBracketedPrepaidCreditsCreditUnitBracketsItems
-    ProductCreditBenefitInputCreditGrantTiming:
-      type: string
-      enum:
-      - on_order_activation
-      - on_payment
-      - on_invoice_posted
-      title: ProductCreditBenefitInputCreditGrantTiming
-    ProductSimplePricePointTiersItems:
-      type: object
-      properties:
-        flatAmount:
-          type: number
-          format: double
-        index:
-          type: number
-          format: double
-        lowerBound:
-          type: number
-          format: double
-        number:
-          type: number
-          format: double
-        tierBillingType:
-          $ref: '#/components/schemas/ProductSimplePricePointTiersItemsTierBillingType'
-        unitAmount:
-          type: number
-          format: double
-        upperBound:
-          type: number
-          format: double
-      required:
-      - lowerBound
-      title: ProductSimplePricePointTiersItems
-    ProductPricingInputDiscriminatorMappingUsageBracketedPrepaidCreditsBillingType:
-      type: string
-      enum:
-      - Advance
-      - Arrears
-      default: Arrears
-      title: ProductPricingInputDiscriminatorMappingUsageBracketedPrepaidCreditsBillingType
-    ProductPricingInputDiscriminatorMappingUsagePerUnitBillingType:
-      type: string
-      enum:
-      - Advance
-      - Arrears
-      default: Arrears
-      title: ProductPricingInputDiscriminatorMappingUsagePerUnitBillingType
-    ProductPricingInputDiscriminatorMappingUsagePrepaidCreditsBillingFrequency:
-      type: string
-      enum:
-      - Monthly
-      - Quarterly
-      - Semi-Annually
-      - Annual
-      - Custom
-      title: ProductPricingInputDiscriminatorMappingUsagePrepaidCreditsBillingFrequency
-    ProductPricingInputDiscriminatorMappingSeatBasedPerUnitBillingFrequency:
-      type: string
-      enum:
-      - Monthly
-      - Quarterly
-      - Semi-Annually
-      - Annual
-      - Custom
-      title: ProductPricingInputDiscriminatorMappingSeatBasedPerUnitBillingFrequency
-    ProductPricingInputDiscriminatorMappingUsageCostPlusSignalType:
-      type: string
-      enum:
-      - activity
-      - outcome
-      title: ProductPricingInputDiscriminatorMappingUsageCostPlusSignalType
-    ProductPricingInputDiscriminatorMappingUsageVolumeBillingFrequency:
-      type: string
-      enum:
-      - Monthly
-      - Quarterly
-      - Semi-Annually
-      - Annual
-      - Custom
-      title: ProductPricingInputDiscriminatorMappingUsageVolumeBillingFrequency
     Pagination:
       type: object
       properties:
@@ -1276,178 +1228,6 @@ components:
       - total
       - hasMore
       title: Pagination
-    ProductPricingInputDiscriminatorMappingRecurringPerUnitBillingType:
-      type: string
-      enum:
-      - Advance
-      - Arrears
-      default: Advance
-      title: ProductPricingInputDiscriminatorMappingRecurringPerUnitBillingType
-    ProductPricingInputDiscriminatorMappingRecurringVolumeBillingType:
-      type: string
-      enum:
-      - Advance
-      - Arrears
-      default: Advance
-      title: ProductPricingInputDiscriminatorMappingRecurringVolumeBillingType
-    ProductPricingInputDiscriminatorMappingSeatBasedPrepaidCreditsBillingFrequency:
-      type: string
-      enum:
-      - Monthly
-      - Quarterly
-      - Semi-Annually
-      - Annual
-      - Custom
-      title: ProductPricingInputDiscriminatorMappingSeatBasedPrepaidCreditsBillingFrequency
-    ProductPricingInputDiscriminatorMappingRecurringVolumeBillingFrequency:
-      type: string
-      enum:
-      - Monthly
-      - Quarterly
-      - Semi-Annually
-      - Annual
-      - Custom
-      title: ProductPricingInputDiscriminatorMappingRecurringVolumeBillingFrequency
-    ProductPricingInputDiscriminatorMappingRecurringGraduatedBillingFrequency:
-      type: string
-      enum:
-      - Monthly
-      - Quarterly
-      - Semi-Annually
-      - Annual
-      - Custom
-      title: ProductPricingInputDiscriminatorMappingRecurringGraduatedBillingFrequency
-    ProductPricingInputDiscriminatorMappingSeatBasedVolumeBillingType:
-      type: string
-      enum:
-      - Advance
-      - Arrears
-      default: Advance
-      title: ProductPricingInputDiscriminatorMappingSeatBasedVolumeBillingType
-    ProductPricingInputDiscriminatorMappingUsageBracketedPrepaidCreditsPricingInput:
-      type: object
-      properties:
-        kind:
-          $ref: '#/components/schemas/ProductPricingInputDiscriminatorMappingUsageBracketedPrepaidCreditsPricingInputKind'
-      required:
-      - kind
-      title: ProductPricingInputDiscriminatorMappingUsageBracketedPrepaidCreditsPricingInput
-    ProductPricingInputDiscriminatorMappingUsageVolumeSignalType:
-      type: string
-      enum:
-      - activity
-      - outcome
-      title: ProductPricingInputDiscriminatorMappingUsageVolumeSignalType
-    ProductCreditBenefitInput:
-      type: object
-      properties:
-        creditsCurrencyId:
-          type: string
-        amount:
-          type: number
-          format: double
-        recipient:
-          $ref: '#/components/schemas/ProductCreditBenefitInputRecipient'
-        isInfiniteTotal:
-          type: boolean
-          default: false
-        allocationCadence:
-          $ref: '#/components/schemas/ProductCreditBenefitInputAllocationCadence'
-        creditGrantTiming:
-          $ref: '#/components/schemas/ProductCreditBenefitInputCreditGrantTiming'
-        overageUnitPrice:
-          type:
-          - number
-          - 'null'
-          format: double
-        rolloverAmount:
-          type:
-          - number
-          - 'null'
-          format: double
-        rolloverDuration:
-          type:
-          - number
-          - 'null'
-          format: double
-        rolloverDurationUnit:
-          type:
-          - string
-          - 'null'
-      required:
-      - creditsCurrencyId
-      - amount
-      title: ProductCreditBenefitInput
-    ProductPricingInputDiscriminatorMappingOneTimePerUnitFeeType:
-      type: string
-      enum:
-      - setup
-      - onboarding
-      - implementation
-      - migration
-      - custom
-      title: ProductPricingInputDiscriminatorMappingOneTimePerUnitFeeType
-    ProductPricingInputDiscriminatorMappingUsageBracketedPrepaidCreditsBillingFrequency:
-      type: string
-      enum:
-      - Monthly
-      - Quarterly
-      - Semi-Annually
-      - Annual
-      - Custom
-      title: ProductPricingInputDiscriminatorMappingUsageBracketedPrepaidCreditsBillingFrequency
-    ProductPricingInputDiscriminatorMappingUsageGraduatedSignalType:
-      type: string
-      enum:
-      - activity
-      - outcome
-      title: ProductPricingInputDiscriminatorMappingUsageGraduatedSignalType
-    ProductAttributeOutput:
-      type: object
-      properties:
-        productAttributeId:
-          type: string
-        name:
-          type: string
-        active:
-          type: boolean
-        pricing:
-          $ref: '#/components/schemas/ProductPricingOutput'
-        creditBenefits:
-          type: array
-          items:
-            $ref: '#/components/schemas/ProductCreditBenefitOutput'
-      required:
-      - productAttributeId
-      - name
-      - active
-      - pricing
-      - creditBenefits
-      title: ProductAttributeOutput
-    ProductPricingOutputPricingType:
-      type: string
-      enum:
-      - RecurringPerUnit
-      - RecurringGraduated
-      - RecurringVolume
-      - RecurringPercentOfTotal
-      - UsagePerUnit
-      - UsageGraduated
-      - UsageVolume
-      - UsagePrepaidCredits
-      - UsageBracketedPrepaidCredits
-      - UsageCostPlus
-      - OneTimePerUnit
-      - SeatBasedPerUnit
-      - SeatBasedGraduated
-      - SeatBasedVolume
-      - SeatBasedPrepaidCredits
-      title: ProductPricingOutputPricingType
-    ProductPricingInputDiscriminatorMappingUsageBracketedPrepaidCreditsPricingInputKind:
-      type: string
-      enum:
-      - signalQuantity
-      title: ProductPricingInputDiscriminatorMappingUsageBracketedPrepaidCreditsPricingInputKind
     ProductDetail:
       type: object
       properties:
@@ -1503,42 +1283,19 @@ components:
       - metadata
       - productAttributes
       title: ProductDetail
-    ProductPricingInputDiscriminatorMappingUsageGraduatedBillingType:
+    ProductPricePointOutputTiersItemsTierBillingType:
       type: string
       enum:
-      - Advance
-      - Arrears
-      default: Arrears
-      title: ProductPricingInputDiscriminatorMappingUsageGraduatedBillingType
-    CreateProductRequest:
-      type: object
-      properties:
-        name:
-          type: string
-        description:
-          type:
-          - string
-          - 'null'
-        active:
-          type: boolean
-          default: false
-        productCode:
-          type:
-          - string
-          - 'null'
-        externalId:
-          type:
-          - string
-          - 'null'
-        metadata:
-          type:
-          - object
-          - 'null'
-          additionalProperties:
-            description: Any type
-      required:
-      - name
-      title: CreateProductRequest
+      - flat
+      - perUnit
+      title: ProductPricePointOutputTiersItemsTierBillingType
+    ProductCreditBenefitInputCreditGrantTiming:
+      type: string
+      enum:
+      - on_order_activation
+      - on_payment
+      - on_invoice_posted
+      title: ProductCreditBenefitInputCreditGrantTiming
     ProductPricingInput:
       oneOf:
       - type: object
@@ -1934,38 +1691,281 @@ components:
       discriminator:
         propertyName: pricingType
       title: ProductPricingInput
-    ProductPricingInputDiscriminatorMappingUsageBracketedPrepaidCreditsSignalType:
+    ProductPricingInputDiscriminatorMappingRecurringGraduatedBillingFrequency:
       type: string
       enum:
-      - activity
-      - outcome
-      title: ProductPricingInputDiscriminatorMappingUsageBracketedPrepaidCreditsSignalType
+      - Monthly
+      - Quarterly
+      - Semi-Annually
+      - Annual
+      - Custom
+      title: ProductPricingInputDiscriminatorMappingRecurringGraduatedBillingFrequency
+    ProductPricingInputDiscriminatorMappingUsageBracketedPrepaidCreditsPricingInputKind:
+      type: string
+      enum:
+      - signalQuantity
+      title: ProductPricingInputDiscriminatorMappingUsageBracketedPrepaidCreditsPricingInputKind
+    ProductPricingInputDiscriminatorMappingUsageVolumeBillingFrequency:
+      type: string
+      enum:
+      - Monthly
+      - Quarterly
+      - Semi-Annually
+      - Annual
+      - Custom
+      title: ProductPricingInputDiscriminatorMappingUsageVolumeBillingFrequency
     ProductSimplePricePointTiersItemsTierBillingType:
       type: string
       enum:
       - flat
       - perUnit
       title: ProductSimplePricePointTiersItemsTierBillingType
-    ProductAttributeUpsert:
+    ProductPricingInputDiscriminatorMappingUsageCostPlusSignalType:
+      type: string
+      enum:
+      - activity
+      - outcome
+      title: ProductPricingInputDiscriminatorMappingUsageCostPlusSignalType
+    ProductPricingInputDiscriminatorMappingUsagePrepaidCreditsBillingFrequency:
+      type: string
+      enum:
+      - Monthly
+      - Quarterly
+      - Semi-Annually
+      - Annual
+      - Custom
+      title: ProductPricingInputDiscriminatorMappingUsagePrepaidCreditsBillingFrequency
+    ProductPricingInputDiscriminatorMappingRecurringGraduatedBillingType:
+      type: string
+      enum:
+      - Advance
+      - Arrears
+      default: Advance
+      title: ProductPricingInputDiscriminatorMappingRecurringGraduatedBillingType
+    ProductTieredPricePoint:
+      type: object
+      properties:
+        currency:
+          type: string
+        unitPrice:
+          type: number
+          format: double
+        tiers:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProductTieredPricePointTiersItems'
+        minQuantity:
+          type: number
+          format: double
+        maxQuantity:
+          type: number
+          format: double
+        includedQuantity:
+          type: number
+          format: double
+      required:
+      - currency
+      - unitPrice
+      - tiers
+      title: ProductTieredPricePoint
+    ProductPricingInputDiscriminatorMappingUsageGraduatedBillingType:
+      type: string
+      enum:
+      - Advance
+      - Arrears
+      default: Arrears
+      title: ProductPricingInputDiscriminatorMappingUsageGraduatedBillingType
+    ProductPricingInputDiscriminatorMappingUsagePerUnitBillingType:
+      type: string
+      enum:
+      - Advance
+      - Arrears
+      default: Arrears
+      title: ProductPricingInputDiscriminatorMappingUsagePerUnitBillingType
+    ProductPricingOutputSignalType:
+      type: string
+      enum:
+      - activity
+      - outcome
+      title: ProductPricingOutputSignalType
+    ProductPricingInputDiscriminatorMappingUsageBracketedPrepaidCreditsBillingType:
+      type: string
+      enum:
+      - Advance
+      - Arrears
+      default: Arrears
+      title: ProductPricingInputDiscriminatorMappingUsageBracketedPrepaidCreditsBillingType
+    ProductPricingInputDiscriminatorMappingUsageBracketedPrepaidCreditsPricingInput:
+      type: object
+      properties:
+        kind:
+          $ref: '#/components/schemas/ProductPricingInputDiscriminatorMappingUsageBracketedPrepaidCreditsPricingInputKind'
+      required:
+      - kind
+      title: ProductPricingInputDiscriminatorMappingUsageBracketedPrepaidCreditsPricingInput
+    ProductAttributeOutput:
       type: object
       properties:
         productAttributeId:
           type: string
-          format: uuid
         name:
           type: string
         active:
           type: boolean
         pricing:
-          $ref: '#/components/schemas/ProductPricingInput'
+          $ref: '#/components/schemas/ProductPricingOutput'
         creditBenefits:
           type: array
           items:
-            $ref: '#/components/schemas/ProductCreditBenefitInput'
+            $ref: '#/components/schemas/ProductCreditBenefitOutput'
       required:
+      - productAttributeId
       - name
+      - active
       - pricing
-      title: ProductAttributeUpsert
+      - creditBenefits
+      title: ProductAttributeOutput
+    ProductPricingInputDiscriminatorMappingUsageCostPlusBillingFrequency:
+      type: string
+      enum:
+      - Monthly
+      - Quarterly
+      - Semi-Annually
+      - Annual
+      - Custom
+      title: ProductPricingInputDiscriminatorMappingUsageCostPlusBillingFrequency
+    ProductPricingInputDiscriminatorMappingUsagePerUnitSignalType:
+      type: string
+      enum:
+      - activity
+      - outcome
+      title: ProductPricingInputDiscriminatorMappingUsagePerUnitSignalType
+    ProductSimplePricePointTiersItems:
+      type: object
+      properties:
+        flatAmount:
+          type: number
+          format: double
+        index:
+          type: number
+          format: double
+        lowerBound:
+          type: number
+          format: double
+        number:
+          type: number
+          format: double
+        tierBillingType:
+          $ref: '#/components/schemas/ProductSimplePricePointTiersItemsTierBillingType'
+        unitAmount:
+          type: number
+          format: double
+        upperBound:
+          type: number
+          format: double
+      required:
+      - lowerBound
+      title: ProductSimplePricePointTiersItems
+    ProductTieredPricePointTiersItems:
+      type: object
+      properties:
+        flatAmount:
+          type: number
+          format: double
+        index:
+          type: number
+          format: double
+        lowerBound:
+          type: number
+          format: double
+        number:
+          type: number
+          format: double
+        tierBillingType:
+          $ref: '#/components/schemas/ProductTieredPricePointTiersItemsTierBillingType'
+        unitAmount:
+          type: number
+          format: double
+        upperBound:
+          type: number
+          format: double
+      required:
+      - lowerBound
+      title: ProductTieredPricePointTiersItems
+    ProductPricePointOutput:
+      type: object
+      properties:
+        currency:
+          type: string
+        unitPrice:
+          type: number
+          format: double
+        tiers:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProductPricePointOutputTiersItems'
+        minQuantity:
+          type: number
+          format: double
+        maxQuantity:
+          type: number
+          format: double
+        includedQuantity:
+          type: number
+          format: double
+      required:
+      - currency
+      - unitPrice
+      title: ProductPricePointOutput
+    ProductPricingInputDiscriminatorMappingRecurringPerUnitBillingFrequency:
+      type: string
+      enum:
+      - Monthly
+      - Quarterly
+      - Semi-Annually
+      - Annual
+      - Custom
+      title: ProductPricingInputDiscriminatorMappingRecurringPerUnitBillingFrequency
+    ProductPricingOutput:
+      type: object
+      properties:
+        pricingType:
+          $ref: '#/components/schemas/ProductPricingOutputPricingType'
+        chargeType:
+          type: string
+        pricingModel:
+          type: string
+        eventName:
+          type: string
+        signalType:
+          $ref: '#/components/schemas/ProductPricingOutputSignalType'
+        billingFrequency:
+          type: string
+        billingType:
+          type: string
+        creditsCurrencyId:
+          type: string
+        creditCost:
+          type: number
+          format: double
+        unitValue:
+          type: number
+          format: double
+        percentageValue:
+          type: number
+          format: double
+        costPlusMultiplier:
+          type: number
+          format: double
+        pricePoints:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProductPricePointOutput'
+      required:
+      - pricingType
+      - chargeType
+      - pricePoints
+      title: ProductPricingOutput
   securitySchemes:
     bearerAuth:
       type: http

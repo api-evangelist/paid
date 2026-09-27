@@ -61,6 +61,12 @@ paths:
               $ref: '#/components/schemas/CreateCustomerPortalRequest'
 components:
   schemas:
+    CustomerPortalStatus:
+      type: string
+      enum:
+      - active
+      - expired
+      title: CustomerPortalStatus
     ErrorResponse:
       type: object
       properties:
@@ -73,12 +79,6 @@ components:
       required:
       - error
       title: ErrorResponse
-    CustomerPortalStatus:
-      type: string
-      enum:
-      - active
-      - expired
-      title: CustomerPortalStatus
     CustomerPortal:
       type: object
       properties:

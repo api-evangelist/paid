@@ -68,7 +68,7 @@ tags_raw:
 - FinOps
 apis:
 - aid: paid:paid-agents-api
-  name: Paid agents API
+  name: Paid Agents API
   description: The agents API from Paid — 3 operation(s) for agents.
   humanURL: https://docs.paid.ai/api-reference/api-reference
   baseURL: https://api.agentpaid.io/api/v2
@@ -82,7 +82,7 @@ apis:
   - type: Documentation
     url: https://docs.paid.ai/
 - aid: paid:paid-analyticsexperimental-api
-  name: Paid analyticsExperimental API
+  name: Paid Analytics Experimental API
   description: The analyticsExperimental API from Paid — 3 operation(s) for analyticsexperimental.
   humanURL: https://docs.paid.ai/api-reference/api-reference
   baseURL: https://api.agentpaid.io/api/v2
@@ -95,7 +95,7 @@ apis:
   - type: Documentation
     url: https://docs.paid.ai/
 - aid: paid:paid-checkouts-api
-  name: Paid checkouts API
+  name: Paid Checkouts API
   description: The checkouts API from Paid — 2 operation(s) for checkouts.
   humanURL: https://docs.paid.ai/api-reference/api-reference
   baseURL: https://api.agentpaid.io/api/v2
@@ -109,7 +109,7 @@ apis:
   - type: Documentation
     url: https://docs.paid.ai/
 - aid: paid:paid-contacts-api
-  name: Paid contacts API
+  name: Paid Contacts API
   description: The contacts API from Paid — 5 operation(s) for contacts.
   humanURL: https://docs.paid.ai/api-reference/api-reference
   baseURL: https://api.agentpaid.io/api/v2
@@ -123,7 +123,7 @@ apis:
   - type: Documentation
     url: https://docs.paid.ai/
 - aid: paid:paid-costs-api
-  name: Paid costs API
+  name: Paid Costs API
   description: The costs API from Paid — 1 operation(s) for costs.
   humanURL: https://docs.paid.ai/api-reference/api-reference
   baseURL: https://api.agentpaid.io/api/v2
@@ -137,7 +137,7 @@ apis:
   - type: Documentation
     url: https://docs.paid.ai/
 - aid: paid:paid-credits-api
-  name: Paid credits API
+  name: Paid Credits API
   description: The credits API from Paid — 2 operation(s) for credits.
   humanURL: https://docs.paid.ai/api-reference/api-reference
   baseURL: https://api.agentpaid.io/api/v2
@@ -151,7 +151,7 @@ apis:
   - type: Documentation
     url: https://docs.paid.ai/
 - aid: paid:paid-customer-groups-api
-  name: Paid customer-groups API
+  name: Paid Customer Groups API
   description: The customer-groups API from Paid — 3 operation(s) for customer-groups.
   humanURL: https://docs.paid.ai/api-reference/api-reference
   baseURL: https://api.agentpaid.io/api/v2
@@ -165,7 +165,7 @@ apis:
   - type: Documentation
     url: https://docs.paid.ai/
 - aid: paid:paid-customer-portals-api
-  name: Paid customer-portals API
+  name: Paid Customer Portals API
   description: The customer-portals API from Paid — 1 operation(s) for customer-portals.
   humanURL: https://docs.paid.ai/api-reference/api-reference
   baseURL: https://api.agentpaid.io/api/v2
@@ -177,7 +177,7 @@ apis:
   - type: Documentation
     url: https://docs.paid.ai/
 - aid: paid:paid-customers-api
-  name: Paid customers API
+  name: Paid Customers API
   description: The customers API from Paid — 22 operation(s) for customers.
   humanURL: https://docs.paid.ai/api-reference/api-reference
   baseURL: https://api.agentpaid.io/api/v2
@@ -191,7 +191,7 @@ apis:
   - type: Documentation
     url: https://docs.paid.ai/
 - aid: paid:paid-customviewsexperimental-api
-  name: Paid customViewsExperimental API
+  name: Paid Custom Views Experimental API
   description: The customViewsExperimental API from Paid — 6 operation(s) for customviewsexperimental.
   humanURL: https://docs.paid.ai/api-reference/api-reference
   baseURL: https://api.agentpaid.io/api/v2
@@ -204,7 +204,7 @@ apis:
   - type: Documentation
     url: https://docs.paid.ai/
 - aid: paid:paid-invoices-api
-  name: Paid invoices API
+  name: Paid Invoices API
   description: The invoices API from Paid — 3 operation(s) for invoices.
   humanURL: https://docs.paid.ai/api-reference/api-reference
   baseURL: https://api.agentpaid.io/api/v2
@@ -218,7 +218,7 @@ apis:
   - type: Documentation
     url: https://docs.paid.ai/
 - aid: paid:paid-orders-api
-  name: Paid orders API
+  name: Paid Orders API
   description: The orders API from Paid — 14 operation(s) for orders.
   humanURL: https://docs.paid.ai/api-reference/api-reference
   baseURL: https://api.agentpaid.io/api/v2
@@ -244,7 +244,7 @@ apis:
   - type: Documentation
     url: https://docs.paid.ai/
 - aid: paid:paid-plans-api
-  name: Paid plans API
+  name: Paid Plans API
   description: The plans API from Paid — 12 operation(s) for plans.
   humanURL: https://docs.paid.ai/api-reference/api-reference
   baseURL: https://api.agentpaid.io/api/v2
@@ -258,7 +258,7 @@ apis:
   - type: Documentation
     url: https://docs.paid.ai/
 - aid: paid:paid-pricing-api
-  name: Paid pricing API
+  name: Paid Pricing API
   description: The pricing API from Paid — 2 operation(s) for pricing.
   humanURL: https://docs.paid.ai/api-reference/api-reference
   baseURL: https://api.agentpaid.io/api/v2
@@ -272,7 +272,7 @@ apis:
   - type: Documentation
     url: https://docs.paid.ai/
 - aid: paid:paid-products-api
-  name: Paid products API
+  name: Paid Products API
   description: The products API from Paid — 5 operation(s) for products.
   humanURL: https://docs.paid.ai/api-reference/api-reference
   baseURL: https://api.agentpaid.io/api/v2
@@ -286,7 +286,7 @@ apis:
   - type: Documentation
     url: https://docs.paid.ai/
 - aid: paid:paid-signals-api
-  name: Paid signals API
+  name: Paid Signals API
   description: The signals API from Paid — 1 operation(s) for signals.
   humanURL: https://docs.paid.ai/api-reference/api-reference
   baseURL: https://api.agentpaid.io/api/v2
@@ -300,7 +300,7 @@ apis:
   - type: Documentation
     url: https://docs.paid.ai/
 - aid: paid:paid-traces-api
-  name: Paid traces API
+  name: Paid Traces API
   description: The traces API from Paid — 1 operation(s) for traces.
   humanURL: https://docs.paid.ai/api-reference/api-reference
   baseURL: https://api.agentpaid.io/api/v2
@@ -314,7 +314,7 @@ apis:
   - type: Documentation
     url: https://docs.paid.ai/
 - aid: paid:paid-usage-api
-  name: Paid usage API
+  name: Paid Usage API
   description: The usage API from Paid — 3 operation(s) for usage.
   humanURL: https://docs.paid.ai/api-reference/api-reference
   baseURL: https://api.agentpaid.io/api/v2
@@ -328,7 +328,7 @@ apis:
   - type: Documentation
     url: https://docs.paid.ai/
 - aid: paid:paid-value-models-api
-  name: Paid value-models API
+  name: Paid Value Models API
   description: The value-models API from Paid — 4 operation(s) for value-models.
   humanURL: https://docs.paid.ai/api-reference/api-reference
   baseURL: https://api.agentpaid.io/api/v2
@@ -340,7 +340,7 @@ apis:
   - type: Documentation
     url: https://docs.paid.ai/
 - aid: paid:paid-value-receipts-api
-  name: Paid value-receipts API
+  name: Paid Value Receipts API
   description: The value-receipts API from Paid — 9 operation(s) for value-receipts.
   humanURL: https://docs.paid.ai/api-reference/api-reference
   baseURL: https://api.agentpaid.io/api/v2
@@ -352,7 +352,7 @@ apis:
   - type: Documentation
     url: https://docs.paid.ai/
 - aid: paid:paid-webhooks-api
-  name: Paid webhooks API
+  name: Paid Webhooks API
   description: The webhooks API from Paid — 4 operation(s) for webhooks.
   humanURL: https://docs.paid.ai/api-reference/api-reference
   baseURL: https://api.agentpaid.io/api/v2

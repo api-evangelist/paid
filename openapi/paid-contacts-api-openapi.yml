@@ -463,16 +463,6 @@ paths:
       description: Production API
 components:
   schemas:
-    contacts_delete_Response_204:
-      type: object
-      properties: {}
-      description: Empty response body
-      title: contacts_delete_Response_204
-    contacts_deleteByExternalId_Response_204:
-      type: object
-      properties: {}
-      description: Empty response body
-      title: contacts_deleteByExternalId_Response_204
     Contact:
       type: object
       properties:
@@ -507,16 +497,6 @@ components:
         billingPostalCode:
           type: string
       title: Contact
-    Salutation:
-      type: string
-      enum:
-      - Mr.
-      - Mrs.
-      - Miss
-      - Ms.
-      - Dr.
-      - Prof.
-      title: Salutation
     ContactCreate:
       type: object
       properties:
@@ -552,41 +532,26 @@ components:
       - lastName
       - email
       title: ContactCreate
-    UpdateContactRequestRolesItems:
-      type: string
-      enum:
-      - BILLING
-      - ACCOUNTS_PAYABLE
-      title: UpdateContactRequestRolesItems
-    EmptyResponse:
+    contacts_deleteByExternalId_Response_204:
       type: object
       properties: {}
-      title: EmptyResponse
-    ContactListResponse:
+      description: Empty response body
+      title: contacts_deleteByExternalId_Response_204
+    Salutation:
+      type: string
+      enum:
+      - Mr.
+      - Mrs.
+      - Miss
+      - Ms.
+      - Dr.
+      - Prof.
+      title: Salutation
+    contacts_delete_Response_204:
       type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Contact_2'
-        pagination:
-          $ref: '#/components/schemas/Pagination'
-      required:
-      - data
-      - pagination
-      title: ContactListResponse
-    ErrorResponse:
-      type: object
-      properties:
-        error:
-          type: string
-        code:
-          type: string
-        details:
-          type: string
-      required:
-      - error
-      title: ErrorResponse
+      properties: {}
+      description: Empty response body
+      title: contacts_delete_Response_204
     Contact_2:
       type: object
       properties:
@@ -632,6 +597,75 @@ components:
       - createdAt
       - updatedAt
       title: Contact
+    ContactBillingAddress:
+      type: object
+      properties:
+        street:
+          type: string
+        city:
+          type: string
+        state:
+          type: string
+        country:
+          type: string
+        zipCode:
+          type: string
+      title: ContactBillingAddress
+    CreateContactRequestRolesItems:
+      type: string
+      enum:
+      - BILLING
+      - ACCOUNTS_PAYABLE
+      title: CreateContactRequestRolesItems
+    UpdateContactRequest:
+      type: object
+      properties:
+        customerId:
+          type: string
+        firstName:
+          type: string
+        lastName:
+          type: string
+        email:
+          type: string
+          format: email
+        phone:
+          type:
+          - string
+          - 'null'
+        billingAddress:
+          $ref: '#/components/schemas/ContactBillingAddress'
+        externalId:
+          type:
+          - string
+          - 'null'
+        roles:
+          type: array
+          items:
+            $ref: '#/components/schemas/UpdateContactRequestRolesItems'
+      title: UpdateContactRequest
+    EmptyResponse:
+      type: object
+      properties: {}
+      title: EmptyResponse
+    ContactRolesItems:
+      type: string
+      enum:
+      - BILLING
+      - ACCOUNTS_PAYABLE
+      title: ContactRolesItems
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+        code:
+          type: string
+        details:
+          type: string
+      required:
+      - error
+      title: ErrorResponse
     Pagination:
       type: object
       properties:
@@ -649,12 +683,12 @@ components:
       - total
       - hasMore
       title: Pagination
-    ContactRolesItems:
+    UpdateContactRequestRolesItems:
       type: string
       enum:
       - BILLING
       - ACCOUNTS_PAYABLE
-      title: ContactRolesItems
+      title: UpdateContactRequestRolesItems
     CreateContactRequest:
       type: object
       properties:
@@ -687,53 +721,19 @@ components:
       - customerId
       - email
       title: CreateContactRequest
-    CreateContactRequestRolesItems:
-      type: string
-      enum:
-      - BILLING
-      - ACCOUNTS_PAYABLE
-      title: CreateContactRequestRolesItems
-    ContactBillingAddress:
+    ContactListResponse:
       type: object
       properties:
-        street:
-          type: string
-        city:
-          type: string
-        state:
-          type: string
-        country:
-          type: string
-        zipCode:
-          type: string
-      title: ContactBillingAddress
-    UpdateContactRequest:
-      type: object
-      properties:
-        customerId:
-          type: string
-        firstName:
-          type: string
-        lastName:
-          type: string
-        email:
-          type: string
-          format: email
-        phone:
-          type:
-          - string
-          - 'null'
-        billingAddress:
-          $ref: '#/components/schemas/ContactBillingAddress'
-        externalId:
-          type:
-          - string
-          - 'null'
-        roles:
+        data:
           type: array
           items:
-            $ref: '#/components/schemas/UpdateContactRequestRolesItems'
-      title: UpdateContactRequest
+            $ref: '#/components/schemas/Contact_2'
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+      required:
+      - data
+      - pagination
+      title: ContactListResponse
   securitySchemes:
     bearerAuth:
       type: http

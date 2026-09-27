@@ -94,6 +94,86 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
+    TracesResponse:
+      type: object
+      properties:
+        traces:
+          type: array
+          items:
+            $ref: '#/components/schemas/Trace'
+        meta:
+          $ref: '#/components/schemas/PaginationMeta'
+      required:
+      - traces
+      - meta
+      description: Response containing cost traces and pagination metadata
+      title: TracesResponse
+    CostAmount:
+      type: object
+      properties:
+        amount:
+          type: number
+          format: double
+          description: The cost amount
+        currency:
+          type: string
+          description: The currency code (e.g., "USD")
+      required:
+      - amount
+      - currency
+      description: Cost amount with currency
+      title: CostAmount
+    Error:
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/ApiError'
+      required:
+      - error
+      description: An error response from the Paid API
+      title: Error
+    PaginationMeta:
+      type: object
+      properties:
+        limit:
+          type: integer
+          description: The requested limit
+        offset:
+          type: integer
+          description: The requested offset
+        count:
+          type: integer
+          description: Number of items returned in this response
+        hasMore:
+          type: boolean
+          description: Whether there are more results available
+        startTime:
+          type: string
+          format: date-time
+          description: The startTime filter that was applied (if any)
+        endTime:
+          type: string
+          format: date-time
+          description: The endTime filter that was applied (if any)
+        externalCustomerId:
+          type: string
+          description: The externalCustomerId filter that was applied (if any)
+        externalProductId:
+          type: string
+          description: The externalProductId filter that was applied (if any)
+        externalAgentId:
+          type: string
+          description: 'DEPRECATED: Use externalProductId instead. The externalAgentId filter that was applied (if any)'
+        metadata:
+          type: string
+          description: The metadata filter that was applied (if any)
+      required:
+      - limit
+      - offset
+      - count
+      - hasMore
+      description: Pagination metadata for cost traces
+      title: PaginationMeta
     Trace:
       type: object
       properties:
@@ -157,20 +237,6 @@ components:
       - attributes
       description: A single cost trace record with customer and product info
       title: Trace
-    TracesResponse:
-      type: object
-      properties:
-        traces:
-          type: array
-          items:
-            $ref: '#/components/schemas/Trace'
-        meta:
-          $ref: '#/components/schemas/PaginationMeta'
-      required:
-      - traces
-      - meta
-      description: Response containing cost traces and pagination metadata
-      title: TracesResponse
     ApiError:
       type: object
       properties:
@@ -183,72 +249,6 @@ components:
           type: string
       description: An API error response from the Paid API
       title: ApiError
-    Error:
-      type: object
-      properties:
-        error:
-          $ref: '#/components/schemas/ApiError'
-      required:
-      - error
-      description: An error response from the Paid API
-      title: Error
-    CostAmount:
-      type: object
-      properties:
-        amount:
-          type: number
-          format: double
-          description: The cost amount
-        currency:
-          type: string
-          description: The currency code (e.g., "USD")
-      required:
-      - amount
-      - currency
-      description: Cost amount with currency
-      title: CostAmount
-    PaginationMeta:
-      type: object
-      properties:
-        limit:
-          type: integer
-          description: The requested limit
-        offset:
-          type: integer
-          description: The requested offset
-        count:
-          type: integer
-          description: Number of items returned in this response
-        hasMore:
-          type: boolean
-          description: Whether there are more results available
-        startTime:
-          type: string
-          format: date-time
-          description: The startTime filter that was applied (if any)
-        endTime:
-          type: string
-          format: date-time
-          description: The endTime filter that was applied (if any)
-        externalCustomerId:
-          type: string
-          description: The externalCustomerId filter that was applied (if any)
-        externalProductId:
-          type: string
-          description: The externalProductId filter that was applied (if any)
-        externalAgentId:
-          type: string
-          description: 'DEPRECATED: Use externalProductId instead. The externalAgentId filter that was applied (if any)'
-        metadata:
-          type: string
-          description: The metadata filter that was applied (if any)
-      required:
-      - limit
-      - offset
-      - count
-      - hasMore
-      description: Pagination metadata for cost traces
-      title: PaginationMeta
   securitySchemes:
     bearerAuth:
       type: http

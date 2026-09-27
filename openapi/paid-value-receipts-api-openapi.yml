@@ -447,6 +447,75 @@ paths:
               properties: {}
 components:
   schemas:
+    SyncValueReceiptRequestProduct:
+      type: object
+      properties:
+        productId:
+          type: string
+        currency:
+          type: string
+      required:
+      - productId
+      description: Mutually exclusive with orderId. Provide at most one.
+      title: SyncValueReceiptRequestProduct
+    ValueReceiptSyncResponse:
+      type: object
+      properties:
+        id:
+          type: string
+        status:
+          type: string
+        publicUrlToken:
+          type: string
+        publicUrl:
+          type: string
+          format: uri
+      required:
+      - id
+      - status
+      - publicUrlToken
+      - publicUrl
+      title: ValueReceiptSyncResponse
+    ValueReceiptsGetParametersArchived:
+      type: string
+      enum:
+      - 'true'
+      - 'false'
+      default: 'false'
+      title: ValueReceiptsGetParametersArchived
+    ValueReceiptListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValueReceiptSummary'
+        total:
+          type: integer
+      required:
+      - data
+      - total
+      title: ValueReceiptListResponse
+    SuccessResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+      required:
+      - success
+      title: SuccessResponse
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+        code:
+          type: string
+        details:
+          type: string
+      required:
+      - error
+      title: ErrorResponse
     ValueReceiptDetail:
       type: object
       properties:
@@ -539,68 +608,31 @@ components:
       - publishExpiresAt
       - allowEmbed
       title: ValueReceiptDetail
-    SuccessResponse:
+    SyncValueReceiptRequest:
       type: object
       properties:
-        success:
-          type: boolean
+        customerId:
+          type: string
+          description: Mutually exclusive with externalCustomerId. Exactly one is required.
+        externalCustomerId:
+          type: string
+          description: Mutually exclusive with customerId. Exactly one is required.
+        startDate:
+          type: string
+          format: date-time
+        endDate:
+          type: string
+          format: date-time
+        product:
+          $ref: '#/components/schemas/SyncValueReceiptRequestProduct'
+          description: Mutually exclusive with orderId. Provide at most one.
+        orderId:
+          type: string
+          description: Mutually exclusive with product. Provide at most one.
       required:
-      - success
-      title: SuccessResponse
-    ValueReceiptSyncResponse:
-      type: object
-      properties:
-        id:
-          type: string
-        status:
-          type: string
-        publicUrlToken:
-          type: string
-        publicUrl:
-          type: string
-          format: uri
-      required:
-      - id
-      - status
-      - publicUrlToken
-      - publicUrl
-      title: ValueReceiptSyncResponse
-    ValueReceiptListResponse:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValueReceiptSummary'
-        total:
-          type: integer
-      required:
-      - data
-      - total
-      title: ValueReceiptListResponse
-    SyncValueReceiptRequestProduct:
-      type: object
-      properties:
-        productId:
-          type: string
-        currency:
-          type: string
-      required:
-      - productId
-      description: Mutually exclusive with orderId. Provide at most one.
-      title: SyncValueReceiptRequestProduct
-    ErrorResponse:
-      type: object
-      properties:
-        error:
-          type: string
-        code:
-          type: string
-        details:
-          type: string
-      required:
-      - error
-      title: ErrorResponse
+      - startDate
+      - endDate
+      title: SyncValueReceiptRequest
     PublishValueReceiptBody:
       type: object
       properties:
@@ -610,13 +642,6 @@ components:
           - 'null'
           format: date-time
       title: PublishValueReceiptBody
-    ValueReceiptsGetParametersArchived:
-      type: string
-      enum:
-      - 'true'
-      - 'false'
-      default: 'false'
-      title: ValueReceiptsGetParametersArchived
     ValueReceiptSummary:
       type: object
       properties:
@@ -694,31 +719,6 @@ components:
       - archivedAt
       - createdAt
       title: ValueReceiptSummary
-    SyncValueReceiptRequest:
-      type: object
-      properties:
-        customerId:
-          type: string
-          description: Mutually exclusive with externalCustomerId. Exactly one is required.
-        externalCustomerId:
-          type: string
-          description: Mutually exclusive with customerId. Exactly one is required.
-        startDate:
-          type: string
-          format: date-time
-        endDate:
-          type: string
-          format: date-time
-        product:
-          $ref: '#/components/schemas/SyncValueReceiptRequestProduct'
-          description: Mutually exclusive with orderId. Provide at most one.
-        orderId:
-          type: string
-          description: Mutually exclusive with product. Provide at most one.
-      required:
-      - startDate
-      - endDate
-      title: SyncValueReceiptRequest
   securitySchemes:
     bearerAuth:
       type: http
