@@ -55,20 +55,18 @@ paths:
               $ref: '#/components/schemas/BulkSignalsRequest'
 components:
   schemas:
-    CustomerAttribution:
-      oneOf:
-      - $ref: '#/components/schemas/CustomerById'
-      - $ref: '#/components/schemas/CustomerByExternalId'
-      title: CustomerAttribution
-    CustomerByExternalId:
+    ErrorResponse:
       type: object
       properties:
-        externalCustomerId:
+        error:
           type: string
-          description: Your external customer ID
+        code:
+          type: string
+        details:
+          type: string
       required:
-      - externalCustomerId
-      title: CustomerByExternalId
+      - error
+      title: ErrorResponse
     BulkSignalsRequest:
       type: object
       properties:
@@ -79,20 +77,20 @@ components:
       required:
       - signals
       title: BulkSignalsRequest
-    BulkSignalsResponse:
+    CustomerByExternalId:
       type: object
       properties:
-        ingested:
-          type: integer
-        duplicates:
-          type: integer
-        failed:
-          type: integer
+        externalCustomerId:
+          type: string
+          description: Your external customer ID
       required:
-      - ingested
-      - duplicates
-      - failed
-      title: BulkSignalsResponse
+      - externalCustomerId
+      title: CustomerByExternalId
+    CustomerAttribution:
+      oneOf:
+      - $ref: '#/components/schemas/CustomerById'
+      - $ref: '#/components/schemas/CustomerByExternalId'
+      title: CustomerAttribution
     Signal:
       type: object
       properties:
@@ -116,6 +114,11 @@ components:
       - eventName
       - customer
       title: Signal
+    Attribution:
+      oneOf:
+      - $ref: '#/components/schemas/ProductById'
+      - $ref: '#/components/schemas/ProductByExternalId'
+      title: Attribution
     ProductById:
       type: object
       properties:
@@ -125,32 +128,6 @@ components:
       required:
       - productId
       title: ProductById
-    Attribution:
-      oneOf:
-      - $ref: '#/components/schemas/ProductById'
-      - $ref: '#/components/schemas/ProductByExternalId'
-      title: Attribution
-    CustomerById:
-      type: object
-      properties:
-        customerId:
-          type: string
-          description: The Paid customer ID
-      required:
-      - customerId
-      title: CustomerById
-    ErrorResponse:
-      type: object
-      properties:
-        error:
-          type: string
-        code:
-          type: string
-        details:
-          type: string
-      required:
-      - error
-      title: ErrorResponse
     ProductByExternalId:
       type: object
       properties:
@@ -160,6 +137,29 @@ components:
       required:
       - externalProductId
       title: ProductByExternalId
+    CustomerById:
+      type: object
+      properties:
+        customerId:
+          type: string
+          description: The Paid customer ID
+      required:
+      - customerId
+      title: CustomerById
+    BulkSignalsResponse:
+      type: object
+      properties:
+        ingested:
+          type: integer
+        duplicates:
+          type: integer
+        failed:
+          type: integer
+      required:
+      - ingested
+      - duplicates
+      - failed
+      title: BulkSignalsResponse
   securitySchemes:
     bearerAuth:
       type: http

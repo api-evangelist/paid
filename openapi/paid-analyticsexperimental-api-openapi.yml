@@ -162,7 +162,7 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
 components:
   schemas:
-    AnalyticsSchemaColumn:
+    AnalyticsColumn:
       type: object
       properties:
         name:
@@ -170,23 +170,38 @@ components:
         type:
           type: string
           description: ClickHouse column type
-        comment:
-          type: string
       required:
       - name
       - type
-      - comment
-      title: AnalyticsSchemaColumn
-    AnalyticsSchemaResponse:
+      title: AnalyticsColumn
+    ErrorResponse:
       type: object
       properties:
-        views:
+        error:
+          type: string
+        code:
+          type: string
+        details:
+          type: string
+      required:
+      - error
+      title: ErrorResponse
+    AnalyticsSchemaView:
+      type: object
+      properties:
+        name:
+          type: string
+        comment:
+          type: string
+        columns:
           type: array
           items:
-            $ref: '#/components/schemas/AnalyticsSchemaView'
+            $ref: '#/components/schemas/AnalyticsSchemaColumn'
       required:
-      - views
-      title: AnalyticsSchemaResponse
+      - name
+      - comment
+      - columns
+      title: AnalyticsSchemaView
     SignalsMetadataResponseMeta:
       type: object
       properties:
@@ -198,15 +213,6 @@ components:
       - fromDate
       - toDate
       title: SignalsMetadataResponseMeta
-    AnalyticsQueryRequest:
-      type: object
-      properties:
-        query:
-          type: string
-          description: A single ClickHouse SELECT (or WITH ... SELECT) statement against the analytics views. Results are automatically scoped to your organization. See GET /schema for the available views and columns.
-      required:
-      - query
-      title: AnalyticsQueryRequest
     SignalsMetadataResponseSignalsItemsPathsItems:
       type: object
       properties:
@@ -222,34 +228,6 @@ components:
       - path
       - types
       title: SignalsMetadataResponseSignalsItemsPathsItems
-    AnalyticsColumn:
-      type: object
-      properties:
-        name:
-          type: string
-        type:
-          type: string
-          description: ClickHouse column type
-      required:
-      - name
-      - type
-      title: AnalyticsColumn
-    AnalyticsQueryResponseMeta:
-      type: object
-      properties:
-        rowCount:
-          type: integer
-        elapsedMs:
-          type: number
-          format: double
-        truncated:
-          type: boolean
-          description: True when the result hit the row cap and was truncated. Narrow the query (shorter date range, LIMIT, coarser grouping) to see the rest.
-      required:
-      - rowCount
-      - elapsedMs
-      - truncated
-      title: AnalyticsQueryResponseMeta
     AnalyticsQueryResponse:
       type: object
       properties:
@@ -271,18 +249,6 @@ components:
       - rows
       - meta
       title: AnalyticsQueryResponse
-    ErrorResponse:
-      type: object
-      properties:
-        error:
-          type: string
-        code:
-          type: string
-        details:
-          type: string
-      required:
-      - error
-      title: ErrorResponse
     SignalsMetadataResponse:
       type: object
       properties:
@@ -296,6 +262,22 @@ components:
       - signals
       - meta
       title: SignalsMetadataResponse
+    AnalyticsQueryResponseMeta:
+      type: object
+      properties:
+        rowCount:
+          type: integer
+        elapsedMs:
+          type: number
+          format: double
+        truncated:
+          type: boolean
+          description: True when the result hit the row cap and was truncated. Narrow the query (shorter date range, LIMIT, coarser grouping) to see the rest.
+      required:
+      - rowCount
+      - elapsedMs
+      - truncated
+      title: AnalyticsQueryResponseMeta
     SignalsMetadataResponseSignalsItems:
       type: object
       properties:
@@ -309,22 +291,40 @@ components:
       - signalName
       - paths
       title: SignalsMetadataResponseSignalsItems
-    AnalyticsSchemaView:
+    AnalyticsSchemaResponse:
+      type: object
+      properties:
+        views:
+          type: array
+          items:
+            $ref: '#/components/schemas/AnalyticsSchemaView'
+      required:
+      - views
+      title: AnalyticsSchemaResponse
+    AnalyticsSchemaColumn:
       type: object
       properties:
         name:
           type: string
+        type:
+          type: string
+          description: ClickHouse column type
         comment:
           type: string
-        columns:
-          type: array
-          items:
-            $ref: '#/components/schemas/AnalyticsSchemaColumn'
       required:
       - name
+      - type
       - comment
-      - columns
-      title: AnalyticsSchemaView
+      title: AnalyticsSchemaColumn
+    AnalyticsQueryRequest:
+      type: object
+      properties:
+        query:
+          type: string
+          description: A single ClickHouse SELECT (or WITH ... SELECT) statement against the analytics views. Results are automatically scoped to your organization. See GET /schema for the available views and columns.
+      required:
+      - query
+      title: AnalyticsQueryRequest
   securitySchemes:
     bearerAuth:
       type: http

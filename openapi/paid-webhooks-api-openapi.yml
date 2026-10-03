@@ -202,35 +202,6 @@ paths:
               properties: {}
 components:
   schemas:
-    RotateWebhookSecretResponse:
-      type: object
-      properties:
-        signingSecret:
-          type: string
-          description: The newly minted org-scoped signing secret. Returned exactly once — store it now; subsequent reads will not return it.
-      required:
-      - signingSecret
-      title: RotateWebhookSecretResponse
-    WebhookDeliveryStatus:
-      type: string
-      enum:
-      - success
-      - failed
-      title: WebhookDeliveryStatus
-    WebhookName:
-      type: string
-      enum:
-      - billing-invoice-created
-      - billing-invoice-paid
-      - billing-invoice-posted
-      - billing-checkout-created
-      - billing-checkout-completed
-      - billing-checkout-expired
-      - billing-payment-succeeded
-      - billing-payment-failed
-      - billing-credits-depleted
-      - billing-overage-incurred
-      title: WebhookName
     WebhookListResponse:
       type: object
       properties:
@@ -245,57 +216,20 @@ components:
       - data
       - signingSecretConfigured
       title: WebhookListResponse
-    Webhook:
-      type: object
-      properties:
-        id:
-          type: string
-        name:
-          $ref: '#/components/schemas/WebhookName'
-        description:
-          type: string
-        enabled:
-          type: boolean
-        url:
-          type:
-          - string
-          - 'null'
-        lastSentAt:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        lastStatus:
-          $ref: '#/components/schemas/WebhookDeliveryStatus'
-      required:
-      - id
-      - name
-      - description
-      - enabled
-      - url
-      - lastSentAt
-      - lastStatus
-      title: Webhook
-    WebhookTestResponse:
-      type: object
-      properties:
-        success:
-          type: boolean
-      required:
-      - success
-      title: WebhookTestResponse
-    ErrorResponse:
-      type: object
-      properties:
-        error:
-          type: string
-        code:
-          type: string
-        details:
-          type: string
-      required:
-      - error
-      title: ErrorResponse
+    WebhooksWebhookNamePatchParametersWebhookName:
+      type: string
+      enum:
+      - billing-invoice-created
+      - billing-invoice-paid
+      - billing-invoice-posted
+      - billing-checkout-created
+      - billing-checkout-completed
+      - billing-checkout-expired
+      - billing-payment-succeeded
+      - billing-payment-failed
+      - billing-credits-depleted
+      - billing-overage-incurred
+      title: WebhooksWebhookNamePatchParametersWebhookName
     WebhookUpdateResponse:
       type: object
       properties:
@@ -330,47 +264,12 @@ components:
       - lastSentAt
       - lastStatus
       title: WebhookUpdateResponse
-    WebhooksWebhookNameTestPostParametersWebhookName:
+    WebhookDeliveryStatus:
       type: string
       enum:
-      - billing-invoice-created
-      - billing-invoice-paid
-      - billing-invoice-posted
-      - billing-checkout-created
-      - billing-checkout-completed
-      - billing-checkout-expired
-      - billing-payment-succeeded
-      - billing-payment-failed
-      - billing-credits-depleted
-      - billing-overage-incurred
-      title: WebhooksWebhookNameTestPostParametersWebhookName
-    WebhooksWebhookNamePatchParametersWebhookName:
-      type: string
-      enum:
-      - billing-invoice-created
-      - billing-invoice-paid
-      - billing-invoice-posted
-      - billing-checkout-created
-      - billing-checkout-completed
-      - billing-checkout-expired
-      - billing-payment-succeeded
-      - billing-payment-failed
-      - billing-credits-depleted
-      - billing-overage-incurred
-      title: WebhooksWebhookNamePatchParametersWebhookName
-    UpdateWebhookRequest:
-      type: object
-      properties:
-        enabled:
-          type: boolean
-          description: Whether the webhook is enabled for delivery.
-        url:
-          type:
-          - string
-          - 'null'
-          format: uri
-          description: The HTTPS endpoint Paid should deliver this webhook to. Set to null to clear it while disabled.
-      title: UpdateWebhookRequest
+      - success
+      - failed
+      title: WebhookDeliveryStatus
     WebhookUpdateResponseName:
       type: string
       enum:
@@ -385,6 +284,107 @@ components:
       - billing-credits-depleted
       - billing-overage-incurred
       title: WebhookUpdateResponseName
+    Webhook:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          $ref: '#/components/schemas/WebhookName'
+        description:
+          type: string
+        enabled:
+          type: boolean
+        url:
+          type:
+          - string
+          - 'null'
+        lastSentAt:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        lastStatus:
+          $ref: '#/components/schemas/WebhookDeliveryStatus'
+      required:
+      - id
+      - name
+      - description
+      - enabled
+      - url
+      - lastSentAt
+      - lastStatus
+      title: Webhook
+    WebhooksWebhookNameTestPostParametersWebhookName:
+      type: string
+      enum:
+      - billing-invoice-created
+      - billing-invoice-paid
+      - billing-invoice-posted
+      - billing-checkout-created
+      - billing-checkout-completed
+      - billing-checkout-expired
+      - billing-payment-succeeded
+      - billing-payment-failed
+      - billing-credits-depleted
+      - billing-overage-incurred
+      title: WebhooksWebhookNameTestPostParametersWebhookName
+    WebhookTestResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+      required:
+      - success
+      title: WebhookTestResponse
+    WebhookName:
+      type: string
+      enum:
+      - billing-invoice-created
+      - billing-invoice-paid
+      - billing-invoice-posted
+      - billing-checkout-created
+      - billing-checkout-completed
+      - billing-checkout-expired
+      - billing-payment-succeeded
+      - billing-payment-failed
+      - billing-credits-depleted
+      - billing-overage-incurred
+      title: WebhookName
+    RotateWebhookSecretResponse:
+      type: object
+      properties:
+        signingSecret:
+          type: string
+          description: The newly minted org-scoped signing secret. Returned exactly once — store it now; subsequent reads will not return it.
+      required:
+      - signingSecret
+      title: RotateWebhookSecretResponse
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+        code:
+          type: string
+        details:
+          type: string
+      required:
+      - error
+      title: ErrorResponse
+    UpdateWebhookRequest:
+      type: object
+      properties:
+        enabled:
+          type: boolean
+          description: Whether the webhook is enabled for delivery.
+        url:
+          type:
+          - string
+          - 'null'
+          format: uri
+          description: The HTTPS endpoint Paid should deliver this webhook to. Set to null to clear it while disabled.
+      title: UpdateWebhookRequest
   securitySchemes:
     bearerAuth:
       type: http

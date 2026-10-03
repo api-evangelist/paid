@@ -67,18 +67,22 @@ components:
       - active
       - expired
       title: CustomerPortalStatus
-    ErrorResponse:
+    CreateCustomerPortalRequest:
       type: object
       properties:
-        error:
+        customerId:
           type: string
-        code:
+          description: The Paid customer ID (display ID or UUID). Either this or externalCustomerId must be provided.
+        externalCustomerId:
           type: string
-        details:
+          description: Your external customer ID. Either this or customerId must be provided.
+        returnUrl:
           type: string
-      required:
-      - error
-      title: ErrorResponse
+          format: uri
+        expiresAt:
+          type: string
+          format: date-time
+      title: CreateCustomerPortalRequest
     CustomerPortal:
       type: object
       properties:
@@ -109,22 +113,18 @@ components:
       - expiresAt
       - createdAt
       title: CustomerPortal
-    CreateCustomerPortalRequest:
+    ErrorResponse:
       type: object
       properties:
-        customerId:
+        error:
           type: string
-          description: The Paid customer ID (display ID or UUID). Either this or externalCustomerId must be provided.
-        externalCustomerId:
+        code:
           type: string
-          description: Your external customer ID. Either this or customerId must be provided.
-        returnUrl:
+        details:
           type: string
-          format: uri
-        expiresAt:
-          type: string
-          format: date-time
-      title: CreateCustomerPortalRequest
+      required:
+      - error
+      title: ErrorResponse
   securitySchemes:
     bearerAuth:
       type: http

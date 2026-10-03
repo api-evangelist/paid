@@ -150,6 +150,61 @@ paths:
               $ref: '#/components/schemas/UpdateCreditCurrencyRequest'
 components:
   schemas:
+    CreditsCurrenciesGetParametersStatus:
+      type: string
+      enum:
+      - active
+      - archived
+      - all
+      default: all
+      title: CreditsCurrenciesGetParametersStatus
+    UpdateCreditCurrencyRequestStatus:
+      type: string
+      enum:
+      - active
+      - archived
+      description: Set to `archived` to archive this credit currency, or `active` to restore it.
+      title: UpdateCreditCurrencyRequestStatus
+    UpdateCreditCurrencyRequest:
+      type: object
+      properties:
+        description:
+          type:
+          - string
+          - 'null'
+          description: Updated description for this credit currency. Use null to clear the description.
+        status:
+          $ref: '#/components/schemas/UpdateCreditCurrencyRequestStatus'
+          description: Set to `archived` to archive this credit currency, or `active` to restore it.
+      title: UpdateCreditCurrencyRequest
+    CreateCreditCurrencyRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Human-readable name shown for this credit currency.
+        key:
+          type: string
+          description: Stable machine-readable key for this credit currency. Use lowercase letters, numbers, underscores, and hyphens. Keys are unique within an organization.
+        description:
+          type:
+          - string
+          - 'null'
+          description: Optional description for this credit currency.
+      required:
+      - name
+      - key
+      title: CreateCreditCurrencyRequest
+    CreditCurrencyListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/CreditCurrency'
+      required:
+      - data
+      title: CreditCurrencyListResponse
     CreditCurrencyStatus:
       type: string
       enum:
@@ -201,23 +256,6 @@ components:
       - createdAt
       - updatedAt
       title: CreditCurrency
-    CreditCurrencyListResponse:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/CreditCurrency'
-      required:
-      - data
-      title: CreditCurrencyListResponse
-    UpdateCreditCurrencyRequestStatus:
-      type: string
-      enum:
-      - active
-      - archived
-      description: Set to `archived` to archive this credit currency, or `active` to restore it.
-      title: UpdateCreditCurrencyRequestStatus
     ErrorResponse:
       type: object
       properties:
@@ -230,44 +268,6 @@ components:
       required:
       - error
       title: ErrorResponse
-    CreateCreditCurrencyRequest:
-      type: object
-      properties:
-        name:
-          type: string
-          description: Human-readable name shown for this credit currency.
-        key:
-          type: string
-          description: Stable machine-readable key for this credit currency. Use lowercase letters, numbers, underscores, and hyphens. Keys are unique within an organization.
-        description:
-          type:
-          - string
-          - 'null'
-          description: Optional description for this credit currency.
-      required:
-      - name
-      - key
-      title: CreateCreditCurrencyRequest
-    CreditsCurrenciesGetParametersStatus:
-      type: string
-      enum:
-      - active
-      - archived
-      - all
-      default: all
-      title: CreditsCurrenciesGetParametersStatus
-    UpdateCreditCurrencyRequest:
-      type: object
-      properties:
-        description:
-          type:
-          - string
-          - 'null'
-          description: Updated description for this credit currency. Use null to clear the description.
-        status:
-          $ref: '#/components/schemas/UpdateCreditCurrencyRequestStatus'
-          description: Set to `archived` to archive this credit currency, or `active` to restore it.
-      title: UpdateCreditCurrencyRequest
   securitySchemes:
     bearerAuth:
       type: http

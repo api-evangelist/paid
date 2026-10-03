@@ -377,6 +377,91 @@ paths:
               $ref: '#/components/schemas/MemberRequest'
 components:
   schemas:
+    SetMembersResponse:
+      type: object
+      properties:
+        added:
+          type: integer
+        removed:
+          type: integer
+        skipped:
+          type: integer
+        skippedIds:
+          type: array
+          items:
+            type: string
+      required:
+      - added
+      - removed
+      - skipped
+      - skippedIds
+      title: SetMembersResponse
+    CustomerGroupMember:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        externalId:
+          type:
+          - string
+          - 'null'
+      required:
+      - id
+      - name
+      - externalId
+      title: CustomerGroupMember
+    MemberRequest:
+      type: object
+      properties:
+        customerIds:
+          type: array
+          items:
+            type: string
+          description: External customer IDs.
+      required:
+      - customerIds
+      title: MemberRequest
+    UpdateCustomerGroupRequest:
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type:
+          - string
+          - 'null'
+      title: UpdateCustomerGroupRequest
+    CustomerGroupListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/CustomerGroupSummary'
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+      required:
+      - data
+      - pagination
+      title: CustomerGroupListResponse
+    AddMembersResponse:
+      type: object
+      properties:
+        added:
+          type: integer
+        skipped:
+          type: integer
+        skippedIds:
+          type: array
+          items:
+            type: string
+      required:
+      - added
+      - skipped
+      - skippedIds
+      title: AddMembersResponse
     CustomerGroupSummary:
       type: object
       properties:
@@ -405,104 +490,6 @@ components:
       - createdAt
       - updatedAt
       title: CustomerGroupSummary
-    CustomerGroupListResponse:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/CustomerGroupSummary'
-        pagination:
-          $ref: '#/components/schemas/Pagination'
-      required:
-      - data
-      - pagination
-      title: CustomerGroupListResponse
-    UpdateCustomerGroupRequest:
-      type: object
-      properties:
-        name:
-          type: string
-        description:
-          type:
-          - string
-          - 'null'
-      title: UpdateCustomerGroupRequest
-    RemoveMembersResponse:
-      type: object
-      properties:
-        removed:
-          type: integer
-        skipped:
-          type: integer
-        skippedIds:
-          type: array
-          items:
-            type: string
-      required:
-      - removed
-      - skipped
-      - skippedIds
-      title: RemoveMembersResponse
-    MemberRequest:
-      type: object
-      properties:
-        customerIds:
-          type: array
-          items:
-            type: string
-          description: External customer IDs.
-      required:
-      - customerIds
-      title: MemberRequest
-    SetMembersResponse:
-      type: object
-      properties:
-        added:
-          type: integer
-        removed:
-          type: integer
-        skipped:
-          type: integer
-        skippedIds:
-          type: array
-          items:
-            type: string
-      required:
-      - added
-      - removed
-      - skipped
-      - skippedIds
-      title: SetMembersResponse
-    ErrorResponse:
-      type: object
-      properties:
-        error:
-          type: string
-        code:
-          type: string
-        details:
-          type: string
-      required:
-      - error
-      title: ErrorResponse
-    Pagination:
-      type: object
-      properties:
-        limit:
-          type: integer
-        offset:
-          type: integer
-        total:
-          type: integer
-        hasMore:
-          type: boolean
-      required:
-      - limit
-      - offset
-      - total
-      - hasMore
-      title: Pagination
     CustomerGroupDetail:
       type: object
       properties:
@@ -536,22 +523,6 @@ components:
       - updatedAt
       - customers
       title: CustomerGroupDetail
-    CustomerGroupMember:
-      type: object
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-        externalId:
-          type:
-          - string
-          - 'null'
-      required:
-      - id
-      - name
-      - externalId
-      title: CustomerGroupMember
     CreateCustomerGroupRequest:
       type: object
       properties:
@@ -564,6 +535,22 @@ components:
       required:
       - name
       title: CreateCustomerGroupRequest
+    RemoveMembersResponse:
+      type: object
+      properties:
+        removed:
+          type: integer
+        skipped:
+          type: integer
+        skippedIds:
+          type: array
+          items:
+            type: string
+      required:
+      - removed
+      - skipped
+      - skippedIds
+      title: RemoveMembersResponse
     CustomerGroupDeleteResponse:
       type: object
       properties:
@@ -576,22 +563,35 @@ components:
       - deletedGroupId
       - unboundCustomerCount
       title: CustomerGroupDeleteResponse
-    AddMembersResponse:
+    Pagination:
       type: object
       properties:
-        added:
+        limit:
           type: integer
-        skipped:
+        offset:
           type: integer
-        skippedIds:
-          type: array
-          items:
-            type: string
+        total:
+          type: integer
+        hasMore:
+          type: boolean
       required:
-      - added
-      - skipped
-      - skippedIds
-      title: AddMembersResponse
+      - limit
+      - offset
+      - total
+      - hasMore
+      title: Pagination
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+        code:
+          type: string
+        details:
+          type: string
+      required:
+      - error
+      title: ErrorResponse
   securitySchemes:
     bearerAuth:
       type: http

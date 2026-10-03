@@ -1645,6 +1645,185 @@ paths:
       description: Production API
 components:
   schemas:
+    CustomerCreate:
+      type: object
+      properties:
+        name:
+          type: string
+        externalId:
+          type: string
+        phone:
+          type: string
+        employeeCount:
+          type: number
+          format: double
+        annualRevenue:
+          type: number
+          format: double
+        taxExemptStatus:
+          $ref: '#/components/schemas/TaxExemptStatus'
+        creationSource:
+          $ref: '#/components/schemas/CreationSource'
+        website:
+          type: string
+        billingAddress:
+          $ref: '#/components/schemas/Address'
+        metadata:
+          $ref: '#/components/schemas/CustomerCreateMetadata'
+          description: Flexible JSON field for storing custom metadata about the customer
+        contacts:
+          type: array
+          items:
+            $ref: '#/components/schemas/ContactCreateForCustomer'
+          description: Array of contacts to create for this customer
+      required:
+      - name
+      title: CustomerCreate
+    TaxExemptStatus:
+      type: string
+      enum:
+      - none
+      - exempt
+      - reverse
+      title: TaxExemptStatus
+    CreationSource:
+      type: string
+      enum:
+      - manual
+      - api
+      - crm
+      - other
+      title: CreationSource
+    Error:
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/ApiError'
+      required:
+      - error
+      description: An error response from the Paid API
+      title: Error
+    PaymentMethod:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The payment method ID (typically from Stripe)
+        type:
+          $ref: '#/components/schemas/PaymentMethodType'
+          description: The type of payment method
+        card:
+          $ref: '#/components/schemas/PaymentMethodCard'
+          description: Card details (present when type is 'card')
+        usBankAccount:
+          $ref: '#/components/schemas/PaymentMethodUsBankAccount'
+          description: US bank account details (present when type is 'us_bank_account')
+        isDefault:
+          type: boolean
+          description: Whether this is the customer's default payment method
+        createdAt:
+          type: string
+          format: date-time
+      description: A customer's payment method
+      title: PaymentMethod
+    ApiError:
+      type: object
+      properties:
+        message:
+          type: string
+          description: A human-readable message providing more details about the error.
+        code:
+          type: string
+        details:
+          type: string
+      description: An API error response from the Paid API
+      title: ApiError
+    CustomerUpdateMetadata:
+      type: object
+      properties: {}
+      description: Flexible JSON field for storing custom metadata about the customer
+      title: CustomerUpdateMetadata
+    UsagePaginationMeta:
+      type: object
+      properties:
+        limit:
+          type: integer
+          description: The requested limit
+        offset:
+          type: integer
+          description: The requested offset
+        total:
+          type: integer
+          description: Total number of usage summaries available
+        hasMore:
+          type: boolean
+          description: Whether there are more results available
+      required:
+      - limit
+      - offset
+      - total
+      - hasMore
+      description: Pagination metadata for usage summaries
+      title: UsagePaginationMeta
+    UsageSummaryOrder:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        displayId:
+          type:
+          - string
+          - 'null'
+      description: Associated order information
+      title: UsageSummaryOrder
+    customers_deleteByExternalId_Response_204:
+      type: object
+      properties: {}
+      description: Empty response body
+      title: customers_deleteByExternalId_Response_204
+    CostAmount:
+      type: object
+      properties:
+        amount:
+          type: number
+          format: double
+          description: The cost amount
+        currency:
+          type: string
+          description: The currency code (e.g., "USD")
+      required:
+      - amount
+      - currency
+      description: Cost amount with currency
+      title: CostAmount
+    CustomerMetadata:
+      type: object
+      properties: {}
+      description: Flexible JSON field for storing custom metadata about the customer
+      title: CustomerMetadata
+    Address:
+      type: object
+      properties:
+        line1:
+          type: string
+        line2:
+          type: string
+        city:
+          type: string
+        state:
+          type: string
+        zipCode:
+          type: string
+        country:
+          type: string
+      required:
+      - line1
+      - city
+      - state
+      - zipCode
+      - country
+      title: Address
     CustomerUpdate:
       type: object
       properties:
@@ -1672,98 +1851,35 @@ components:
           $ref: '#/components/schemas/CustomerUpdateMetadata'
           description: Flexible JSON field for storing custom metadata about the customer
       title: CustomerUpdate
-    UsageSummariesResponse:
+    CustomerCreateMetadata:
+      type: object
+      properties: {}
+      description: Flexible JSON field for storing custom metadata about the customer
+      title: CustomerCreateMetadata
+    PaymentMethodCard:
       type: object
       properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/UsageSummary'
-        pagination:
-          $ref: '#/components/schemas/UsagePaginationMeta'
-      required:
-      - data
-      - pagination
-      description: Response containing usage summaries and pagination metadata
-      title: UsageSummariesResponse
-    Customer:
-      type: object
-      properties:
-        id:
+        brand:
           type: string
-        organizationId:
+          description: Card brand (visa, mastercard, amex, etc.)
+        last4:
           type: string
-        name:
-          type: string
-        externalId:
-          type: string
-        phone:
-          type: string
-        employeeCount:
-          type: number
-          format: double
-        annualRevenue:
-          type: number
-          format: double
-        taxExemptStatus:
-          $ref: '#/components/schemas/TaxExemptStatus'
-        creationSource:
-          $ref: '#/components/schemas/CreationSource'
-        creationState:
-          $ref: '#/components/schemas/CreationState'
-        website:
-          type: string
-        billingAddress:
-          $ref: '#/components/schemas/Address'
-        metadata:
-          $ref: '#/components/schemas/CustomerMetadata'
-          description: Flexible JSON field for storing custom metadata about the customer
-      required:
-      - id
-      - organizationId
-      - name
-      title: Customer
-    TaxExemptStatus:
+          description: Last 4 digits of the card number
+        expMonth:
+          type: integer
+          description: Expiration month (1-12)
+        expYear:
+          type: integer
+          description: Expiration year
+      description: Card details (present when type is 'card')
+      title: PaymentMethodCard
+    CustomersCustomerIdEntitlementGetParametersView:
       type: string
       enum:
-      - none
-      - exempt
-      - reverse
-      title: TaxExemptStatus
-    CostTrace:
-      type: object
-      properties:
-        name:
-          type: string
-          description: The name/type of the operation (e.g., "trace.openai.agents.on_agent")
-        vendor:
-          type: string
-          description: The vendor/provider (e.g., "openai", "anthropic", "mistral")
-        model:
-          type: string
-          description: The model used for the operation (e.g., "gpt-4o-mini", "claude-3-sonnet")
-        cost:
-          $ref: '#/components/schemas/CostAmount'
-        startTimeUnixNano:
-          type: string
-          description: Unix timestamp in nanoseconds when the operation started
-        endTimeUnixNano:
-          type: string
-          description: Unix timestamp in nanoseconds when the operation completed
-        attributes:
-          type: object
-          additionalProperties:
-            description: Any type
-          description: Additional metadata about the trace (e.g., tokens, etc.)
-      required:
-      - name
-      - vendor
-      - cost
-      - startTimeUnixNano
-      - endTimeUnixNano
-      - attributes
-      description: A single cost trace record
-      title: CostTrace
+      - all
+      - active_only
+      default: active_only
+      title: CustomersCustomerIdEntitlementGetParametersView
     PaginationMeta:
       type: object
       properties:
@@ -1806,35 +1922,113 @@ components:
       - hasMore
       description: Pagination metadata for cost traces
       title: PaginationMeta
-    CostAmount:
+    UsageSummaryOrderLine:
       type: object
       properties:
-        amount:
-          type: number
-          format: double
-          description: The cost amount
-        currency:
+        id:
           type: string
-          description: The currency code (e.g., "USD")
-      required:
-      - amount
-      - currency
-      description: Cost amount with currency
-      title: CostAmount
-    customers_checkEntitlement_Response_200:
+          format: uuid
+        displayId:
+          type:
+          - string
+          - 'null'
+      description: Associated order line information
+      title: UsageSummaryOrderLine
+    CreationState:
+      type: string
+      enum:
+      - active
+      - draft
+      title: CreationState
+    UsageSummariesResponse:
       type: object
       properties:
-        entitled:
-          type: boolean
-          description: Whether the customer is entitled to the specified event
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/UsageSummary'
+        pagination:
+          $ref: '#/components/schemas/UsagePaginationMeta'
       required:
-      - entitled
-      title: customers_checkEntitlement_Response_200
+      - data
+      - pagination
+      description: Response containing usage summaries and pagination metadata
+      title: UsageSummariesResponse
+    EntitlementUsage:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+        organizationId:
+          type: string
+          format: uuid
+        productId:
+          type: string
+          format: uuid
+        entitlementId:
+          type: string
+          format: uuid
+        customerId:
+          type: string
+          format: uuid
+        startDate:
+          type: string
+          format: date-time
+        endDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        total:
+          type: integer
+          format: int64
+          description: Total entitlement amount
+        available:
+          type: integer
+          format: int64
+          description: Available entitlement amount
+        used:
+          type: integer
+          format: int64
+          description: Used entitlement amount
+      required:
+      - id
+      - organizationId
+      - productId
+      - entitlementId
+      - customerId
+      - startDate
+      - total
+      - available
+      - used
+      description: Tracks the usage of an entitlement for a customer
+      title: EntitlementUsage
     customers_deletePaymentMethod_Response_204:
       type: object
       properties: {}
       description: Empty response body
       title: customers_deletePaymentMethod_Response_204
+    CostTracesResponse:
+      type: object
+      properties:
+        traces:
+          type: array
+          items:
+            $ref: '#/components/schemas/CostTrace'
+        meta:
+          $ref: '#/components/schemas/PaginationMeta'
+      required:
+      - traces
+      - meta
+      description: Response containing cost traces and pagination metadata
+      title: CostTracesResponse
     PaymentMethodUsBankAccount:
       type: object
       properties:
@@ -1847,41 +2041,45 @@ components:
           $ref: '#/components/schemas/PaymentMethodUsBankAccountAccountType'
       description: US bank account details (present when type is 'us_bank_account')
       title: PaymentMethodUsBankAccount
-    CreationSource:
-      type: string
-      enum:
-      - manual
-      - api
-      - crm
-      - other
-      title: CreationSource
-    customers_deleteByExternalId_Response_204:
+    customers_delete_Response_204:
       type: object
       properties: {}
       description: Empty response body
-      title: customers_deleteByExternalId_Response_204
-    UsagePaginationMeta:
+      title: customers_delete_Response_204
+    CostTrace:
       type: object
       properties:
-        limit:
-          type: integer
-          description: The requested limit
-        offset:
-          type: integer
-          description: The requested offset
-        total:
-          type: integer
-          description: Total number of usage summaries available
-        hasMore:
-          type: boolean
-          description: Whether there are more results available
+        name:
+          type: string
+          description: The name/type of the operation (e.g., "trace.openai.agents.on_agent")
+        vendor:
+          type: string
+          description: The vendor/provider (e.g., "openai", "anthropic", "mistral")
+        model:
+          type: string
+          description: The model used for the operation (e.g., "gpt-4o-mini", "claude-3-sonnet")
+        cost:
+          $ref: '#/components/schemas/CostAmount'
+        startTimeUnixNano:
+          type: string
+          description: Unix timestamp in nanoseconds when the operation started
+        endTimeUnixNano:
+          type: string
+          description: Unix timestamp in nanoseconds when the operation completed
+        attributes:
+          type: object
+          additionalProperties:
+            description: Any type
+          description: Additional metadata about the trace (e.g., tokens, etc.)
       required:
-      - limit
-      - offset
-      - total
-      - hasMore
-      description: Pagination metadata for usage summaries
-      title: UsagePaginationMeta
+      - name
+      - vendor
+      - cost
+      - startTimeUnixNano
+      - endTimeUnixNano
+      - attributes
+      description: A single cost trace record
+      title: CostTrace
     ContactCreateForCustomer:
       type: object
       properties:
@@ -1915,6 +2113,16 @@ components:
       - lastName
       - email
       title: ContactCreateForCustomer
+    Salutation:
+      type: string
+      enum:
+      - Mr.
+      - Mrs.
+      - Miss
+      - Ms.
+      - Dr.
+      - Prof.
+      title: Salutation
     UsageSummary:
       type: object
       properties:
@@ -2003,16 +2211,27 @@ components:
       - updatedAt
       description: A single usage summary record
       title: UsageSummary
-    CustomersCustomerIdEntitlementGetParametersView:
+    PaymentMethodUsBankAccountAccountType:
       type: string
       enum:
-      - all
-      - active_only
-      default: active_only
-      title: CustomersCustomerIdEntitlementGetParametersView
-    CustomerCreate:
+      - checking
+      - savings
+      title: PaymentMethodUsBankAccountAccountType
+    PaymentMethodType:
+      type: string
+      enum:
+      - card
+      - us_bank_account
+      - sepa_debit
+      description: The type of payment method
+      title: PaymentMethodType
+    Customer:
       type: object
       properties:
+        id:
+          type: string
+        organizationId:
+          type: string
         name:
           type: string
         externalId:
@@ -2029,480 +2248,29 @@ components:
           $ref: '#/components/schemas/TaxExemptStatus'
         creationSource:
           $ref: '#/components/schemas/CreationSource'
+        creationState:
+          $ref: '#/components/schemas/CreationState'
         website:
           type: string
         billingAddress:
           $ref: '#/components/schemas/Address'
         metadata:
-          $ref: '#/components/schemas/CustomerCreateMetadata'
+          $ref: '#/components/schemas/CustomerMetadata'
           description: Flexible JSON field for storing custom metadata about the customer
-        contacts:
-          type: array
-          items:
-            $ref: '#/components/schemas/ContactCreateForCustomer'
-          description: Array of contacts to create for this customer
-      required:
-      - name
-      title: CustomerCreate
-    Error:
-      type: object
-      properties:
-        error:
-          $ref: '#/components/schemas/ApiError'
-      required:
-      - error
-      description: An error response from the Paid API
-      title: Error
-    customers_delete_Response_204:
-      type: object
-      properties: {}
-      description: Empty response body
-      title: customers_delete_Response_204
-    Salutation:
-      type: string
-      enum:
-      - Mr.
-      - Mrs.
-      - Miss
-      - Ms.
-      - Dr.
-      - Prof.
-      title: Salutation
-    UsageSummaryOrderLine:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        displayId:
-          type:
-          - string
-          - 'null'
-      description: Associated order line information
-      title: UsageSummaryOrderLine
-    Address:
-      type: object
-      properties:
-        line1:
-          type: string
-        line2:
-          type: string
-        city:
-          type: string
-        state:
-          type: string
-        zipCode:
-          type: string
-        country:
-          type: string
-      required:
-      - line1
-      - city
-      - state
-      - zipCode
-      - country
-      title: Address
-    PaymentMethodType:
-      type: string
-      enum:
-      - card
-      - us_bank_account
-      - sepa_debit
-      description: The type of payment method
-      title: PaymentMethodType
-    UsageSummaryOrder:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        displayId:
-          type:
-          - string
-          - 'null'
-      description: Associated order information
-      title: UsageSummaryOrder
-    CostTracesResponse:
-      type: object
-      properties:
-        traces:
-          type: array
-          items:
-            $ref: '#/components/schemas/CostTrace'
-        meta:
-          $ref: '#/components/schemas/PaginationMeta'
-      required:
-      - traces
-      - meta
-      description: Response containing cost traces and pagination metadata
-      title: CostTracesResponse
-    CreationState:
-      type: string
-      enum:
-      - active
-      - draft
-      title: CreationState
-    CustomerCreateMetadata:
-      type: object
-      properties: {}
-      description: Flexible JSON field for storing custom metadata about the customer
-      title: CustomerCreateMetadata
-    CustomerUpdateMetadata:
-      type: object
-      properties: {}
-      description: Flexible JSON field for storing custom metadata about the customer
-      title: CustomerUpdateMetadata
-    PaymentMethod:
-      type: object
-      properties:
-        id:
-          type: string
-          description: The payment method ID (typically from Stripe)
-        type:
-          $ref: '#/components/schemas/PaymentMethodType'
-          description: The type of payment method
-        card:
-          $ref: '#/components/schemas/PaymentMethodCard'
-          description: Card details (present when type is 'card')
-        usBankAccount:
-          $ref: '#/components/schemas/PaymentMethodUsBankAccount'
-          description: US bank account details (present when type is 'us_bank_account')
-        isDefault:
-          type: boolean
-          description: Whether this is the customer's default payment method
-        createdAt:
-          type: string
-          format: date-time
-      description: A customer's payment method
-      title: PaymentMethod
-    PaymentMethodUsBankAccountAccountType:
-      type: string
-      enum:
-      - checking
-      - savings
-      title: PaymentMethodUsBankAccountAccountType
-    PaymentMethodCard:
-      type: object
-      properties:
-        brand:
-          type: string
-          description: Card brand (visa, mastercard, amex, etc.)
-        last4:
-          type: string
-          description: Last 4 digits of the card number
-        expMonth:
-          type: integer
-          description: Expiration month (1-12)
-        expYear:
-          type: integer
-          description: Expiration year
-      description: Card details (present when type is 'card')
-      title: PaymentMethodCard
-    EntitlementUsage:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        createdAt:
-          type: string
-          format: date-time
-        updatedAt:
-          type: string
-          format: date-time
-        organizationId:
-          type: string
-          format: uuid
-        productId:
-          type: string
-          format: uuid
-        entitlementId:
-          type: string
-          format: uuid
-        customerId:
-          type: string
-          format: uuid
-        startDate:
-          type: string
-          format: date-time
-        endDate:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        total:
-          type: integer
-          format: int64
-          description: Total entitlement amount
-        available:
-          type: integer
-          format: int64
-          description: Available entitlement amount
-        used:
-          type: integer
-          format: int64
-          description: Used entitlement amount
       required:
       - id
       - organizationId
-      - productId
-      - entitlementId
-      - customerId
-      - startDate
-      - total
-      - available
-      - used
-      description: Tracks the usage of an entitlement for a customer
-      title: EntitlementUsage
-    CustomerMetadata:
-      type: object
-      properties: {}
-      description: Flexible JSON field for storing custom metadata about the customer
-      title: CustomerMetadata
-    ApiError:
-      type: object
-      properties:
-        message:
-          type: string
-          description: A human-readable message providing more details about the error.
-        code:
-          type: string
-        details:
-          type: string
-      description: An API error response from the Paid API
-      title: ApiError
-    CustomerStatus:
-      type: string
-      enum:
-      - active
-      - churned
-      description: 'Customer status: churned when the customer is marked as churned, active otherwise.'
-      title: CustomerStatus
-    CustomerStateCustomer:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Stable Paid customer display ID. Use this value as the `{id}` path parameter for customer routes, for example `GET /api/v2/customers/cus_abc123/state`.
-        name:
-          type: string
-        externalId:
-          type:
-          - string
-          - 'null'
-        billingAddress:
-          $ref: '#/components/schemas/CustomerBillingAddressResponse'
-      required:
-      - id
       - name
-      - externalId
-      - billingAddress
-      title: CustomerStateCustomer
-    CustomerState:
-      type: object
-      properties:
-        customer:
-          $ref: '#/components/schemas/CustomerStateCustomer'
-        defaultCurrency:
-          $ref: '#/components/schemas/CurrencyCode'
-        orders:
-          type: array
-          items:
-            $ref: '#/components/schemas/CustomerStateOrder'
-        seats:
-          $ref: '#/components/schemas/CustomerStateSeats'
-        checkoutLinks:
-          type: array
-          items:
-            $ref: '#/components/schemas/CustomerStateCheckoutLink'
-        credits:
-          $ref: '#/components/schemas/CustomerStateCreditSummary'
-        timestamp:
-          type: string
-          format: date-time
-      required:
-      - customer
-      - defaultCurrency
-      - orders
-      - seats
-      - checkoutLinks
-      - credits
-      - timestamp
-      title: CustomerState
-    CustomersGetParametersCreationState:
-      type: string
-      enum:
-      - draft
-      - active
-      title: CustomersGetParametersCreationState
-    CustomerUser:
-      type: object
-      properties:
-        id:
-          type: string
-        externalId:
-          type: string
-        customerExternalId:
-          type: string
-        name:
-          type:
-          - string
-          - 'null'
-        email:
-          type:
-          - string
-          - 'null'
-        metadata:
-          type:
-          - object
-          - 'null'
-          additionalProperties:
-            description: Any type
-        status:
-          $ref: '#/components/schemas/CustomerUserStatus'
-        created:
-          type: boolean
-        createdAt:
-          type: string
-          format: date-time
-        updatedAt:
-          type: string
-          format: date-time
-      required:
-      - id
-      - externalId
-      - customerExternalId
-      - name
-      - email
-      - metadata
-      - status
-      - created
-      - createdAt
-      - updatedAt
-      title: CustomerUser
-    CustomerConnections:
-      type: object
-      properties:
-        stripe:
-          $ref: '#/components/schemas/StripeConnection'
-      required:
-      - stripe
-      description: Linked external system IDs for this customer.
-      title: CustomerConnections
-    CustomerAlias:
-      type: object
-      properties:
-        alias:
-          type: string
-          description: Alternate external identifier that resolves to the customer.
-        customerId:
-          type: string
-          description: Paid customer display ID this alias resolves to.
-        name:
-          type:
-          - string
-          - 'null'
-        description:
-          type:
-          - string
-          - 'null'
-        createdAt:
-          type: string
-          format: date-time
-        updatedAt:
-          type: string
-          format: date-time
-      required:
-      - alias
-      - customerId
-      - name
-      - description
-      - createdAt
-      - updatedAt
-      title: CustomerAlias
-    CreditBalanceListResponse:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/CreditBalance'
-      required:
-      - data
-      title: CreditBalanceListResponse
-    Customer_2:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Stable Paid customer display ID. Use this value as the `{id}` path parameter for customer routes, for example `GET /api/v2/customers/cus_abc123/state`.
-        name:
-          type: string
-        legalName:
-          type:
-          - string
-          - 'null'
-        email:
-          type: string
-        phone:
-          type: string
-        website:
-          type: string
-        externalId:
-          type:
-          - string
-          - 'null'
-        billingAddress:
-          $ref: '#/components/schemas/CustomerBillingAddressResponse'
-        creationState:
-          $ref: '#/components/schemas/CustomerCreationState'
-        status:
-          $ref: '#/components/schemas/CustomerStatus'
-          description: 'Customer status: churned when the customer is marked as churned, active otherwise.'
-        churnDate:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        vatNumber:
-          type:
-          - string
-          - 'null'
-        metadata:
-          type:
-          - object
-          - 'null'
-          additionalProperties:
-            description: Any type
-        defaultCurrency:
-          $ref: '#/components/schemas/CurrencyCode'
-        connections:
-          $ref: '#/components/schemas/CustomerConnections'
-        createdAt:
-          type: string
-          format: date-time
-        updatedAt:
-          type: string
-          format: date-time
-      required:
-      - id
-      - name
-      - legalName
-      - email
-      - phone
-      - website
-      - externalId
-      - billingAddress
-      - creationState
-      - status
-      - churnDate
-      - vatNumber
-      - metadata
-      - defaultCurrency
-      - connections
-      - createdAt
-      - updatedAt
       title: Customer
+    customers_checkEntitlement_Response_200:
+      type: object
+      properties:
+        entitled:
+          type: boolean
+          description: Whether the customer is entitled to the specified event
+      required:
+      - entitled
+      title: customers_checkEntitlement_Response_200
     CustomerStateProductRef:
       type: object
       properties:
@@ -2519,41 +2287,16 @@ components:
       - externalId
       - name
       title: CustomerStateProductRef
-    CurrencyCode:
-      type: string
-      description: ISO 4217 currency code, for example USD, EUR, or GBP.
-      title: CurrencyCode
-    CustomerStateOrderState:
-      type: string
-      enum:
-      - draft
-      - active
-      - paused
-      - ended
-      title: CustomerStateOrderState
-    EmptyResponse:
-      type: object
-      properties: {}
-      title: EmptyResponse
-    CustomerStateSeats:
+    CustomerStateCreditSummary:
       type: object
       properties:
-        total:
-          type: integer
-        assigned:
-          type: integer
-        unassigned:
-          type: integer
-        data:
+        balances:
           type: array
           items:
-            $ref: '#/components/schemas/CustomerStateSeat'
+            $ref: '#/components/schemas/CustomerStateCreditBalance'
       required:
-      - total
-      - assigned
-      - unassigned
-      - data
-      title: CustomerStateSeats
+      - balances
+      title: CustomerStateCreditSummary
     CreditBalance:
       type: object
       properties:
@@ -2610,155 +2353,14 @@ components:
       - recipient
       - grants
       title: CreditBalance
-    CustomerStateSeatStatus:
-      type: string
-      enum:
-      - assigned
-      - unassigned
-      title: CustomerStateSeatStatus
-    CreditGrantCurrency:
-      type: object
-      properties:
-        key:
-          type: string
-          description: Stable machine-readable key for this credit currency.
-        name:
-          type: string
-          description: Human-readable name for this credit currency.
-      required:
-      - key
-      - name
-      title: CreditGrantCurrency
-    CustomerAliasListResponse:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/CustomerAlias'
-        pagination:
-          $ref: '#/components/schemas/Pagination'
-      required:
-      - data
-      - pagination
-      title: CustomerAliasListResponse
-    CreateCustomerRequest:
-      type: object
-      properties:
-        name:
-          type: string
-        legalName:
-          type:
-          - string
-          - 'null'
-        email:
-          type: string
-          format: email
-        phone:
-          type: string
-        website:
-          type: string
-        externalId:
-          type:
-          - string
-          - 'null'
-        billingAddress:
-          $ref: '#/components/schemas/CustomerBillingAddressInput'
-        creationState:
-          $ref: '#/components/schemas/CustomerCreationState'
-        vatNumber:
-          type:
-          - string
-          - 'null'
-        metadata:
-          type:
-          - object
-          - 'null'
-          additionalProperties:
-            description: Any type
-        defaultCurrency:
-          type: string
-      required:
-      - name
-      title: CreateCustomerRequest
-    CustomerStateCreditBalance:
-      type: object
-      properties:
-        creditsCurrencyId:
-          type: string
-        currencyName:
-          type: string
-        currencyKey:
-          type: string
-        balance:
-          type: number
-          format: double
-      required:
-      - creditsCurrencyId
-      - currencyName
-      - currencyKey
-      - balance
-      title: CustomerStateCreditBalance
-    CreditGrantResultStatus:
+    CustomerStateCheckoutLinkStatus:
       type: string
       enum:
       - active
-      description: Credit grants are active immediately when created.
-      title: CreditGrantResultStatus
-    CustomerStateSeat:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Seat UUID. Seats do not currently have display IDs; use this value as `{seatId}` with the order seat assignment endpoints.
-        orderId:
-          type: string
-        product:
-          $ref: '#/components/schemas/CustomerStateProductRef'
-        status:
-          $ref: '#/components/schemas/CustomerStateSeatStatus'
-        assignee:
-          $ref: '#/components/schemas/CustomerStateSeatAssignee'
-        credits:
-          $ref: '#/components/schemas/CustomerStateCreditSummary'
-      required:
-      - id
-      - orderId
-      - product
-      - status
-      - assignee
-      - credits
-      title: CustomerStateSeat
-    CreditGrantResult:
-      type: object
-      properties:
-        amount:
-          type: integer
-        startsAt:
-          type: string
-          format: date-time
-          description: When these credits become spendable, as an RFC3339 datetime with timezone.
-        expiresAt:
-          type:
-          - string
-          - 'null'
-          format: date-time
-          description: When these credits expire, as an RFC3339 datetime with timezone. Null when the credits do not expire.
-        status:
-          $ref: '#/components/schemas/CreditGrantResultStatus'
-          description: Credit grants are active immediately when created.
-      required:
-      - amount
-      - startsAt
-      - expiresAt
-      - status
-      title: CreditGrantResult
-    CreditBalanceRecipient:
-      type: string
-      enum:
-      - organization
-      - seat
-      title: CreditBalanceRecipient
+      - completed
+      - expired
+      - archived
+      title: CustomerStateCheckoutLinkStatus
     CreditGrant:
       type: object
       properties:
@@ -2841,53 +2443,107 @@ components:
       - id
       - externalId
       title: CreditGrantCustomer
-    CreditGrantCreateRequest:
+    CustomerAlias:
       type: object
       properties:
-        creditCurrencyKey:
+        alias:
           type: string
-          description: Stable machine-readable key for the active credit currency to grant.
-        amount:
-          type: integer
-          description: Number of credits to grant. This is not a monetary amount.
-        startsAt:
+          description: Alternate external identifier that resolves to the customer.
+        customerId:
           type: string
-          format: date-time
-          description: When these credits become spendable, as an RFC3339 datetime with timezone. Must be at or before the current server time. Defaults to the current server time when omitted.
-        expiresAt:
+          description: Paid customer display ID this alias resolves to.
+        name:
           type:
           - string
           - 'null'
+        description:
+          type:
+          - string
+          - 'null'
+        createdAt:
+          type: string
           format: date-time
-          description: When these credits expire, as an RFC3339 datetime with timezone. Omit or set null for credits that do not expire.
+        updatedAt:
+          type: string
+          format: date-time
       required:
-      - creditCurrencyKey
-      - amount
-      title: CreditGrantCreateRequest
+      - alias
+      - customerId
+      - name
+      - description
+      - createdAt
+      - updatedAt
+      title: CustomerAlias
+    CustomerAliasListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/CustomerAlias'
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+      required:
+      - data
+      - pagination
+      title: CustomerAliasListResponse
+    CreditGrantResultStatus:
+      type: string
+      enum:
+      - active
+      description: Credit grants are active immediately when created.
+      title: CreditGrantResultStatus
+    CustomerUser:
+      type: object
+      properties:
+        id:
+          type: string
+        externalId:
+          type: string
+        customerExternalId:
+          type: string
+        name:
+          type:
+          - string
+          - 'null'
+        email:
+          type:
+          - string
+          - 'null'
+        metadata:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            description: Any type
+        status:
+          $ref: '#/components/schemas/CustomerUserStatus'
+        created:
+          type: boolean
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+      required:
+      - id
+      - externalId
+      - customerExternalId
+      - name
+      - email
+      - metadata
+      - status
+      - created
+      - createdAt
+      - updatedAt
+      title: CustomerUser
     CustomersGetParametersStatus:
       type: string
       enum:
       - active
       - churned
       title: CustomersGetParametersStatus
-    StripeConnection:
-      type: object
-      properties:
-        customerId:
-          type: string
-          description: Stripe customer ID.
-      required:
-      - customerId
-      description: Stripe customer link, or null when no Stripe gateway account is configured.
-      title: StripeConnection
-    CustomerStateCheckoutLinkStatus:
-      type: string
-      enum:
-      - active
-      - completed
-      - expired
-      - archived
-      title: CustomerStateCheckoutLinkStatus
     CustomerStateCheckoutLink:
       type: object
       properties:
@@ -2921,63 +2577,159 @@ components:
       - allowedCurrencies
       - expiresAt
       title: CustomerStateCheckoutLink
-    ErrorResponse:
+    CustomerBillingAddressInput:
       type: object
       properties:
-        error:
+        line1:
           type: string
-        code:
+        line2:
           type: string
-        details:
+        city:
           type: string
+        state:
+          type: string
+        zipCode:
+          type: string
+        country:
+          type: string
+      title: CustomerBillingAddressInput
+    CurrencyCode:
+      type: string
+      description: ISO 4217 currency code, for example USD, EUR, or GBP.
+      title: CurrencyCode
+    StripeConnection:
+      type: object
+      properties:
+        customerId:
+          type: string
+          description: Stripe customer ID.
       required:
-      - error
-      title: ErrorResponse
-    Pagination:
+      - customerId
+      description: Stripe customer link, or null when no Stripe gateway account is configured.
+      title: StripeConnection
+    CustomerStateCreditBalance:
       type: object
       properties:
-        limit:
-          type: integer
-        offset:
-          type: integer
-        total:
-          type: integer
-        hasMore:
-          type: boolean
+        creditsCurrencyId:
+          type: string
+        currencyName:
+          type: string
+        currencyKey:
+          type: string
+        balance:
+          type: number
+          format: double
       required:
-      - limit
-      - offset
-      - total
-      - hasMore
-      title: Pagination
-    GrantCustomerCreditsResponse:
+      - creditsCurrencyId
+      - currencyName
+      - currencyKey
+      - balance
+      title: CustomerStateCreditBalance
+    CreditGrantCreateRequest:
       type: object
       properties:
-        created:
-          type: boolean
-          description: True when this request created a new grant.
-        customer:
-          $ref: '#/components/schemas/CreditGrantCustomer'
-        creditCurrency:
-          $ref: '#/components/schemas/CreditGrantCurrency'
-        grant:
-          $ref: '#/components/schemas/CreditGrantResult'
-        createdAt:
+        creditCurrencyKey:
+          type: string
+          description: Stable machine-readable key for the active credit currency to grant.
+        amount:
+          type: integer
+          description: Number of credits to grant. This is not a monetary amount.
+        startsAt:
           type: string
           format: date-time
+          description: When these credits become spendable, as an RFC3339 datetime with timezone. Must be at or before the current server time. Defaults to the current server time when omitted.
+        expiresAt:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: When these credits expire, as an RFC3339 datetime with timezone. Omit or set null for credits that do not expire.
       required:
-      - created
-      - customer
-      - creditCurrency
-      - grant
-      - createdAt
-      title: GrantCustomerCreditsResponse
-    CustomerCreationState:
+      - creditCurrencyKey
+      - amount
+      title: CreditGrantCreateRequest
+    CreateCustomerRequest:
+      type: object
+      properties:
+        name:
+          type: string
+        legalName:
+          type:
+          - string
+          - 'null'
+        email:
+          type: string
+          format: email
+        phone:
+          type: string
+        website:
+          type: string
+        externalId:
+          type:
+          - string
+          - 'null'
+        billingAddress:
+          $ref: '#/components/schemas/CustomerBillingAddressInput'
+        creationState:
+          $ref: '#/components/schemas/CustomerCreationState'
+        vatNumber:
+          type:
+          - string
+          - 'null'
+        metadata:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            description: Any type
+        defaultCurrency:
+          type: string
+      required:
+      - name
+      title: CreateCustomerRequest
+    CustomerStateSeatStatus:
       type: string
       enum:
-      - draft
-      - active
-      title: CustomerCreationState
+      - assigned
+      - unassigned
+      title: CustomerStateSeatStatus
+    CreditGrantResult:
+      type: object
+      properties:
+        amount:
+          type: integer
+        startsAt:
+          type: string
+          format: date-time
+          description: When these credits become spendable, as an RFC3339 datetime with timezone.
+        expiresAt:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: When these credits expire, as an RFC3339 datetime with timezone. Null when the credits do not expire.
+        status:
+          $ref: '#/components/schemas/CreditGrantResultStatus'
+          description: Credit grants are active immediately when created.
+      required:
+      - amount
+      - startsAt
+      - expiresAt
+      - status
+      title: CreditGrantResult
+    CreditGrantCurrency:
+      type: object
+      properties:
+        key:
+          type: string
+          description: Stable machine-readable key for this credit currency.
+        name:
+          type: string
+          description: Human-readable name for this credit currency.
+      required:
+      - key
+      - name
+      title: CreditGrantCurrency
     CustomerBillingAddressResponse:
       type: object
       properties:
@@ -2995,58 +2747,6 @@ components:
           type: string
       description: Customer billing address, or null when no address is set.
       title: CustomerBillingAddressResponse
-    CustomerStateOrder:
-      type: object
-      properties:
-        id:
-          type: string
-        externalId:
-          type:
-          - string
-          - 'null'
-        name:
-          type: string
-        state:
-          $ref: '#/components/schemas/CustomerStateOrderState'
-        currency:
-          $ref: '#/components/schemas/CurrencyCode'
-        startDate:
-          type: string
-          format: date-time
-        endDate:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        effectiveUntil:
-          type:
-          - string
-          - 'null'
-          format: date-time
-          description: When the order stops applying; null means no scheduled end.
-      required:
-      - id
-      - externalId
-      - name
-      - state
-      - currency
-      - startDate
-      - endDate
-      - effectiveUntil
-      title: CustomerStateOrder
-    CustomerListResponse:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Customer_2'
-        pagination:
-          $ref: '#/components/schemas/Pagination'
-      required:
-      - data
-      - pagination
-      title: CustomerListResponse
     CustomerStateSeatAssignee:
       type: object
       properties:
@@ -3068,32 +2768,61 @@ components:
       - name
       - email
       title: CustomerStateSeatAssignee
-    CustomerBillingAddressInput:
+    CreditBalanceRecipient:
+      type: string
+      enum:
+      - organization
+      - seat
+      title: CreditBalanceRecipient
+    CreditBalanceListResponse:
       type: object
       properties:
-        line1:
-          type: string
-        line2:
-          type: string
-        city:
-          type: string
-        state:
-          type: string
-        zipCode:
-          type: string
-        country:
-          type: string
-      title: CustomerBillingAddressInput
-    CustomerStateCreditSummary:
-      type: object
-      properties:
-        balances:
+        data:
           type: array
           items:
-            $ref: '#/components/schemas/CustomerStateCreditBalance'
+            $ref: '#/components/schemas/CreditBalance'
       required:
-      - balances
-      title: CustomerStateCreditSummary
+      - data
+      title: CreditBalanceListResponse
+    EmptyResponse:
+      type: object
+      properties: {}
+      title: EmptyResponse
+    CustomerAliasCreateRequest:
+      type: object
+      properties:
+        alias:
+          type: string
+          description: Alternate external identifier that should resolve to this customer.
+        name:
+          type: string
+          description: Optional display name for this alias.
+        description:
+          type: string
+          description: Optional note describing where this alias comes from.
+      required:
+      - alias
+      title: CustomerAliasCreateRequest
+    CustomerStateCustomer:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Stable Paid customer display ID. Use this value as the `{id}` path parameter for customer routes, for example `GET /api/v2/customers/cus_abc123/state`.
+        name:
+          type: string
+        externalId:
+          type:
+          - string
+          - 'null'
+        billingAddress:
+          $ref: '#/components/schemas/CustomerBillingAddressResponse'
+      required:
+      - id
+      - name
+      - externalId
+      - billingAddress
+      title: CustomerStateCustomer
     UpdateCustomerRequest:
       type: object
       properties:
@@ -3134,27 +2863,298 @@ components:
           additionalProperties:
             description: Any type
       title: UpdateCustomerRequest
+    CustomersGetParametersCreationState:
+      type: string
+      enum:
+      - draft
+      - active
+      title: CustomersGetParametersCreationState
+    CustomerListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Customer_2'
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+      required:
+      - data
+      - pagination
+      title: CustomerListResponse
+    CustomerStatus:
+      type: string
+      enum:
+      - active
+      - churned
+      description: 'Customer status: churned when the customer is marked as churned, active otherwise.'
+      title: CustomerStatus
+    CustomerState:
+      type: object
+      properties:
+        customer:
+          $ref: '#/components/schemas/CustomerStateCustomer'
+        defaultCurrency:
+          $ref: '#/components/schemas/CurrencyCode'
+        orders:
+          type: array
+          items:
+            $ref: '#/components/schemas/CustomerStateOrder'
+        seats:
+          $ref: '#/components/schemas/CustomerStateSeats'
+        checkoutLinks:
+          type: array
+          items:
+            $ref: '#/components/schemas/CustomerStateCheckoutLink'
+        credits:
+          $ref: '#/components/schemas/CustomerStateCreditSummary'
+        timestamp:
+          type: string
+          format: date-time
+      required:
+      - customer
+      - defaultCurrency
+      - orders
+      - seats
+      - checkoutLinks
+      - credits
+      - timestamp
+      title: CustomerState
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+        code:
+          type: string
+        details:
+          type: string
+      required:
+      - error
+      title: ErrorResponse
+    GrantCustomerCreditsResponse:
+      type: object
+      properties:
+        created:
+          type: boolean
+          description: True when this request created a new grant.
+        customer:
+          $ref: '#/components/schemas/CreditGrantCustomer'
+        creditCurrency:
+          $ref: '#/components/schemas/CreditGrantCurrency'
+        grant:
+          $ref: '#/components/schemas/CreditGrantResult'
+        createdAt:
+          type: string
+          format: date-time
+      required:
+      - created
+      - customer
+      - creditCurrency
+      - grant
+      - createdAt
+      title: GrantCustomerCreditsResponse
+    Pagination:
+      type: object
+      properties:
+        limit:
+          type: integer
+        offset:
+          type: integer
+        total:
+          type: integer
+        hasMore:
+          type: boolean
+      required:
+      - limit
+      - offset
+      - total
+      - hasMore
+      title: Pagination
+    CustomerConnections:
+      type: object
+      properties:
+        stripe:
+          $ref: '#/components/schemas/StripeConnection'
+      required:
+      - stripe
+      description: Linked external system IDs for this customer.
+      title: CustomerConnections
+    CustomerStateOrderState:
+      type: string
+      enum:
+      - draft
+      - active
+      - paused
+      - ended
+      title: CustomerStateOrderState
+    CustomerStateSeat:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Seat UUID. Seats do not currently have display IDs; use this value as `{seatId}` with the order seat assignment endpoints.
+        orderId:
+          type: string
+        product:
+          $ref: '#/components/schemas/CustomerStateProductRef'
+        status:
+          $ref: '#/components/schemas/CustomerStateSeatStatus'
+        assignee:
+          $ref: '#/components/schemas/CustomerStateSeatAssignee'
+        credits:
+          $ref: '#/components/schemas/CustomerStateCreditSummary'
+      required:
+      - id
+      - orderId
+      - product
+      - status
+      - assignee
+      - credits
+      title: CustomerStateSeat
+    CustomerCreationState:
+      type: string
+      enum:
+      - draft
+      - active
+      title: CustomerCreationState
+    CustomerStateSeats:
+      type: object
+      properties:
+        total:
+          type: integer
+        assigned:
+          type: integer
+        unassigned:
+          type: integer
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/CustomerStateSeat'
+      required:
+      - total
+      - assigned
+      - unassigned
+      - data
+      title: CustomerStateSeats
+    Customer_2:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Stable Paid customer display ID. Use this value as the `{id}` path parameter for customer routes, for example `GET /api/v2/customers/cus_abc123/state`.
+        name:
+          type: string
+        legalName:
+          type:
+          - string
+          - 'null'
+        email:
+          type: string
+        phone:
+          type: string
+        website:
+          type: string
+        externalId:
+          type:
+          - string
+          - 'null'
+        billingAddress:
+          $ref: '#/components/schemas/CustomerBillingAddressResponse'
+        creationState:
+          $ref: '#/components/schemas/CustomerCreationState'
+        status:
+          $ref: '#/components/schemas/CustomerStatus'
+          description: 'Customer status: churned when the customer is marked as churned, active otherwise.'
+        churnDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        vatNumber:
+          type:
+          - string
+          - 'null'
+        metadata:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            description: Any type
+        defaultCurrency:
+          $ref: '#/components/schemas/CurrencyCode'
+        connections:
+          $ref: '#/components/schemas/CustomerConnections'
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+      required:
+      - id
+      - name
+      - legalName
+      - email
+      - phone
+      - website
+      - externalId
+      - billingAddress
+      - creationState
+      - status
+      - churnDate
+      - vatNumber
+      - metadata
+      - defaultCurrency
+      - connections
+      - createdAt
+      - updatedAt
+      title: Customer
     CustomerUserStatus:
       type: string
       enum:
       - active
       - deactivated
       title: CustomerUserStatus
-    CustomerAliasCreateRequest:
+    CustomerStateOrder:
       type: object
       properties:
-        alias:
+        id:
           type: string
-          description: Alternate external identifier that should resolve to this customer.
+        externalId:
+          type:
+          - string
+          - 'null'
         name:
           type: string
-          description: Optional display name for this alias.
-        description:
+        state:
+          $ref: '#/components/schemas/CustomerStateOrderState'
+        currency:
+          $ref: '#/components/schemas/CurrencyCode'
+        startDate:
           type: string
-          description: Optional note describing where this alias comes from.
+          format: date-time
+        endDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        effectiveUntil:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: When the order stops applying; null means no scheduled end.
       required:
-      - alias
-      title: CustomerAliasCreateRequest
+      - id
+      - externalId
+      - name
+      - state
+      - currency
+      - startDate
+      - endDate
+      - effectiveUntil
+      title: CustomerStateOrder
   securitySchemes:
     bearerAuth:
       type: http

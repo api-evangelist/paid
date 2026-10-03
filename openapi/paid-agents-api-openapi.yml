@@ -220,53 +220,26 @@ paths:
                 $ref: '#/components/schemas/agents_deleteByExternalId_Response_204'
 components:
   schemas:
-    AgentAttribute:
+    ChargeType:
+      type: string
+      enum:
+      - oneTime
+      - recurring
+      - usage
+      - seatBased
+      title: ChargeType
+    BillingFrequency:
+      type: string
+      enum:
+      - monthly
+      - quarterly
+      - annual
+      title: BillingFrequency
+    agents_delete_Response_204:
       type: object
-      properties:
-        name:
-          type: string
-        active:
-          type: boolean
-        pricing:
-          $ref: '#/components/schemas/Pricing'
-      required:
-      - name
-      - active
-      - pricing
-      title: AgentAttribute
-    AgentUpdate:
-      type: object
-      properties:
-        name:
-          type: string
-        description:
-          type: string
-        externalId:
-          type: string
-        active:
-          type: boolean
-        agentCode:
-          type: string
-        agentAttributes:
-          type: array
-          items:
-            $ref: '#/components/schemas/AgentAttribute'
-      title: AgentUpdate
-    AgentPricePointTiers:
-      type: object
-      properties:
-        minQuantity:
-          type: number
-          format: double
-        maxQuantity:
-          type: number
-          format: double
-        unitPrice:
-          type: number
-          format: double
-      required:
-      - unitPrice
-      title: AgentPricePointTiers
+      properties: {}
+      description: Empty response body
+      title: agents_delete_Response_204
     AgentPricePoint:
       type: object
       properties:
@@ -284,14 +257,6 @@ components:
           items:
             $ref: '#/components/schemas/AgentPricePointTiers'
       title: AgentPricePoint
-    PricingModelType:
-      type: string
-      enum:
-      - PerUnit
-      - VolumePricing
-      - GraduatedPricing
-      - PrepaidCredits
-      title: PricingModelType
     Agent:
       type: object
       properties:
@@ -319,13 +284,29 @@ components:
       - name
       - active
       title: Agent
-    BillingFrequency:
+    AgentPricePointTiers:
+      type: object
+      properties:
+        minQuantity:
+          type: number
+          format: double
+        maxQuantity:
+          type: number
+          format: double
+        unitPrice:
+          type: number
+          format: double
+      required:
+      - unitPrice
+      title: AgentPricePointTiers
+    PricingModelType:
       type: string
       enum:
-      - monthly
-      - quarterly
-      - annual
-      title: BillingFrequency
+      - PerUnit
+      - VolumePricing
+      - GraduatedPricing
+      - PrepaidCredits
+      title: PricingModelType
     AgentCreate:
       type: object
       properties:
@@ -370,24 +351,43 @@ components:
       - billingFrequency
       - pricePoints
       title: Pricing
+    AgentUpdate:
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        externalId:
+          type: string
+        active:
+          type: boolean
+        agentCode:
+          type: string
+        agentAttributes:
+          type: array
+          items:
+            $ref: '#/components/schemas/AgentAttribute'
+      title: AgentUpdate
     agents_deleteByExternalId_Response_204:
       type: object
       properties: {}
       description: Empty response body
       title: agents_deleteByExternalId_Response_204
-    ChargeType:
-      type: string
-      enum:
-      - oneTime
-      - recurring
-      - usage
-      - seatBased
-      title: ChargeType
-    agents_delete_Response_204:
+    AgentAttribute:
       type: object
-      properties: {}
-      description: Empty response body
-      title: agents_delete_Response_204
+      properties:
+        name:
+          type: string
+        active:
+          type: boolean
+        pricing:
+          $ref: '#/components/schemas/Pricing'
+      required:
+      - name
+      - active
+      - pricing
+      title: AgentAttribute
   securitySchemes:
     bearerAuth:
       type: http

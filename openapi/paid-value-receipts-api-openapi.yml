@@ -447,6 +447,18 @@ paths:
               properties: {}
 components:
   schemas:
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+        code:
+          type: string
+        details:
+          type: string
+      required:
+      - error
+      title: ErrorResponse
     SyncValueReceiptRequestProduct:
       type: object
       properties:
@@ -458,6 +470,98 @@ components:
       - productId
       description: Mutually exclusive with orderId. Provide at most one.
       title: SyncValueReceiptRequestProduct
+    ValueReceiptsGetParametersArchived:
+      type: string
+      enum:
+      - 'true'
+      - 'false'
+      default: 'false'
+      title: ValueReceiptsGetParametersArchived
+    SuccessResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+      required:
+      - success
+      title: SuccessResponse
+    ValueReceiptSummary:
+      type: object
+      properties:
+        id:
+          type: string
+        status:
+          type: string
+        publicUrlToken:
+          type: string
+        publicUrl:
+          type: string
+          format: uri
+        isPublished:
+          type: boolean
+        customerId:
+          type:
+          - string
+          - 'null'
+        customerName:
+          type:
+          - string
+          - 'null'
+        customerExternalId:
+          type:
+          - string
+          - 'null'
+        orderId:
+          type:
+          - string
+          - 'null'
+        productId:
+          type:
+          - string
+          - 'null'
+        currency:
+          type: string
+        startDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        endDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        totalDeliveredValue:
+          type:
+          - number
+          - 'null'
+          format: double
+        archivedAt:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        createdAt:
+          type: string
+          format: date-time
+      required:
+      - id
+      - status
+      - publicUrlToken
+      - publicUrl
+      - isPublished
+      - customerId
+      - customerName
+      - customerExternalId
+      - orderId
+      - productId
+      - currency
+      - startDate
+      - endDate
+      - totalDeliveredValue
+      - archivedAt
+      - createdAt
+      title: ValueReceiptSummary
     ValueReceiptSyncResponse:
       type: object
       properties:
@@ -476,46 +580,6 @@ components:
       - publicUrlToken
       - publicUrl
       title: ValueReceiptSyncResponse
-    ValueReceiptsGetParametersArchived:
-      type: string
-      enum:
-      - 'true'
-      - 'false'
-      default: 'false'
-      title: ValueReceiptsGetParametersArchived
-    ValueReceiptListResponse:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValueReceiptSummary'
-        total:
-          type: integer
-      required:
-      - data
-      - total
-      title: ValueReceiptListResponse
-    SuccessResponse:
-      type: object
-      properties:
-        success:
-          type: boolean
-      required:
-      - success
-      title: SuccessResponse
-    ErrorResponse:
-      type: object
-      properties:
-        error:
-          type: string
-        code:
-          type: string
-        details:
-          type: string
-      required:
-      - error
-      title: ErrorResponse
     ValueReceiptDetail:
       type: object
       properties:
@@ -608,6 +672,15 @@ components:
       - publishExpiresAt
       - allowEmbed
       title: ValueReceiptDetail
+    PublishValueReceiptBody:
+      type: object
+      properties:
+        publishExpiresAt:
+          type:
+          - string
+          - 'null'
+          format: date-time
+      title: PublishValueReceiptBody
     SyncValueReceiptRequest:
       type: object
       properties:
@@ -633,92 +706,19 @@ components:
       - startDate
       - endDate
       title: SyncValueReceiptRequest
-    PublishValueReceiptBody:
+    ValueReceiptListResponse:
       type: object
       properties:
-        publishExpiresAt:
-          type:
-          - string
-          - 'null'
-          format: date-time
-      title: PublishValueReceiptBody
-    ValueReceiptSummary:
-      type: object
-      properties:
-        id:
-          type: string
-        status:
-          type: string
-        publicUrlToken:
-          type: string
-        publicUrl:
-          type: string
-          format: uri
-        isPublished:
-          type: boolean
-        customerId:
-          type:
-          - string
-          - 'null'
-        customerName:
-          type:
-          - string
-          - 'null'
-        customerExternalId:
-          type:
-          - string
-          - 'null'
-        orderId:
-          type:
-          - string
-          - 'null'
-        productId:
-          type:
-          - string
-          - 'null'
-        currency:
-          type: string
-        startDate:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        endDate:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        totalDeliveredValue:
-          type:
-          - number
-          - 'null'
-          format: double
-        archivedAt:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        createdAt:
-          type: string
-          format: date-time
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValueReceiptSummary'
+        total:
+          type: integer
       required:
-      - id
-      - status
-      - publicUrlToken
-      - publicUrl
-      - isPublished
-      - customerId
-      - customerName
-      - customerExternalId
-      - orderId
-      - productId
-      - currency
-      - startDate
-      - endDate
-      - totalDeliveredValue
-      - archivedAt
-      - createdAt
-      title: ValueReceiptSummary
+      - data
+      - total
+      title: ValueReceiptListResponse
   securitySchemes:
     bearerAuth:
       type: http

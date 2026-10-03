@@ -145,6 +145,52 @@ components:
       - error
       description: An error response from the Paid API
       title: Error
+    ApiError:
+      type: object
+      properties:
+        message:
+          type: string
+          description: A human-readable message providing more details about the error.
+        code:
+          type: string
+        details:
+          type: string
+      description: An API error response from the Paid API
+      title: ApiError
+    usage_usageRecordBulkV2_Response_201:
+      type: object
+      properties: {}
+      description: Empty response body
+      title: usage_usageRecordBulkV2_Response_201
+    Signal:
+      type: object
+      properties:
+        event_name:
+          type: string
+        agent_id:
+          type: string
+          description: 'DEPRECATED: Use product_id in SignalV2 instead.'
+        external_agent_id:
+          type: string
+          description: 'DEPRECATED: Use external_product_id in SignalV2 instead.'
+        customer_id:
+          type: string
+          description: 'DEPRECATED: The external customer id. Use `external_customer_id` or `internal_customer_id` instead.'
+        data:
+          type: object
+          additionalProperties:
+            description: Any type
+        idempotency_key:
+          type: string
+          description: A unique key to ensure idempotent signal processing
+        internal_customer_id:
+          type: string
+          description: 'DEPRECATED: Use customer_id in SignalV2 instead. This was Paid''s internal customer ID.'
+        external_customer_id:
+          type: string
+          description: Your system's customer ID
+      description: 'DEPRECATED: Use SignalV2 instead for cleaner field names.'
+      title: Signal
     usage_checkUsage_Response_200:
       type: object
       properties:
@@ -170,11 +216,6 @@ components:
           format: double
           description: Usage limit (only present when usage exceeds limit)
       title: usage_checkUsage_Response_200
-    usage_usageRecordBulkV2_Response_201:
-      type: object
-      properties: {}
-      description: Empty response body
-      title: usage_usageRecordBulkV2_Response_201
     SignalV2:
       type: object
       properties:
@@ -205,52 +246,11 @@ components:
       - event_name
       description: 'V2 signal schema with clean field names. IMPORTANT: Exactly one customer ID field (customer_id OR external_customer_id) and exactly one product ID field (product_id OR external_product_id) must be provided per signal.'
       title: SignalV2
-    Signal:
-      type: object
-      properties:
-        event_name:
-          type: string
-        agent_id:
-          type: string
-          description: 'DEPRECATED: Use product_id in SignalV2 instead.'
-        external_agent_id:
-          type: string
-          description: 'DEPRECATED: Use external_product_id in SignalV2 instead.'
-        customer_id:
-          type: string
-          description: 'DEPRECATED: The external customer id. Use `external_customer_id` or `internal_customer_id` instead.'
-        data:
-          type: object
-          additionalProperties:
-            description: Any type
-        idempotency_key:
-          type: string
-          description: A unique key to ensure idempotent signal processing
-        internal_customer_id:
-          type: string
-          description: 'DEPRECATED: Use customer_id in SignalV2 instead. This was Paid''s internal customer ID.'
-        external_customer_id:
-          type: string
-          description: Your system's customer ID
-      description: 'DEPRECATED: Use SignalV2 instead for cleaner field names.'
-      title: Signal
     usage_recordBulk_Response_201:
       type: object
       properties: {}
       description: Empty response body
       title: usage_recordBulk_Response_201
-    ApiError:
-      type: object
-      properties:
-        message:
-          type: string
-          description: A human-readable message providing more details about the error.
-        code:
-          type: string
-        details:
-          type: string
-      description: An API error response from the Paid API
-      title: ApiError
   securitySchemes:
     bearerAuth:
       type: http
