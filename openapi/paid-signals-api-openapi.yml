@@ -55,6 +55,80 @@ paths:
               $ref: '#/components/schemas/BulkSignalsRequest'
 components:
   schemas:
+    ProductById:
+      type: object
+      properties:
+        productId:
+          type: string
+          description: The Paid product ID
+      required:
+      - productId
+      title: ProductById
+    ProductByExternalId:
+      type: object
+      properties:
+        externalProductId:
+          type: string
+          description: Your external product ID
+      required:
+      - externalProductId
+      title: ProductByExternalId
+    Attribution:
+      oneOf:
+      - $ref: '#/components/schemas/ProductById'
+      - $ref: '#/components/schemas/ProductByExternalId'
+      title: Attribution
+    BulkSignalsResponse:
+      type: object
+      properties:
+        ingested:
+          type: integer
+        duplicates:
+          type: integer
+        failed:
+          type: integer
+      required:
+      - ingested
+      - duplicates
+      - failed
+      title: BulkSignalsResponse
+    Signal:
+      type: object
+      properties:
+        eventName:
+          type: string
+        customer:
+          $ref: '#/components/schemas/CustomerAttribution'
+        attribution:
+          $ref: '#/components/schemas/Attribution'
+        timestamp:
+          type: string
+          format: date-time
+          description: True event timestamp in RFC3339 format with timezone (e.g. 2026-01-31T23:00:00Z)
+        data:
+          type: object
+          additionalProperties:
+            description: Any type
+        idempotencyKey:
+          type: string
+      required:
+      - eventName
+      - customer
+      title: Signal
+    CustomerById:
+      type: object
+      properties:
+        customerId:
+          type: string
+          description: The Paid customer ID
+      required:
+      - customerId
+      title: CustomerById
+    CustomerAttribution:
+      oneOf:
+      - $ref: '#/components/schemas/CustomerById'
+      - $ref: '#/components/schemas/CustomerByExternalId'
+      title: CustomerAttribution
     ErrorResponse:
       type: object
       properties:
@@ -86,80 +160,6 @@ components:
       required:
       - externalCustomerId
       title: CustomerByExternalId
-    CustomerAttribution:
-      oneOf:
-      - $ref: '#/components/schemas/CustomerById'
-      - $ref: '#/components/schemas/CustomerByExternalId'
-      title: CustomerAttribution
-    Signal:
-      type: object
-      properties:
-        eventName:
-          type: string
-        customer:
-          $ref: '#/components/schemas/CustomerAttribution'
-        attribution:
-          $ref: '#/components/schemas/Attribution'
-        timestamp:
-          type: string
-          format: date-time
-          description: True event timestamp in RFC3339 format with timezone (e.g. 2026-01-31T23:00:00Z)
-        data:
-          type: object
-          additionalProperties:
-            description: Any type
-        idempotencyKey:
-          type: string
-      required:
-      - eventName
-      - customer
-      title: Signal
-    Attribution:
-      oneOf:
-      - $ref: '#/components/schemas/ProductById'
-      - $ref: '#/components/schemas/ProductByExternalId'
-      title: Attribution
-    ProductById:
-      type: object
-      properties:
-        productId:
-          type: string
-          description: The Paid product ID
-      required:
-      - productId
-      title: ProductById
-    ProductByExternalId:
-      type: object
-      properties:
-        externalProductId:
-          type: string
-          description: Your external product ID
-      required:
-      - externalProductId
-      title: ProductByExternalId
-    CustomerById:
-      type: object
-      properties:
-        customerId:
-          type: string
-          description: The Paid customer ID
-      required:
-      - customerId
-      title: CustomerById
-    BulkSignalsResponse:
-      type: object
-      properties:
-        ingested:
-          type: integer
-        duplicates:
-          type: integer
-        failed:
-          type: integer
-      required:
-      - ingested
-      - duplicates
-      - failed
-      title: BulkSignalsResponse
   securitySchemes:
     bearerAuth:
       type: http

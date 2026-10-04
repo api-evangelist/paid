@@ -202,30 +202,37 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
 components:
   schemas:
-    CheckoutPlan:
+    CheckoutPlanInput:
       type: object
       properties:
         id:
           type: string
+          description: Plan identifier, as returned by the list plans endpoint. Selects a specific plan within the product.
         features:
           type: array
           items:
             type: string
+          description: Override the feature bullet points shown for this plan on the hosted checkout page.
       required:
       - id
-      title: CheckoutPlan
-    ErrorResponse:
+      title: CheckoutPlanInput
+    Pagination:
       type: object
       properties:
-        error:
-          type: string
-        code:
-          type: string
-        details:
-          type: string
+        limit:
+          type: integer
+        offset:
+          type: integer
+        total:
+          type: integer
+        hasMore:
+          type: boolean
       required:
-      - error
-      title: ErrorResponse
+      - limit
+      - offset
+      - total
+      - hasMore
+      title: Pagination
     CheckoutCustomCard:
       type: object
       properties:
@@ -244,52 +251,22 @@ components:
       required:
       - label
       title: CheckoutCustomCard
-    CheckoutCustomCardInput:
-      type: object
-      properties:
-        label:
-          type: string
-          description: Card title.
-        priceText:
-          type: string
-          description: Headline price text, e.g. "$99/mo".
-        buttonText:
-          type: string
-          description: Call-to-action button label.
-        buttonUrl:
-          type: string
-          format: uri
-          description: Call-to-action button URL.
-      required:
-      - label
-      title: CheckoutCustomCardInput
-    CheckoutListResponse:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Checkout'
-        pagination:
-          $ref: '#/components/schemas/Pagination'
-      required:
-      - data
-      - pagination
-      title: CheckoutListResponse
-    CheckoutPlanInput:
+    CheckoutPlan:
       type: object
       properties:
         id:
           type: string
-          description: Plan identifier, as returned by the list plans endpoint. Selects a specific plan within the product.
         features:
           type: array
           items:
             type: string
-          description: Override the feature bullet points shown for this plan on the hosted checkout page.
       required:
       - id
-      title: CheckoutPlanInput
+      title: CheckoutPlan
+    EmptyResponse:
+      type: object
+      properties: {}
+      title: EmptyResponse
     CheckoutStatus:
       type: string
       enum:
@@ -298,63 +275,6 @@ components:
       - expired
       - archived
       title: CheckoutStatus
-    CreateCheckoutRequest:
-      type: object
-      properties:
-        products:
-          type: array
-          items:
-            $ref: '#/components/schemas/CheckoutProductInput'
-        customerId:
-          type: string
-        externalCustomerId:
-          type: string
-          description: External customer identifier. Creates the customer on first use, resolves to the existing customer on subsequent uses.
-        successUrl:
-          type: string
-          format: uri
-        cancelUrl:
-          type: string
-          format: uri
-        expiresAt:
-          type: string
-          format: date-time
-        metadata:
-          type: object
-          additionalProperties:
-            description: Any type
-        collectAddress:
-          type: boolean
-          default: true
-        collectPhone:
-          type: boolean
-          default: false
-        singleUse:
-          type: boolean
-          default: true
-        currency:
-          type: string
-          description: Lock checkout to a specific currency. Omit to allow all currencies supported by the selected plans. If the checkout is for a customer with an active subscription, the currency must match that subscription's currency — subscriptions cannot change currency.
-        customCards:
-          type: array
-          items:
-            $ref: '#/components/schemas/CheckoutCustomCardInput'
-          description: Additional informational pricing cards rendered alongside the plans.
-      required:
-      - products
-      - successUrl
-      title: CreateCheckoutRequest
-    EmptyResponse:
-      type: object
-      properties: {}
-      title: EmptyResponse
-    CheckoutsGetParametersStatus:
-      type: string
-      enum:
-      - active
-      - completed
-      - archived
-      title: CheckoutsGetParametersStatus
     Checkout:
       type: object
       properties:
@@ -432,6 +352,85 @@ components:
       - createdAt
       - updatedAt
       title: Checkout
+    CheckoutListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Checkout'
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+      required:
+      - data
+      - pagination
+      title: CheckoutListResponse
+    CheckoutsGetParametersStatus:
+      type: string
+      enum:
+      - active
+      - completed
+      - archived
+      title: CheckoutsGetParametersStatus
+    CheckoutProductInput:
+      type: object
+      properties:
+        id:
+          type: string
+        plans:
+          type: array
+          items:
+            $ref: '#/components/schemas/CheckoutPlanInput'
+          description: Select specific plans within this product. Omit to offer all of the product's plans.
+      required:
+      - id
+      title: CheckoutProductInput
+    CreateCheckoutRequest:
+      type: object
+      properties:
+        products:
+          type: array
+          items:
+            $ref: '#/components/schemas/CheckoutProductInput'
+        customerId:
+          type: string
+        externalCustomerId:
+          type: string
+          description: External customer identifier. Creates the customer on first use, resolves to the existing customer on subsequent uses.
+        successUrl:
+          type: string
+          format: uri
+        cancelUrl:
+          type: string
+          format: uri
+        expiresAt:
+          type: string
+          format: date-time
+        metadata:
+          type: object
+          additionalProperties:
+            description: Any type
+        collectAddress:
+          type: boolean
+          default: true
+        collectPhone:
+          type: boolean
+          default: false
+        singleUse:
+          type: boolean
+          default: true
+        currency:
+          type: string
+          description: Lock checkout to a specific currency. Omit to allow all currencies supported by the selected plans. If the checkout is for a customer with an active subscription, the currency must match that subscription's currency — subscriptions cannot change currency.
+        customCards:
+          type: array
+          items:
+            $ref: '#/components/schemas/CheckoutCustomCardInput'
+          description: Additional informational pricing cards rendered alongside the plans.
+      required:
+      - products
+      - successUrl
+      title: CreateCheckoutRequest
     PlanRef:
       type: object
       properties:
@@ -450,32 +449,25 @@ components:
       - name
       - externalId
       title: PlanRef
-    CheckoutProduct:
+    CheckoutCustomCardInput:
       type: object
       properties:
-        id:
+        label:
           type: string
-        plans:
-          type: array
-          items:
-            $ref: '#/components/schemas/CheckoutPlan'
-          description: Plans selected within this product. Absent when the product is offered with all of its plans and none are individually configured.
-      required:
-      - id
-      title: CheckoutProduct
-    CheckoutProductInput:
-      type: object
-      properties:
-        id:
+          description: Card title.
+        priceText:
           type: string
-        plans:
-          type: array
-          items:
-            $ref: '#/components/schemas/CheckoutPlanInput'
-          description: Select specific plans within this product. Omit to offer all of the product's plans.
+          description: Headline price text, e.g. "$99/mo".
+        buttonText:
+          type: string
+          description: Call-to-action button label.
+        buttonUrl:
+          type: string
+          format: uri
+          description: Call-to-action button URL.
       required:
-      - id
-      title: CheckoutProductInput
+      - label
+      title: CheckoutCustomCardInput
     CheckoutSelectedProduct:
       type: object
       properties:
@@ -488,23 +480,6 @@ components:
       - plan
       description: The product and plan the customer selected, once checkout completes. Null before completion.
       title: CheckoutSelectedProduct
-    Pagination:
-      type: object
-      properties:
-        limit:
-          type: integer
-        offset:
-          type: integer
-        total:
-          type: integer
-        hasMore:
-          type: boolean
-      required:
-      - limit
-      - offset
-      - total
-      - hasMore
-      title: Pagination
     CheckoutDetails:
       type: object
       properties:
@@ -591,6 +566,31 @@ components:
       - orderId
       - selectedProduct
       title: CheckoutDetails
+    CheckoutProduct:
+      type: object
+      properties:
+        id:
+          type: string
+        plans:
+          type: array
+          items:
+            $ref: '#/components/schemas/CheckoutPlan'
+          description: Plans selected within this product. Absent when the product is offered with all of its plans and none are individually configured.
+      required:
+      - id
+      title: CheckoutProduct
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+        code:
+          type: string
+        details:
+          type: string
+      required:
+      - error
+      title: ErrorResponse
   securitySchemes:
     bearerAuth:
       type: http

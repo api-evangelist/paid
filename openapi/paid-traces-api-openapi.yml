@@ -94,30 +94,6 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
-    CostAmount:
-      type: object
-      properties:
-        amount:
-          type: number
-          format: double
-          description: The cost amount
-        currency:
-          type: string
-          description: The currency code (e.g., "USD")
-      required:
-      - amount
-      - currency
-      description: Cost amount with currency
-      title: CostAmount
-    Error:
-      type: object
-      properties:
-        error:
-          $ref: '#/components/schemas/ApiError'
-      required:
-      - error
-      description: An error response from the Paid API
-      title: Error
     ApiError:
       type: object
       properties:
@@ -130,6 +106,20 @@ components:
           type: string
       description: An API error response from the Paid API
       title: ApiError
+    TracesResponse:
+      type: object
+      properties:
+        traces:
+          type: array
+          items:
+            $ref: '#/components/schemas/Trace'
+        meta:
+          $ref: '#/components/schemas/PaginationMeta'
+      required:
+      - traces
+      - meta
+      description: Response containing cost traces and pagination metadata
+      title: TracesResponse
     Trace:
       type: object
       properties:
@@ -193,20 +183,6 @@ components:
       - attributes
       description: A single cost trace record with customer and product info
       title: Trace
-    TracesResponse:
-      type: object
-      properties:
-        traces:
-          type: array
-          items:
-            $ref: '#/components/schemas/Trace'
-        meta:
-          $ref: '#/components/schemas/PaginationMeta'
-      required:
-      - traces
-      - meta
-      description: Response containing cost traces and pagination metadata
-      title: TracesResponse
     PaginationMeta:
       type: object
       properties:
@@ -249,6 +225,30 @@ components:
       - hasMore
       description: Pagination metadata for cost traces
       title: PaginationMeta
+    Error:
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/ApiError'
+      required:
+      - error
+      description: An error response from the Paid API
+      title: Error
+    CostAmount:
+      type: object
+      properties:
+        amount:
+          type: number
+          format: double
+          description: The cost amount
+        currency:
+          type: string
+          description: The currency code (e.g., "USD")
+      required:
+      - amount
+      - currency
+      description: Cost amount with currency
+      title: CostAmount
   securitySchemes:
     bearerAuth:
       type: http

@@ -162,7 +162,29 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
 components:
   schemas:
-    AnalyticsColumn:
+    AnalyticsQueryRequest:
+      type: object
+      properties:
+        query:
+          type: string
+          description: A single ClickHouse SELECT (or WITH ... SELECT) statement against the analytics views. Results are automatically scoped to your organization. See GET /schema for the available views and columns.
+      required:
+      - query
+      title: AnalyticsQueryRequest
+    SignalsMetadataResponse:
+      type: object
+      properties:
+        signals:
+          type: array
+          items:
+            $ref: '#/components/schemas/SignalsMetadataResponseSignalsItems'
+        meta:
+          $ref: '#/components/schemas/SignalsMetadataResponseMeta'
+      required:
+      - signals
+      - meta
+      title: SignalsMetadataResponse
+    AnalyticsSchemaColumn:
       type: object
       properties:
         name:
@@ -170,22 +192,26 @@ components:
         type:
           type: string
           description: ClickHouse column type
+        comment:
+          type: string
       required:
       - name
       - type
-      title: AnalyticsColumn
-    ErrorResponse:
+      - comment
+      title: AnalyticsSchemaColumn
+    SignalsMetadataResponseSignalsItems:
       type: object
       properties:
-        error:
+        signalName:
           type: string
-        code:
-          type: string
-        details:
-          type: string
+        paths:
+          type: array
+          items:
+            $ref: '#/components/schemas/SignalsMetadataResponseSignalsItemsPathsItems'
       required:
-      - error
-      title: ErrorResponse
+      - signalName
+      - paths
+      title: SignalsMetadataResponseSignalsItems
     AnalyticsSchemaView:
       type: object
       properties:
@@ -202,17 +228,16 @@ components:
       - comment
       - columns
       title: AnalyticsSchemaView
-    SignalsMetadataResponseMeta:
+    AnalyticsSchemaResponse:
       type: object
       properties:
-        fromDate:
-          type: string
-        toDate:
-          type: string
+        views:
+          type: array
+          items:
+            $ref: '#/components/schemas/AnalyticsSchemaView'
       required:
-      - fromDate
-      - toDate
-      title: SignalsMetadataResponseMeta
+      - views
+      title: AnalyticsSchemaResponse
     SignalsMetadataResponseSignalsItemsPathsItems:
       type: object
       properties:
@@ -228,6 +253,57 @@ components:
       - path
       - types
       title: SignalsMetadataResponseSignalsItemsPathsItems
+    SignalsMetadataResponseMeta:
+      type: object
+      properties:
+        fromDate:
+          type: string
+        toDate:
+          type: string
+      required:
+      - fromDate
+      - toDate
+      title: SignalsMetadataResponseMeta
+    AnalyticsQueryResponseMeta:
+      type: object
+      properties:
+        rowCount:
+          type: integer
+        elapsedMs:
+          type: number
+          format: double
+        truncated:
+          type: boolean
+          description: True when the result hit the row cap and was truncated. Narrow the query (shorter date range, LIMIT, coarser grouping) to see the rest.
+      required:
+      - rowCount
+      - elapsedMs
+      - truncated
+      title: AnalyticsQueryResponseMeta
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+        code:
+          type: string
+        details:
+          type: string
+      required:
+      - error
+      title: ErrorResponse
+    AnalyticsColumn:
+      type: object
+      properties:
+        name:
+          type: string
+        type:
+          type: string
+          description: ClickHouse column type
+      required:
+      - name
+      - type
+      title: AnalyticsColumn
     AnalyticsQueryResponse:
       type: object
       properties:
@@ -249,82 +325,6 @@ components:
       - rows
       - meta
       title: AnalyticsQueryResponse
-    SignalsMetadataResponse:
-      type: object
-      properties:
-        signals:
-          type: array
-          items:
-            $ref: '#/components/schemas/SignalsMetadataResponseSignalsItems'
-        meta:
-          $ref: '#/components/schemas/SignalsMetadataResponseMeta'
-      required:
-      - signals
-      - meta
-      title: SignalsMetadataResponse
-    AnalyticsQueryResponseMeta:
-      type: object
-      properties:
-        rowCount:
-          type: integer
-        elapsedMs:
-          type: number
-          format: double
-        truncated:
-          type: boolean
-          description: True when the result hit the row cap and was truncated. Narrow the query (shorter date range, LIMIT, coarser grouping) to see the rest.
-      required:
-      - rowCount
-      - elapsedMs
-      - truncated
-      title: AnalyticsQueryResponseMeta
-    SignalsMetadataResponseSignalsItems:
-      type: object
-      properties:
-        signalName:
-          type: string
-        paths:
-          type: array
-          items:
-            $ref: '#/components/schemas/SignalsMetadataResponseSignalsItemsPathsItems'
-      required:
-      - signalName
-      - paths
-      title: SignalsMetadataResponseSignalsItems
-    AnalyticsSchemaResponse:
-      type: object
-      properties:
-        views:
-          type: array
-          items:
-            $ref: '#/components/schemas/AnalyticsSchemaView'
-      required:
-      - views
-      title: AnalyticsSchemaResponse
-    AnalyticsSchemaColumn:
-      type: object
-      properties:
-        name:
-          type: string
-        type:
-          type: string
-          description: ClickHouse column type
-        comment:
-          type: string
-      required:
-      - name
-      - type
-      - comment
-      title: AnalyticsSchemaColumn
-    AnalyticsQueryRequest:
-      type: object
-      properties:
-        query:
-          type: string
-          description: A single ClickHouse SELECT (or WITH ... SELECT) statement against the analytics views. Results are automatically scoped to your organization. See GET /schema for the available views and columns.
-      required:
-      - query
-      title: AnalyticsQueryRequest
   securitySchemes:
     bearerAuth:
       type: http

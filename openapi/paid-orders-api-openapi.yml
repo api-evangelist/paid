@@ -971,42 +971,72 @@ paths:
       description: Production API
 components:
   schemas:
-    TaxExemptStatus:
-      type: string
-      enum:
-      - none
-      - exempt
-      - reverse
-      title: TaxExemptStatus
-    CreationSource:
-      type: string
-      enum:
-      - manual
-      - api
-      - crm
-      - other
-      title: CreationSource
-    ProrationUpgradeRequest:
+    PricePoint:
       type: object
       properties:
-        orderVersion:
-          type: integer
-          description: The current version of the order (for optimistic locking)
-        effectiveDate:
+        currency:
           type: string
-          format: date-time
-          description: The date when the plan change should take effect (ISO 8601 format)
-        updatedOrderLineAttributes:
+        unitPrice:
+          type: number
+          format: double
+        minQuantity:
+          type: number
+          format: double
+        tiers:
           type: array
           items:
-            $ref: '#/components/schemas/ProrationAttributeUpdate'
-          description: The list of order line attributes to update
-      required:
-      - orderVersion
-      - effectiveDate
-      - updatedOrderLineAttributes
-      description: Request to schedule a plan change with proration
-      title: ProrationUpgradeRequest
+            $ref: '#/components/schemas/Tier'
+      title: PricePoint
+    ApiError:
+      type: object
+      properties:
+        message:
+          type: string
+          description: A human-readable message providing more details about the error.
+        code:
+          type: string
+        details:
+          type: string
+      description: An API error response from the Paid API
+      title: ApiError
+    OrderLine:
+      type: object
+      properties:
+        id:
+          type: string
+        orderId:
+          type: string
+        agentId:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        startDate:
+          type: string
+        endDate:
+          type: string
+        totalAmount:
+          type: number
+          format: double
+        billedAmountWithoutTax:
+          type: number
+          format: double
+        billedTax:
+          type: number
+          format: double
+        totalBilledAmount:
+          type: number
+          format: double
+        creationState:
+          $ref: '#/components/schemas/CreationState'
+        agent:
+          $ref: '#/components/schemas/Agent'
+        orderLineAttributes:
+          type: array
+          items:
+            $ref: '#/components/schemas/OrderLineAttribute'
+      title: OrderLine
     OrderLineCreate:
       type: object
       properties:
@@ -1039,6 +1069,286 @@ components:
             $ref: '#/components/schemas/OrderLineAttributeCreate'
           description: 'DEPRECATED: Use ProductAttribute instead. Optional array of custom agent attributes to override default pricing, allowing per customer pricing. If not provided, attributes will be auto-generated from the product definition.'
       title: OrderLineCreate
+    BillingFrequency:
+      type: string
+      enum:
+      - monthly
+      - quarterly
+      - annual
+      title: BillingFrequency
+    ProrationUpgradeRequest:
+      type: object
+      properties:
+        orderVersion:
+          type: integer
+          description: The current version of the order (for optimistic locking)
+        effectiveDate:
+          type: string
+          format: date-time
+          description: The date when the plan change should take effect (ISO 8601 format)
+        updatedOrderLineAttributes:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProrationAttributeUpdate'
+          description: The list of order line attributes to update
+      required:
+      - orderVersion
+      - effectiveDate
+      - updatedOrderLineAttributes
+      description: Request to schedule a plan change with proration
+      title: ProrationUpgradeRequest
+    Error:
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/ApiError'
+      required:
+      - error
+      description: An error response from the Paid API
+      title: Error
+    CustomerMetadata:
+      type: object
+      properties: {}
+      description: Flexible JSON field for storing custom metadata about the customer
+      title: CustomerMetadata
+    OrderLineAttributeCreate:
+      oneOf:
+      - description: Any type
+      - description: Any type
+      title: OrderLineAttributeCreate
+    ProrationAttributeUpdate:
+      type: object
+      properties:
+        orderLineAttributeId:
+          type: string
+          format: uuid
+          description: The ID of the order line attribute to update
+        newPricing:
+          type: object
+          additionalProperties:
+            description: Any type
+          description: The new pricing configuration
+        newQuantity:
+          type: number
+          format: double
+          description: Optional new quantity for the attribute
+      required:
+      - orderLineAttributeId
+      - newPricing
+      description: An attribute update for a proration upgrade
+      title: ProrationAttributeUpdate
+    Order:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        customerId:
+          type: string
+        organizationId:
+          type: string
+        startDate:
+          type: string
+        endDate:
+          type: string
+        totalAmount:
+          type: number
+          format: double
+        estimatedTax:
+          type: number
+          format: double
+        billedAmountNoTax:
+          type: number
+          format: double
+        billedTax:
+          type: number
+          format: double
+        totalBilledAmount:
+          type: number
+          format: double
+        pendingBillingAmount:
+          type: number
+          format: double
+        creationState:
+          $ref: '#/components/schemas/CreationState'
+        orderLines:
+          type: array
+          items:
+            $ref: '#/components/schemas/OrderLine'
+        customer:
+          $ref: '#/components/schemas/Customer'
+      title: Order
+    CreationState:
+      type: string
+      enum:
+      - active
+      - draft
+      title: CreationState
+    orders_delete_Response_204:
+      type: object
+      properties: {}
+      description: Empty response body
+      title: orders_delete_Response_204
+    ProrationUpgradeResponse:
+      type: object
+      properties:
+        orderId:
+          type: string
+          format: uuid
+          description: The ID of the order
+        amendmentId:
+          type: string
+          format: uuid
+          description: The ID of the amendment record
+        version:
+          type: integer
+          description: The new version of the order after the amendment
+        effectiveDate:
+          type: string
+          format: date-time
+          description: The effective date of the plan change
+        endedLineIds:
+          type: array
+          items:
+            type: string
+            format: uuid
+          description: IDs of order lines that were ended
+        createdLineIds:
+          type: array
+          items:
+            type: string
+            format: uuid
+          description: IDs of new order lines that were created
+        creditLineIds:
+          type: array
+          items:
+            type: string
+            format: uuid
+          description: IDs of credit lines that were created
+        prorationDetails:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProrationDetail'
+          description: Detailed proration calculations for each updated attribute
+      required:
+      - orderId
+      - amendmentId
+      - version
+      - effectiveDate
+      - endedLineIds
+      - createdLineIds
+      - creditLineIds
+      - prorationDetails
+      description: Response after successfully scheduling a plan change
+      title: ProrationUpgradeResponse
+    CancelRenewalRequest:
+      type: object
+      properties:
+        orderVersion:
+          type: integer
+          description: The current version of the order (for optimistic locking)
+        cancelFromDate:
+          type: string
+          format: date-time
+          description: The date from which the renewal should be cancelled (ISO 8601 format)
+      required:
+      - orderVersion
+      - cancelFromDate
+      description: Request to cancel an order's renewal
+      title: CancelRenewalRequest
+    Address:
+      type: object
+      properties:
+        line1:
+          type: string
+        line2:
+          type: string
+        city:
+          type: string
+        state:
+          type: string
+        zipCode:
+          type: string
+        country:
+          type: string
+      required:
+      - line1
+      - city
+      - state
+      - zipCode
+      - country
+      title: Address
+    OrderCreate:
+      type: object
+      properties:
+        customerId:
+          type: string
+        customerExternalId:
+          type: string
+        billingContactId:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        startDate:
+          type: string
+        endDate:
+          type: string
+        currency:
+          type: string
+        planId:
+          type: string
+          format: uuid
+          description: Optional plan ID to associate with this order
+        orderLines:
+          type: array
+          items:
+            $ref: '#/components/schemas/OrderLineCreate'
+      required:
+      - name
+      - startDate
+      - currency
+      title: OrderCreate
+    AgentPricePointTiers:
+      type: object
+      properties:
+        minQuantity:
+          type: number
+          format: double
+        maxQuantity:
+          type: number
+          format: double
+        unitPrice:
+          type: number
+          format: double
+      required:
+      - unitPrice
+      title: AgentPricePointTiers
+    AgentAttribute:
+      type: object
+      properties:
+        name:
+          type: string
+        active:
+          type: boolean
+        pricing:
+          $ref: '#/components/schemas/Pricing'
+      required:
+      - name
+      - active
+      - pricing
+      title: AgentAttribute
+    TaxExemptStatus:
+      type: string
+      enum:
+      - none
+      - exempt
+      - reverse
+      title: TaxExemptStatus
     Agent:
       type: object
       properties:
@@ -1066,42 +1376,6 @@ components:
       - name
       - active
       title: Agent
-    Error:
-      type: object
-      properties:
-        error:
-          $ref: '#/components/schemas/ApiError'
-      required:
-      - error
-      description: An error response from the Paid API
-      title: Error
-    ApiError:
-      type: object
-      properties:
-        message:
-          type: string
-          description: A human-readable message providing more details about the error.
-        code:
-          type: string
-        details:
-          type: string
-      description: An API error response from the Paid API
-      title: ApiError
-    AgentPricePointTiers:
-      type: object
-      properties:
-        minQuantity:
-          type: number
-          format: double
-        maxQuantity:
-          type: number
-          format: double
-        unitPrice:
-          type: number
-          format: double
-      required:
-      - unitPrice
-      title: AgentPricePointTiers
     ProrationDetail:
       type: object
       properties:
@@ -1140,38 +1414,36 @@ components:
       - GraduatedPricing
       - PrepaidCredits
       title: PricingModelType
-    AgentAttribute:
+    CreationSource:
+      type: string
+      enum:
+      - manual
+      - api
+      - crm
+      - other
+      title: CreationSource
+    OrderLineAttributePricing:
       type: object
       properties:
-        name:
+        eventName:
           type: string
-        active:
-          type: boolean
-        pricing:
-          $ref: '#/components/schemas/Pricing'
-      required:
-      - name
-      - active
-      - pricing
-      title: AgentAttribute
-    Tier:
-      type: object
-      properties:
-        lowerBound:
-          type: number
-          format: double
-        upperBound:
-          type: number
-          format: double
-        price:
-          type: number
-          format: double
-      title: Tier
-    CustomerMetadata:
-      type: object
-      properties: {}
-      description: Flexible JSON field for storing custom metadata about the customer
-      title: CustomerMetadata
+        chargeType:
+          $ref: '#/components/schemas/ChargeType'
+        pricePoint:
+          $ref: '#/components/schemas/PricePoint'
+        pricingModel:
+          $ref: '#/components/schemas/PricingModelType'
+        billingFrequency:
+          $ref: '#/components/schemas/BillingFrequency'
+      title: OrderLineAttributePricing
+    ChargeType:
+      type: string
+      enum:
+      - oneTime
+      - recurring
+      - usage
+      - seatBased
+      title: ChargeType
     Invoice:
       type: object
       properties:
@@ -1237,6 +1509,55 @@ components:
           $ref: '#/components/schemas/Customer'
       description: An invoice for an order
       title: Invoice
+    Pricing:
+      type: object
+      properties:
+        eventName:
+          type: string
+        taxable:
+          type: boolean
+        creditCost:
+          type: number
+          format: double
+        chargeType:
+          $ref: '#/components/schemas/ChargeType'
+        pricingModel:
+          $ref: '#/components/schemas/PricingModelType'
+        billingFrequency:
+          $ref: '#/components/schemas/BillingFrequency'
+        pricePoints:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/AgentPricePoint'
+      required:
+      - taxable
+      - chargeType
+      - pricingModel
+      - billingFrequency
+      - pricePoints
+      title: Pricing
+    InvoiceStatus:
+      type: string
+      enum:
+      - draft
+      - open
+      - paid
+      - void
+      - uncollectible
+      title: InvoiceStatus
+    OrderLineAttribute:
+      type: object
+      properties:
+        agentAttributeId:
+          type: string
+        quantity:
+          type: number
+          format: double
+        currency:
+          type: string
+        pricing:
+          $ref: '#/components/schemas/OrderLineAttributePricing'
+      title: OrderLineAttribute
     AgentPricePoint:
       type: object
       properties:
@@ -1254,115 +1575,6 @@ components:
           items:
             $ref: '#/components/schemas/AgentPricePointTiers'
       title: AgentPricePoint
-    Order:
-      type: object
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-        description:
-          type: string
-        customerId:
-          type: string
-        organizationId:
-          type: string
-        startDate:
-          type: string
-        endDate:
-          type: string
-        totalAmount:
-          type: number
-          format: double
-        estimatedTax:
-          type: number
-          format: double
-        billedAmountNoTax:
-          type: number
-          format: double
-        billedTax:
-          type: number
-          format: double
-        totalBilledAmount:
-          type: number
-          format: double
-        pendingBillingAmount:
-          type: number
-          format: double
-        creationState:
-          $ref: '#/components/schemas/CreationState'
-        orderLines:
-          type: array
-          items:
-            $ref: '#/components/schemas/OrderLine'
-        customer:
-          $ref: '#/components/schemas/Customer'
-      title: Order
-    OrderLine:
-      type: object
-      properties:
-        id:
-          type: string
-        orderId:
-          type: string
-        agentId:
-          type: string
-        name:
-          type: string
-        description:
-          type: string
-        startDate:
-          type: string
-        endDate:
-          type: string
-        totalAmount:
-          type: number
-          format: double
-        billedAmountWithoutTax:
-          type: number
-          format: double
-        billedTax:
-          type: number
-          format: double
-        totalBilledAmount:
-          type: number
-          format: double
-        creationState:
-          $ref: '#/components/schemas/CreationState'
-        agent:
-          $ref: '#/components/schemas/Agent'
-        orderLineAttributes:
-          type: array
-          items:
-            $ref: '#/components/schemas/OrderLineAttribute'
-      title: OrderLine
-    orders_delete_Response_204:
-      type: object
-      properties: {}
-      description: Empty response body
-      title: orders_delete_Response_204
-    Address:
-      type: object
-      properties:
-        line1:
-          type: string
-        line2:
-          type: string
-        city:
-          type: string
-        state:
-          type: string
-        zipCode:
-          type: string
-        country:
-          type: string
-      required:
-      - line1
-      - city
-      - state
-      - zipCode
-      - country
-      title: Address
     CancelRenewalResponse:
       type: object
       properties:
@@ -1393,231 +1605,19 @@ components:
       - effectiveDate
       description: Response after successfully cancelling an order's renewal
       title: CancelRenewalResponse
-    ChargeType:
-      type: string
-      enum:
-      - oneTime
-      - recurring
-      - usage
-      - seatBased
-      title: ChargeType
-    OrderLineAttributePricing:
+    Tier:
       type: object
       properties:
-        eventName:
-          type: string
-        chargeType:
-          $ref: '#/components/schemas/ChargeType'
-        pricePoint:
-          $ref: '#/components/schemas/PricePoint'
-        pricingModel:
-          $ref: '#/components/schemas/PricingModelType'
-        billingFrequency:
-          $ref: '#/components/schemas/BillingFrequency'
-      title: OrderLineAttributePricing
-    PricePoint:
-      type: object
-      properties:
-        currency:
-          type: string
-        unitPrice:
+        lowerBound:
           type: number
           format: double
-        minQuantity:
+        upperBound:
           type: number
           format: double
-        tiers:
-          type: array
-          items:
-            $ref: '#/components/schemas/Tier'
-      title: PricePoint
-    CreationState:
-      type: string
-      enum:
-      - active
-      - draft
-      title: CreationState
-    CancelRenewalRequest:
-      type: object
-      properties:
-        orderVersion:
-          type: integer
-          description: The current version of the order (for optimistic locking)
-        cancelFromDate:
-          type: string
-          format: date-time
-          description: The date from which the renewal should be cancelled (ISO 8601 format)
-      required:
-      - orderVersion
-      - cancelFromDate
-      description: Request to cancel an order's renewal
-      title: CancelRenewalRequest
-    Pricing:
-      type: object
-      properties:
-        eventName:
-          type: string
-        taxable:
-          type: boolean
-        creditCost:
+        price:
           type: number
           format: double
-        chargeType:
-          $ref: '#/components/schemas/ChargeType'
-        pricingModel:
-          $ref: '#/components/schemas/PricingModelType'
-        billingFrequency:
-          $ref: '#/components/schemas/BillingFrequency'
-        pricePoints:
-          type: object
-          additionalProperties:
-            $ref: '#/components/schemas/AgentPricePoint'
-      required:
-      - taxable
-      - chargeType
-      - pricingModel
-      - billingFrequency
-      - pricePoints
-      title: Pricing
-    ProrationAttributeUpdate:
-      type: object
-      properties:
-        orderLineAttributeId:
-          type: string
-          format: uuid
-          description: The ID of the order line attribute to update
-        newPricing:
-          type: object
-          additionalProperties:
-            description: Any type
-          description: The new pricing configuration
-        newQuantity:
-          type: number
-          format: double
-          description: Optional new quantity for the attribute
-      required:
-      - orderLineAttributeId
-      - newPricing
-      description: An attribute update for a proration upgrade
-      title: ProrationAttributeUpdate
-    InvoiceStatus:
-      type: string
-      enum:
-      - draft
-      - open
-      - paid
-      - void
-      - uncollectible
-      title: InvoiceStatus
-    OrderCreate:
-      type: object
-      properties:
-        customerId:
-          type: string
-        customerExternalId:
-          type: string
-        billingContactId:
-          type: string
-        name:
-          type: string
-        description:
-          type: string
-        startDate:
-          type: string
-        endDate:
-          type: string
-        currency:
-          type: string
-        planId:
-          type: string
-          format: uuid
-          description: Optional plan ID to associate with this order
-        orderLines:
-          type: array
-          items:
-            $ref: '#/components/schemas/OrderLineCreate'
-      required:
-      - name
-      - startDate
-      - currency
-      title: OrderCreate
-    BillingFrequency:
-      type: string
-      enum:
-      - monthly
-      - quarterly
-      - annual
-      title: BillingFrequency
-    ProrationUpgradeResponse:
-      type: object
-      properties:
-        orderId:
-          type: string
-          format: uuid
-          description: The ID of the order
-        amendmentId:
-          type: string
-          format: uuid
-          description: The ID of the amendment record
-        version:
-          type: integer
-          description: The new version of the order after the amendment
-        effectiveDate:
-          type: string
-          format: date-time
-          description: The effective date of the plan change
-        endedLineIds:
-          type: array
-          items:
-            type: string
-            format: uuid
-          description: IDs of order lines that were ended
-        createdLineIds:
-          type: array
-          items:
-            type: string
-            format: uuid
-          description: IDs of new order lines that were created
-        creditLineIds:
-          type: array
-          items:
-            type: string
-            format: uuid
-          description: IDs of credit lines that were created
-        prorationDetails:
-          type: array
-          items:
-            $ref: '#/components/schemas/ProrationDetail'
-          description: Detailed proration calculations for each updated attribute
-      required:
-      - orderId
-      - amendmentId
-      - version
-      - effectiveDate
-      - endedLineIds
-      - createdLineIds
-      - creditLineIds
-      - prorationDetails
-      description: Response after successfully scheduling a plan change
-      title: ProrationUpgradeResponse
-    OrderLineAttributeCreate:
-      oneOf:
-      - description: Any type
-      - description: Any type
-      title: OrderLineAttributeCreate
-    OrderLineAttribute:
-      type: object
-      properties:
-        agentAttributeId:
-          type: string
-        quantity:
-          type: number
-          format: double
-        currency:
-          type: string
-        pricing:
-          $ref: '#/components/schemas/OrderLineAttributePricing'
-      title: OrderLineAttribute
+      title: Tier
     Customer:
       type: object
       properties:
@@ -1655,92 +1655,6 @@ components:
       - organizationId
       - name
       title: Customer
-    BatchSeatAssignmentsRequest:
-      type: object
-      properties:
-        assignments:
-          type: array
-          items:
-            $ref: '#/components/schemas/BatchSeatAssignmentsRequestAssignmentsItems'
-      required:
-      - assignments
-      title: BatchSeatAssignmentsRequest
-    CreateOrderLineAttributeRequestPricingPricePointsTiersItemsTierBillingType:
-      type: string
-      enum:
-      - flat
-      - perUnit
-      title: CreateOrderLineAttributeRequestPricingPricePointsTiersItemsTierBillingType
-    OrderLineType:
-      type: string
-      enum:
-      - STANDARD
-      - PRORATION_CREDIT
-      - PRORATION_CHARGE
-      - CREDIT
-      title: OrderLineType
-    CreateOrderLineAttributeRequestPricingCreditBenefitsItemsRolloverDurationUnit:
-      type: string
-      enum:
-      - days
-      - months
-      title: CreateOrderLineAttributeRequestPricingCreditBenefitsItemsRolloverDurationUnit
-    OrderSeat:
-      type: object
-      properties:
-        id:
-          type: string
-        orderId:
-          type: string
-        productExternalId:
-          type:
-          - string
-          - 'null'
-        status:
-          $ref: '#/components/schemas/SeatAssignmentStatus'
-        assignee:
-          $ref: '#/components/schemas/SeatAssignee'
-        createdAt:
-          type: string
-          format: date-time
-        updatedAt:
-          type: string
-          format: date-time
-      required:
-      - id
-      - orderId
-      - productExternalId
-      - status
-      - assignee
-      - createdAt
-      - updatedAt
-      title: OrderSeat
-    CreateOrderLineAttributeRequestPricingChargeType:
-      type: string
-      enum:
-      - usage
-      - recurring
-      - oneTime
-      - seatBased
-      title: CreateOrderLineAttributeRequestPricingChargeType
-    BatchSeatAssignmentsResponse:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/OrderSeat'
-      required:
-      - data
-      title: BatchSeatAssignmentsResponse
-    CreateOrderLineAttributeRequestPricingPricingInput:
-      type: object
-      properties:
-        kind:
-          $ref: '#/components/schemas/CreateOrderLineAttributeRequestPricingPricingInputKind'
-      required:
-      - kind
-      title: CreateOrderLineAttributeRequestPricingPricingInput
     SeatAssignee:
       type: object
       properties:
@@ -1757,6 +1671,49 @@ components:
       - externalId
       - email
       title: SeatAssignee
+    CreateOrderLineAttributeRequestPricingPricePointsTiersItemsTierBillingType:
+      type: string
+      enum:
+      - flat
+      - perUnit
+      title: CreateOrderLineAttributeRequestPricingPricePointsTiersItemsTierBillingType
+    CreateOrderLineAttributeRequestPricingPricePointsTiersItems:
+      type: object
+      properties:
+        flatAmount:
+          type: number
+          format: double
+        index:
+          type: number
+          format: double
+        lowerBound:
+          type: number
+          format: double
+        number:
+          type: number
+          format: double
+        tierBillingType:
+          $ref: '#/components/schemas/CreateOrderLineAttributeRequestPricingPricePointsTiersItemsTierBillingType'
+        unitAmount:
+          type: number
+          format: double
+        upperBound:
+          type: number
+          format: double
+      title: CreateOrderLineAttributeRequestPricingPricePointsTiersItems
+    BatchSeatAssignmentsRequestAssignmentsItems:
+      type: object
+      properties:
+        seatId:
+          type: string
+        userExternalId:
+          type:
+          - string
+          - 'null'
+      required:
+      - seatId
+      - userExternalId
+      title: BatchSeatAssignmentsRequestAssignmentsItems
     CreateOrderLineAttributeRequestPricing:
       type: object
       properties:
@@ -1803,85 +1760,139 @@ components:
       - pricePoints
       - pricingModel
       title: CreateOrderLineAttributeRequestPricing
-    CreateOrderLineAttributeRequestPricingPricePoints:
+    OrderLine_2:
       type: object
       properties:
-        currency:
+        id:
           type: string
-        unitPrice:
-          type: number
-          format: double
-        minQuantity:
-          type: number
-          format: double
-        includedQuantity:
-          type: number
-          format: double
-        tiers:
+        productId:
+          type: string
+        name:
+          type: string
+        description:
+          type:
+          - string
+          - 'null'
+        startDate:
+          type: string
+          format: date-time
+        endDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        lineType:
+          $ref: '#/components/schemas/OrderLineType'
+      required:
+      - id
+      - productId
+      - name
+      - description
+      - startDate
+      - endDate
+      - lineType
+      title: OrderLine
+    OrderSeat:
+      type: object
+      properties:
+        id:
+          type: string
+        orderId:
+          type: string
+        productExternalId:
+          type:
+          - string
+          - 'null'
+        status:
+          $ref: '#/components/schemas/SeatAssignmentStatus'
+        assignee:
+          $ref: '#/components/schemas/SeatAssignee'
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+      required:
+      - id
+      - orderId
+      - productExternalId
+      - status
+      - assignee
+      - createdAt
+      - updatedAt
+      title: OrderSeat
+    BatchSeatAssignmentsRequest:
+      type: object
+      properties:
+        assignments:
           type: array
           items:
-            $ref: '#/components/schemas/CreateOrderLineAttributeRequestPricingPricePointsTiersItems'
+            $ref: '#/components/schemas/BatchSeatAssignmentsRequestAssignmentsItems'
       required:
-      - unitPrice
-      description: Single flat price point for this order attribute override. Do not send a currency-keyed map here.
-      title: CreateOrderLineAttributeRequestPricingPricePoints
-    CreateOrderLineAttributeRequestPricingPricePointsTiersItems:
+      - assignments
+      title: BatchSeatAssignmentsRequest
+    WritableOrderLineType:
+      type: string
+      enum:
+      - STANDARD
+      - CREDIT
+      description: Defaults to STANDARD. Set to CREDIT for customer-authored, term-bound discount lines whose amounts contribute negatively to invoice aggregates.
+      title: WritableOrderLineType
+    OrderListResponse:
       type: object
       properties:
-        flatAmount:
-          type: number
-          format: double
-        index:
-          type: number
-          format: double
-        lowerBound:
-          type: number
-          format: double
-        number:
-          type: number
-          format: double
-        tierBillingType:
-          $ref: '#/components/schemas/CreateOrderLineAttributeRequestPricingPricePointsTiersItemsTierBillingType'
-        unitAmount:
-          type: number
-          format: double
-        upperBound:
-          type: number
-          format: double
-      title: CreateOrderLineAttributeRequestPricingPricePointsTiersItems
-    OrderBillingFrequencyOverride:
-      type: object
-      properties:
-        frequency:
-          $ref: '#/components/schemas/OrderBillingFrequencyOverrideFrequency'
-        customMonths:
-          type:
-          - integer
-          - 'null'
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Order_2'
+        pagination:
+          $ref: '#/components/schemas/Pagination'
       required:
-      - frequency
-      title: OrderBillingFrequencyOverride
-    OrdersGetParametersStatus:
+      - data
+      - pagination
+      title: OrderListResponse
+    SeatAssignmentStatus:
+      type: string
+      enum:
+      - assigned
+      - unassigned
+      title: SeatAssignmentStatus
+    CreateOrderLineAttributeRequestPricingCreditBenefitsItemsRolloverDurationUnit:
+      type: string
+      enum:
+      - days
+      - months
+      title: CreateOrderLineAttributeRequestPricingCreditBenefitsItemsRolloverDurationUnit
+    OrdersGetParametersCreationState:
       type: string
       enum:
       - draft
-      - paused
       - active
-      - ended
-      title: OrdersGetParametersStatus
-    CreateOrderLineAttributeRequest:
+      title: OrdersGetParametersCreationState
+    Pagination:
       type: object
       properties:
-        name:
-          type: string
-        quantity:
+        limit:
           type: integer
-        pricing:
-          $ref: '#/components/schemas/CreateOrderLineAttributeRequestPricing'
+        offset:
+          type: integer
+        total:
+          type: integer
+        hasMore:
+          type: boolean
       required:
-      - name
-      - pricing
-      title: CreateOrderLineAttributeRequest
+      - limit
+      - offset
+      - total
+      - hasMore
+      title: Pagination
+    CreateOrderLineAttributeRequestPricingSignalType:
+      type: string
+      enum:
+      - activity
+      - outcome
+      title: CreateOrderLineAttributeRequestPricingSignalType
     Order_2:
       type: object
       properties:
@@ -2014,38 +2025,110 @@ components:
       - billingFrequencyOverridden
       - purchaseOrderReference
       title: Order
-    OrderLine_2:
+    CreateOrderLineAttributeRequestPricingCreditUnitBracketsItems:
       type: object
       properties:
-        id:
-          type: string
-        productId:
-          type: string
+        upTo:
+          type:
+          - integer
+          - 'null'
+        creditUnits:
+          type: integer
+      required:
+      - upTo
+      - creditUnits
+      title: CreateOrderLineAttributeRequestPricingCreditUnitBracketsItems
+    OrdersGetParametersStatus:
+      type: string
+      enum:
+      - draft
+      - paused
+      - active
+      - ended
+      title: OrdersGetParametersStatus
+    CreateOrderLineAttributeRequestPricingCreditBenefitsItemsCreditGrantTiming:
+      type: string
+      enum:
+      - on_payment
+      - on_invoice_posted
+      - on_order_activation
+      title: CreateOrderLineAttributeRequestPricingCreditBenefitsItemsCreditGrantTiming
+    CreateOrderLineAttributeRequestPricingPricingInputKind:
+      type: string
+      enum:
+      - signalQuantity
+      title: CreateOrderLineAttributeRequestPricingPricingInputKind
+    OrderLinesResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/OrderLine_2'
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+      required:
+      - data
+      - pagination
+      title: OrderLinesResponse
+    CreateOrderLineAttributeRequest:
+      type: object
+      properties:
         name:
           type: string
-        description:
-          type:
-          - string
-          - 'null'
-        startDate:
-          type: string
-          format: date-time
-        endDate:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        lineType:
-          $ref: '#/components/schemas/OrderLineType'
+        quantity:
+          type: integer
+        pricing:
+          $ref: '#/components/schemas/CreateOrderLineAttributeRequestPricing'
       required:
-      - id
-      - productId
       - name
-      - description
-      - startDate
-      - endDate
-      - lineType
-      title: OrderLine
+      - pricing
+      title: CreateOrderLineAttributeRequest
+    CreateOrderLineAttributeRequestPricingBillingType:
+      type: string
+      enum:
+      - advance
+      - arrears
+      title: CreateOrderLineAttributeRequestPricingBillingType
+    OrderCreationState:
+      type: string
+      enum:
+      - draft
+      - active
+      title: OrderCreationState
+    OrderBillingFrequencyOverrideFrequency:
+      type: string
+      enum:
+      - monthly
+      - quarterly
+      - semiAnnually
+      - annual
+      - custom
+      title: OrderBillingFrequencyOverrideFrequency
+    UpdateSeatAssignmentRequest:
+      type: object
+      properties:
+        userExternalId:
+          type:
+          - string
+          - 'null'
+      required:
+      - userExternalId
+      title: UpdateSeatAssignmentRequest
+    BatchSeatAssignmentsResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/OrderSeat'
+      required:
+      - data
+      title: BatchSeatAssignmentsResponse
+    EmptyResponse:
+      type: object
+      properties: {}
+      title: EmptyResponse
     UpdateOrderRequest:
       type: object
       properties:
@@ -2090,18 +2173,151 @@ components:
           - 'null'
           description: Purchase order number printed on invoices generated from this order.
       title: UpdateOrderRequest
+    CreateOrderLineAttributeRequestPricingCreditBenefitsItemsRecipient:
+      type: string
+      enum:
+      - organization
+      - seat
+      title: CreateOrderLineAttributeRequestPricingCreditBenefitsItemsRecipient
+    OrderSeatListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/OrderSeat'
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+      required:
+      - data
+      - pagination
+      title: OrderSeatListResponse
+    CreateOrderLineAttributeRequestPricingPricingModel:
+      type: string
+      enum:
+      - perUnit
+      - volumePricing
+      - graduatedPricing
+      - prepaidCredits
+      - bracketedPrepaidCredits
+      - flat
+      title: CreateOrderLineAttributeRequestPricingPricingModel
     OrdersIdSeatsGetParametersStatus:
       type: string
       enum:
       - assigned
       - unassigned
       title: OrdersIdSeatsGetParametersStatus
-    OrderCreationState:
+    CreateOrderLineAttributeRequestPricingPricePoints:
+      type: object
+      properties:
+        currency:
+          type: string
+        unitPrice:
+          type: number
+          format: double
+        minQuantity:
+          type: number
+          format: double
+        includedQuantity:
+          type: number
+          format: double
+        tiers:
+          type: array
+          items:
+            $ref: '#/components/schemas/CreateOrderLineAttributeRequestPricingPricePointsTiersItems'
+      required:
+      - unitPrice
+      description: Single flat price point for this order attribute override. Do not send a currency-keyed map here.
+      title: CreateOrderLineAttributeRequestPricingPricePoints
+    OrderLineType:
       type: string
       enum:
-      - draft
-      - active
-      title: OrderCreationState
+      - STANDARD
+      - PRORATION_CREDIT
+      - PRORATION_CHARGE
+      - CREDIT
+      title: OrderLineType
+    CreateOrderLineRequest:
+      type: object
+      properties:
+        productId:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        startDate:
+          type: string
+          format: date-time
+        endDate:
+          type: string
+          format: date-time
+        attributes:
+          type: array
+          items:
+            $ref: '#/components/schemas/CreateOrderLineAttributeRequest'
+        lineType:
+          $ref: '#/components/schemas/WritableOrderLineType'
+      required:
+      - productId
+      description: When override `attributes` are omitted, the order will match the base product (or default plan if plans are configured).
+      title: CreateOrderLineRequest
+    CreateOrderLineAttributeRequestPricingCreditBenefitsItemsAllocationCadence:
+      type: string
+      enum:
+      - upfront
+      - monthly
+      title: CreateOrderLineAttributeRequestPricingCreditBenefitsItemsAllocationCadence
+    CreateOrderLineAttributeRequestPricingCreditBenefitsItems:
+      type: object
+      properties:
+        id:
+          type: string
+        creditsCurrencyId:
+          type: string
+        recipient:
+          $ref: '#/components/schemas/CreateOrderLineAttributeRequestPricingCreditBenefitsItemsRecipient'
+        amount:
+          type: number
+          format: double
+        rolloverAmount:
+          type:
+          - number
+          - 'null'
+          format: double
+        rolloverDuration:
+          type:
+          - number
+          - 'null'
+          format: double
+        rolloverDurationUnit:
+          $ref: '#/components/schemas/CreateOrderLineAttributeRequestPricingCreditBenefitsItemsRolloverDurationUnit'
+        allocationCadence:
+          $ref: '#/components/schemas/CreateOrderLineAttributeRequestPricingCreditBenefitsItemsAllocationCadence'
+        creditGrantTiming:
+          $ref: '#/components/schemas/CreateOrderLineAttributeRequestPricingCreditBenefitsItemsCreditGrantTiming'
+      required:
+      - id
+      - amount
+      title: CreateOrderLineAttributeRequestPricingCreditBenefitsItems
+    CreateOrderLineAttributeRequestPricingBillingFrequency:
+      type: string
+      enum:
+      - monthly
+      - quarterly
+      - semiAnnually
+      - annual
+      - custom
+      title: CreateOrderLineAttributeRequestPricingBillingFrequency
+    CreateOrderLineAttributeRequestPricingChargeType:
+      type: string
+      enum:
+      - usage
+      - recurring
+      - oneTime
+      - seatBased
+      title: CreateOrderLineAttributeRequestPricingChargeType
     CreateOrderRequest:
       type: object
       properties:
@@ -2158,125 +2374,14 @@ components:
       required:
       - customerId
       title: CreateOrderRequest
-    SeatAssignmentStatus:
-      type: string
-      enum:
-      - assigned
-      - unassigned
-      title: SeatAssignmentStatus
-    CreateOrderLineAttributeRequestPricingCreditBenefitsItemsCreditGrantTiming:
-      type: string
-      enum:
-      - on_payment
-      - on_invoice_posted
-      - on_order_activation
-      title: CreateOrderLineAttributeRequestPricingCreditBenefitsItemsCreditGrantTiming
-    CreateOrderLineAttributeRequestPricingBillingType:
-      type: string
-      enum:
-      - advance
-      - arrears
-      title: CreateOrderLineAttributeRequestPricingBillingType
-    CreateOrderLineAttributeRequestPricingCreditUnitBracketsItems:
+    CreateOrderLineAttributeRequestPricingPricingInput:
       type: object
       properties:
-        upTo:
-          type:
-          - integer
-          - 'null'
-        creditUnits:
-          type: integer
+        kind:
+          $ref: '#/components/schemas/CreateOrderLineAttributeRequestPricingPricingInputKind'
       required:
-      - upTo
-      - creditUnits
-      title: CreateOrderLineAttributeRequestPricingCreditUnitBracketsItems
-    OrderSeatListResponse:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/OrderSeat'
-        pagination:
-          $ref: '#/components/schemas/Pagination'
-      required:
-      - data
-      - pagination
-      title: OrderSeatListResponse
-    CreateOrderLineRequest:
-      type: object
-      properties:
-        productId:
-          type: string
-        name:
-          type: string
-        description:
-          type: string
-        startDate:
-          type: string
-          format: date-time
-        endDate:
-          type: string
-          format: date-time
-        attributes:
-          type: array
-          items:
-            $ref: '#/components/schemas/CreateOrderLineAttributeRequest'
-        lineType:
-          $ref: '#/components/schemas/WritableOrderLineType'
-      required:
-      - productId
-      description: When override `attributes` are omitted, the order will match the base product (or default plan if plans are configured).
-      title: CreateOrderLineRequest
-    EmptyResponse:
-      type: object
-      properties: {}
-      title: EmptyResponse
-    OrderLinesResponse:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/OrderLine_2'
-        pagination:
-          $ref: '#/components/schemas/Pagination'
-      required:
-      - data
-      - pagination
-      title: OrderLinesResponse
-    CreateOrderLineAttributeRequestPricingBillingFrequency:
-      type: string
-      enum:
-      - monthly
-      - quarterly
-      - semiAnnually
-      - annual
-      - custom
-      title: CreateOrderLineAttributeRequestPricingBillingFrequency
-    CreateOrderLineAttributeRequestPricingCreditBenefitsItemsAllocationCadence:
-      type: string
-      enum:
-      - upfront
-      - monthly
-      title: CreateOrderLineAttributeRequestPricingCreditBenefitsItemsAllocationCadence
-    Pagination:
-      type: object
-      properties:
-        limit:
-          type: integer
-        offset:
-          type: integer
-        total:
-          type: integer
-        hasMore:
-          type: boolean
-      required:
-      - limit
-      - offset
-      - total
-      - hasMore
-      title: Pagination
+      - kind
+      title: CreateOrderLineAttributeRequestPricingPricingInput
     ErrorResponse:
       type: object
       properties:
@@ -2289,123 +2394,18 @@ components:
       required:
       - error
       title: ErrorResponse
-    BatchSeatAssignmentsRequestAssignmentsItems:
+    OrderBillingFrequencyOverride:
       type: object
       properties:
-        seatId:
-          type: string
-        userExternalId:
+        frequency:
+          $ref: '#/components/schemas/OrderBillingFrequencyOverrideFrequency'
+        customMonths:
           type:
-          - string
+          - integer
           - 'null'
       required:
-      - seatId
-      - userExternalId
-      title: BatchSeatAssignmentsRequestAssignmentsItems
-    CreateOrderLineAttributeRequestPricingPricingInputKind:
-      type: string
-      enum:
-      - signalQuantity
-      title: CreateOrderLineAttributeRequestPricingPricingInputKind
-    OrderBillingFrequencyOverrideFrequency:
-      type: string
-      enum:
-      - monthly
-      - quarterly
-      - semiAnnually
-      - annual
-      - custom
-      title: OrderBillingFrequencyOverrideFrequency
-    OrdersGetParametersCreationState:
-      type: string
-      enum:
-      - draft
-      - active
-      title: OrdersGetParametersCreationState
-    UpdateSeatAssignmentRequest:
-      type: object
-      properties:
-        userExternalId:
-          type:
-          - string
-          - 'null'
-      required:
-      - userExternalId
-      title: UpdateSeatAssignmentRequest
-    WritableOrderLineType:
-      type: string
-      enum:
-      - STANDARD
-      - CREDIT
-      description: Defaults to STANDARD. Set to CREDIT for customer-authored, term-bound discount lines whose amounts contribute negatively to invoice aggregates.
-      title: WritableOrderLineType
-    CreateOrderLineAttributeRequestPricingCreditBenefitsItems:
-      type: object
-      properties:
-        id:
-          type: string
-        creditsCurrencyId:
-          type: string
-        recipient:
-          $ref: '#/components/schemas/CreateOrderLineAttributeRequestPricingCreditBenefitsItemsRecipient'
-        amount:
-          type: number
-          format: double
-        rolloverAmount:
-          type:
-          - number
-          - 'null'
-          format: double
-        rolloverDuration:
-          type:
-          - number
-          - 'null'
-          format: double
-        rolloverDurationUnit:
-          $ref: '#/components/schemas/CreateOrderLineAttributeRequestPricingCreditBenefitsItemsRolloverDurationUnit'
-        allocationCadence:
-          $ref: '#/components/schemas/CreateOrderLineAttributeRequestPricingCreditBenefitsItemsAllocationCadence'
-        creditGrantTiming:
-          $ref: '#/components/schemas/CreateOrderLineAttributeRequestPricingCreditBenefitsItemsCreditGrantTiming'
-      required:
-      - id
-      - amount
-      title: CreateOrderLineAttributeRequestPricingCreditBenefitsItems
-    CreateOrderLineAttributeRequestPricingSignalType:
-      type: string
-      enum:
-      - activity
-      - outcome
-      title: CreateOrderLineAttributeRequestPricingSignalType
-    CreateOrderLineAttributeRequestPricingPricingModel:
-      type: string
-      enum:
-      - perUnit
-      - volumePricing
-      - graduatedPricing
-      - prepaidCredits
-      - bracketedPrepaidCredits
-      - flat
-      title: CreateOrderLineAttributeRequestPricingPricingModel
-    OrderListResponse:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Order_2'
-        pagination:
-          $ref: '#/components/schemas/Pagination'
-      required:
-      - data
-      - pagination
-      title: OrderListResponse
-    CreateOrderLineAttributeRequestPricingCreditBenefitsItemsRecipient:
-      type: string
-      enum:
-      - organization
-      - seat
-      title: CreateOrderLineAttributeRequestPricingCreditBenefitsItemsRecipient
+      - frequency
+      title: OrderBillingFrequencyOverride
   securitySchemes:
     bearerAuth:
       type: http

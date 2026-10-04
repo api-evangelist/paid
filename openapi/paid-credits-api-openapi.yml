@@ -158,13 +158,16 @@ components:
       - all
       default: all
       title: CreditsCurrenciesGetParametersStatus
-    UpdateCreditCurrencyRequestStatus:
-      type: string
-      enum:
-      - active
-      - archived
-      description: Set to `archived` to archive this credit currency, or `active` to restore it.
-      title: UpdateCreditCurrencyRequestStatus
+    CreditCurrencyListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/CreditCurrency'
+      required:
+      - data
+      title: CreditCurrencyListResponse
     UpdateCreditCurrencyRequest:
       type: object
       properties:
@@ -177,6 +180,13 @@ components:
           $ref: '#/components/schemas/UpdateCreditCurrencyRequestStatus'
           description: Set to `archived` to archive this credit currency, or `active` to restore it.
       title: UpdateCreditCurrencyRequest
+    CreditCurrencyStatus:
+      type: string
+      enum:
+      - active
+      - archived
+      description: Whether this credit currency is active or archived.
+      title: CreditCurrencyStatus
     CreateCreditCurrencyRequest:
       type: object
       properties:
@@ -195,23 +205,25 @@ components:
       - name
       - key
       title: CreateCreditCurrencyRequest
-    CreditCurrencyListResponse:
+    ErrorResponse:
       type: object
       properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/CreditCurrency'
+        error:
+          type: string
+        code:
+          type: string
+        details:
+          type: string
       required:
-      - data
-      title: CreditCurrencyListResponse
-    CreditCurrencyStatus:
+      - error
+      title: ErrorResponse
+    UpdateCreditCurrencyRequestStatus:
       type: string
       enum:
       - active
       - archived
-      description: Whether this credit currency is active or archived.
-      title: CreditCurrencyStatus
+      description: Set to `archived` to archive this credit currency, or `active` to restore it.
+      title: UpdateCreditCurrencyRequestStatus
     CreditCurrency:
       type: object
       properties:
@@ -256,18 +268,6 @@ components:
       - createdAt
       - updatedAt
       title: CreditCurrency
-    ErrorResponse:
-      type: object
-      properties:
-        error:
-          type: string
-        code:
-          type: string
-        details:
-          type: string
-      required:
-      - error
-      title: ErrorResponse
   securitySchemes:
     bearerAuth:
       type: http
