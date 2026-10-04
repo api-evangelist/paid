@@ -371,6 +371,9 @@ maintainers:
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: CapabilityMap
+  url: capabilities/paid-capability-edges.yml
+  name: Paid Business Capability Map
 - type: Overlay
   url: overlays/paid-v1-overlay.yaml
 - type: Website

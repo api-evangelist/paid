@@ -1,0 +1,113 @@
+slug: paid
+provider: Paid
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Software & Technology
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 9
+edges:
+- tag: Invoices
+  spec_file: paid-invoices-api-openapi.yml
+  capability_id: BC-4250.30
+  capability_id_l1: BC-4250
+  capability_name: Invoicing & Statement Management
+  confidence: 0.9
+  evidence: GET /invoices/ list-invoices List invoices; GET /invoices/{id}/lines get-invoice-lines Get
+    invoice lines; schemas Invoice, InvoiceLine, InvoicePaymentStatus, InvoiceTaxStatus
+  reason: Operations read, update and itemise invoices with payment and tax status for a subscription
+    billing platform — plainly Invoicing & Statement Management.
+- tag: Plans
+  spec_file: paid-plans-api-openapi.yml
+  capability_id: BC-4240
+  capability_id_l1: BC-4240
+  capability_name: Subscription Lifecycle Management
+  confidence: 0.85
+  evidence: POST /plans/{planId}/subscribe Subscribe customer to plan; POST /plans/upgrade Upgrade customer
+    to a new plan; PUT /plans/upgrade-path Update plan upgrade path
+  reason: Plan definition, plan groups, upgrade paths and subscribe/unsubscribe/upgrade of customers are
+    squarely subscription lifecycle management; the operations straddle plan design, provisioning and
+    modification, so only the L1 is claimed.
+- tag: Usage
+  spec_file: paid-usage-api-openapi.yml
+  capability_id: BC-4250.10
+  capability_id_l1: BC-4250
+  capability_name: Usage Metering
+  confidence: 0.82
+  evidence: POST /usage/signals/bulk  record-bulk  Record usage signals in bulk; POST /usage/check-usage  Check
+    if usage is allowed for a customer and product
+  reason: The dominant operations record usage signals in bulk for rating and billing, which is Usage
+    Metering. The check-usage call leans toward entitlement enforcement, so there is some sub-capability
+    ambiguity, but metering is the clear centre of gravity.
+- tag: Orders
+  spec_file: paid-orders-api-openapi.yml
+  capability_id: BC-4240
+  capability_id_l1: BC-4240
+  capability_name: Subscription Lifecycle Management
+  confidence: 0.8
+  evidence: POST /orders/{orderId}/activate Activate order; POST /orders/{orderId}/cancel cancel-renewal
+    Cancel order renewal; POST /orders/{orderId}/schedule-plan-change Schedule a plan change with proration
+  reason: 'Orders here are the subscription contract objects: created, activated (with payment), modified
+    via prorated plan changes, and cancelled at renewal. That spans provisioning, modification and cancellation,
+    so the L1 Subscription Lifecycle Management is asserted without a single L2.'
+- tag: Costs
+  spec_file: paid-costs-api-openapi.yml
+  capability_id: BC-4250.10
+  capability_id_l1: BC-4250
+  capability_name: Usage Metering
+  confidence: 0.75
+  evidence: POST /costs/bulk create-costs Submit cost and/or usage data; schemas costIngestRequest, tokenUsage,
+    CustomerAttribution
+  reason: The single operation ingests cost and usage events (including token usage) attributed to customers
+    and products, which is usage/consumption event ingestion feeding downstream rating — Usage Metering.
+    It also carries AI cost tracking, hence not full confidence.
+- tag: Webhooks
+  spec_file: paid-webhooks-api-openapi.yml
+  capability_id: BC-4270.80
+  capability_id_l1: BC-4270
+  capability_name: Webhook & Event Subscription Management
+  confidence: 0.75
+  evidence: GET /webhooks/  list-webhooks; POST /webhooks/{webhookName}/test  Send a test webhook; POST
+    /webhooks/rotate-secret  Rotate the organization's webhook signing secret
+  reason: These operations manage outbound webhook subscriptions, delivery status and signing secrets
+    for the platform's event notifications, which is precisely the Webhook & Event Subscription Management
+    capability in this frame rather than generic plumbing with no mapped home.
+- tag: Signals
+  spec_file: paid-signals-api-openapi.yml
+  capability_id: BC-4250.10
+  capability_id_l1: BC-4250
+  capability_name: Usage Metering
+  confidence: 0.72
+  evidence: POST /signals/bulk  create-signals  Create signals in bulk; schemas Signal, CustomerAttribution,
+    ProductByExternalId
+  reason: Bulk ingestion of per-customer, per-product signal events is the event-capture layer that feeds
+    Paid's usage/outcome-based rating, matching Usage Metering (ingestion and aggregation of usage events).
+    Confidence held below 0.8 because the tag's single operation does not itself state the downstream
+    rating use.
+- tag: Contacts
+  spec_file: paid-contacts-api-openapi.yml
+  capability_id: BC-420.10
+  capability_id_l1: BC-420
+  capability_name: Customer Data Management
+  confidence: 0.7
+  evidence: POST /contacts create Create contact; schemas Contact, ContactBillingAddress, ContactRolesItems,
+    Salutation
+  reason: CRUD over customer contact records with billing addresses, roles and salutations is customer
+    master/contact data maintenance, not a billing computation. Maps to Customer Data Management.
+- tag: Customers
+  spec_file: paid-customers-api-openapi.yml
+  capability_id: BC-420.10
+  capability_id_l1: BC-420
+  capability_name: Customer Data Management
+  confidence: 0.7
+  evidence: POST /customers create Create a new customer; schemas CustomerCreate, CustomerUpdate, Address,
+    PaymentMethod, TaxExemptStatus
+  reason: The dominant surface is customer master record CRUD (including external-ID resolution), i.e.
+    Customer Data Management. Secondary operations such as 'Check customer entitlement for an event' point
+    at entitlement enforcement, which keeps confidence below 0.8.
