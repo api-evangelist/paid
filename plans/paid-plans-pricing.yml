@@ -1,0 +1,47 @@
+# Pricing transcribed from the provider's own page — see provenance. Numbers are quoted, not derived.
+generated: '2026-10-07'
+method: searched
+source: https://paid.ai/pricing
+sources:
+- https://paid.ai/pricing
+provenance:
+  tool: all/0-working/economics/harvest_pricing.py
+  run: 20261007T104522
+  grounding: every price_text was found verbatim in the fetched page text
+audience: business-product
+pricing_basis: tiered-subscription
+delivery:
+  delivery: managed
+  method: page
+  read: '2026-10-07'
+published: true
+note: Paid tier prices render as animated digit reels in the extracted text, so only the Free plan's $0
+  is legible; Grow/Scale/Accelerate amounts not recoverable. Tiers are gated by annual billings volume.
+plan_count: 5
+currency: USD
+plans:
+- name: Free
+  price_text: $0
+  price: 0
+  currency: USD
+  period: month
+  included_quota: Up to $100k billings/year
+- name: Grow
+  price_text: /mo
+  currency: USD
+  period: month
+  included_quota: Up to $200k billings/year
+- name: Scale
+  price_text: /mo
+  currency: USD
+  period: month
+  included_quota: Up to $500k billings/year
+- name: Accelerate
+  price_text: /mo
+  currency: USD
+  period: month
+  included_quota: Up to $1m billings/year
+- name: Enterprise
+  price_text: Custom
+  period: none
+  included_quota: Unlimited billings
