@@ -220,6 +220,38 @@ paths:
                 $ref: '#/components/schemas/agents_deleteByExternalId_Response_204'
 components:
   schemas:
+    AgentPricePointTiers:
+      type: object
+      properties:
+        minQuantity:
+          type: number
+          format: double
+        maxQuantity:
+          type: number
+          format: double
+        unitPrice:
+          type: number
+          format: double
+      required:
+      - unitPrice
+      title: AgentPricePointTiers
+    AgentPricePoint:
+      type: object
+      properties:
+        unitPrice:
+          type: number
+          format: double
+        minQuantity:
+          type: number
+          format: double
+        includedQuantity:
+          type: number
+          format: double
+        tiers:
+          type: array
+          items:
+            $ref: '#/components/schemas/AgentPricePointTiers'
+      title: AgentPricePoint
     Pricing:
       type: object
       properties:
@@ -247,26 +279,57 @@ components:
       - billingFrequency
       - pricePoints
       title: Pricing
+    AgentCreate:
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        agentCode:
+          type: string
+        externalId:
+          type: string
+        active:
+          type: boolean
+      required:
+      - name
+      - description
+      title: AgentCreate
     agents_delete_Response_204:
       type: object
       properties: {}
       description: Empty response body
       title: agents_delete_Response_204
-    AgentPricePointTiers:
+    PricingModelType:
+      type: string
+      enum:
+      - PerUnit
+      - VolumePricing
+      - GraduatedPricing
+      - PrepaidCredits
+      title: PricingModelType
+    AgentAttribute:
       type: object
       properties:
-        minQuantity:
-          type: number
-          format: double
-        maxQuantity:
-          type: number
-          format: double
-        unitPrice:
-          type: number
-          format: double
+        name:
+          type: string
+        active:
+          type: boolean
+        pricing:
+          $ref: '#/components/schemas/Pricing'
       required:
-      - unitPrice
-      title: AgentPricePointTiers
+      - name
+      - active
+      - pricing
+      title: AgentAttribute
+    BillingFrequency:
+      type: string
+      enum:
+      - monthly
+      - quarterly
+      - annual
+      title: BillingFrequency
     AgentUpdate:
       type: object
       properties:
@@ -285,37 +348,11 @@ components:
           items:
             $ref: '#/components/schemas/AgentAttribute'
       title: AgentUpdate
-    AgentAttribute:
+    agents_deleteByExternalId_Response_204:
       type: object
-      properties:
-        name:
-          type: string
-        active:
-          type: boolean
-        pricing:
-          $ref: '#/components/schemas/Pricing'
-      required:
-      - name
-      - active
-      - pricing
-      title: AgentAttribute
-    AgentPricePoint:
-      type: object
-      properties:
-        unitPrice:
-          type: number
-          format: double
-        minQuantity:
-          type: number
-          format: double
-        includedQuantity:
-          type: number
-          format: double
-        tiers:
-          type: array
-          items:
-            $ref: '#/components/schemas/AgentPricePointTiers'
-      title: AgentPricePoint
+      properties: {}
+      description: Empty response body
+      title: agents_deleteByExternalId_Response_204
     Agent:
       type: object
       properties:
@@ -343,43 +380,6 @@ components:
       - name
       - active
       title: Agent
-    agents_deleteByExternalId_Response_204:
-      type: object
-      properties: {}
-      description: Empty response body
-      title: agents_deleteByExternalId_Response_204
-    BillingFrequency:
-      type: string
-      enum:
-      - monthly
-      - quarterly
-      - annual
-      title: BillingFrequency
-    PricingModelType:
-      type: string
-      enum:
-      - PerUnit
-      - VolumePricing
-      - GraduatedPricing
-      - PrepaidCredits
-      title: PricingModelType
-    AgentCreate:
-      type: object
-      properties:
-        name:
-          type: string
-        description:
-          type: string
-        agentCode:
-          type: string
-        externalId:
-          type: string
-        active:
-          type: boolean
-      required:
-      - name
-      - description
-      title: AgentCreate
     ChargeType:
       type: string
       enum:

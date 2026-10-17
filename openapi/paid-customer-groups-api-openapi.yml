@@ -377,84 +377,6 @@ paths:
               $ref: '#/components/schemas/MemberRequest'
 components:
   schemas:
-    AddMembersResponse:
-      type: object
-      properties:
-        added:
-          type: integer
-        skipped:
-          type: integer
-        skippedIds:
-          type: array
-          items:
-            type: string
-      required:
-      - added
-      - skipped
-      - skippedIds
-      title: AddMembersResponse
-    CustomerGroupListResponse:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/CustomerGroupSummary'
-        pagination:
-          $ref: '#/components/schemas/Pagination'
-      required:
-      - data
-      - pagination
-      title: CustomerGroupListResponse
-    Pagination:
-      type: object
-      properties:
-        limit:
-          type: integer
-        offset:
-          type: integer
-        total:
-          type: integer
-        hasMore:
-          type: boolean
-      required:
-      - limit
-      - offset
-      - total
-      - hasMore
-      title: Pagination
-    CustomerGroupMember:
-      type: object
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-        externalId:
-          type:
-          - string
-          - 'null'
-      required:
-      - id
-      - name
-      - externalId
-      title: CustomerGroupMember
-    RemoveMembersResponse:
-      type: object
-      properties:
-        removed:
-          type: integer
-        skipped:
-          type: integer
-        skippedIds:
-          type: array
-          items:
-            type: string
-      required:
-      - removed
-      - skipped
-      - skippedIds
-      title: RemoveMembersResponse
     CreateCustomerGroupRequest:
       type: object
       properties:
@@ -467,28 +389,6 @@ components:
       required:
       - name
       title: CreateCustomerGroupRequest
-    CustomerGroupDeleteResponse:
-      type: object
-      properties:
-        deletedGroupId:
-          type: string
-          format: uuid
-        unboundCustomerCount:
-          type: integer
-      required:
-      - deletedGroupId
-      - unboundCustomerCount
-      title: CustomerGroupDeleteResponse
-    UpdateCustomerGroupRequest:
-      type: object
-      properties:
-        name:
-          type: string
-        description:
-          type:
-          - string
-          - 'null'
-      title: UpdateCustomerGroupRequest
     CustomerGroupDetail:
       type: object
       properties:
@@ -533,6 +433,72 @@ components:
       required:
       - customerIds
       title: MemberRequest
+    UpdateCustomerGroupRequest:
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type:
+          - string
+          - 'null'
+      title: UpdateCustomerGroupRequest
+    CustomerGroupDeleteResponse:
+      type: object
+      properties:
+        deletedGroupId:
+          type: string
+          format: uuid
+        unboundCustomerCount:
+          type: integer
+      required:
+      - deletedGroupId
+      - unboundCustomerCount
+      title: CustomerGroupDeleteResponse
+    AddMembersResponse:
+      type: object
+      properties:
+        added:
+          type: integer
+        skipped:
+          type: integer
+        skippedIds:
+          type: array
+          items:
+            type: string
+      required:
+      - added
+      - skipped
+      - skippedIds
+      title: AddMembersResponse
+    RemoveMembersResponse:
+      type: object
+      properties:
+        removed:
+          type: integer
+        skipped:
+          type: integer
+        skippedIds:
+          type: array
+          items:
+            type: string
+      required:
+      - removed
+      - skipped
+      - skippedIds
+      title: RemoveMembersResponse
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+        code:
+          type: string
+        details:
+          type: string
+      required:
+      - error
+      title: ErrorResponse
     CustomerGroupSummary:
       type: object
       properties:
@@ -561,18 +527,23 @@ components:
       - createdAt
       - updatedAt
       title: CustomerGroupSummary
-    ErrorResponse:
+    Pagination:
       type: object
       properties:
-        error:
-          type: string
-        code:
-          type: string
-        details:
-          type: string
+        limit:
+          type: integer
+        offset:
+          type: integer
+        total:
+          type: integer
+        hasMore:
+          type: boolean
       required:
-      - error
-      title: ErrorResponse
+      - limit
+      - offset
+      - total
+      - hasMore
+      title: Pagination
     SetMembersResponse:
       type: object
       properties:
@@ -592,6 +563,35 @@ components:
       - skipped
       - skippedIds
       title: SetMembersResponse
+    CustomerGroupMember:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        externalId:
+          type:
+          - string
+          - 'null'
+      required:
+      - id
+      - name
+      - externalId
+      title: CustomerGroupMember
+    CustomerGroupListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/CustomerGroupSummary'
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+      required:
+      - data
+      - pagination
+      title: CustomerGroupListResponse
   securitySchemes:
     bearerAuth:
       type: http

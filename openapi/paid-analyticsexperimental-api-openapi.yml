@@ -162,15 +162,21 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
 components:
   schemas:
-    AnalyticsQueryRequest:
+    SignalsMetadataResponseSignalsItemsPathsItems:
       type: object
       properties:
-        query:
+        path:
           type: string
-          description: A single ClickHouse SELECT (or WITH ... SELECT) statement against the analytics views. Results are automatically scoped to your organization. See GET /schema for the available views and columns.
+          description: JSON path inside the signal `data` payload, usable in queries as e.g. `data.<path>::String`.
+        types:
+          type: array
+          items:
+            type: string
+          description: ClickHouse dynamic types observed for this path.
       required:
-      - query
-      title: AnalyticsQueryRequest
+      - path
+      - types
+      title: SignalsMetadataResponseSignalsItemsPathsItems
     SignalsMetadataResponse:
       type: object
       properties:
@@ -184,21 +190,6 @@ components:
       - signals
       - meta
       title: SignalsMetadataResponse
-    AnalyticsSchemaColumn:
-      type: object
-      properties:
-        name:
-          type: string
-        type:
-          type: string
-          description: ClickHouse column type
-        comment:
-          type: string
-      required:
-      - name
-      - type
-      - comment
-      title: AnalyticsSchemaColumn
     SignalsMetadataResponseSignalsItems:
       type: object
       properties:
@@ -212,6 +203,87 @@ components:
       - signalName
       - paths
       title: SignalsMetadataResponseSignalsItems
+    AnalyticsQueryResponse:
+      type: object
+      properties:
+        columns:
+          type: array
+          items:
+            $ref: '#/components/schemas/AnalyticsColumn'
+        rows:
+          type: array
+          items:
+            type: array
+            items:
+              description: Any type
+          description: Result rows; values are ordered to match `columns`. 64-bit integers (UInt64/Int64 — counts, sums, amounts in cents, ids) are returned as JSON strings to preserve precision; parse them client-side as needed.
+        meta:
+          $ref: '#/components/schemas/AnalyticsQueryResponseMeta'
+      required:
+      - columns
+      - rows
+      - meta
+      title: AnalyticsQueryResponse
+    AnalyticsQueryResponseMeta:
+      type: object
+      properties:
+        rowCount:
+          type: integer
+        elapsedMs:
+          type: number
+          format: double
+        truncated:
+          type: boolean
+          description: True when the result hit the row cap and was truncated. Narrow the query (shorter date range, LIMIT, coarser grouping) to see the rest.
+      required:
+      - rowCount
+      - elapsedMs
+      - truncated
+      title: AnalyticsQueryResponseMeta
+    AnalyticsQueryRequest:
+      type: object
+      properties:
+        query:
+          type: string
+          description: A single ClickHouse SELECT (or WITH ... SELECT) statement against the analytics views. Results are automatically scoped to your organization. See GET /schema for the available views and columns.
+      required:
+      - query
+      title: AnalyticsQueryRequest
+    AnalyticsColumn:
+      type: object
+      properties:
+        name:
+          type: string
+        type:
+          type: string
+          description: ClickHouse column type
+      required:
+      - name
+      - type
+      title: AnalyticsColumn
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+        code:
+          type: string
+        details:
+          type: string
+      required:
+      - error
+      title: ErrorResponse
+    SignalsMetadataResponseMeta:
+      type: object
+      properties:
+        fromDate:
+          type: string
+        toDate:
+          type: string
+      required:
+      - fromDate
+      - toDate
+      title: SignalsMetadataResponseMeta
     AnalyticsSchemaView:
       type: object
       properties:
@@ -238,61 +310,7 @@ components:
       required:
       - views
       title: AnalyticsSchemaResponse
-    SignalsMetadataResponseSignalsItemsPathsItems:
-      type: object
-      properties:
-        path:
-          type: string
-          description: JSON path inside the signal `data` payload, usable in queries as e.g. `data.<path>::String`.
-        types:
-          type: array
-          items:
-            type: string
-          description: ClickHouse dynamic types observed for this path.
-      required:
-      - path
-      - types
-      title: SignalsMetadataResponseSignalsItemsPathsItems
-    SignalsMetadataResponseMeta:
-      type: object
-      properties:
-        fromDate:
-          type: string
-        toDate:
-          type: string
-      required:
-      - fromDate
-      - toDate
-      title: SignalsMetadataResponseMeta
-    AnalyticsQueryResponseMeta:
-      type: object
-      properties:
-        rowCount:
-          type: integer
-        elapsedMs:
-          type: number
-          format: double
-        truncated:
-          type: boolean
-          description: True when the result hit the row cap and was truncated. Narrow the query (shorter date range, LIMIT, coarser grouping) to see the rest.
-      required:
-      - rowCount
-      - elapsedMs
-      - truncated
-      title: AnalyticsQueryResponseMeta
-    ErrorResponse:
-      type: object
-      properties:
-        error:
-          type: string
-        code:
-          type: string
-        details:
-          type: string
-      required:
-      - error
-      title: ErrorResponse
-    AnalyticsColumn:
+    AnalyticsSchemaColumn:
       type: object
       properties:
         name:
@@ -300,31 +318,13 @@ components:
         type:
           type: string
           description: ClickHouse column type
+        comment:
+          type: string
       required:
       - name
       - type
-      title: AnalyticsColumn
-    AnalyticsQueryResponse:
-      type: object
-      properties:
-        columns:
-          type: array
-          items:
-            $ref: '#/components/schemas/AnalyticsColumn'
-        rows:
-          type: array
-          items:
-            type: array
-            items:
-              description: Any type
-          description: Result rows; values are ordered to match `columns`. 64-bit integers (UInt64/Int64 — counts, sums, amounts in cents, ids) are returned as JSON strings to preserve precision; parse them client-side as needed.
-        meta:
-          $ref: '#/components/schemas/AnalyticsQueryResponseMeta'
-      required:
-      - columns
-      - rows
-      - meta
-      title: AnalyticsQueryResponse
+      - comment
+      title: AnalyticsSchemaColumn
   securitySchemes:
     bearerAuth:
       type: http

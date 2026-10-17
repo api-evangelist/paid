@@ -478,45 +478,6 @@ components:
       - Dr.
       - Prof.
       title: Salutation
-    contacts_delete_Response_204:
-      type: object
-      properties: {}
-      description: Empty response body
-      title: contacts_delete_Response_204
-    Contact:
-      type: object
-      properties:
-        id:
-          type: string
-        externalId:
-          type: string
-        organizationId:
-          type: string
-        customerId:
-          type: string
-        customerExternalId:
-          type: string
-        salutation:
-          $ref: '#/components/schemas/Salutation'
-        firstName:
-          type: string
-        lastName:
-          type: string
-        email:
-          type: string
-        phone:
-          type: string
-        billingStreet:
-          type: string
-        billingCity:
-          type: string
-        billingStateProvince:
-          type: string
-        billingCountry:
-          type: string
-        billingPostalCode:
-          type: string
-      title: Contact
     ContactCreate:
       type: object
       properties:
@@ -552,23 +513,45 @@ components:
       - lastName
       - email
       title: ContactCreate
-    Pagination:
+    Contact:
       type: object
       properties:
-        limit:
-          type: integer
-        offset:
-          type: integer
-        total:
-          type: integer
-        hasMore:
-          type: boolean
-      required:
-      - limit
-      - offset
-      - total
-      - hasMore
-      title: Pagination
+        id:
+          type: string
+        externalId:
+          type: string
+        organizationId:
+          type: string
+        customerId:
+          type: string
+        customerExternalId:
+          type: string
+        salutation:
+          $ref: '#/components/schemas/Salutation'
+        firstName:
+          type: string
+        lastName:
+          type: string
+        email:
+          type: string
+        phone:
+          type: string
+        billingStreet:
+          type: string
+        billingCity:
+          type: string
+        billingStateProvince:
+          type: string
+        billingCountry:
+          type: string
+        billingPostalCode:
+          type: string
+      title: Contact
+    contacts_delete_Response_204:
+      type: object
+      properties: {}
+      description: Empty response body
+      title: contacts_delete_Response_204
     UpdateContactRequest:
       type: object
       properties:
@@ -596,12 +579,48 @@ components:
           items:
             $ref: '#/components/schemas/UpdateContactRequestRolesItems'
       title: UpdateContactRequest
-    CreateContactRequestRolesItems:
+    CreateContactRequest:
+      type: object
+      properties:
+        customerId:
+          type: string
+        firstName:
+          type: string
+          default: ''
+        lastName:
+          type: string
+          default: ''
+        email:
+          type: string
+          format: email
+        phone:
+          type:
+          - string
+          - 'null'
+        billingAddress:
+          $ref: '#/components/schemas/ContactBillingAddress'
+        externalId:
+          type:
+          - string
+          - 'null'
+        roles:
+          type: array
+          items:
+            $ref: '#/components/schemas/CreateContactRequestRolesItems'
+      required:
+      - customerId
+      - email
+      title: CreateContactRequest
+    EmptyResponse:
+      type: object
+      properties: {}
+      title: EmptyResponse
+    UpdateContactRequestRolesItems:
       type: string
       enum:
       - BILLING
       - ACCOUNTS_PAYABLE
-      title: CreateContactRequestRolesItems
+      title: UpdateContactRequestRolesItems
     ContactListResponse:
       type: object
       properties:
@@ -615,24 +634,12 @@ components:
       - data
       - pagination
       title: ContactListResponse
-    EmptyResponse:
-      type: object
-      properties: {}
-      title: EmptyResponse
-    ContactBillingAddress:
-      type: object
-      properties:
-        street:
-          type: string
-        city:
-          type: string
-        state:
-          type: string
-        country:
-          type: string
-        zipCode:
-          type: string
-      title: ContactBillingAddress
+    CreateContactRequestRolesItems:
+      type: string
+      enum:
+      - BILLING
+      - ACCOUNTS_PAYABLE
+      title: CreateContactRequestRolesItems
     Contact_2:
       type: object
       properties:
@@ -678,44 +685,6 @@ components:
       - createdAt
       - updatedAt
       title: Contact
-    CreateContactRequest:
-      type: object
-      properties:
-        customerId:
-          type: string
-        firstName:
-          type: string
-          default: ''
-        lastName:
-          type: string
-          default: ''
-        email:
-          type: string
-          format: email
-        phone:
-          type:
-          - string
-          - 'null'
-        billingAddress:
-          $ref: '#/components/schemas/ContactBillingAddress'
-        externalId:
-          type:
-          - string
-          - 'null'
-        roles:
-          type: array
-          items:
-            $ref: '#/components/schemas/CreateContactRequestRolesItems'
-      required:
-      - customerId
-      - email
-      title: CreateContactRequest
-    UpdateContactRequestRolesItems:
-      type: string
-      enum:
-      - BILLING
-      - ACCOUNTS_PAYABLE
-      title: UpdateContactRequestRolesItems
     ErrorResponse:
       type: object
       properties:
@@ -728,6 +697,37 @@ components:
       required:
       - error
       title: ErrorResponse
+    Pagination:
+      type: object
+      properties:
+        limit:
+          type: integer
+        offset:
+          type: integer
+        total:
+          type: integer
+        hasMore:
+          type: boolean
+      required:
+      - limit
+      - offset
+      - total
+      - hasMore
+      title: Pagination
+    ContactBillingAddress:
+      type: object
+      properties:
+        street:
+          type: string
+        city:
+          type: string
+        state:
+          type: string
+        country:
+          type: string
+        zipCode:
+          type: string
+      title: ContactBillingAddress
     ContactRolesItems:
       type: string
       enum:

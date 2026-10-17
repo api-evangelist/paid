@@ -286,23 +286,47 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
 components:
   schemas:
-    Pagination:
+    InvoiceListResponse:
       type: object
       properties:
-        limit:
-          type: integer
-        offset:
-          type: integer
-        total:
-          type: integer
-        hasMore:
-          type: boolean
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Invoice'
+        pagination:
+          $ref: '#/components/schemas/Pagination'
       required:
-      - limit
-      - offset
-      - total
-      - hasMore
-      title: Pagination
+      - data
+      - pagination
+      title: InvoiceListResponse
+    UpdateInvoiceRequest:
+      type: object
+      properties:
+        metadata:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            description: Any type
+      title: UpdateInvoiceRequest
+    InvoiceTaxStatus:
+      type: string
+      enum:
+      - not_applicable
+      - calculated
+      - committed
+      - failed
+      - voided
+      title: InvoiceTaxStatus
+    InvoicesGetParametersPaymentStatus:
+      type: string
+      enum:
+      - pending
+      - paid
+      - partiallyPaid
+      - overdue
+      - error
+      title: InvoicesGetParametersPaymentStatus
     Invoice:
       type: object
       properties:
@@ -430,6 +454,94 @@ components:
       - updatedAt
       - taxExempt
       title: Invoice
+    InvoiceStatus:
+      type: string
+      enum:
+      - building
+      - draft
+      - pending
+      - posted
+      - voided
+      - canceled
+      - error
+      title: InvoiceStatus
+    InvoicesGetParametersStatus:
+      type: string
+      enum:
+      - building
+      - draft
+      - pending
+      - posted
+      - voided
+      - canceled
+      - error
+      title: InvoicesGetParametersStatus
+    InvoiceLinePaymentStatus:
+      type: string
+      enum:
+      - pending
+      - paid
+      - partiallyPaid
+      - overdue
+      - error
+      title: InvoiceLinePaymentStatus
+    Pagination:
+      type: object
+      properties:
+        limit:
+          type: integer
+        offset:
+          type: integer
+        total:
+          type: integer
+        hasMore:
+          type: boolean
+      required:
+      - limit
+      - offset
+      - total
+      - hasMore
+      title: Pagination
+    InvoiceLinesResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/InvoiceLine'
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+      required:
+      - data
+      - pagination
+      title: InvoiceLinesResponse
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+        code:
+          type: string
+        details:
+          type: string
+      required:
+      - error
+      title: ErrorResponse
+    InvoicePaymentStatus:
+      type: string
+      enum:
+      - pending
+      - paid
+      - partiallyPaid
+      - overdue
+      - error
+      title: InvoicePaymentStatus
+    InvoiceSource:
+      type: string
+      enum:
+      - order_based
+      - manual
+      title: InvoiceSource
     InvoiceLine:
       type: object
       properties:
@@ -505,118 +617,6 @@ components:
       - createdAt
       - updatedAt
       title: InvoiceLine
-    InvoiceListResponse:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Invoice'
-        pagination:
-          $ref: '#/components/schemas/Pagination'
-      required:
-      - data
-      - pagination
-      title: InvoiceListResponse
-    InvoicePaymentStatus:
-      type: string
-      enum:
-      - pending
-      - paid
-      - partiallyPaid
-      - overdue
-      - error
-      title: InvoicePaymentStatus
-    InvoicesGetParametersPaymentStatus:
-      type: string
-      enum:
-      - pending
-      - paid
-      - partiallyPaid
-      - overdue
-      - error
-      title: InvoicesGetParametersPaymentStatus
-    UpdateInvoiceRequest:
-      type: object
-      properties:
-        metadata:
-          type:
-          - object
-          - 'null'
-          additionalProperties:
-            description: Any type
-      title: UpdateInvoiceRequest
-    InvoiceLinesResponse:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/InvoiceLine'
-        pagination:
-          $ref: '#/components/schemas/Pagination'
-      required:
-      - data
-      - pagination
-      title: InvoiceLinesResponse
-    InvoiceStatus:
-      type: string
-      enum:
-      - building
-      - draft
-      - pending
-      - posted
-      - voided
-      - canceled
-      - error
-      title: InvoiceStatus
-    InvoiceTaxStatus:
-      type: string
-      enum:
-      - not_applicable
-      - calculated
-      - committed
-      - failed
-      - voided
-      title: InvoiceTaxStatus
-    InvoicesGetParametersStatus:
-      type: string
-      enum:
-      - building
-      - draft
-      - pending
-      - posted
-      - voided
-      - canceled
-      - error
-      title: InvoicesGetParametersStatus
-    ErrorResponse:
-      type: object
-      properties:
-        error:
-          type: string
-        code:
-          type: string
-        details:
-          type: string
-      required:
-      - error
-      title: ErrorResponse
-    InvoiceLinePaymentStatus:
-      type: string
-      enum:
-      - pending
-      - paid
-      - partiallyPaid
-      - overdue
-      - error
-      title: InvoiceLinePaymentStatus
-    InvoiceSource:
-      type: string
-      enum:
-      - order_based
-      - manual
-      title: InvoiceSource
   securitySchemes:
     bearerAuth:
       type: http

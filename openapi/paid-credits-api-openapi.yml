@@ -150,14 +150,6 @@ paths:
               $ref: '#/components/schemas/UpdateCreditCurrencyRequest'
 components:
   schemas:
-    CreditsCurrenciesGetParametersStatus:
-      type: string
-      enum:
-      - active
-      - archived
-      - all
-      default: all
-      title: CreditsCurrenciesGetParametersStatus
     CreditCurrencyListResponse:
       type: object
       properties:
@@ -168,18 +160,13 @@ components:
       required:
       - data
       title: CreditCurrencyListResponse
-    UpdateCreditCurrencyRequest:
-      type: object
-      properties:
-        description:
-          type:
-          - string
-          - 'null'
-          description: Updated description for this credit currency. Use null to clear the description.
-        status:
-          $ref: '#/components/schemas/UpdateCreditCurrencyRequestStatus'
-          description: Set to `archived` to archive this credit currency, or `active` to restore it.
-      title: UpdateCreditCurrencyRequest
+    UpdateCreditCurrencyRequestStatus:
+      type: string
+      enum:
+      - active
+      - archived
+      description: Set to `archived` to archive this credit currency, or `active` to restore it.
+      title: UpdateCreditCurrencyRequestStatus
     CreditCurrencyStatus:
       type: string
       enum:
@@ -205,25 +192,18 @@ components:
       - name
       - key
       title: CreateCreditCurrencyRequest
-    ErrorResponse:
+    UpdateCreditCurrencyRequest:
       type: object
       properties:
-        error:
-          type: string
-        code:
-          type: string
-        details:
-          type: string
-      required:
-      - error
-      title: ErrorResponse
-    UpdateCreditCurrencyRequestStatus:
-      type: string
-      enum:
-      - active
-      - archived
-      description: Set to `archived` to archive this credit currency, or `active` to restore it.
-      title: UpdateCreditCurrencyRequestStatus
+        description:
+          type:
+          - string
+          - 'null'
+          description: Updated description for this credit currency. Use null to clear the description.
+        status:
+          $ref: '#/components/schemas/UpdateCreditCurrencyRequestStatus'
+          description: Set to `archived` to archive this credit currency, or `active` to restore it.
+      title: UpdateCreditCurrencyRequest
     CreditCurrency:
       type: object
       properties:
@@ -268,6 +248,26 @@ components:
       - createdAt
       - updatedAt
       title: CreditCurrency
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+        code:
+          type: string
+        details:
+          type: string
+      required:
+      - error
+      title: ErrorResponse
+    CreditsCurrenciesGetParametersStatus:
+      type: string
+      enum:
+      - active
+      - archived
+      - all
+      default: all
+      title: CreditsCurrenciesGetParametersStatus
   securitySchemes:
     bearerAuth:
       type: http

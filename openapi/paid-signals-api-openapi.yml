@@ -55,6 +55,25 @@ paths:
               $ref: '#/components/schemas/BulkSignalsRequest'
 components:
   schemas:
+    CustomerAttribution:
+      oneOf:
+      - $ref: '#/components/schemas/CustomerById'
+      - $ref: '#/components/schemas/CustomerByExternalId'
+      title: CustomerAttribution
+    Attribution:
+      oneOf:
+      - $ref: '#/components/schemas/ProductById'
+      - $ref: '#/components/schemas/ProductByExternalId'
+      title: Attribution
+    CustomerById:
+      type: object
+      properties:
+        customerId:
+          type: string
+          description: The Paid customer ID
+      required:
+      - customerId
+      title: CustomerById
     ProductById:
       type: object
       properties:
@@ -73,25 +92,37 @@ components:
       required:
       - externalProductId
       title: ProductByExternalId
-    Attribution:
-      oneOf:
-      - $ref: '#/components/schemas/ProductById'
-      - $ref: '#/components/schemas/ProductByExternalId'
-      title: Attribution
-    BulkSignalsResponse:
+    CustomerByExternalId:
       type: object
       properties:
-        ingested:
-          type: integer
-        duplicates:
-          type: integer
-        failed:
-          type: integer
+        externalCustomerId:
+          type: string
+          description: Your external customer ID
       required:
-      - ingested
-      - duplicates
-      - failed
-      title: BulkSignalsResponse
+      - externalCustomerId
+      title: CustomerByExternalId
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+        code:
+          type: string
+        details:
+          type: string
+      required:
+      - error
+      title: ErrorResponse
+    BulkSignalsRequest:
+      type: object
+      properties:
+        signals:
+          type: array
+          items:
+            $ref: '#/components/schemas/Signal'
+      required:
+      - signals
+      title: BulkSignalsRequest
     Signal:
       type: object
       properties:
@@ -115,51 +146,20 @@ components:
       - eventName
       - customer
       title: Signal
-    CustomerById:
+    BulkSignalsResponse:
       type: object
       properties:
-        customerId:
-          type: string
-          description: The Paid customer ID
+        ingested:
+          type: integer
+        duplicates:
+          type: integer
+        failed:
+          type: integer
       required:
-      - customerId
-      title: CustomerById
-    CustomerAttribution:
-      oneOf:
-      - $ref: '#/components/schemas/CustomerById'
-      - $ref: '#/components/schemas/CustomerByExternalId'
-      title: CustomerAttribution
-    ErrorResponse:
-      type: object
-      properties:
-        error:
-          type: string
-        code:
-          type: string
-        details:
-          type: string
-      required:
-      - error
-      title: ErrorResponse
-    BulkSignalsRequest:
-      type: object
-      properties:
-        signals:
-          type: array
-          items:
-            $ref: '#/components/schemas/Signal'
-      required:
-      - signals
-      title: BulkSignalsRequest
-    CustomerByExternalId:
-      type: object
-      properties:
-        externalCustomerId:
-          type: string
-          description: Your external customer ID
-      required:
-      - externalCustomerId
-      title: CustomerByExternalId
+      - ingested
+      - duplicates
+      - failed
+      title: BulkSignalsResponse
   securitySchemes:
     bearerAuth:
       type: http

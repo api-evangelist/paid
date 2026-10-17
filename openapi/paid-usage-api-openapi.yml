@@ -136,6 +136,20 @@ paths:
               - externalProductId
 components:
   schemas:
+    usage_recordBulk_Response_201:
+      type: object
+      properties: {}
+      description: Empty response body
+      title: usage_recordBulk_Response_201
+    Error:
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/ApiError'
+      required:
+      - error
+      description: An error response from the Paid API
+      title: Error
     ApiError:
       type: object
       properties:
@@ -148,6 +162,11 @@ components:
           type: string
       description: An API error response from the Paid API
       title: ApiError
+    usage_usageRecordBulkV2_Response_201:
+      type: object
+      properties: {}
+      description: Empty response body
+      title: usage_usageRecordBulkV2_Response_201
     SignalV2:
       type: object
       properties:
@@ -203,11 +222,6 @@ components:
           format: double
           description: Usage limit (only present when usage exceeds limit)
       title: usage_checkUsage_Response_200
-    usage_usageRecordBulkV2_Response_201:
-      type: object
-      properties: {}
-      description: Empty response body
-      title: usage_usageRecordBulkV2_Response_201
     Signal:
       type: object
       properties:
@@ -237,20 +251,6 @@ components:
           description: Your system's customer ID
       description: 'DEPRECATED: Use SignalV2 instead for cleaner field names.'
       title: Signal
-    usage_recordBulk_Response_201:
-      type: object
-      properties: {}
-      description: Empty response body
-      title: usage_recordBulk_Response_201
-    Error:
-      type: object
-      properties:
-        error:
-          $ref: '#/components/schemas/ApiError'
-      required:
-      - error
-      description: An error response from the Paid API
-      title: Error
   securitySchemes:
     bearerAuth:
       type: http
